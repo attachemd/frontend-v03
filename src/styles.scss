@@ -1,4 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+@use '~@angular/material/theming' as material;
+
+@include material.mat-core();
+$workshop-primary: material.mat-palette(material.$mat-cyan);
+$workshop-accent: material.mat-palette(material.$mat-pink);
+
+$workshop-theme: material.mat-light-theme(
+    (
+        color: (
+        primary: $workshop-primary,
+        accent: $workshop-accent,
+    )
+    )
+);
+
+@include material.angular-material-theme($workshop-theme);
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
