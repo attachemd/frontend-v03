@@ -1,0 +1,28 @@
+[
+    {
+        "type": "Group",
+        "name": "Header",
+        "parent_id": null,
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "vSjY5irPOxgzLG9B"
+    },
+    {
+        "type": "Directory",
+        "name": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\navigation\\header",
+        "parent_id": "vSjY5irPOxgzLG9B",
+        "fsPath": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\navigation\\header",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "KLkreBZauHm3C7v9"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\auth\\auth.service.ts",
+        "parent_id": "vSjY5irPOxgzLG9B",
+        "fsPath": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\auth\\auth.service.ts",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "TxZfNCsEqlYFVGt8"
+    }
+]

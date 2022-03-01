@@ -10,12 +10,14 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { SharedModule } from './shared/shared.module';
+import { AuthModule } from './auth/auth.module';
+import { AuthService } from './auth/auth.service';
+import { UIService } from './shared/ui.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignupComponent,
-    LoginComponent,
     HomeComponent,
     HeaderComponent,
     SidenavListComponent
@@ -24,9 +26,14 @@ import { SharedModule } from './shared/shared.module';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    SharedModule
+    HttpClientModule,
+    SharedModule,
+    AuthModule,
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    UIService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
