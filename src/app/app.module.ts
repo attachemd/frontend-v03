@@ -20,7 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    SidenavListComponent
+    SidenavListComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,10 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule,
     AuthModule,
   ],
-  providers: [
-    AuthService,
-    UIService
-  ],
-  bootstrap: [AppComponent]
+  providers: [AuthService, UIService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -4,18 +4,16 @@ import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss']
+  styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
   public maxDate: Date = new Date();
   public isLoading: boolean = false;
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
+    console.log('SignupComponent');
   }
 
-  onSubmit(form: NgForm) {
-
-  }
-
+  public onSubmit(form: NgForm) {}
 }
