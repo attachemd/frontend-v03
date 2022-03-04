@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { UIService } from 'src/app/shared/ui.service';
-import { AuthService } from '../auth.service';
+import { UIService } from 'src/app/services/ui.service';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
+  public onSubmit(): void {
     if (!this.loginForm.valid) return;
 
     this._authService

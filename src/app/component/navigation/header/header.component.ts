@@ -6,7 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AuthService } from 'src/app/auth/auth.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -32,11 +32,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
   }
 
-  onToggleSidenav() {
+  public onToggleSidenav() {
     this.sidenavToggle.emit();
   }
 
-  onLogout(): void {}
+  public onLogout(): void {}
 
   ngOnDestroy() {
     this.authSubscription.unsubscribe();

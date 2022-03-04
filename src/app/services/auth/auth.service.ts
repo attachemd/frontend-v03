@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, map, Observable, of, Subject } from 'rxjs';
-import { UIService } from '../shared/ui.service';
+import { UIService } from '../ui.service';
 import { AuthData } from './auth-data.model';
 
 @Injectable()
@@ -45,9 +45,9 @@ export class AuthService {
           this._uiService.setLoadingState(false);
           if (!data) return false;
 
-          console.log('access_token');
-          console.log(data.access_token);
-          localStorage.setItem('access_token', data.access_token);
+          console.log('access');
+          console.log(data.access);
+          localStorage.setItem('access', data.access);
           // localStorage.setItem('refresh', data.refresh);
           return true;
         }),

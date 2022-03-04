@@ -24,5 +24,66 @@
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "TxZfNCsEqlYFVGt8"
+    },
+    {
+        "type": "Group",
+        "name": "Login",
+        "parent_id": null,
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "W324QzRJXF051jyG"
+    },
+    {
+        "type": "Directory",
+        "name": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\auth\\login",
+        "parent_id": "W324QzRJXF051jyG",
+        "fsPath": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\auth\\login",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "wfjq2sxEWpMLTR3A"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\auth\\auth.service.ts",
+        "parent_id": "W324QzRJXF051jyG",
+        "fsPath": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\auth\\auth.service.ts",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "2glEKfhIDzPoTMUY"
+    },
+    {
+        "type": "Group",
+        "name": "Misc",
+        "parent_id": null,
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "cV9K1huqCSIHLlrg"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\app.module.ts",
+        "parent_id": "cV9K1huqCSIHLlrg",
+        "fsPath": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\app.module.ts",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "FmWkzKnxLIsaDN9S"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\package.json",
+        "parent_id": "cV9K1huqCSIHLlrg",
+        "fsPath": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\package.json",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "ZoDMVAd9r87BGJ6E"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\auth\\manager.guard.ts",
+        "parent_id": "W324QzRJXF051jyG",
+        "fsPath": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\auth\\manager.guard.ts",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "uXo7K1l96BdpCiY4"
     }
 ]
