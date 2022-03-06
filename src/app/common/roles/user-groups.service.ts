@@ -1,23 +1,62 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
-import { filter, mergeMap, ReplaySubject, Subscription } from 'rxjs';
+import {
+  catchError,
+  filter,
+  mergeMap,
+  Observable,
+  of,
+  ReplaySubject,
+  Subscription,
+} from 'rxjs';
+
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { UserGroups } from './user-groups.model';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class UserGroupsService implements OnDestroy {
-  private _connected$ = new ReplaySubject<UserGroups>(1);
+  public connected$ = new ReplaySubject<UserGroups>(1);
   private _connectedSubscription: Subscription = new Subscription();
   constructor(private _http: HttpClient, private _authService: AuthService) {
     this._connectedSubscription = this._authService.userActivate$
       .pipe(
-        filter((user) => !!user),
-        mergeMap((user) => this.get(user.username))
+        filter((id) => !!id),
+        mergeMap((id) => this._get(id))
       )
-      .subscribe((connected) => this._connected$.next(connected as UserGroups));
+      .subscribe((connected) => this.connected$.next(connected as UserGroups));
+  }
+
+  /**
+   * Does the connected have such a role/group?
+   * @param connected : the user to be tested
+   * @param role : role / group to test on the connected
+   */
+  public hasRole(connected: UserGroups, role: string): boolean {
+    return (
+      connected &&
+      'groups' in connected &&
+      connected.groups.some((name) => name === role)
+    );
   }
 
   ngOnDestroy(): void {
     this._connectedSubscription.unsubscribe();
+  }
+
+  private _get(uid: string): Observable<UserGroups | null> {
+    return this._http.get<UserGroups>(`api/user-roles/${uid}`).pipe(
+      catchError((err: HttpErrorResponse) => {
+        if (
+          err &&
+          err.status === 401 &&
+          err.error &&
+          'detail' in err.error &&
+          err.error.detail === 'Signature has expired.'
+        )
+          console.error('An error occurred:', err);
+
+        return of(null);
+      })
+    );
   }
 }

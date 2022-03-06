@@ -11,10 +11,10 @@ import { SharedModule } from './modules/shared.module';
 import { AuthService } from './services/auth/auth.service';
 import { UIService } from './services/ui.service';
 import { HttpClientModule } from '@angular/common/http';
-import { JwtModule } from '@auth0/angular-jwt';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './component/auth/auth.module';
 import { NotFoundComponent } from './component/not-found/not-found.component';
+import { JwtModule } from '@auth0/angular-jwt';
 
 export function tokenGetter(): string | null {
   return localStorage.getItem('access');

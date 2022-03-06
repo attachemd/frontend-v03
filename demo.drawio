@@ -1,0 +1,18 @@
+<mxfile host="65bd71144e">
+    <diagram id="proq1kuHruyxWR1AKS8f" name="Page-1">
+        <mxGraphModel dx="803" dy="734" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="&lt;div style=&quot;color: rgb(252 , 252 , 250) ; background-color: rgb(45 , 42 , 46) ; font-family: &amp;#34;consolas&amp;#34; , &amp;#34;courier new&amp;#34; , monospace ; font-size: 14px ; line-height: 19px&quot;&gt;&lt;div style=&quot;font-family: &amp;#34;consolas&amp;#34; , &amp;#34;courier new&amp;#34; , monospace ; line-height: 19px&quot;&gt;authService&lt;span style=&quot;color: #939293&quot;&gt;.&lt;/span&gt;userActivate$&lt;/div&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="25" y="170" width="245" height="60" as="geometry"/>
+                </mxCell>
+                <object label="&lt;div style=&quot;color: rgb(252 , 252 , 250) ; background-color: rgb(45 , 42 , 46) ; font-family: &amp;#34;consolas&amp;#34; , &amp;#34;courier new&amp;#34; , monospace ; font-size: 14px ; line-height: 19px&quot;&gt;connecte$&lt;/div&gt;" id="3">
+                    <mxCell style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                        <mxGeometry x="120" y="300" width="120" height="60" as="geometry"/>
+                    </mxCell>
+                </object>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

@@ -6,9 +6,12 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { roles } from '../roles/roles.enum';
+import { UserGroups } from '../roles/user-groups.model';
+import { UserGroupsService } from '../roles/user-groups.service';
 
 export class ManagerGuard implements CanLoad, CanActivate {
-  constructor(private userGrpService: UserGroupsService) {}
+  constructor(private _userGrpService: UserGroupsService) {}
   public canLoad(route: Route): Observable<boolean> {
     return this._isManager();
   }
@@ -25,8 +28,8 @@ export class ManagerGuard implements CanLoad, CanActivate {
    */
   private _isManager(): Observable<boolean> {
     return new Observable<boolean>((observer) => {
-      this.userGrpService.connecte$.subscribe((connecte) => {
-        observer.next(this._manager(connecte));
+      this._userGrpService.connected$.subscribe((connected) => {
+        observer.next(this._manager(connected));
         observer.complete();
       });
     });
@@ -39,8 +42,8 @@ export class ManagerGuard implements CanLoad, CanActivate {
    */
   private _manager(connecte: UserGroups) {
     return (
-      this.userGrpService.hasRole(connecte, roles.gestionnaire) ||
-      this.userGrpService.hasRole(connecte, roles.admin)
+      this._userGrpService.hasRole(connecte, roles.manager) ||
+      this._userGrpService.hasRole(connecte, roles.admin)
     );
   }
 }
