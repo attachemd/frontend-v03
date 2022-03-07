@@ -9,45 +9,45 @@
     },
     {
         "type": "File",
-        "name": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\common\\roles\\user-groups.service.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\common\\roles\\user-groups.service.ts",
         "parent_id": "quaeW0AjbBMzNx6k",
-        "fsPath": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\common\\roles\\user-groups.service.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\common\\roles\\user-groups.service.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "LOMm3jvSnoQ6Nf8r"
     },
     {
         "type": "File",
-        "name": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\common\\guards\\manager.guard.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\common\\guards\\manager.guard.ts",
         "parent_id": "quaeW0AjbBMzNx6k",
-        "fsPath": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\common\\guards\\manager.guard.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\common\\guards\\manager.guard.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "JFD2AjlfWqPS9Hh3"
     },
     {
         "type": "File",
-        "name": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\services\\auth\\auth.service.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\services\\auth\\auth.service.ts",
         "parent_id": "quaeW0AjbBMzNx6k",
-        "fsPath": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\services\\auth\\auth.service.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\services\\auth\\auth.service.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "AurpkoECLJe1wGvh"
     },
     {
         "type": "File",
-        "name": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\services\\auth\\auth-data.model.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\services\\auth\\auth-data.model.ts",
         "parent_id": "quaeW0AjbBMzNx6k",
-        "fsPath": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\services\\auth\\auth-data.model.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\services\\auth\\auth-data.model.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "RjViFDXC894zy6ga"
     },
     {
         "type": "File",
-        "name": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\services\\auth\\user.model.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\services\\auth\\user.model.ts",
         "parent_id": "quaeW0AjbBMzNx6k",
-        "fsPath": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\services\\auth\\user.model.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\services\\auth\\user.model.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "17szyXY9plLEIuGJ"

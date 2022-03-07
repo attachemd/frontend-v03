@@ -10,23 +10,23 @@ import { roles } from '../roles/roles.enum';
 import { UserRole } from '../roles/user-role.model';
 import { UserGroupsService } from '../roles/user-groups.service';
 
-export class ManagerGuard implements CanLoad, CanActivate {
+export class EntryGuard implements CanLoad, CanActivate {
   constructor(private _userGrpService: UserGroupsService) {}
   public canLoad(route: Route): Observable<boolean> {
-    return this._isManager();
+    return this._isAuthenticated();
   }
 
   public canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> {
-    return this._isManager();
+    return this._isAuthenticated();
   }
 
   /**
-   * Is manager ?
+   * Is authenticated ?
    */
-  private _isManager(): Observable<boolean> {
+  private _isAuthenticated(): Observable<boolean> {
     return new Observable<boolean>((observer) => {
       this._userGrpService.userRole$.subscribe((userRoles) => {
         observer.next(this._manager(userRoles));

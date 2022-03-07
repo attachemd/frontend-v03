@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { catchError, map, Observable, of, ReplaySubject, Subject } from 'rxjs';
 import { UIService } from '../ui.service';
 import { AuthData } from './auth-data.model';
@@ -13,7 +14,8 @@ export class AuthService {
   constructor(
     private _http: HttpClient,
     private _router: Router,
-    private _uiService: UIService
+    private _uiService: UIService,
+    private _jwtHelper: JwtHelperService
   ) {}
 
   public setAuthChange(isAuthenticated: boolean) {
@@ -25,9 +27,9 @@ export class AuthService {
   }
 
   /**
-   * Authentification /api-token-auth/
-   * @param {UserAuthent} user : l'utilisateur a connecté
-   * @return any dont token
+   * Authentication api/auth/access_token
+   * @param {AuthData} authData : The user to be connected
+   * @return {Observable<any>} any including token
    */
   public logon(authData: AuthData): Observable<any> {
     this._uiService.setLoadingState(true);
@@ -67,13 +69,17 @@ export class AuthService {
     return this._http
       .post('api/auth/access_token', body.toString(), options)
       .pipe(
-        map((data: any) => {
+        map((dataJwt: any) => {
           this._uiService.setLoadingState(false);
-          if (!data) return false;
+          if (!dataJwt) return false;
+          const decodedAccess = this._jwtHelper.decodeToken(dataJwt.access);
 
           console.log('access');
-          console.log(data.access);
-          localStorage.setItem('access', data.access);
+          console.log(dataJwt.access);
+          console.log('decodedAccess');
+          console.log(decodedAccess);
+          localStorage.setItem('access', dataJwt.access);
+          this.userActivate$.next(decodedAccess.id);
           // localStorage.setItem('refresh', data.refresh);
           return true;
         }),
@@ -99,16 +105,31 @@ export class AuthService {
 
   /**
    * Storage of the token and some user information
-   * @param data
+   * @param dataJwt
    * @private
    */
-  private _authenticated(data: any): any {
+  private _authenticated(dataJwt: any): any {
     this._uiService.setLoadingState(false);
-    console.log(data);
-    localStorage.setItem('access', data.access);
+    console.log('dataJwt');
+
+    console.log(dataJwt);
+    localStorage.setItem('access', dataJwt.access);
     // localStorage.setItem('user', JSON.stringify(data.user));
     // this.userActivate$.next(data.user as User);
-    this.userActivate$.next(data.id);
-    return data;
+    this.userActivate$.next(dataJwt.id);
+    return dataJwt;
+  }
+
+  private _isToken(token: string): boolean {
+    // let token: string | any = localStorage.getItem('access');
+
+    if (token)
+      try {
+        return this._jwtHelper.decodeToken(token);
+        // eslint-disable-next-line brace-style
+      } catch (error) {
+        return false;
+      }
+    else return false;
   }
 }

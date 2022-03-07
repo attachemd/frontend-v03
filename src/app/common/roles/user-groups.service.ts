@@ -11,11 +11,11 @@ import {
 } from 'rxjs';
 
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { UserGroups } from './user-groups.model';
+import { UserRole } from './user-role.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserGroupsService implements OnDestroy {
-  public connected$ = new ReplaySubject<UserGroups>(1);
+  public userRole$ = new ReplaySubject<UserRole[]>(1);
   private _connectedSubscription: Subscription = new Subscription();
   constructor(private _http: HttpClient, private _authService: AuthService) {
     this._connectedSubscription = this._authService.userActivate$
@@ -23,37 +23,32 @@ export class UserGroupsService implements OnDestroy {
         filter((id) => !!id),
         mergeMap((id) => this._get(id))
       )
-      .subscribe((connected) => this.connected$.next(connected as UserGroups));
+      .subscribe((userRoles) => this.userRole$.next(userRoles as UserRole[]));
   }
 
   /**
-   * Does the connected have such a role/group?
-   * @param connected : the user to be tested
-   * @param role : role / group to test on the connected
+   * Does the active user have such a role?
+   * @param userRoles : the userRoles to be tested
+   * @param roleName : roleName to test on the active user
    */
-  public hasRole(connected: UserGroups, role: string): boolean {
-    return (
-      connected &&
-      'groups' in connected &&
-      connected.groups.some((name) => name === role)
-    );
+  public hasRole(userRoles: UserRole[], roleName: string): boolean {
+    return userRoles && userRoles.some((role) => role.name === roleName);
   }
 
   ngOnDestroy(): void {
     this._connectedSubscription.unsubscribe();
   }
 
-  private _get(uid: string): Observable<UserGroups | null> {
-    return this._http.get<UserGroups>(`api/user-roles/${uid}`).pipe(
+  /**
+   * Extra check for token validation
+   * @param {string} uid : the user id
+   * @returns {Observable<UserRole[] | null>}
+   */
+  private _get(uid: string): Observable<UserRole[] | null> {
+    return this._http.get<UserRole[]>(`api/user-roles/${uid}`).pipe(
       catchError((err: HttpErrorResponse) => {
-        if (
-          err &&
-          err.status === 401 &&
-          err.error &&
-          'detail' in err.error &&
-          err.error.detail === 'Signature has expired.'
-        )
-          console.error('An error occurred:', err);
+        // if (err && err.status === 401 && err.error && 'detail' in err.error)
+        console.error('An error occurred:', err);
 
         return of(null);
       })
