@@ -7,6 +7,7 @@ import {
   Observable,
   of,
   ReplaySubject,
+  Subject,
   Subscription,
 } from 'rxjs';
 
@@ -18,10 +19,13 @@ export class UserGroupsService implements OnDestroy {
   public userRole$ = new ReplaySubject<UserRole[]>(1);
   private _connectedSubscription: Subscription = new Subscription();
   constructor(private _http: HttpClient, private _authService: AuthService) {
-    this._connectedSubscription = this._authService.userActivate$
+    // this._userGrpService.userRole$.next([{ name: 'manager' }]);
+    // this.userRole$.next([{ name: 'manager' }]);
+    this._connectedSubscription = this._authService
+      .getUserId$()
       .pipe(
         filter((id) => !!id),
-        mergeMap((id) => this._get(id))
+        mergeMap((id) => this._get(id!))
       )
       .subscribe((userRoles) => this.userRole$.next(userRoles as UserRole[]));
   }

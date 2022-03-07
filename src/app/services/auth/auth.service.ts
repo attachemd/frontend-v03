@@ -9,14 +9,24 @@ import { User } from './user.model';
 
 @Injectable()
 export class AuthService {
-  public userActivate$ = new ReplaySubject<string>(1);
+  private _userId$ = new ReplaySubject<string | null>(1);
   private _authChange$: Subject<boolean> = new Subject<boolean>();
   constructor(
     private _http: HttpClient,
     private _router: Router,
     private _uiService: UIService,
     private _jwtHelper: JwtHelperService
-  ) {}
+  ) {
+    this._sendUserId();
+  }
+
+  public setUserId$(roleName: string | null) {
+    this._userId$.next(roleName);
+  }
+
+  public getUserId$(): ReplaySubject<string | null> {
+    return this._userId$;
+  }
 
   public setAuthChange(isAuthenticated: boolean) {
     this._authChange$.next(isAuthenticated);
@@ -79,7 +89,7 @@ export class AuthService {
           console.log('decodedAccess');
           console.log(decodedAccess);
           localStorage.setItem('access', dataJwt.access);
-          this.userActivate$.next(decodedAccess.id);
+          this.setUserId$(decodedAccess.id);
           // localStorage.setItem('refresh', data.refresh);
           return true;
         }),
@@ -103,6 +113,18 @@ export class AuthService {
     this._router.navigate(['/home']);
   }
 
+  private _getUserId(): string | null {
+    return this._decodedToken(localStorage.getItem('access')).id;
+  }
+
+  private _decodedToken(token: any): any {
+    return this._jwtHelper.decodeToken(token);
+  }
+
+  private _sendUserId() {
+    this.setUserId$(this._getUserId());
+  }
+
   /**
    * Storage of the token and some user information
    * @param dataJwt
@@ -116,7 +138,7 @@ export class AuthService {
     localStorage.setItem('access', dataJwt.access);
     // localStorage.setItem('user', JSON.stringify(data.user));
     // this.userActivate$.next(data.user as User);
-    this.userActivate$.next(dataJwt.id);
+    this.setUserId$(dataJwt.id);
     return dataJwt;
   }
 
