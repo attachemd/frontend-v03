@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UIService } from 'src/app/services/ui.service';
 import { AuthService } from '../../../services/auth/auth.service';
@@ -15,10 +16,15 @@ export class LoginComponent implements OnInit {
   private _loadingSubscription: Subscription = new Subscription();
   constructor(
     private _authService: AuthService,
-    private _uiService: UIService
-  ) {}
+    private _uiService: UIService,
+    private _router: Router
+  ) {
+    // if (this._authService.isAuthenticatedState()) this._router.navigate(['/']);
+    this._authService.setAuthChange(this._authService.isAuthenticatedState());
+  }
 
   ngOnInit(): void {
+    // if (this._authService.isAuthenticatedState()) this._router.navigate(['/']);
     this._loadingSubscription = this._uiService.getLoadingState().subscribe({
       next: (isLoadingState) => {
         this.isLoading = isLoadingState;
@@ -47,10 +53,7 @@ export class LoginComponent implements OnInit {
       })
       .subscribe({
         next: (isLogin) => {
-          this._authService.setAuthChange(isLogin);
-          // if (isLogin) {
-          //   this._authService.authSuccessfully()
-          // }
+          if (isLogin) this._authService.authSuccessfully();
         },
         error: (error) => {
           console.log('error');

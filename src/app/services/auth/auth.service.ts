@@ -10,7 +10,8 @@ import { User } from './user.model';
 @Injectable()
 export class AuthService {
   private _userId$ = new ReplaySubject<string | null>(1);
-  private _authChange$: Subject<boolean> = new Subject<boolean>();
+  private _authChange$: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
+
   constructor(
     private _http: HttpClient,
     private _router: Router,
@@ -18,6 +19,7 @@ export class AuthService {
     private _jwtHelper: JwtHelperService
   ) {
     this._sendUserId();
+    // this.setAuthChange(this.isAuthenticatedState());
   }
 
   public setUserId$(roleName: string | null) {
@@ -103,8 +105,13 @@ export class AuthService {
       );
   }
 
+  public isAuthenticatedState(): boolean {
+    return !!(this._isToken('access') && this._isTokensAlive());
+  }
+
   public logout(): void {
     this.setAuthChange(false);
+    localStorage.removeItem('access');
     this._router.navigate(['/login']);
   }
 
@@ -113,12 +120,31 @@ export class AuthService {
     this._router.navigate(['/home']);
   }
 
-  private _getUserId(): string | null {
-    return this._decodedToken(localStorage.getItem('access')).id;
+  private _isTokensAlive(): boolean {
+    return !this._jwtHelper.isTokenExpired();
   }
 
-  private _decodedToken(token: any): any {
-    return this._jwtHelper.decodeToken(token);
+  private _isToken(type: string): string | boolean {
+    let token: string | any = localStorage.getItem(type);
+    let decodedToken: string | boolean = false;
+
+    if (token)
+      try {
+        decodedToken = this._jwtHelper.decodeToken(token);
+        // eslint-disable-next-line brace-style
+      } catch (error) {
+        console.error(error);
+        this._router.navigate(['/login']);
+      }
+    return decodedToken;
+  }
+
+  private _getUserId(): string | null {
+    return this._decodedToken().id;
+  }
+
+  private _decodedToken(): any {
+    return this._isToken('access');
   }
 
   private _sendUserId() {
@@ -140,18 +166,5 @@ export class AuthService {
     // this.userActivate$.next(data.user as User);
     this.setUserId$(dataJwt.id);
     return dataJwt;
-  }
-
-  private _isToken(token: string): boolean {
-    // let token: string | any = localStorage.getItem('access');
-
-    if (token)
-      try {
-        return this._jwtHelper.decodeToken(token);
-        // eslint-disable-next-line brace-style
-      } catch (error) {
-        return false;
-      }
-    else return false;
   }
 }
