@@ -145,5 +145,48 @@
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "B21KP9UEzvaZNCgS"
+    },
+    {
+        "type": "Group",
+        "name": "Test",
+        "parent_id": null,
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "ZoW8pVCUDMbhEzY7"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\cypress\\integration\\spec.ts",
+        "parent_id": "ZoW8pVCUDMbhEzY7",
+        "fsPath": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\cypress\\integration\\spec.ts",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "8Cu3PmNctqdapbYg"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\cypress.json",
+        "parent_id": "ZoW8pVCUDMbhEzY7",
+        "fsPath": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\cypress.json",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "ArEOaJ45uGZlKBgX"
+    },
+    {
+        "type": "Group",
+        "name": "Home",
+        "parent_id": "dw1N5A2TDrnkujC3",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "BRTUxnOpmYezufwF"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\home\\home.component.ts",
+        "parent_id": "BRTUxnOpmYezufwF",
+        "fsPath": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\home\\home.component.ts",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "tnOyoqXIH7xfZGC9"
     }
 ]
