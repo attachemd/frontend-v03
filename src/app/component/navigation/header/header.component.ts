@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.authSubscription = this._authService.getAuthChange().subscribe({
+    this.authSubscription = this._authService.getAuthChange$().subscribe({
       next: (authStats) => {
         this.isAuthenticated = authStats;
         console.log('this.isAuthenticated');
@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         console.log('error :', error);
       },
     });
-    this._authService.setAuthChange(this._authService.isAuthenticatedState());
+    this._authService.setAuthChange$(this._authService.isAuthenticatedState());
   }
 
   public onToggleSidenav() {

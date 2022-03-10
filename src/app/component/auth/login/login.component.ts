@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     private _router: Router
   ) {
     // if (this._authService.isAuthenticatedState()) this._router.navigate(['/']);
-    this._authService.setAuthChange(this._authService.isAuthenticatedState());
+    this._authService.setAuthChange$(this._authService.isAuthenticatedState());
   }
 
   ngOnInit(): void {

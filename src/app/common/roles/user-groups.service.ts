@@ -16,7 +16,7 @@ import { UserRole } from './user-role.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserGroupsService implements OnDestroy {
-  public userRole$ = new ReplaySubject<UserRole[]>(1);
+  private _userRole$ = new ReplaySubject<UserRole[]>(1);
   private _connectedSubscription: Subscription = new Subscription();
   constructor(private _http: HttpClient, private _authService: AuthService) {
     // this._userGrpService.userRole$.next([{ name: 'manager' }]);
@@ -27,7 +27,15 @@ export class UserGroupsService implements OnDestroy {
         filter((id) => !!id),
         mergeMap((id) => this._get(id!))
       )
-      .subscribe((userRoles) => this.userRole$.next(userRoles as UserRole[]));
+      .subscribe((userRoles) => this.setUserRole$(userRoles as UserRole[]));
+  }
+
+  public setUserRole$(userRoles: UserRole[]): void {
+    this._userRole$.next(userRoles);
+  }
+
+  public getUserRole$() {
+    return this._userRole$;
   }
 
   /**

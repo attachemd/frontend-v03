@@ -38,7 +38,7 @@ export class ManagerGuard implements CanLoad, CanActivate {
    */
   private _isManager(): Observable<boolean> {
     return new Observable<boolean>((observer) => {
-      this._userGrpService.userRole$.subscribe((userRoles) => {
+      this._userGrpService.getUserRole$().subscribe((userRoles) => {
         observer.next(this._manager(userRoles));
         observer.complete();
       });

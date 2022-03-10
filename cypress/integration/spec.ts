@@ -5,7 +5,6 @@
 import * as jwt from 'jsonwebtoken';
 
 // Test cases
-// 
 
 // describe('My First Test', () => {
 //   it('Visits the initial project page', () => {

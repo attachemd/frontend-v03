@@ -22,19 +22,19 @@ export class AuthService {
     // this.setAuthChange(this.isAuthenticatedState());
   }
 
-  public setUserId$(roleName: string | null) {
-    this._userId$.next(roleName);
+  public setUserId$(userId: string | null) {
+    this._userId$.next(userId);
   }
 
   public getUserId$(): ReplaySubject<string | null> {
     return this._userId$;
   }
 
-  public setAuthChange(isAuthenticated: boolean) {
+  public setAuthChange$(isAuthenticated: boolean) {
     this._authChange$.next(isAuthenticated);
   }
 
-  public getAuthChange(): Subject<boolean> {
+  public getAuthChange$(): Subject<boolean> {
     return this._authChange$;
   }
 
@@ -110,13 +110,13 @@ export class AuthService {
   }
 
   public logout(): void {
-    this.setAuthChange(false);
+    this.setAuthChange$(false);
     localStorage.removeItem('access');
     this._router.navigate(['/login']);
   }
 
   public authSuccessfully() {
-    this.setAuthChange(true);
+    this.setAuthChange$(true);
     this._router.navigate(['/home']);
   }
 
