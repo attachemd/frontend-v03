@@ -39,7 +39,12 @@
             "prefix": "app",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "brace-style": [
+          "error",
+          "1tbs",
+          {"allowSingleLine": true}
+      ]
       }
     },
     {

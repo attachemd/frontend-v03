@@ -131,7 +131,6 @@ export class AuthService {
     if (token)
       try {
         decodedToken = this._jwtHelper.decodeToken(token);
-        // eslint-disable-next-line brace-style
       } catch (error) {
         console.error(error);
         this._router.navigate(['/login']);
