@@ -1,1 +1,9 @@
 <p data-testid="home">Home works!</p>
+<mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="key">
+        <mat-header-cell *matHeaderCellDef="">License Key</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.key}}</mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
