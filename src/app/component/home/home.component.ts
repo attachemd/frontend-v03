@@ -10,17 +10,11 @@ import { MatSort } from '@angular/material/sort';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-  @ViewChild(MatSort)
+  @ViewChild(MatSort, { static: true })
   private _sort!: MatSort;
 
   public currentTab: string = 'Tab1';
-  public displayedColumns = [
-    'key',
-    'status',
-    'expiry',
-    'account',
-    'product.name',
-  ];
+  public displayedColumns = ['key', 'status', 'expiry', 'account', 'product'];
 
   public dataSource = new MatTableDataSource<License>();
 
@@ -61,14 +55,27 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     // https://stackoverflow.com/questions/48891174/angular-material-2-datatable-sorting-with-nested-objects
-    // this.dataSource.sortingDataAccessor = (item: License, property) => {
-    //   switch (property) {
-    //     case 'product.name':
-    //       return item.product.name;
-    //     // default:
-    //     //   return item[property];
-    //   }
-    // };
+    this.dataSource.sortingDataAccessor = (item: any, property) => {
+      switch (property) {
+        case 'product':
+          return item.product.name;
+        case 'account':
+          return item.account.first_name + ' ' + item.account.last_name;
+        default:
+          return item[property];
+      }
+    };
     this.dataSource.sort = this._sort;
+  }
+
+  public doFilter(event: KeyboardEvent) {
+    this.dataSource.filterPredicate = (data: any, filter) => {
+      const dataStr = JSON.stringify(data).toLowerCase();
+
+      return dataStr.indexOf(filter) != -1;
+    };
+    this.dataSource.filter = (event.target as HTMLInputElement).value
+      .trim()
+      .toLowerCase();
   }
 }
