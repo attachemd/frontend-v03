@@ -1,8 +1,25 @@
 <p data-testid="home">Home works!</p>
-<mat-table [dataSource]="dataSource">
+<mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="key">
-        <mat-header-cell *matHeaderCellDef="">License Key</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>License Key</mat-header-cell>
         <mat-cell *matCellDef="let element">{{element.key}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.status}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="expiry">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Expiry</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.expiry | date}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="product.name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Product</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.product.name}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="account">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Customer</mat-header-cell>
+        <!-- <mat-cell *matCellDef="let element">{{element.account.first_name}} {{element.account.last_name}}</mat-cell> -->
+        <mat-cell *matCellDef="let element">{{element.account.first_name}}</mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>

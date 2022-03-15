@@ -205,5 +205,31 @@
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "1XdUbhv5MLNjqITe"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\services\\licenses\\license.model.ts",
+        "parent_id": "BRTUxnOpmYezufwF",
+        "fsPath": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\services\\licenses\\license.model.ts",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "4PMWdwXenaU53ibt"
+    },
+    {
+        "type": "Group",
+        "name": "Modules",
+        "parent_id": null,
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "64E9c8HjlTLDYhwB"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\modules\\material.module.ts",
+        "parent_id": "64E9c8HjlTLDYhwB",
+        "fsPath": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\modules\\material.module.ts",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "SBkRbWqzUp2D9cAL"
     }
 ]
