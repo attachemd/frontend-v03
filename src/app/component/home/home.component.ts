@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   public doFilter(event: KeyboardEvent) {
     // https://stackoverflow.com/questions/49833315/angular-material-2-datasource-filter-with-nested-object
-    // TODO status not filtred
+    // TODO status not filtered
     this.dataSource.filterPredicate = (data: any, filter) => {
       const dataStr = JSON.stringify(data).toLowerCase();
 
