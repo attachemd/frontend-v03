@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public sidenavToggle: EventEmitter<void> = new EventEmitter<void>();
 
   public isAuthenticated: boolean | string = false;
-  public authSubscription: Subscription = new Subscription();
+  public _authSubscription: Subscription = new Subscription();
   constructor(
     private _authService: AuthService,
     private _userGrpService: UserGroupsService
@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.authSubscription = this._authService.getAuthChange$().subscribe({
+    this._authSubscription = this._authService.getAuthChange$().subscribe({
       next: (authStats) => {
         this.isAuthenticated = authStats;
         console.log('this.isAuthenticated');
@@ -51,6 +51,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.authSubscription.unsubscribe();
+    this._authSubscription.unsubscribe();
   }
 }

@@ -1,5 +1,5 @@
-<mat-toolbar color="primary">
-    <div>
+<div color="primary" class="ft-lm-header">
+    <div *ngIf="isAuthenticated">
         <button
             mat-icon-button
             data-testid="menu-button"
@@ -8,7 +8,7 @@
             <mat-icon>menu</mat-icon>
         </button>
     </div>
-    <div><a routerLink="/">Model Title</a></div>
+    <div *ngIf="isAuthenticated" class="ft-lm-model-title">Model Title</div>
     <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
         <ul fxLayout class="navigation-items" fxLayoutGap="10px">
             <li *ngIf="!isAuthenticated">
@@ -22,4 +22,4 @@
             </li>
         </ul>
     </div>
-</mat-toolbar>
+</div>

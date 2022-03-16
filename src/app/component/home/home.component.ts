@@ -3,6 +3,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { License } from 'src/app/services/licenses/license.model';
 import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,9 @@ import { MatSort } from '@angular/material/sort';
 export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort, { static: true })
   private _sort!: MatSort;
+
+  @ViewChild(MatPaginator)
+  private _paginator!: MatPaginator;
 
   public currentTab: string = 'Tab1';
   public displayedColumns = ['key', 'status', 'expiry', 'account', 'product'];
@@ -66,6 +70,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       }
     };
     this.dataSource.sort = this._sort;
+    this.dataSource.paginator = this._paginator;
   }
 
   public doFilter(event: KeyboardEvent) {

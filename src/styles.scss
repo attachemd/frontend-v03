@@ -18,3 +18,26 @@ $workshop-theme: material.mat-light-theme(
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+mat-table {
+    margin: 0 40px 0 50px;
+}
+
+mat-header-row {
+    border-bottom: none !important;
+    // border-top: 1px solid #ffa600;
+    background-color: #F7F7F8;
+    border-radius: 5px;
+    min-height: 45px !important;
+}
+
+mat-header-row div {
+    font-weight: bold;
+    font-size: 14px
+}
+
+mat-row {
+    border-bottom: none !important;
+    // border-top: 1px solid #ffa600;
+    padding: 6px 0;
+}

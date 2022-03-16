@@ -1,17 +1,15 @@
-<!-- <mat-nav-list>
-    <a *ngIf="!isAuth" mat-list-item routerLink="/signup" (click)="onClose()">
-        <mat-icon>face</mat-icon>
-        <span class="nav-caption">Signup</span>
+<mat-nav-list class="nav-list-for-models">
+    <a *ngIf="isAuth" mat-list-item routerLink="/home" routerLinkActive="active">
+        <span class="nav-caption">Home</span>
     </a>
-    <a *ngIf="!isAuth" mat-list-item routerLink="/login" (click)="onClose()">
-        <mat-icon>input</mat-icon>
-        <span class="nav-caption">Login</span>
+    <a *ngIf="isAuth" mat-list-item routerLink="/licenses" routerLinkActive="active">
+        <span class="nav-caption">Licenses</span>
     </a>
-    <mat-list-item *ngIf="isAuth">
-        <button mat-icon-button (click)="onLogout()">
-            <mat-icon>eject</mat-icon>
-            <span class="nav-caption">Logout</span>
-        </button>
-    </mat-list-item>
-</mat-nav-list> -->
-<p>list works!</p>
+    <a *ngIf="isAuth" mat-list-item routerLink="/customers" routerLinkActive="active">
+        <span class="nav-caption">Customers</span>
+    </a>
+    <a *ngIf="isAuth" mat-list-item routerLink="/products" routerLinkActive="active">
+        <span class="nav-caption">Products</span>
+    </a>
+</mat-nav-list>
+<!-- <p>list works!</p> -->

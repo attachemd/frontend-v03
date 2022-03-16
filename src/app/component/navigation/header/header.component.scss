@@ -1,14 +1,32 @@
 a {
     text-decoration: none;
-    color: white;
+    color: black;
 }
 
-a:hover, a:active {
-    color: lightgrey;
-}
+// a:hover, a:active {
+//     color: lightgrey;
+// }
 
 .navigation-items {
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+// .ft-lm-header {
+//     position: fixed;
+//     top: 0;
+// }
+
+.ft-lm-header {
+    align-items: center;
+    height: 50px;
+    padding: 0 40px;
+    margin-top: 20px;
+}
+
+.ft-lm-model-title {
+    font-size: 26px;
+    font-weight: 500;
+    margin-left: 10px;
 }
