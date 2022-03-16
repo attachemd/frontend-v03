@@ -29,15 +29,16 @@ mat-header-row {
     background-color: #F7F7F8;
     border-radius: 5px;
     min-height: 45px !important;
+    margin-bottom: 10px;
 }
 
 mat-header-row div {
-    font-weight: bold;
-    font-size: 14px
+    font-weight: 400;
+    font-size: 13px;
+    color: #6E6B84;
 }
 
 mat-row {
     border-bottom: none !important;
     // border-top: 1px solid #ffa600;
-    padding: 6px 0;
 }
