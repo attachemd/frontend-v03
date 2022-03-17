@@ -4,8 +4,12 @@ import { AuthGuard } from './common/guards/auth.guard';
 import { EntryGuard } from './common/guards/entry.guard';
 import { LoginComponent } from './component/auth/login/login.component';
 import { SignupComponent } from './component/auth/signup/signup.component';
+import { ClientComponent } from './component/client/client.component';
 import { HomeComponent } from './component/home/home.component';
+import { LicenseComponent } from './component/license/license.component';
 import { NotFoundComponent } from './component/not-found/not-found.component';
+import { ProductComponent } from './component/product/product.component';
+import { LicenseEditComponent } from './management/license-edit/license-edit.component';
 const routes: Routes = [
   {
     path: '',
@@ -16,6 +20,30 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'licenses',
+    component: LicenseComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'licenses/edit',
+    component: LicenseEditComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'clients',
+    component: ClientComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'products',
+    component: ProductComponent,
     canLoad: [AuthGuard],
     canActivate: [AuthGuard],
   },

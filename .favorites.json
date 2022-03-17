@@ -266,5 +266,31 @@
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "94kIxFfTuLljKaHU"
+    },
+    {
+        "type": "Group",
+        "name": "License",
+        "parent_id": "dw1N5A2TDrnkujC3",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "wJolHb6WiTBDUgE9"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\license\\license.component.ts",
+        "parent_id": "wJolHb6WiTBDUgE9",
+        "fsPath": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\license\\license.component.ts",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "7SbGc5ed0ZvEiFk2"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\management\\license-edit\\license-edit.component.ts",
+        "parent_id": "wJolHb6WiTBDUgE9",
+        "fsPath": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\management\\license-edit\\license-edit.component.ts",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "a1vLDygBfHCizjr8"
     }
 ]

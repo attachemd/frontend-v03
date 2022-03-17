@@ -15,6 +15,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './component/auth/auth.module';
 import { NotFoundComponent } from './component/not-found/not-found.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { LicenseComponent } from './component/license/license.component';
+import { ClientComponent } from './component/client/client.component';
+import { ProductComponent } from './component/product/product.component';
+import { LicenseEditComponent } from './management/license-edit/license-edit.component';
 
 export function tokenGetter(): string | null {
   return localStorage.getItem('access');
@@ -27,6 +31,10 @@ export function tokenGetter(): string | null {
     HeaderComponent,
     SidenavListComponent,
     NotFoundComponent,
+    LicenseComponent,
+    ClientComponent,
+    ProductComponent,
+    LicenseEditComponent,
   ],
   imports: [
     JwtModule.forRoot({
