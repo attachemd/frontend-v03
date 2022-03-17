@@ -25,6 +25,7 @@ export class LicenseComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator)
   private _paginator!: MatPaginator;
 
+  public isVisible = true;
   public displayedColumns = [
     'key',
     'status',
@@ -91,6 +92,10 @@ export class LicenseComponent implements OnInit, AfterViewInit {
   public editContact(row: any) {
     console.log('row');
     console.log(row);
+  }
+
+  public toggleEditVisibility(event: any, visibility: string) {
+    event.target.querySelector('button').style.display = visibility;
   }
 
   public doFilter(event: KeyboardEvent) {

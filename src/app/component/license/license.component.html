@@ -36,13 +36,14 @@
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
       
           <mat-cell *matCellDef="let row">
-              <!-- TODO show todo on hover -->
-            <button mat-icon-button class="icon-display" routerLink="/licenses/edit" [state]="{ id:1 , name:'Angular'}" (click)="editContact(row)" title="Edit License"><mat-icon>edit</mat-icon></button>
+              <!-- TODO show icons on hover -->
+            <button *ngIf="isVisible" mat-icon-button class="icon-display" routerLink="/licenses/edit" [state]="{ id:1 , name:'Angular'}" (click)="editContact(row)" title="Edit License"><mat-icon>edit</mat-icon></button>
           </mat-cell>
      
       </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    <!-- <mat-row *matRowDef="let row; columns: displayedColumns" (mouseenter) ="test($event)"  (mouseleave) ="isVisible = false"></mat-row> -->
+    <mat-row *matRowDef="let row; columns: displayedColumns" (mouseenter)="toggleEditVisibility($event, 'inline-block')" (mouseleave)="toggleEditVisibility($event, 'none')"></mat-row>
 </mat-table>
 <!-- TODO sticky paginator to the right bottom -->
 <mat-paginator
