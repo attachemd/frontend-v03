@@ -2,7 +2,7 @@
 @use '~@angular/material/theming' as material;
 
 @include material.mat-core();
-$workshop-primary: material.mat-palette(material.$mat-cyan);
+$workshop-primary: material.mat-palette(material.$mat-brown);
 $workshop-accent: material.mat-palette(material.$mat-pink);
 
 $workshop-theme: material.mat-light-theme(

@@ -1,3 +1,6 @@
+import { Client } from '../clients/client.model';
+import { Product } from '../products/product.model';
+
 export interface License {
   id: number;
   key: string;
@@ -6,14 +9,9 @@ export interface License {
   expiry: string;
   status: boolean;
   customer: string;
-  account: {
-    first_name: string;
-    last_name: string;
-  };
+  client: Client;
   iproduct: string;
-  product: {
-    name: string;
-  };
+  product: Product;
   created_at?: string;
   updated_at?: string;
 }

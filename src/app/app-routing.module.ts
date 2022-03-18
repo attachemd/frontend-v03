@@ -30,7 +30,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'licenses/edit',
+    path: 'licenses/:id',
     component: LicenseEditComponent,
     canLoad: [AuthGuard],
     canActivate: [AuthGuard],

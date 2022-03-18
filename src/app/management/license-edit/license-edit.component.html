@@ -1,1 +1,74 @@
-<p>license-edit works!</p>
+
+<div fxLayoutAlign="center" class="ft-lm-edit-field">
+    <mat-form-field fxFlex="500px">
+        <input
+            matInput
+            type="text"
+            placeholder="Key"
+            [(ngModel)]="license.key"
+        />
+    </mat-form-field>
+</div>
+<div fxLayoutAlign="center" class="ft-lm-edit-field">
+    <mat-form-field fxFlex="500px">
+        <input
+            matInput
+            type="text"
+            placeholder="Type"
+            [ngModel]="license.type"
+        />
+    </mat-form-field>
+</div>
+<div fxLayoutAlign="center" class="ft-lm-edit-field">
+    <mat-form-field fxFlex="500px">
+        <input
+            matInput
+            type="text"
+            placeholder="Description"
+            [(ngModel)]="license.description"
+        />
+    </mat-form-field>
+</div>
+<div fxLayoutAlign="center" class="ft-lm-edit-field">
+    <mat-form-field fxFlex="500px">
+        <input
+            matInput
+            type="text"
+            placeholder="expiry"
+            [(ngModel)]="license.expiry"
+        />
+    </mat-form-field>
+</div>
+<div fxLayoutAlign="center" class="ft-lm-edit-field">
+    <mat-form-field fxFlex="500px" appearance="fill">
+        <mat-label>Select a client</mat-label>
+        <!-- <mat-select [(value)]="clientSelected" placeholder="Select a client"> -->
+        <mat-select [value]="license.client?.id">
+        <mat-option>None</mat-option>
+        <mat-option
+        *ngFor="let client of clients"
+        [value]="client.id"
+    >
+        {{client.first_name}} {{client.last_name}}
+    </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div fxLayoutAlign="center" class="ft-lm-edit-field">
+    <mat-form-field fxFlex="500px" appearance="fill">
+        <mat-label>Select a product</mat-label>
+        <!-- <mat-select [(value)]="clientSelected" placeholder="Select a client"> -->
+        <mat-select [value]="license.product?.id">
+        <mat-option>None</mat-option>
+        <mat-option
+        *ngFor="let product of products"
+        [value]="product.id"
+    >
+        {{product.name}}
+    </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div fxLayoutAlign="center" class="ft-lm-edit-field">
+        <h1 fxFlex="500px" fxLayoutAlign="center">Other fields</h1>
+</div>

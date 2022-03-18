@@ -50,7 +50,7 @@ export class LicenseComponent implements OnInit, AfterViewInit {
 
         // for (const item of newLicense) {
         //   item.customer =
-        //     item.account.first_name + ' ' + item.account.last_name;
+        //     item.client.first_name + ' ' + item.client.last_name;
         //   item.iproduct = item.product.name;
         // }
 
@@ -79,7 +79,7 @@ export class LicenseComponent implements OnInit, AfterViewInit {
         case 'product':
           return item.product.name;
         case 'client':
-          return item.account.first_name + ' ' + item.account.last_name;
+          return item.client.first_name + ' ' + item.client.last_name;
         default:
           return item[property];
       }
