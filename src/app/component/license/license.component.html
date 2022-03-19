@@ -1,4 +1,5 @@
 <!-- TODO add search icon -->
+<!-- TODO add clear to the filter field -->
 <div fxLayoutAlign="left" class="ft-lm-search-for-field">
     <mat-form-field fxFlex="40%">
         <input
@@ -38,7 +39,7 @@
           <mat-cell *matCellDef="let row">
               <!-- TODO show icons on hover -->
             <!-- <button *ngIf="isVisible" mat-icon-button class="icon-display" [routerLink]="['/licenses', row.id]" routerLink="/licenses/edit" [state]="{ id:row.id , name:'Angular'}" (click)="editContact(row)" title="Edit License"><mat-icon>edit</mat-icon></button> -->
-            <button *ngIf="isVisible" mat-icon-button class="icon-display" [routerLink]="['/licenses', row.id]" (click)="editContact(row)" title="Edit License"><mat-icon>edit</mat-icon></button>
+            <button *ngIf="isVisible" color="primary" mat-icon-button class="icon-display" [routerLink]="['/licenses', row.id]" (click)="editContact(row)" title="Edit License"><mat-icon>edit</mat-icon></button>
           </mat-cell>
      
       </ng-container>

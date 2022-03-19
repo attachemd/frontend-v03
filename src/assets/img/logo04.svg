@@ -1,11 +1,4 @@
-<mat-nav-list class="nav-list-for-models">
-    <a *ngIf="isAuth" mat-list-item routerLink="/home">
-        <!-- <img class="ft-lm-logo" src="/assets/img/logo03.svg" alt="License Manager"> -->
-        <div class="ft-lm-logo"> 
-            <!-- <object width="35" height="35" type="image/svg+xml" data="/assets/img/logo03.svg" id="svg"  class="logo">
-                Kiwi Logo 
-              </object> -->
-            <svg preserveAspectRatio="none" id="svg" viewBox="0 0 650 600">
+<svg preserveAspectRatio="none" id="svg" viewBox="0 0 650 600">
               <defs
                  id="defs27086" />
               <g
@@ -36,19 +29,3 @@
                 </g>
               </g>
             </svg>
-            </div>
-    </a>
-    <a *ngIf="isAuth" mat-list-item routerLink="/home" routerLinkActive="active">
-        <span class="nav-caption">Home</span>
-    </a>
-    <a *ngIf="isAuth" mat-list-item routerLink="/licenses" routerLinkActive="active">
-        <span class="nav-caption">Licenses</span>
-    </a>
-    <a *ngIf="isAuth" mat-list-item routerLink="/clients" routerLinkActive="active">
-        <span class="nav-caption">Clients</span>
-    </a>
-    <a *ngIf="isAuth" mat-list-item routerLink="/products" routerLinkActive="active">
-        <span class="nav-caption">Products</span>
-    </a>
-</mat-nav-list>
-<!-- <p>list works!</p> -->

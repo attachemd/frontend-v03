@@ -1,4 +1,30 @@
+.ft-lm-primary-fields {
+    // background-color: #2DCA72;
+    margin: 0 50px;
+}
 .ft-lm-edit-field:nth-of-type(1)
 {
     margin-top: 40px;
 } 
+
+:host ::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color: #2DCA72 ;
+}
+
+:host ::ng-deep  .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: #e5fcef ;
+}
+
+:host ::ng-deep  .mat-slide-toggle.mat-checked .mat-ripple-element {
+    background-color: #2DCA72 ;
+}
+
+.ft-lm-label {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 11px;
+}
+
+.ft-lm-custom-fields-content {
+    // background-color: red
+    margin: 0 50px;
+}

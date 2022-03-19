@@ -11,6 +11,7 @@ import { Product } from 'src/app/services/products/product.model';
   styleUrls: ['./license-edit.component.scss'],
 })
 export class LicenseEditComponent implements OnInit {
+  public status = false;
   public license = {} as License;
   public clients = [] as Client[];
   public products = [] as Product[];

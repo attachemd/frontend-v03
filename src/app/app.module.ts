@@ -19,6 +19,7 @@ import { LicenseComponent } from './component/license/license.component';
 import { ClientComponent } from './component/client/client.component';
 import { ProductComponent } from './component/product/product.component';
 import { LicenseEditComponent } from './management/license-edit/license-edit.component';
+import { DragulaModule } from 'ng2-dragula';
 
 export function tokenGetter(): string | null {
   return localStorage.getItem('access');
@@ -50,6 +51,7 @@ export function tokenGetter(): string | null {
         // throwNoTokenError: true
       },
     }),
+    DragulaModule.forRoot(),
     ReactiveFormsModule,
     BrowserModule,
     BrowserAnimationsModule,

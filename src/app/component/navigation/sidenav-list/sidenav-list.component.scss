@@ -12,15 +12,47 @@
 //     padding-left: 6px;
 // }
 
+.ft-lm-logo {
+    width:40px;
+    height:40px;
+    // height: auto;
+    margin-left: 24px;
+    image-rendering: auto;
+    // position:relative
+}
+
+#svg {
+    // position: absolute;
+    color: #795548;
+    fill: #795548;
+}
+
+#layer1 {
+    // fill: #7a663d;
+    fill: #795548;
+}
+#svg27089 {
+    // fill: #7a663d;
+    fill: #795548;
+}
+#g25788 {
+    // fill: #7a663d;
+    fill: #795548;
+}
+
 .active {
     // background-color: #ededed !important;
     // background-color: #E6E6EA !important;
     background-color: #ffffff !important;
 }
 
-.nav-list-for-models {
-    margin-top: 70px;
-    // background-color: #e0e0e0;
+// .nav-list-for-models {
+//     // margin-top: 70px;
+//     // background-color: #e0e0e0;
+// }
+
+.nav-list-for-models a:nth-of-type(1) {
+    height: 100px;
 }
 
 .nav-list-for-models a span {

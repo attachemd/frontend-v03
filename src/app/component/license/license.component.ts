@@ -16,6 +16,7 @@ import { License } from 'src/app/services/licenses/license.model';
   selector: 'app-license',
   templateUrl: './license.component.html',
   styleUrls: ['./license.component.scss'],
+  // TODO Encapsulation
   encapsulation: ViewEncapsulation.None,
 })
 export class LicenseComponent implements OnInit, AfterViewInit {
