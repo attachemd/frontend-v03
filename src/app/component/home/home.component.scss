@@ -6,3 +6,33 @@
     height: 300px;
     border: 1px solid #d0ff00;
 }
+
+.dnd-field {
+    display: flex;
+    height: 30px;
+    width: max-content;
+    align-content: center;
+    border: 1px solid #ddd;
+    border-radius: 5px
+}
+
+.dnd-field > div {
+    display: flex;
+    align-items: center; 
+}
+
+.dnd-field .dnd-field-icon {
+    width: 30px;
+    justify-content: center;
+}
+.dnd-field .dnd-field-content {
+    width: 100px;
+}
+// .dnd-field .dnd-field-content span {
+//     // display: inline-block;
+//     // vertical-align: middle;
+// }
+
+.many2class {
+    color: red;
+}

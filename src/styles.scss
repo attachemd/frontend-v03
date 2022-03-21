@@ -19,6 +19,37 @@ $workshop-theme: material.mat-light-theme(
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+@font-face {
+  font-family: 'icomoon';
+  src:  url('assets/fonts/icomoon/icomoon.eot?2wykv2');
+  src:  url('assets/fonts/icomoon/icomoon.eot?2wykv2#iefix') format('embedded-opentype'),
+    url('assets/fonts/icomoon/icomoon.ttf?2wykv2') format('truetype'),
+    url('assets/fonts/icomoon/icomoon.woff?2wykv2') format('woff'),
+    url('assets/fonts/icomoon/icomoon.svg?2wykv2#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  // speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-select-type-cursor:before {
+  content: "\e900";
+}
+
 /* in-flight clone */
 .gu-mirror {
     position: fixed !important;
