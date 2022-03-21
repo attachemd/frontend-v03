@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  // encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None,
 })
 export class HomeComponent implements OnInit, OnDestroy {
   public left = [
@@ -48,13 +48,32 @@ export class HomeComponent implements OnInit, OnDestroy {
     },
   ];
 
+  private _shadow: any;
+
   private _subs = new Subscription();
   constructor(private _dragulaService: DragulaService) {
-    // this._subs.add(
-    //   this._dragulaService.drop('VAMPIRES').subscribe(({ el }) => {
-    //     this.addClass(el, "ex-moved");
-    //   })
-    // );
+    this._subs.add(
+      this._dragulaService.drop(this.MANY_ITEMS).subscribe(({ el }) => {
+        let element = document.getElementById('unique_id');
+
+        element?.remove();
+      })
+    );
+
+    this._subs.add(
+      this._dragulaService.shadow(this.MANY_ITEMS).subscribe(({ el }) => {
+        if (!this._shadow) {
+          this._shadow = this.makeElement();
+          // this._shadow.classList.add('gu-transit');
+          this._shadow.classList.add('shadow');
+        }
+        // el.style.display = 'none';
+        // el.classList.add('shadow');
+        el.parentNode?.insertBefore(this._shadow, el);
+        // console.log('el');
+        // console.log(el.style);
+      })
+    );
 
     this._subs.add(
       _dragulaService
@@ -105,6 +124,15 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log('HomeComponent');
+  }
+
+  public makeElement() {
+    let newNode = document.createElement('div');
+
+    newNode.textContent = 'Drop Here';
+    newNode.classList.add('elem');
+    newNode.setAttribute('id', 'unique_id');
+    return newNode;
   }
 
   ngOnDestroy(): void {
