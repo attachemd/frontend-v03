@@ -27,4 +27,25 @@
 .ft-lm-custom-fields-content {
     // background-color: red
     margin: 0 50px;
+    padding: 20px 0; 
+}
+
+.ft-lm-custom-fields {
+    // background-color: #f0fff6;
+    padding: 10px 0;
+    min-height: 400px;
+}
+
+.builder-container {
+    display: flex;
+}
+// .builder-canvas {
+//     background-color: #eee;
+// }
+// .builder-elements-container {
+//     background-color: rgb(233, 233, 233);
+// }
+.builder-elements {
+    background-color: #fff;
+    width: 284px;
 }

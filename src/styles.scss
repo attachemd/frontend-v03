@@ -126,3 +126,74 @@ mat-row {
 //   mat-table mat-icon {
 //       color: #ADACBA;
 //   }
+
+/***********************/
+/******* Builder *******/
+/***********************/
+
+.top {
+  height: 300px;
+  border: 1px solid #ffa600;
+}
+.bottom {
+  height: 300px;
+  border: 1px solid #d0ff00;
+}
+
+.dnd-field {
+  display: inline-flex;
+  height: 35px;
+  width: max-content;
+  align-content: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 0 10px 10px 0;
+}
+
+.dnd-field > div {
+  display: flex;
+  align-items: center; 
+}
+
+.dnd-field .dnd-field-icon {
+  width: 30px;
+  justify-content: center;
+}
+.dnd-field .dnd-field-content {
+  width: 100px;
+}
+// .dnd-field .dnd-field-content span {
+//     // display: inline-block;
+//     // vertical-align: middle;
+// }
+
+.many2class {
+  color: red;
+}
+
+// .shadow {
+//     border: 1px solid #ffa600;
+// }
+
+.drop-here {
+//     border: 2px dashed #2B916A;
+//   background-color: #E1F1EA;
+//     color: #2DCA72;
+//     border: 2px dashed #2DCA72;
+//   background-color: #edfdf4;
+  color: #0054F7;
+  border: 2px dashed #0054F7;
+background-color: #f8faff;
+border-radius: 5px;
+margin: 5px;
+padding: 10px;
+text-align: center;
+}
+
+// .gu-transit {
+//     display: none;
+//   }
+
+/***********************/
+/***** Builder End *****/
+/***********************/

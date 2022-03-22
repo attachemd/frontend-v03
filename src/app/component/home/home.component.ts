@@ -2,11 +2,24 @@ import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
 
+let personId = 0;
+
+class FormField {
+  public id: number;
+  constructor(
+    public name: string,
+    public type: string,
+    public content: string
+  ) {
+    this.id = personId++;
+  }
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  // encapsulation: ViewEncapsulation.None,
 })
 export class HomeComponent implements OnInit, OnDestroy {
   public left = [
@@ -19,59 +32,85 @@ export class HomeComponent implements OnInit, OnDestroy {
   // public many = ['The', 'possibilities', 'are', 'endless!'];
   // public many2 = ['Explore', 'them'];
   public many = [
-    {
-      name: 'Form Field',
-      type: 'many2class',
-      content: '<p class="many2class">new text 03</p>',
-      id: 1,
-    },
-    {
-      name: 'Radio Button',
-      type: 'textblock',
-      content: '<p class="many2class">new text 02</p>',
-      id: 2,
-    },
-    {
-      name: 'Text Area',
-      type: 'image',
-      content: '<p class="many2class">new text 01</p>',
-      id: 3,
-    },
+    new FormField(
+      'Form Field',
+      'many2class',
+      '<p class="many2class">new text 03</p>'
+    ),
+    new FormField(
+      'Radio Button',
+      'textblock',
+      '<p class="many2class">new text 02</p>'
+    ),
+    new FormField(
+      'Text Area',
+      'image',
+      '<p class="many2class">new text 01</p>'
+    ),
   ];
 
   public many2 = [
-    {
-      name: 'Text Area',
-      type: 'image',
-      content: '<p class="many2class">new text 04</p>',
-      id: 1,
-    },
+    new FormField(
+      'Text Area',
+      'image',
+      '<p class="many2class">new text 04</p>'
+    ),
+    new FormField(
+      'Date Picker',
+      'image',
+      '<p class="many2class">new text 05</p>'
+    ),
+    new FormField(
+      'Drop Down',
+      'image',
+      '<p class="many2class">new text 06</p>'
+    ),
   ];
 
   private _shadow: any;
+  private _shadowInnerHTML: string = 'test';
 
   private _subs = new Subscription();
   constructor(private _dragulaService: DragulaService) {
     this._subs.add(
-      this._dragulaService.drop(this.MANY_ITEMS).subscribe(({ el }) => {
-        let element = document.getElementById('unique_id');
+      this._dragulaService.dragend(this.MANY_ITEMS).subscribe(({ el }) => {
+        // let element = document.getElementById('unique_id');
 
-        element?.remove();
+        // element?.remove();
+        this._shadow.innerHTML = this._shadowInnerHTML;
+        el.className = '';
+        console.log('dragend');
+        console.log(this._shadowInnerHTML);
+      })
+    );
+    this._subs.add(
+      this._dragulaService.drag(this.MANY_ITEMS).subscribe(({ el }) => {
+        console.log('drag');
+        this._shadow = el;
+        this._shadowInnerHTML = el.innerHTML;
       })
     );
 
+    // this._subs.add(
+    //   this._dragulaService.shadow(this.MANY_ITEMS).subscribe(({ el }) => {
+    //     if (!this._shadow) {
+    //       this._shadow = this.makeElement();
+    //       // this._shadow.classList.add('gu-transit');
+    //       this._shadow.classList.add('shadow');
+    //     }
+    //     // el.style.display = 'none';
+    //     // el.classList.add('shadow');
+    //     el.parentNode?.insertBefore(this._shadow, el);
+    //     // console.log('el');
+    //     // console.log(el.style);
+    //   })
+    // );
+
     this._subs.add(
       this._dragulaService.shadow(this.MANY_ITEMS).subscribe(({ el }) => {
-        if (!this._shadow) {
-          this._shadow = this.makeElement();
-          // this._shadow.classList.add('gu-transit');
-          this._shadow.classList.add('shadow');
-        }
-        // el.style.display = 'none';
-        // el.classList.add('shadow');
-        el.parentNode?.insertBefore(this._shadow, el);
-        // console.log('el');
-        // console.log(el.style);
+        console.log('shadow');
+        el.className = 'drop-here';
+        el.innerHTML = 'shadow test';
       })
     );
 
@@ -114,9 +153,12 @@ export class HomeComponent implements OnInit, OnDestroy {
         return source?.classList.contains('top');
         // return true;
       },
-      copyItem: (item) => {
-        return item;
-      }, //Allow item to be coppied in another div
+      // copyItem: (item) => {
+      //   return item;
+      // }, //Allow item to be coppied in another div
+      copyItem: (formField: FormField) => {
+        return new FormField(formField.name, formField.type, formField.content);
+      },
       removeOnSpill: true,
       // removeOnSpill: false,
     });
