@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
@@ -76,13 +77,15 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   constructor(
     private _http: HttpClient,
     private _route: ActivatedRoute,
-    private _dragulaService: DragulaService
+    private _dragulaService: DragulaService,
+    private _sanitizer: DomSanitizer
   ) {
     this._subs.add(
       this._dragulaService
         .dragend(this.builderContainer)
         .subscribe(({ el }) => {
           this._shadow.innerHTML = this._shadowInnerHTML;
+          // this._shadow.innerHTML = this.builder_elements_model_02[0].content;
           el.className = '';
           console.log('dragend');
           console.log(this._shadowInnerHTML);
@@ -213,6 +216,10 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     //     console.log('error :', error);
     //   },
     // });
+  }
+
+  public setStatus(): SafeHtml {
+    return '<span title="active" class="status status-active">test</span>';
   }
 
   ngOnDestroy(): void {
