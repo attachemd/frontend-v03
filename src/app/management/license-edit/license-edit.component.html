@@ -60,7 +60,8 @@
         <div class="ft-lm-custom-fields-content">
             <div class="ft-lm-custom-fields builder-render" [dragula]="builderContainer" [(dragulaModel)]='builder_elements_model_02'>
                 <!-- <div *ngFor='let formElement of builder_elements_model_02' [innerHtml]='formElement.content'></div> -->
-                <div *ngFor='let formElement of builder_elements_model_02' [innerHtml]='formElement.content'></div>
+                <!-- <div *ngFor='let formElement of builder_elements_model_02' [innerHtml]='formElement.content'></div> -->
+                <div *ngFor='let formElement of builder_elements_model_02;' appDynamicField [type]="formElement.name"></div>
             </div>
         </div>
     </div>

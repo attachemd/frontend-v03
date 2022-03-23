@@ -22,6 +22,7 @@ import { LicenseEditComponent } from './management/license-edit/license-edit.com
 import { DragulaModule } from 'ng2-dragula';
 import { AlertComponent } from './component/alert/alert.component';
 import { AdDirective } from './directive/ad.directive';
+import { DynamicFieldDirective } from './directive/dynamic-field.directive';
 
 export function tokenGetter(): string | null {
   return localStorage.getItem('access');
@@ -40,6 +41,7 @@ export function tokenGetter(): string | null {
     LicenseEditComponent,
     AlertComponent,
     AdDirective,
+    DynamicFieldDirective,
   ],
   imports: [
     JwtModule.forRoot({
