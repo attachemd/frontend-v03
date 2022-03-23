@@ -20,6 +20,8 @@ import { ClientComponent } from './component/client/client.component';
 import { ProductComponent } from './component/product/product.component';
 import { LicenseEditComponent } from './management/license-edit/license-edit.component';
 import { DragulaModule } from 'ng2-dragula';
+import { AlertComponent } from './component/alert/alert.component';
+import { AdDirective } from './directive/ad.directive';
 
 export function tokenGetter(): string | null {
   return localStorage.getItem('access');
@@ -36,6 +38,8 @@ export function tokenGetter(): string | null {
     ClientComponent,
     ProductComponent,
     LicenseEditComponent,
+    AlertComponent,
+    AdDirective,
   ],
   imports: [
     JwtModule.forRoot({
