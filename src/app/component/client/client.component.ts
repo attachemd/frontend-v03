@@ -36,6 +36,6 @@ export class ClientComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.componentRef.destroy();
+    this.componentRef?.destroy();
   }
 }

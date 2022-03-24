@@ -1,3 +1,4 @@
+import * as $ from 'jquery';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -158,6 +159,47 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    let elementBuilder = $('#elem-id');
+    // variables
+
+    if (elementBuilder) {
+      let topPosition = elementBuilder.offset()!.top - 10;
+
+      console.log('topPosition');
+      console.log(topPosition);
+      console.log('$(window)');
+      console.log($(window));
+
+      window.addEventListener(
+        'scroll',
+        () => {
+          console.log('topPosition');
+          console.log(topPosition);
+          console.log('$(document).scrollTop()!');
+          console.log($(document).scrollTop()!);
+          console.log('$(".mat-sidenav-content").scrollTop()!');
+          console.log($('.mat-sidenav-content').scrollTop()!);
+          console.log('window.pageYOffset');
+          console.log(window.pageYOffset);
+          console.log('document.body.scrollTop');
+          console.log(document.body.scrollTop);
+
+          if ($('.mat-sidenav-content').scrollTop()! > topPosition)
+            elementBuilder.addClass('sticky');
+          else elementBuilder.removeClass('sticky');
+        },
+        true
+      );
+
+      // $(document).on('scroll', () => {
+      //   console.log('topPosition');
+      //   console.log(topPosition);
+      //   if ($(window).scrollTop()! > topPosition)
+      //     elementBuilder.addClass('sticky');
+      //   else elementBuilder.removeClass('sticky');
+      // });
+    }
+
     this._route.params.subscribe({
       next: (params: any) => {
         console.log(
@@ -218,8 +260,32 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     // });
   }
 
+  // ngAfterViewInit(): void {
+  //   let elementBuilder = $('#elem-id');
+  //   // variables
+
+  //   let topPosition = elementBuilder.offset()!.top - 10;
+
+  //   console.log('topPosition');
+  //   console.log(topPosition);
+  //   console.log('$(window)');
+  //   console.log($(window));
+  //   $('body').on('scroll', () => {
+  //     console.log('topPosition');
+  //     console.log(topPosition);
+  //     if ($(window).scrollTop()! > topPosition)
+  //       elementBuilder.addClass('sticky');
+  //     else elementBuilder.removeClass('sticky');
+  //   });
+  // }
+
   public setStatus(): SafeHtml {
     return '<span title="active" class="status status-active">test</span>';
+  }
+
+  public setFieldName(fieldName: any): void {
+    console.log('fieldName');
+    console.log(fieldName);
   }
 
   ngOnDestroy(): void {
