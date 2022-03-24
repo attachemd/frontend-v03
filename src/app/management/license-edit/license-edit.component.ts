@@ -65,6 +65,7 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     ),
   ];
 
+  public condition = true;
   public status = false;
   public license = {} as License;
   public clients = [] as Client[];

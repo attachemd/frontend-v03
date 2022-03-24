@@ -1,79 +1,120 @@
 <div class="builder-container">
-    <div class="builder-canvas">
-        <div class="ft-lm-primary-fields">
-            <div class="ft-lm-edit-field">
-                <mat-form-field fxFlex="500px">
-                    <input matInput type="text" placeholder="Key" [(ngModel)]="license.key" />
-                </mat-form-field>
-            </div>
-            <div class="ft-lm-edit-field">
-                <div fxFlex="500px" style="padding:0 0 20px 0;">
-                    <div>
-                        <mat-label class="ft-lm-label">Status</mat-label>
-                    </div>
-                    <mat-slide-toggle [(ngModel)]="license.status">{{license.status ? 'active' : 'inactive'}}</mat-slide-toggle>
-                </div>
-            </div>
-            <div class="ft-lm-edit-field">
-                <mat-form-field fxFlex="500px">
-                    <input matInput type="text" placeholder="Type" [ngModel]="license.type" />
-                </mat-form-field>
-            </div>
-            <div class="ft-lm-edit-field">
-                <mat-form-field fxFlex="500px">
-                    <input matInput type="text" placeholder="Description" [(ngModel)]="license.description" />
-                </mat-form-field>
-            </div>
-            <div class="ft-lm-edit-field">
-                <mat-form-field fxFlex="500px">
-                    <input matInput type="text" placeholder="Expiry" [(ngModel)]="license.expiry" />
-                </mat-form-field>
-            </div>
-            <div class="ft-lm-edit-field">
-                <mat-form-field fxFlex="500px" appearance="fill">
-                    <mat-label>Select a client</mat-label>
-                    <!-- <mat-select [(value)]="clientSelected" placeholder="Select a client"> -->
-                    <mat-select [value]="license.client?.id">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let client of clients" [value]="client.id">
-                            {{client.first_name}} {{client.last_name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="ft-lm-edit-field">
-                <mat-form-field fxFlex="500px" appearance="fill">
-                    <mat-label>Select a product</mat-label>
-                    <!-- <mat-select [(value)]="clientSelected" placeholder="Select a client"> -->
-                    <mat-select [value]="license.product?.id">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let product of products" [value]="product.id">
-                            {{product.name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="ft-lm-custom-fields-title">
-                <h1 fxFlex="500px">Custom fields</h1>
-            </div>
+  <div class="builder-canvas">
+    <div class="ft-lm-primary-fields">
+      <div class="ft-lm-edit-field">
+        <mat-form-field fxFlex="500px">
+          <input
+            matInput
+            type="text"
+            placeholder="Key"
+            [(ngModel)]="license.key"
+          />
+        </mat-form-field>
+      </div>
+      <div class="ft-lm-edit-field">
+        <div fxFlex="500px" style="padding: 0 0 20px 0">
+          <div>
+            <mat-label class="ft-lm-label">Status</mat-label>
+          </div>
+          <mat-slide-toggle [(ngModel)]="license.status"
+            >{{ license.status ? "active" : "inactive" }}
+          </mat-slide-toggle>
         </div>
-        <div class="ft-lm-custom-fields-content">
-            <div class="ft-lm-custom-fields builder-render" [dragula]="builderContainer" [(dragulaModel)]='builder_elements_model_02'>
-                <!-- <div *ngFor='let formElement of builder_elements_model_02' [innerHtml]='formElement.content'></div> -->
-                <!-- <div *ngFor='let formElement of builder_elements_model_02' [innerHtml]='formElement.content'></div> -->
-                <div *ngFor='let formElement of builder_elements_model_02;' (onFieldNameChanged_)="setFieldName($event)" appDynamicField [type]="formElement.name"></div>
-            </div>
-        </div>
+      </div>
+      <div class="ft-lm-edit-field">
+        <mat-form-field fxFlex="500px">
+          <input
+            matInput
+            type="text"
+            placeholder="Type"
+            [ngModel]="license.type"
+          />
+        </mat-form-field>
+      </div>
+      <div class="ft-lm-edit-field">
+        <mat-form-field fxFlex="500px">
+          <input
+            matInput
+            type="text"
+            placeholder="Description"
+            [(ngModel)]="license.description"
+          />
+        </mat-form-field>
+      </div>
+      <div class="ft-lm-edit-field">
+        <mat-form-field fxFlex="500px">
+          <input
+            matInput
+            type="text"
+            placeholder="Expiry"
+            [(ngModel)]="license.expiry"
+          />
+        </mat-form-field>
+      </div>
+      <div class="ft-lm-edit-field">
+        <mat-form-field fxFlex="500px" appearance="fill">
+          <mat-label>Select a client</mat-label>
+          <!-- <mat-select [(value)]="clientSelected" placeholder="Select a client"> -->
+          <mat-select [value]="license.client?.id">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let client of clients" [value]="client.id">
+              {{ client.first_name }} {{ client.last_name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="ft-lm-edit-field">
+        <mat-form-field fxFlex="500px" appearance="fill">
+          <mat-label>Select a product</mat-label>
+          <!-- <mat-select [(value)]="clientSelected" placeholder="Select a client"> -->
+          <mat-select [value]="license.product?.id">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let product of products" [value]="product.id">
+              {{ product.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="ft-lm-custom-fields-title">
+        <h1 fxFlex="500px">Custom fields</h1>
+      </div>
     </div>
-    <div class="builder-elements-container" >
-        <div id="elem-id">
-            <h1>Builder elements</h1>
-            <div class="builder-elements builder-source" [dragula]="builderContainer" [(dragulaModel)]='builder_elements_model_01'>
-                <div class="dnd-field" *ngFor='let formElement of builder_elements_model_01'>
-                    <div class="dnd-field-icon icon-select-type-cursor"></div>
-                      <div [ngClass]="'dnd-field-content'+ ' ' + formElement.type"><span>{{formElement.name}}</span></div>
-                  </div>
-            </div>
-        </div>
+    <div class="ft-lm-custom-fields-content">
+      <div
+        class="ft-lm-custom-fields builder-render"
+        [dragula]="builderContainer"
+        [(dragulaModel)]="builder_elements_model_02"
+      >
+        <!-- <div *ngFor='let formElement of builder_elements_model_02' [innerHtml]='formElement.content'></div> -->
+        <!-- <div *ngFor='let formElement of builder_elements_model_02' [innerHtml]='formElement.content'></div> -->
+        <ng-template
+          *ngFor="let formElement of builder_elements_model_02"
+          (onFieldNameChanged_)="setFieldName($event)"
+          appDynamicField
+          [type]="formElement.name"
+        >
+        </ng-template>
+      </div>
     </div>
+  </div>
+  <div class="builder-elements-container">
+    <div id="elem-id">
+      <h1>Builder elements</h1>
+      <div
+        class="builder-elements builder-source"
+        [dragula]="builderContainer"
+        [(dragulaModel)]="builder_elements_model_01"
+      >
+        <div
+          class="dnd-field"
+          *ngFor="let formElement of builder_elements_model_01"
+        >
+          <div class="dnd-field-icon icon-select-type-cursor"></div>
+          <div [ngClass]="'dnd-field-content' + ' ' + formElement.type">
+            <span>{{ formElement.name }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
