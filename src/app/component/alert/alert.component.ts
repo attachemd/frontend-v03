@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { LicenseEditService } from 'src/app/services/licenses/license-edit.service';
 
 @Component({
   selector: 'app-alert',
@@ -14,7 +15,7 @@ export class AlertComponent implements OnInit {
 
   public text = 'default value';
   public license = { key: 'jsdfhfdhdfshklhf' };
-  constructor() {}
+  constructor(private _licenseEditService: LicenseEditService) {}
 
   ngOnInit(): void {
     console.log('AlertComponent');
@@ -23,6 +24,7 @@ export class AlertComponent implements OnInit {
   public onFieldNameChanged() {
     let parmtr = 'new parameter from alert';
 
-    this.fieldChange.emit(parmtr);
+    this._licenseEditService.setFieldName$(parmtr);
+    // this.fieldChange.emit(parmtr);
   }
 }

@@ -80,30 +80,45 @@
       </div>
     </div>
     <div class="ft-lm-custom-fields-content">
-      <div
+      <!-- <div
         class="ft-lm-custom-fields builder-render"
         [dragula]="builderContainer"
         [(dragulaModel)]="builder_elements_model_02"
+      > -->
+      <div
+        class="ft-lm-custom-fields builder-render"
+        [dragula]="builderContainer"
       >
         <!-- <div *ngFor='let formElement of builder_elements_model_02' [innerHtml]='formElement.content'></div> -->
         <!-- <div *ngFor='let formElement of builder_elements_model_02' [innerHtml]='formElement.content'></div> -->
-        <ng-template
+        <!-- <div
           *ngFor="let formElement of builder_elements_model_02"
-          (onFieldNameChanged_)="setFieldName($event)"
           appDynamicField
           [type]="formElement.name"
-        >
-        </ng-template>
+        ></div> -->
+        <div
+          *ngFor="let formElement of builder_elements_model_02; trackBy: trackItem"
+          appDynamicField
+          [type]="formElement.name"
+        ></div>
+        <!-- <div
+          *ngFor="let formElement of builder_elements_model_02"
+        ><div>{{formElement.name}}</div></div> -->
       </div>
     </div>
   </div>
   <div class="builder-elements-container">
     <div id="elem-id">
       <h1>Builder elements</h1>
+      <!-- <div
+        class="builder-elements builder-source"
+        [dragula]="builderContainer"
+        [dragulaModel]="builder_elements_model_01"
+        (dragulaModelChange)="builder_elements_model_01 = $event"
+      > -->
       <div
         class="builder-elements builder-source"
         [dragula]="builderContainer"
-        [(dragulaModel)]="builder_elements_model_01"
       >
         <div
           class="dnd-field"

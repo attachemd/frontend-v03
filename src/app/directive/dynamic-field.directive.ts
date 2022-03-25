@@ -24,11 +24,14 @@ export class DynamicFieldDirective implements OnInit {
   ngOnInit(): void {
     this.componentRef = this._viewContainerRef.createComponent(AlertComponent);
     this.componentRef.instance.type = this.type;
-    this.componentRef.instance.fieldChange.subscribe((val: any) => {
-      console.log('val');
-      console.log(val);
-      this.onFieldNameChanged_();
-    });
+    console.log('this.type');
+    console.log(this.type);
+
+    // this.componentRef.instance.fieldChange.subscribe((val: any) => {
+    //   console.log('val');
+    //   console.log(val);
+    //   this.onFieldNameChanged_();
+    // });
   }
 
   public onFieldNameChanged_() {

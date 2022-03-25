@@ -1,6 +1,6 @@
 import * as $ from 'jquery';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { DragulaService } from 'ng2-dragula';
@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { Client } from 'src/app/services/clients/client.model';
 import { License } from 'src/app/services/licenses/license.model';
 import { Product } from 'src/app/services/products/product.model';
+import { LicenseEditService } from 'src/app/services/licenses/license-edit.service';
 
 let ft_lm = { formElementId: 0 };
 
@@ -48,10 +49,15 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   ];
 
   public builder_elements_model_02 = [
+    // new FormElement(
+    //   'Text Area',
+    //   'image',
+    //   '<div class="ft-lm-edit-field"><mat-form-field fxFlex="500px"><input matInput type="text" placeholder="Key" [(ngModel)]="license.key" /></mat-form-field></div>'
+    // ),
     new FormElement(
       'Text Area',
       'image',
-      '<div class="ft-lm-edit-field"><mat-form-field fxFlex="500px"><input matInput type="text" placeholder="Key" [(ngModel)]="license.key" /></mat-form-field></div>'
+      '<p class="many2class">new text 04</p>'
     ),
     new FormElement(
       'Date Picker',
@@ -80,7 +86,9 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     private _http: HttpClient,
     private _route: ActivatedRoute,
     private _dragulaService: DragulaService,
-    private _sanitizer: DomSanitizer
+    private _sanitizer: DomSanitizer,
+    private _licenseEditService: LicenseEditService,
+    private _changeDetection: ChangeDetectorRef
   ) {
     this._subs.add(
       this._dragulaService
@@ -90,7 +98,8 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
           // this._shadow.innerHTML = this.builder_elements_model_02[0].content;
           el.className = '';
           console.log('dragend');
-          console.log(this._shadowInnerHTML);
+          // this._updateTargetContainer();
+          // console.log(this._shadowInnerHTML);
         })
     );
     this._subs.add(
@@ -114,12 +123,12 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
         .dropModel(this.builderContainer)
         .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
           console.log('dropModel:');
-          console.log(el);
-          console.log(source);
-          console.log(target);
-          console.log(sourceModel);
-          console.log(targetModel);
-          console.log(item);
+          console.log('el', el);
+          console.log('source', source);
+          console.log('target', target);
+          console.log('sourceModel', sourceModel);
+          console.log('targetModel', targetModel);
+          console.log('item', item);
         })
     );
     this._subs.add(
@@ -160,30 +169,37 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this._licenseEditService.getFieldName$().subscribe({
+      next: (fieldName: string) => {
+        console.log('fieldName', fieldName);
+        this._updateTargetContainer();
+      },
+      error: (err: any) => {},
+    });
     let elementBuilder = $('#elem-id');
     // variables
 
     if (elementBuilder) {
       let topPosition = elementBuilder.offset()!.top - 10;
 
-      console.log('topPosition');
-      console.log(topPosition);
-      console.log('$(window)');
-      console.log($(window));
+      // console.log('topPosition');
+      // console.log(topPosition);
+      // console.log('$(window)');
+      // console.log($(window));
 
       window.addEventListener(
         'scroll',
         () => {
-          console.log('topPosition');
-          console.log(topPosition);
-          console.log('$(document).scrollTop()!');
-          console.log($(document).scrollTop()!);
-          console.log('$(".mat-sidenav-content").scrollTop()!');
-          console.log($('.mat-sidenav-content').scrollTop()!);
-          console.log('window.pageYOffset');
-          console.log(window.pageYOffset);
-          console.log('document.body.scrollTop');
-          console.log(document.body.scrollTop);
+          // console.log('topPosition');
+          // console.log(topPosition);
+          // console.log('$(document).scrollTop()!');
+          // console.log($(document).scrollTop()!);
+          // console.log('$(".mat-sidenav-content").scrollTop()!');
+          // console.log($('.mat-sidenav-content').scrollTop()!);
+          // console.log('window.pageYOffset');
+          // console.log(window.pageYOffset);
+          // console.log('document.body.scrollTop');
+          // console.log(document.body.scrollTop);
 
           if ($('.mat-sidenav-content').scrollTop()! > topPosition)
             elementBuilder.addClass('sticky');
@@ -292,5 +308,41 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this._dragulaService.destroy(this.builderContainer);
     this._subs.unsubscribe();
+  }
+
+  public trackItem(index: number, item: any) {
+    // return item.trackId;
+    return item.id;
+  }
+
+  private _updateTargetContainer() {
+    // let drake = this._dragulaService.find(this.builderContainer).drake;
+    // let models = drake.models;
+    // console.log('models');
+    // console.log(models);
+    // // models![0][0].name = 'attache';
+    // models![0].push(
+    //   new FormElement(
+    //     'Text Area',
+    //     'image',
+    //     '<p class="many2class">new text 17</p>'
+    //   )
+    // );
+    // models![0].pop();
+    // console.log(models);
+
+    // this.builder_elements_model_02 = [...this.builder_elements_model_02];
+    this.builder_elements_model_02[0].id = 90;
+    // this._changeDetection.detectChanges();
+    // this.builder_elements_model_02.push(
+    //   new FormElement(
+    //     'Text Area',
+    //     'image',
+    //     '<p class="many2class">new text 17</p>'
+    //   )
+    // );
+    // // this.builder_elements_model_02.pop();
+    console.log('this.builder_elements_model_02');
+    console.log(this.builder_elements_model_02);
   }
 }
