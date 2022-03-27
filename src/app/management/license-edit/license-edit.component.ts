@@ -55,17 +55,17 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     //   '<div class="ft-lm-edit-field"><mat-form-field fxFlex="500px"><input matInput type="text" placeholder="Key" [(ngModel)]="license.key" /></mat-form-field></div>'
     // ),
     new FormElement(
-      'Text Area',
+      '01 Text Area',
       'image',
       '<p class="many2class">new text 04</p>'
     ),
     new FormElement(
-      'Date Picker',
+      '02 Date Picker',
       'image',
       '<p class="many2class">new text 05</p>'
     ),
     new FormElement(
-      'Drop Down',
+      '03 Drop Down',
       'image',
       '<p class="many2class">new text 06</p>'
     ),
@@ -96,10 +96,12 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
         .subscribe(({ el }) => {
           this._shadow.innerHTML = this._shadowInnerHTML;
           // this._shadow.innerHTML = this.builder_elements_model_02[0].content;
-          el.className = '';
+          // el.className = 'ongoing';
+          this._shadow.className = 'ongoing';
           console.log('dragend');
           // this._updateTargetContainer();
           // console.log(this._shadowInnerHTML);
+          this._updateTargetContainer();
         })
     );
     this._subs.add(
@@ -163,12 +165,15 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
           formElement.content
         );
       }, //Allow item to be coppied in another div
+      // copySortSource: false,
       removeOnSpill: true,
       // removeOnSpill: false,
     });
   }
 
   ngOnInit(): void {
+    console.log('this.builder_elements_model_02');
+    console.log(this.builder_elements_model_02);
     this._licenseEditService.getFieldName$().subscribe({
       next: (fieldName: string) => {
         console.log('fieldName', fieldName);
@@ -315,6 +320,22 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     return item.id;
   }
 
+  private _getRenderedBuilderFieldsNewOrder(): any[] {
+    let form_elements = document.querySelectorAll(
+      '.builder-render .builder-element'
+    );
+    let renderedBuilderFieldElements: any[] = [];
+
+    // console.log('form_element');
+    // console.log(form_elements);
+    form_elements.forEach((form_element: any) => {
+      // console.log('form_element');
+      // console.log(form_element.fieldData);
+      renderedBuilderFieldElements.push(form_element.fieldData);
+    });
+    return renderedBuilderFieldElements;
+  }
+
   private _updateTargetContainer() {
     // let drake = this._dragulaService.find(this.builderContainer).drake;
     // let models = drake.models;
@@ -332,7 +353,17 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     // console.log(models);
 
     // this.builder_elements_model_02 = [...this.builder_elements_model_02];
-    this.builder_elements_model_02[0].id = 90;
+    console.log('this.builder_elements_model_02');
+    console.log(this.builder_elements_model_02);
+    // this.builder_elements_model_02[0].id =
+    //   this.builder_elements_model_02[0].id + 1000;
+    // this.builder_elements_model_02[1].id =
+    //   this.builder_elements_model_02[1].id + 1000;
+    // this.builder_elements_model_02[2].id =
+    //   this.builder_elements_model_02[2].id + 1000;
+    for (let builder_element_model of this.builder_elements_model_02)
+      builder_element_model.id = builder_element_model.id + 1000;
+
     // this._changeDetection.detectChanges();
     // this.builder_elements_model_02.push(
     //   new FormElement(
@@ -344,5 +375,7 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     // // this.builder_elements_model_02.pop();
     console.log('this.builder_elements_model_02');
     console.log(this.builder_elements_model_02);
+    console.log('this._getRenderedBuilderFieldsNewOrder()');
+    console.log(this._getRenderedBuilderFieldsNewOrder());
   }
 }

@@ -1,39 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
-@use '~@angular/material/theming' as material;
+@use "~@angular/material/theming" as material;
 
 @include material.mat-core();
 $workshop-primary: material.mat-palette(material.$mat-brown);
 $workshop-accent: material.mat-palette(material.$mat-pink);
 
 $workshop-theme: material.mat-light-theme(
-    (
-        color: (
-        primary: $workshop-primary,
-        accent: $workshop-accent,
-    )
-    )
+  (
+    color: (
+      primary: $workshop-primary,
+      accent: $workshop-accent,
+    ),
+  )
 );
 
 @include material.angular-material-theme($workshop-theme);
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 @font-face {
-  font-family: 'icomoon';
-  src:  url('assets/fonts/icomoon/icomoon.eot?2wykv2');
-  src:  url('assets/fonts/icomoon/icomoon.eot?2wykv2#iefix') format('embedded-opentype'),
-    url('assets/fonts/icomoon/icomoon.ttf?2wykv2') format('truetype'),
-    url('assets/fonts/icomoon/icomoon.woff?2wykv2') format('woff'),
-    url('assets/fonts/icomoon/icomoon.svg?2wykv2#icomoon') format('svg');
+  font-family: "icomoon";
+  src: url("assets/fonts/icomoon/icomoon.eot?2wykv2");
+  src: url("assets/fonts/icomoon/icomoon.eot?2wykv2#iefix")
+      format("embedded-opentype"),
+    url("assets/fonts/icomoon/icomoon.ttf?2wykv2") format("truetype"),
+    url("assets/fonts/icomoon/icomoon.woff?2wykv2") format("woff"),
+    url("assets/fonts/icomoon/icomoon.svg?2wykv2#icomoon") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class^="icon-"],
+[class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'icomoon' !important;
+  font-family: "icomoon" !important;
   // speak: never;
   font-style: normal;
   font-weight: normal;
@@ -52,75 +60,75 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 /* in-flight clone */
 .gu-mirror {
-    position: fixed !important;
-    margin: 0 !important;
-    z-index: 9999 !important;
-    opacity: 0.8;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-    filter: alpha(opacity=80);
-    pointer-events: none;
-  }
-  /* high-performance display:none; helper */
-  .gu-hide {
-    left: -9999px !important;
-  }
-  /* added to mirrorContainer (default = body) while dragging */
-  .gu-unselectable {
-    -webkit-user-select: none !important;
-    -moz-user-select: none !important;
-    -ms-user-select: none !important;
-    user-select: none !important;
-  }
-  /* added to the source element while its mirror is dragged */
-  .gu-transit {
-    opacity: 0.2;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
-    filter: alpha(opacity=20);
-  }
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+  pointer-events: none;
+}
+/* high-performance display:none; helper */
+.gu-hide {
+  left: -9999px !important;
+}
+/* added to mirrorContainer (default = body) while dragging */
+.gu-unselectable {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+/* added to the source element while its mirror is dragged */
+.gu-transit {
+  opacity: 0.2;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter: alpha(opacity=20);
+}
 
 mat-table {
-    margin: 0 40px 0 50px;
+  margin: 0 40px 0 50px;
 }
 
 mat-header-row {
-    border-bottom: none !important;
-    // border-top: 1px solid #ffa600;
-    // background-color: #F7F7F8;
-    background-color: #f7f4ec;
-    border-radius: 5px;
-    min-height: 45px !important;
-    margin-bottom: 10px;
+  border-bottom: none !important;
+  // border-top: 1px solid #ffa600;
+  // background-color: #F7F7F8;
+  background-color: #f7f4ec;
+  border-radius: 5px;
+  min-height: 45px !important;
+  margin-bottom: 10px;
 }
 
 mat-header-row div {
-    font-weight: 400;
-    font-size: 13px;
-    // color: #6E6B84;
-    // color: #000;
-    color: #683e1f;
+  font-weight: 400;
+  font-size: 13px;
+  // color: #6E6B84;
+  // color: #000;
+  color: #683e1f;
 }
 
 mat-row {
-    border-bottom: none !important;
-    // border-top: 1px solid #ffa600;
+  border-bottom: none !important;
+  // border-top: 1px solid #ffa600;
 }
 
 .mat-column-action {
-    word-wrap: break-word !important;
-    white-space: unset !important;
-    // flex: 0 0 28% !important;
-    // flex: 100px !important;
-    flex: 0 0 16px;
-    // width: 100px !important;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-  
-    word-break: break-word;
-  
-    -ms-hyphens: auto;
-    -moz-hyphens: auto;
-    -webkit-hyphens: auto;
-    hyphens: auto;
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  // flex: 0 0 28% !important;
+  // flex: 100px !important;
+  flex: 0 0 16px;
+  // width: 100px !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
 
 //   mat-table mat-icon {
@@ -152,7 +160,7 @@ mat-row {
 
 .dnd-field > div {
   display: flex;
-  align-items: center; 
+  align-items: center;
 }
 
 .dnd-field .dnd-field-icon {
@@ -176,18 +184,19 @@ mat-row {
 // }
 
 .drop-here {
-//     border: 2px dashed #2B916A;
-//   background-color: #E1F1EA;
-//     color: #2DCA72;
-//     border: 2px dashed #2DCA72;
-//   background-color: #edfdf4;
-  color: #0054F7;
-  border: 2px dashed #0054F7;
-background-color: #f8faff;
-border-radius: 5px;
-margin: 5px;
-padding: 10px;
-text-align: center;
+  //     border: 2px dashed #2B916A;
+  //   background-color: #E1F1EA;
+  //     color: #2DCA72;
+  //     border: 2px dashed #2DCA72;
+  //   background-color: #edfdf4;
+  color: #0054f7;
+  border: 2px dashed #0054f7;
+  background-color: #f8faff;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 10px;
+  text-align: center;
+  // width: 100%;
 }
 
 // .gu-transit {

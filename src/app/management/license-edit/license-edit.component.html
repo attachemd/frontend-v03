@@ -88,6 +88,7 @@
       <div
         class="ft-lm-custom-fields builder-render"
         [dragula]="builderContainer"
+        [(dragulaModel)]="builder_elements_model_02"
       >
         <!-- <div *ngFor='let formElement of builder_elements_model_02' [innerHtml]='formElement.content'></div> -->
         <!-- <div *ngFor='let formElement of builder_elements_model_02' [innerHtml]='formElement.content'></div> -->
@@ -96,11 +97,13 @@
           appDynamicField
           [type]="formElement.name"
         ></div> -->
-        <div
-          *ngFor="let formElement of builder_elements_model_02; trackBy: trackItem" 
+        <ng-container
+          *ngFor="let formElement of builder_elements_model_02;let i=index; trackBy: trackItem" 
           appDynamicField
-          [type]="formElement.name"
-        ></div>
+          [type]="formElement.name + i"
+          [fieldData]="formElement"
+          class="builder-element"
+        ></ng-container>
         <!-- <div
           *ngFor="let formElement of builder_elements_model_02"
         ><div>{{formElement.name}}</div></div> -->
@@ -109,7 +112,7 @@
   </div>
   <div class="builder-elements-container">
     <div id="elem-id">
-      <h1>Builder elements</h1>
+      <h1>Drag & Drop Fields</h1>
       <!-- <div
         class="builder-elements builder-source"
         [dragula]="builderContainer"
@@ -119,6 +122,7 @@
       <div
         class="builder-elements builder-source"
         [dragula]="builderContainer"
+        [(dragulaModel)]="builder_elements_model_01"
       >
         <div
           class="dnd-field"

@@ -1,5 +1,6 @@
 import {
   Directive,
+  ElementRef,
   EventEmitter,
   Input,
   OnInit,
@@ -15,11 +16,17 @@ export class DynamicFieldDirective implements OnInit {
   @Input()
   public type: string = '';
 
+  @Input()
+  public fieldData: any = {};
+
   @Output()
   public fieldChange_ = new EventEmitter();
 
   public componentRef: any;
-  constructor(private _viewContainerRef: ViewContainerRef) {}
+  constructor(
+    private _viewContainerRef: ViewContainerRef,
+    private _elementRef: ElementRef
+  ) {}
 
   ngOnInit(): void {
     this.componentRef = this._viewContainerRef.createComponent(AlertComponent);
@@ -32,6 +39,7 @@ export class DynamicFieldDirective implements OnInit {
     //   console.log(val);
     //   this.onFieldNameChanged_();
     // });
+    this._elementRef.nativeElement.fieldData = this.fieldData;
   }
 
   public onFieldNameChanged_() {
