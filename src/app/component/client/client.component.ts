@@ -8,7 +8,7 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { AlertComponent } from '../alert/alert.component';
+import { DnDFieldComponent } from '../dnd-field/dnd-field.component';
 
 @Component({
   selector: 'app-client',
@@ -24,10 +24,11 @@ export class ClientComponent implements OnInit, OnDestroy {
 
   public createComponent(type: string) {
     this.viewContainerRef.clear();
-    // const factory = this._resolver.resolveComponentFactory(AlertComponent);
+    // const factory = this._resolver.resolveComponentFactory(DnDFieldComponent);
 
     // this.componentRef = this.viewContainerRef.createComponent(factory);
-    this.componentRef = this.viewContainerRef.createComponent(AlertComponent);
+    this.componentRef =
+      this.viewContainerRef.createComponent(DnDFieldComponent);
     this.componentRef.instance.type = type;
   }
 

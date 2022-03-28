@@ -1,0 +1,24 @@
+<div class="field_container" [ngClass]="{ ongoing: isOngoing }">
+  <div class="field-element-header" *ngIf="isOngoing">
+    <div><input [(ngModel)]="fieldData.name" /></div>
+    <div>
+      <button (click)="onFieldCanceled()">
+        cancel
+      </button>
+      <button (click)="onFieldNameChanged()">
+        save
+      </button>
+    </div>
+  </div>
+
+  <div class="ft-lm-edit-field">
+    <mat-form-field fxFlex="500px">
+      <input
+        matInput
+        type="text"
+        placeholder="{{ fieldData.name }}"
+        [(ngModel)]="content"
+      />
+    </mat-form-field>
+  </div>
+</div>

@@ -7,7 +7,7 @@ import {
   Output,
   ViewContainerRef,
 } from '@angular/core';
-import { AlertComponent } from '../component/alert/alert.component';
+import { DnDFieldComponent } from '../component/dnd-field/dnd-field.component';
 
 @Directive({
   selector: '[appDynamicField]',
@@ -15,6 +15,12 @@ import { AlertComponent } from '../component/alert/alert.component';
 export class DynamicFieldDirective implements OnInit {
   @Input()
   public type: string = '';
+
+  @Input()
+  public content: string = '';
+
+  @Input()
+  public isOngoing = false;
 
   @Input()
   public fieldData: any = {};
@@ -29,8 +35,12 @@ export class DynamicFieldDirective implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.componentRef = this._viewContainerRef.createComponent(AlertComponent);
+    this.componentRef =
+      this._viewContainerRef.createComponent(DnDFieldComponent);
     this.componentRef.instance.type = this.type;
+    this.componentRef.instance.content = this.content;
+    this.componentRef.instance.isOngoing = this.isOngoing;
+    this.componentRef.instance.fieldData = this.fieldData;
     console.log('this.type');
     console.log(this.type);
 

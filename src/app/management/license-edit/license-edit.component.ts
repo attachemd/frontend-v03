@@ -14,6 +14,7 @@ let ft_lm = { formElementId: 0 };
 
 class FormElement {
   public id: number;
+  public isOngoing = false;
   constructor(
     public name: string,
     public type: string,
@@ -31,44 +32,21 @@ class FormElement {
 export class LicenseEditComponent implements OnInit, OnDestroy {
   public builderContainer = 'BUILDER_CONTAINER';
   public builder_elements_model_01 = [
-    new FormElement(
-      'Form Field',
-      'many2class',
-      '<p class="many2class">new text 03</p>'
-    ),
-    new FormElement(
-      'Radio Button',
-      'textblock',
-      '<p class="many2class">new text 02</p>'
-    ),
-    new FormElement(
-      'Text Area',
-      'image',
-      '<p class="many2class">new text 01</p>'
-    ),
+    new FormElement('Form Field', 'many2class', 'new text 03'),
+    new FormElement('Radio Button', 'textblock', 'new text 02'),
+    new FormElement('Text Area', 'image', 'new text 01'),
   ];
 
+  public renderedBuilderFieldsBeforeDrag: any[] = [];
   public builder_elements_model_02 = [
     // new FormElement(
     //   'Text Area',
     //   'image',
     //   '<div class="ft-lm-edit-field"><mat-form-field fxFlex="500px"><input matInput type="text" placeholder="Key" [(ngModel)]="license.key" /></mat-form-field></div>'
     // ),
-    new FormElement(
-      '01 Text Area',
-      'image',
-      '<p class="many2class">new text 04</p>'
-    ),
-    new FormElement(
-      '02 Date Picker',
-      'image',
-      '<p class="many2class">new text 05</p>'
-    ),
-    new FormElement(
-      '03 Drop Down',
-      'image',
-      '<p class="many2class">new text 06</p>'
-    ),
+    new FormElement('Text Area', 'image', 'new text 04'),
+    new FormElement('Date Picker', 'image', 'new text 05'),
+    new FormElement('Drop Down', 'image', 'new text 06'),
   ];
 
   public condition = true;
@@ -97,16 +75,32 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
           this._shadow.innerHTML = this._shadowInnerHTML;
           // this._shadow.innerHTML = this.builder_elements_model_02[0].content;
           // el.className = 'ongoing';
-          this._shadow.className = 'ongoing';
-          console.log('dragend');
+          // el.classList.add('ongoing');
+          // this._shadow.className = 'ongoing';
+          // console.log('dragend');
+          // console.log("el.querySelector('.field_container')");
+          // console.log(el.querySelector('.field_container'));
+          // console.log('el.innerHTML');
+          // console.log(el.innerHTML);
+
           // this._updateTargetContainer();
           // console.log(this._shadowInnerHTML);
+
           this._updateTargetContainer();
+          // let ongoing = el.querySelector('.field_container');
+
+          // console.log('ongoing');
+          // console.log(ongoing);
+
+          // ongoing?.classList.add('ongoing');
         })
     );
     this._subs.add(
       this._dragulaService.drag(this.builderContainer).subscribe(({ el }) => {
         console.log('drag');
+        this.renderedBuilderFieldsBeforeDrag = [
+          ...this.builder_elements_model_02,
+        ];
         this._shadow = el;
         this._shadowInnerHTML = el.innerHTML;
       })
@@ -124,12 +118,20 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
       _dragulaService
         .dropModel(this.builderContainer)
         .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
+          // el.classList.add('ongoing');
+          // console.log("el.querySelector('#field_container')");
+          // console.log(el.querySelector('#field_container'));
+          // console.log('el.innerHTML');
+          // console.log(el.innerHTML);
+
           console.log('dropModel:');
           console.log('el', el);
           console.log('source', source);
           console.log('target', target);
           console.log('sourceModel', sourceModel);
           console.log('targetModel', targetModel);
+          console.log('item', item);
+          item.isOngoing = true;
           console.log('item', item);
         })
     );
@@ -175,9 +177,19 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     console.log('this.builder_elements_model_02');
     console.log(this.builder_elements_model_02);
     this._licenseEditService.getFieldName$().subscribe({
-      next: (fieldName: string) => {
-        console.log('fieldName', fieldName);
+      next: (fieldObj: any) => {
+        console.log('fieldName', fieldObj.fieldName);
+        console.log('fieldElement', fieldObj.fieldElement);
+        fieldObj.fieldElement.isOngoing = false;
+        if (fieldObj.fieldName === 'cancel') {
+          this.builder_elements_model_02 = [
+            ...this.renderedBuilderFieldsBeforeDrag,
+          ];
+          this.renderedBuilderFieldsBeforeDrag = [];
+        }
+
         this._updateTargetContainer();
+        // item.isOngoing = false;
       },
       error: (err: any) => {},
     });

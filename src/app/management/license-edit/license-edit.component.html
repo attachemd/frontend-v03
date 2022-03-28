@@ -98,9 +98,11 @@
           [type]="formElement.name"
         ></div> -->
         <ng-container
-          *ngFor="let formElement of builder_elements_model_02;let i=index; trackBy: trackItem" 
+          *ngFor="let formElement of builder_elements_model_02; trackBy: trackItem" 
           appDynamicField
-          [type]="formElement.name + i"
+          [type]="formElement.name"
+          [content]="formElement.content"
+          [isOngoing]="formElement.isOngoing"
           [fieldData]="formElement"
           class="builder-element"
         ></ng-container>

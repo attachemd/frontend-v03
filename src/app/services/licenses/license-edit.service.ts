@@ -5,14 +5,21 @@ import { ReplaySubject, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class LicenseEditService {
-  private _fieldName$ = new ReplaySubject<string>(1);
+  private _fieldName$ = new ReplaySubject<{
+    fieldName: string;
+    fieldElement: any;
+  }>(1);
+
   constructor() {}
 
-  public setFieldName$(fieldName: string) {
-    this._fieldName$.next(fieldName);
+  public setFieldName$(fieldName: string, fieldElement: any) {
+    this._fieldName$.next({ fieldName, fieldElement });
   }
 
-  public getFieldName$(): ReplaySubject<string> {
+  public getFieldName$(): ReplaySubject<{
+    fieldName: string;
+    fieldElement: any;
+  }> {
     return this._fieldName$;
   }
 }
