@@ -37,9 +37,9 @@ export class DynamicFieldDirective implements OnInit {
   ngOnInit(): void {
     this.componentRef =
       this._viewContainerRef.createComponent(DnDFieldComponent);
-    this.componentRef.instance.type = this.type;
-    this.componentRef.instance.content = this.content;
-    this.componentRef.instance.isOngoing = this.isOngoing;
+    // this.componentRef.instance.type = this.type;
+    // this.componentRef.instance.content = this.content;
+    // this.componentRef.instance.isOngoing = this.isOngoing;
     this.componentRef.instance.fieldData = this.fieldData;
     console.log('this.type');
     console.log(this.type);

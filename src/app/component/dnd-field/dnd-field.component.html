@@ -1,5 +1,5 @@
-<div class="field_container" [ngClass]="{ ongoing: isOngoing }">
-  <div class="field-element-header" *ngIf="isOngoing">
+<div class="field_container" [ngClass]="{ ongoing: fieldData.isOngoing }">
+  <div class="field-element-header" *ngIf="fieldData.isOngoing">
     <div><input [(ngModel)]="fieldData.name" /></div>
     <div>
       <button (click)="onFieldCanceled()">
@@ -17,7 +17,7 @@
         matInput
         type="text"
         placeholder="{{ fieldData.name }}"
-        [(ngModel)]="content"
+        [(ngModel)]="fieldData.content"
       />
     </mat-form-field>
   </div>
