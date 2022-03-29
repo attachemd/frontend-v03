@@ -1,117 +1,127 @@
 <div class="builder-container">
-  <div class="builder-canvas">
-    <div class="ft-lm-primary-fields">
-      <div class="ft-lm-edit-field">
-        <mat-form-field fxFlex="500px">
-          <input
-            matInput
-            type="text"
-            placeholder="Key"
-            [(ngModel)]="license.key"
-          />
-        </mat-form-field>
-      </div>
-      <div class="ft-lm-edit-field">
-        <div fxFlex="500px" style="padding: 0 0 20px 0">
-          <div>
-            <mat-label class="ft-lm-label">Status</mat-label>
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+    <div class="builder-canvas">
+      <div class="ft-lm-primary-fields">
+        <div class="ft-lm-edit-field">
+          <mat-form-field fxFlex="500px" [formGroup]="myForm">
+            <input
+              formControlName="key"
+              matInput
+              type="text"
+              placeholder="Key"
+              [(ngModel)]="license.key"
+            />
+          </mat-form-field>
+        </div>
+        <div class="ft-lm-edit-field">
+          <div fxFlex="500px" style="padding: 0 0 20px 0">
+            <div>
+              <mat-label class="ft-lm-label">Status</mat-label>
+            </div>
+            <mat-slide-toggle
+              formControlName="status"
+              [(ngModel)]="license.status"
+              >{{ license.status ? "active" : "inactive" }}
+            </mat-slide-toggle>
           </div>
-          <mat-slide-toggle [(ngModel)]="license.status"
-            >{{ license.status ? "active" : "inactive" }}
-          </mat-slide-toggle>
+        </div>
+        <div class="ft-lm-edit-field">
+          <mat-form-field fxFlex="500px" [formGroup]="myForm">
+            <input
+              formControlName="type"
+              matInput
+              type="text"
+              placeholder="Type"
+              [ngModel]="license.type"
+            />
+          </mat-form-field>
+        </div>
+        <div class="ft-lm-edit-field">
+          <mat-form-field fxFlex="500px" [formGroup]="myForm">
+            <input
+              formControlName="description"
+              matInput
+              type="text"
+              placeholder="Description"
+              [(ngModel)]="license.description"
+            />
+          </mat-form-field>
+        </div>
+        <div class="ft-lm-edit-field">
+          <mat-form-field fxFlex="500px" [formGroup]="myForm">
+            <input
+              formControlName="expiry"
+              matInput
+              type="text"
+              placeholder="Expiry"
+              [(ngModel)]="license.expiry"
+            />
+          </mat-form-field>
+        </div>
+        <div class="ft-lm-edit-field">
+          <mat-form-field fxFlex="500px" appearance="fill" [formGroup]="myForm">
+            <mat-label>Select a client</mat-label>
+            <!-- <mat-select [(value)]="clientSelected" placeholder="Select a client"> -->
+            <mat-select formControlName="client">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let client of clients" [value]="client.id">
+                {{ client.first_name }} {{ client.last_name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="ft-lm-edit-field">
+          <mat-form-field fxFlex="500px" appearance="fill" [formGroup]="myForm">
+            <mat-label>Select a product</mat-label>
+            <!-- <mat-select [(value)]="clientSelected" placeholder="Select a client"> -->
+            <mat-select formControlName="product">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let product of products" [value]="product.id">
+                {{ product.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="ft-lm-custom-fields-title">
+          <h1 fxFlex="500px">Custom fields</h1>
         </div>
       </div>
-      <div class="ft-lm-edit-field">
-        <mat-form-field fxFlex="500px">
-          <input
-            matInput
-            type="text"
-            placeholder="Type"
-            [ngModel]="license.type"
-          />
-        </mat-form-field>
-      </div>
-      <div class="ft-lm-edit-field">
-        <mat-form-field fxFlex="500px">
-          <input
-            matInput
-            type="text"
-            placeholder="Description"
-            [(ngModel)]="license.description"
-          />
-        </mat-form-field>
-      </div>
-      <div class="ft-lm-edit-field">
-        <mat-form-field fxFlex="500px">
-          <input
-            matInput
-            type="text"
-            placeholder="Expiry"
-            [(ngModel)]="license.expiry"
-          />
-        </mat-form-field>
-      </div>
-      <div class="ft-lm-edit-field">
-        <mat-form-field fxFlex="500px" appearance="fill">
-          <mat-label>Select a client</mat-label>
-          <!-- <mat-select [(value)]="clientSelected" placeholder="Select a client"> -->
-          <mat-select [value]="license.client?.id">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let client of clients" [value]="client.id">
-              {{ client.first_name }} {{ client.last_name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="ft-lm-edit-field">
-        <mat-form-field fxFlex="500px" appearance="fill">
-          <mat-label>Select a product</mat-label>
-          <!-- <mat-select [(value)]="clientSelected" placeholder="Select a client"> -->
-          <mat-select [value]="license.product?.id">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let product of products" [value]="product.id">
-              {{ product.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="ft-lm-custom-fields-title">
-        <h1 fxFlex="500px">Custom fields</h1>
-      </div>
-    </div>
-    <div class="ft-lm-custom-fields-content">
-      <!-- <div
+      <div class="ft-lm-custom-fields-content">
+        <!-- <div
         class="ft-lm-custom-fields builder-render"
         [dragula]="builderContainer"
         [(dragulaModel)]="builder_elements_model_02"
       > -->
-      <div
-        class="ft-lm-custom-fields builder-render"
-        [dragula]="builderContainer"
-        [(dragulaModel)]="builder_elements_model_02"
-      >
-        <!-- <div *ngFor='let formElement of builder_elements_model_02' [innerHtml]='formElement.content'></div> -->
-        <!-- <div *ngFor='let formElement of builder_elements_model_02' [innerHtml]='formElement.content'></div> -->
-        <!-- <div
+        <div
+          class="ft-lm-custom-fields builder-render"
+          [dragula]="builderContainer"
+          [(dragulaModel)]="builder_elements_model_02"
+        >
+          <!-- <div *ngFor='let formElement of builder_elements_model_02' [innerHtml]='formElement.content'></div> -->
+          <!-- <div *ngFor='let formElement of builder_elements_model_02' [innerHtml]='formElement.content'></div> -->
+          <!-- <div
           *ngFor="let formElement of builder_elements_model_02"
           appDynamicField
           [type]="formElement.name"
         ></div> -->
-        <ng-container
-          *ngFor="let formElement of builder_elements_model_02; trackBy: trackItem" 
-          appDynamicField
-          [type]="formElement.name"
-          [content]="formElement.content"
-          [isOngoing]="formElement.isOngoing"
-          [fieldData]="formElement"
-          class="builder-element"
-        ></ng-container>
-        <!-- <div
+          <ng-container
+            *ngFor="
+              let formElement of builder_elements_model_02;
+              trackBy: trackItem
+            "
+            appDynamicField
+            [field]="formElement"
+            [group]="myForm"
+            class="builder-element"
+          ></ng-container>
+          <!-- <div
           *ngFor="let formElement of builder_elements_model_02"
         ><div>{{formElement.name}}</div></div> -->
+        </div>
       </div>
     </div>
-  </div>
+    <button type="submit" [disabled]="myForm.invalid">Send</button>
+  </form>
   <div class="builder-elements-container">
     <div id="elem-id">
       <h1>Drag & Drop Fields</h1>

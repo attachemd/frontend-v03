@@ -1,0 +1,29 @@
+<div class="field_container" [ngClass]="{ ongoing: field.isOngoing }">
+  <div class="field-element-header" *ngIf="field.isOngoing">
+    <div><input [(ngModel)]="field.name" /></div>
+    <div>
+      <button (click)="onFieldCanceled()">cancel</button>
+      <button (click)="onFieldNameChanged()">save</button>
+    </div>
+  </div>
+
+  <div class="ft-lm-edit-field">
+    <mat-form-field fxFlex="500px" [formGroup]="group">
+      <input
+        [formControlName]="field.name"
+        matInput
+        [type]="field.inputType"
+        [placeholder]="field.name"
+        [(ngModel)]="field.content"
+      />
+      <ng-container
+        *ngFor="let validation of field.validations"
+        ngProjectAs="mat-error"
+      >
+        <mat-error *ngIf="group.get(field.name)?.hasError(validation.name)">{{
+          validation.message
+        }}</mat-error>
+      </ng-container>
+    </mat-form-field>
+  </div>
+</div>

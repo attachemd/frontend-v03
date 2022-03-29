@@ -1,7 +1,7 @@
 import * as $ from 'jquery';
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
@@ -9,6 +9,17 @@ import { Client } from 'src/app/services/clients/client.model';
 import { License } from 'src/app/services/licenses/license.model';
 import { Product } from 'src/app/services/products/product.model';
 import { LicenseEditService } from 'src/app/services/licenses/license-edit.service';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  FieldConfig,
+  Validation as Validation,
+} from 'src/app/services/dnd-field/field.model';
+import { fieldConfig } from 'src/app/services/dnd-field/field.sample';
 
 let ft_lm = { formElementId: 0 };
 
@@ -18,7 +29,8 @@ class FormElement {
   constructor(
     public name: string,
     public type: string,
-    public content: string
+    public content: string,
+    public validations: Validation[]
   ) {
     this.id = ft_lm.formElementId++;
   }
@@ -30,24 +42,27 @@ class FormElement {
   styleUrls: ['./license-edit.component.scss'],
 })
 export class LicenseEditComponent implements OnInit, OnDestroy {
+  public myForm: FormGroup;
+
   public builderContainer = 'BUILDER_CONTAINER';
   public builder_elements_model_01 = [
-    new FormElement('Form Field', 'many2class', 'new text 03'),
-    new FormElement('Radio Button', 'textblock', 'new text 02'),
-    new FormElement('Text Area', 'image', 'new text 01'),
+    new FormElement('Form Field', 'input', 'new text 03', []),
+    new FormElement('Radio Button', 'input', 'new text 02', []),
+    new FormElement('Text Area', 'input', 'new text 01', []),
   ];
 
   public renderedBuilderFieldsBeforeDrag: any[] = [];
-  public builder_elements_model_02 = [
-    // new FormElement(
-    //   'Text Area',
-    //   'image',
-    //   '<div class="ft-lm-edit-field"><mat-form-field fxFlex="500px"><input matInput type="text" placeholder="Key" [(ngModel)]="license.key" /></mat-form-field></div>'
-    // ),
-    new FormElement('Text Area', 'image', 'new text 04'),
-    new FormElement('Date Picker', 'image', 'new text 05'),
-    new FormElement('Drop Down', 'image', 'new text 06'),
-  ];
+  public builder_elements_model_02 = [] as FieldConfig[];
+  // public builder_elements_model_02 = [
+  //   // new FormElement(
+  //   //   'Text Area',
+  //   //   'image',
+  //   //   '<div class="ft-lm-edit-field"><mat-form-field fxFlex="500px"><input matInput type="text" placeholder="Key" [(ngModel)]="license.key" /></mat-form-field></div>'
+  //   // ),
+  //   new FormElement('Text Area', 'input', 'new text 04'),
+  //   new FormElement('Date Picker', 'input', 'new text 05'),
+  //   new FormElement('Drop Down', 'input', 'new text 06'),
+  // ];
 
   public condition = true;
   public status = false;
@@ -55,6 +70,8 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   public clients = [] as Client[];
   public products = [] as Product[];
   public selectedClientId = '';
+
+  private _regConfig = fieldConfig;
 
   private _shadow: any;
   private _shadowInnerHTML: string = 'test';
@@ -64,10 +81,28 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     private _http: HttpClient,
     private _route: ActivatedRoute,
     private _dragulaService: DragulaService,
-    private _sanitizer: DomSanitizer,
     private _licenseEditService: LicenseEditService,
-    private _changeDetection: ChangeDetectorRef
+    private _fb: FormBuilder
   ) {
+    this._regConfig.forEach((field) => {
+      this.builder_elements_model_02.push(
+        new FormElement(
+          field.name,
+          field.type,
+          'new text 04',
+          field.validations
+        )
+      );
+    });
+    this.myForm = this._fb.group({
+      key: ['', [Validators.required, Validators.minLength(8)]],
+      status: [''],
+      type: ['', Validators.required],
+      description: ['', Validators.required],
+      expiry: ['', Validators.required],
+      client: ['', Validators.required],
+      product: ['', Validators.required],
+    });
     this._subs.add(
       this._dragulaService
         .dragend(this.builderContainer)
@@ -164,7 +199,8 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
         return new FormElement(
           formElement.name,
           formElement.type,
-          formElement.content
+          formElement.content,
+          formElement.validations
         );
       }, //Allow item to be coppied in another div
       // copySortSource: false,
@@ -174,6 +210,11 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // this.myForm = new FormGroup({
+    //   name: new FormControl('Sammy'),
+    //   email: new FormControl(''),
+    //   message: new FormControl('')
+    // });
     console.log('this.builder_elements_model_02');
     console.log(this.builder_elements_model_02);
     this._licenseEditService.getFieldName$().subscribe({
@@ -250,6 +291,8 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
             console.log(license);
             this.license = license;
             this.selectedClientId = this.license.client.id;
+            this.myForm.controls['client'].setValue(this.license.client.id);
+            this.myForm.controls['product'].setValue(this.license.product.id);
             this._http.get<Client[]>('/api/clients').subscribe({
               next: (clients: Client[]): void => {
                 console.log('clients');
@@ -330,6 +373,44 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   public trackItem(index: number, item: any) {
     // return item.trackId;
     return item.id;
+  }
+
+  public onSubmit(form: FormGroup) {
+    console.log('Valid?', form.valid); // true or false
+    console.log('key', form.value.key);
+    console.log('status', form.value.status);
+    console.log('type', form.value.type);
+    console.log('description', form.value.description);
+    console.log('expiry', form.value.expiry);
+    console.log('client', form.value.client);
+    console.log('product', form.value.product);
+  }
+
+  private _createControl() {
+    const group = this._fb.group({});
+
+    this.builder_elements_model_02.forEach((field) => {
+      if (field.type === 'button') return;
+      const control = this._fb.control(
+        field.value,
+        this._bindValidations(field.validations || [])
+      );
+
+      group.addControl(field.name, control);
+    });
+    return group;
+  }
+
+  private _bindValidations(validations: any) {
+    if (validations.length > 0) {
+      const validList: any[] = [];
+
+      validations.forEach((validation: Validation) => {
+        validList.push(validation.validator);
+      });
+      return Validators.compose(validList);
+    }
+    return null;
   }
 
   private _getRenderedBuilderFieldsNewOrder(): any[] {
