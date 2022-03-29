@@ -8,16 +8,16 @@ export const fieldConfig: FieldConfig[] = [
     inputType: 'text',
     name: 'name',
     validations: [
-      {
-        name: 'required',
-        validator: Validators.required,
-        message: 'Name Required',
-      },
-      {
-        name: 'pattern',
-        validator: Validators.pattern('^[a-zA-Z]+$'),
-        message: 'Accept only text',
-      },
+      // {
+      //   name: 'required',
+      //   validator: Validators.required,
+      //   message: 'Name Required',
+      // },
+      // {
+      //   name: 'pattern',
+      //   validator: Validators.pattern('^[a-zA-Z]+$'),
+      //   message: 'Accept only text',
+      // },
     ],
   },
   {
@@ -26,18 +26,18 @@ export const fieldConfig: FieldConfig[] = [
     inputType: 'email',
     name: 'email',
     validations: [
-      {
-        name: 'required',
-        validator: Validators.required,
-        message: 'Email Required',
-      },
-      {
-        name: 'pattern',
-        validator: Validators.pattern(
-          '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'
-        ),
-        message: 'Invalid email',
-      },
+      // {
+      //   name: 'required',
+      //   validator: Validators.required,
+      //   message: 'Email Required',
+      // },
+      // {
+      //   name: 'pattern',
+      //   validator: Validators.pattern(
+      //     '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'
+      //   ),
+      //   message: 'Invalid email',
+      // },
     ],
   },
   {
@@ -46,11 +46,11 @@ export const fieldConfig: FieldConfig[] = [
     inputType: 'password',
     name: 'password',
     validations: [
-      {
-        name: 'required',
-        validator: Validators.required,
-        message: 'Password Required',
-      },
+      // {
+      //   name: 'required',
+      //   validator: Validators.required,
+      //   message: 'Password Required',
+      // },
     ],
   },
 ];

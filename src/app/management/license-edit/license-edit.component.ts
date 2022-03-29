@@ -103,6 +103,7 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
       client: ['', Validators.required],
       product: ['', Validators.required],
     });
+    this._addControls(this.myForm);
     this._subs.add(
       this._dragulaService
         .dragend(this.builderContainer)
@@ -384,6 +385,23 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     console.log('expiry', form.value.expiry);
     console.log('client', form.value.client);
     console.log('product', form.value.product);
+    console.log('name', form.value.name);
+  }
+
+  // private _initializeFormGroup(){
+
+  // }
+
+  private _addControls(formGroup: FormGroup) {
+    this.builder_elements_model_02.forEach((field) => {
+      if (field.type === 'button') return;
+      const control = this._fb.control(
+        field.value,
+        this._bindValidations(field.validations || [])
+      );
+
+      formGroup.addControl(field.name, control);
+    });
   }
 
   private _createControl() {
@@ -455,7 +473,7 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     // this.builder_elements_model_02[2].id =
     //   this.builder_elements_model_02[2].id + 1000;
     for (let builder_element_model of this.builder_elements_model_02)
-      builder_element_model.id = builder_element_model.id + 1000;
+      builder_element_model.id = builder_element_model.id! + 1000;
 
     // this._changeDetection.detectChanges();
     // this.builder_elements_model_02.push(
@@ -470,5 +488,6 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     console.log(this.builder_elements_model_02);
     console.log('this._getRenderedBuilderFieldsNewOrder()');
     console.log(this._getRenderedBuilderFieldsNewOrder());
+    this._addControls(this.myForm);
   }
 }
