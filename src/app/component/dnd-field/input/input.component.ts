@@ -17,7 +17,7 @@ export class InputComponent implements OnInit {
   }
 
   public onFieldNameChanged() {
-    let parmtr = 'new parameter from dnd-field';
+    let parmtr = 'new parameter from dnd-field ' + this.field.name;
 
     this._licenseEditService.setFieldName$(parmtr, this.field);
     // this.fieldChange.emit(parmtr);

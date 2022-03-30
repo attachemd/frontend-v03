@@ -1,6 +1,7 @@
 import * as $ from 'jquery';
+import * as _ from 'lodash';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { DragulaService } from 'ng2-dragula';
@@ -25,14 +26,17 @@ let ft_lm = { formElementId: 0 };
 
 class FormElement {
   public id: number;
+  public tracked_id: number;
   public isOngoing = false;
   constructor(
     public name: string,
     public type: string,
+    public inputType: string,
     public content: string,
     public validations: Validation[]
   ) {
-    this.id = ft_lm.formElementId++;
+    this.tracked_id = ft_lm.formElementId++;
+    this.id = this.tracked_id;
   }
 }
 
@@ -42,13 +46,13 @@ class FormElement {
   styleUrls: ['./license-edit.component.scss'],
 })
 export class LicenseEditComponent implements OnInit, OnDestroy {
-  public myForm: FormGroup;
+  public myForm!: FormGroup;
 
   public builderContainer = 'BUILDER_CONTAINER';
   public builder_elements_model_01 = [
-    new FormElement('Form Field', 'input', 'new text 03', []),
-    new FormElement('Radio Button', 'input', 'new text 02', []),
-    new FormElement('Text Area', 'input', 'new text 01', []),
+    new FormElement('Form Field', 'text', 'input', 'new text 03', []),
+    new FormElement('Radio Button', 'text', 'input', 'new text 02', []),
+    new FormElement('Text Area', 'text', 'input', 'new text 01', []),
   ];
 
   public renderedBuilderFieldsBeforeDrag: any[] = [];
@@ -82,11 +86,18 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     private _route: ActivatedRoute,
     private _dragulaService: DragulaService,
     private _licenseEditService: LicenseEditService,
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private _cdRef: ChangeDetectorRef
   ) {
     this._regConfig.forEach((field) => {
       this.builder_elements_model_02.push(
-        new FormElement(field.name, field.type, field.value, field.validations)
+        new FormElement(
+          field.name,
+          field.type!,
+          field.inputType!,
+          field.value,
+          field.validations
+        )
       );
     });
     this.myForm = this._fb.group({
@@ -99,6 +110,7 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
       product: ['', Validators.required],
     });
     this._addControls(this.myForm);
+    // this._createControl();
     this._subs.add(
       this._dragulaService
         .dragend(this.builderContainer)
@@ -129,9 +141,15 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     this._subs.add(
       this._dragulaService.drag(this.builderContainer).subscribe(({ el }) => {
         console.log('drag');
-        this.renderedBuilderFieldsBeforeDrag = [
-          ...this.builder_elements_model_02,
-        ];
+        // this.renderedBuilderFieldsBeforeDrag = [
+        //   ...this.builder_elements_model_02,
+        // ];
+        this.renderedBuilderFieldsBeforeDrag = _.cloneDeep(
+          this.builder_elements_model_02
+        );
+        console.log('this.renderedBuilderFieldsBeforeDrag');
+        console.log(this.renderedBuilderFieldsBeforeDrag);
+
         this._shadow = el;
         this._shadowInnerHTML = el.innerHTML;
       })
@@ -195,6 +213,7 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
         return new FormElement(
           formElement.name,
           formElement.type,
+          formElement.inputType,
           formElement.content,
           formElement.validations
         );
@@ -218,11 +237,46 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
         console.log('fieldName', fieldObj.fieldName);
         console.log('fieldElement', fieldObj.fieldElement);
         fieldObj.fieldElement.isOngoing = false;
+        console.log('renderedBuilderFieldsBeforeDrag');
+        console.log(this.renderedBuilderFieldsBeforeDrag);
+
         if (fieldObj.fieldName === 'cancel') {
-          this.builder_elements_model_02 = [
-            ...this.renderedBuilderFieldsBeforeDrag,
-          ];
+          this.builder_elements_model_02 = _.cloneDeep(
+            this.renderedBuilderFieldsBeforeDrag
+          );
+          // this.builder_elements_model_02 = [
+          //   ...this.renderedBuilderFieldsBeforeDrag,
+          // ];
           this.renderedBuilderFieldsBeforeDrag = [];
+          console.log('renderedBuilderFieldsBeforeDrag');
+          console.log(this.renderedBuilderFieldsBeforeDrag);
+          // fieldObj.fieldElement = null;
+        } else {
+          console.log('renderedBuilderFieldsBeforeDrag.find');
+          this.renderedBuilderFieldsBeforeDrag.forEach((item) => {
+            console.log('item');
+            console.log(item);
+          });
+          console.log('fieldObj.fieldElement');
+          console.log(fieldObj.fieldElement);
+
+          console.log(
+            '%c name ',
+            'background: red; ' +
+              'color: #fff; ' +
+              'padding: 0 10px; ' +
+              'border: 1px solid #000'
+          );
+          console.log(
+            this.renderedBuilderFieldsBeforeDrag.find(
+              (item) => item.id === fieldObj.fieldElement.id
+            ).name
+          );
+          this.myForm.removeControl(
+            this.renderedBuilderFieldsBeforeDrag.find(
+              (item) => item.id === fieldObj.fieldElement.id
+            ).name
+          );
         }
 
         this._updateTargetContainer();
@@ -273,6 +327,7 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
 
     this._route.params.subscribe({
       next: (params: any) => {
+        // colorfull log
         console.log(
           '%c ActivatedRoute ',
           'background: #B8FF13; ' +
@@ -368,7 +423,7 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
 
   public trackItem(index: number, item: any) {
     // return item.trackId;
-    return item.id;
+    return item.tracked_id;
   }
 
   public onSubmit(form: FormGroup) {
@@ -382,6 +437,11 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     // console.log('product', form.value.product);
     // console.log('name', form.value.name);
     console.log('form.value', form.value);
+    console.log(
+      'this.builder_elements_model_02',
+      this.builder_elements_model_02
+    );
+    // this._updateTargetContainer();
   }
 
   // private _initializeFormGroup(){
@@ -401,7 +461,16 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   }
 
   private _createControl() {
-    const group = this._fb.group({});
+    // const group = this._fb.group({});
+    this.myForm = this._fb.group({
+      key: ['', [Validators.required, Validators.minLength(8)]],
+      status: [''],
+      type: ['', Validators.required],
+      description: ['', Validators.required],
+      expiry: ['', Validators.required],
+      client: ['', Validators.required],
+      product: ['', Validators.required],
+    });
 
     this.builder_elements_model_02.forEach((field) => {
       if (field.type === 'button') return;
@@ -410,9 +479,9 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
         this._bindValidations(field.validations || [])
       );
 
-      group.addControl(field.name, control);
+      this.myForm.addControl(field.name, control);
     });
-    return group;
+    // return this.myForm;
   }
 
   private _bindValidations(validations: any) {
@@ -444,46 +513,54 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   }
 
   private _updateTargetContainer() {
-    // let drake = this._dragulaService.find(this.builderContainer).drake;
-    // let models = drake.models;
-    // console.log('models');
-    // console.log(models);
-    // // models![0][0].name = 'attache';
-    // models![0].push(
-    //   new FormElement(
-    //     'Text Area',
-    //     'image',
-    //     '<p class="many2class">new text 17</p>'
-    //   )
-    // );
-    // models![0].pop();
-    // console.log(models);
+    // https://www.smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/
+    // https://medium.com/@Rahulx1/understanding-event-loop-call-stack-event-job-queue-in-javascript-63dcd2c71ecd
+    // https://stackoverflow.com/questions/31698747/does-the-js-garbage-collector-clear-stack-memory
+    setTimeout(() => {
+      // let drake = this._dragulaService.find(this.builderContainer).drake;
+      // let models = drake.models;
+      // console.log('models');
+      // console.log(models);
+      // // models![0][0].name = 'attache';
+      // models![0].push(
+      //   new FormElement(
+      //     'Text Area',
+      //     'image',
+      //     '<p class="many2class">new text 17</p>'
+      //   )
+      // );
+      // models![0].pop();
+      // console.log(models);
 
-    // this.builder_elements_model_02 = [...this.builder_elements_model_02];
-    console.log('this.builder_elements_model_02');
-    console.log(this.builder_elements_model_02);
-    // this.builder_elements_model_02[0].id =
-    //   this.builder_elements_model_02[0].id + 1000;
-    // this.builder_elements_model_02[1].id =
-    //   this.builder_elements_model_02[1].id + 1000;
-    // this.builder_elements_model_02[2].id =
-    //   this.builder_elements_model_02[2].id + 1000;
-    for (let builder_element_model of this.builder_elements_model_02)
-      builder_element_model.id = builder_element_model.id! + 1000;
+      // this.builder_elements_model_02 = [...this.builder_elements_model_02];
+      console.log('this.builder_elements_model_02');
+      console.log(this.builder_elements_model_02);
+      // this.builder_elements_model_02[0].id =
+      //   this.builder_elements_model_02[0].id + 1000;
+      // this.builder_elements_model_02[1].id =
+      //   this.builder_elements_model_02[1].id + 1000;
+      // this.builder_elements_model_02[2].id =
+      //   this.builder_elements_model_02[2].id + 1000;
+      for (let builder_element_model of this.builder_elements_model_02)
+        builder_element_model.tracked_id =
+          builder_element_model.tracked_id! + 1000;
 
-    // this._changeDetection.detectChanges();
-    // this.builder_elements_model_02.push(
-    //   new FormElement(
-    //     'Text Area',
-    //     'image',
-    //     '<p class="many2class">new text 17</p>'
-    //   )
-    // );
-    // // this.builder_elements_model_02.pop();
-    console.log('this.builder_elements_model_02');
-    console.log(this.builder_elements_model_02);
-    console.log('this._getRenderedBuilderFieldsNewOrder()');
-    console.log(this._getRenderedBuilderFieldsNewOrder());
-    this._addControls(this.myForm);
+      // this._changeDetection.detectChanges();
+      // this.builder_elements_model_02.push(
+      //   new FormElement(
+      //     'Text Area',
+      //     'image',
+      //     '<p class="many2class">new text 17</p>'
+      //   )
+      // );
+      // // this.builder_elements_model_02.pop();
+      console.log('this.builder_elements_model_02');
+      console.log(this.builder_elements_model_02);
+      console.log('this._getRenderedBuilderFieldsNewOrder()');
+      console.log(this._getRenderedBuilderFieldsNewOrder());
+      this._addControls(this.myForm);
+      // this._createControl();
+      this._cdRef.detectChanges();
+    }, 0);
   }
 }
