@@ -1,9 +1,10 @@
-:host(app-dnd-field) {
+:host(app-input) {
   display: block;
   // background-color: red;
 }
 
-.ongoing {
+:host(app-input.ongoing){
+// .ongoing {
   border: 2px solid #2dca72;
   padding: 10px 10px 0 10px;
   margin-bottom: 17px;

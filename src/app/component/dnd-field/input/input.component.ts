@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+// https://stackoverflow.com/questions/34641281/how-to-add-class-to-host-element
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { LicenseEditService } from 'src/app/services/licenses/license-edit.service';
 
@@ -8,12 +9,17 @@ import { LicenseEditService } from 'src/app/services/licenses/license-edit.servi
   styleUrls: ['./input.component.scss'],
 })
 export class InputComponent implements OnInit {
+  @HostBinding('class.ongoing')
+  public isOngoing: boolean = false;
+
   public field: any = {};
   public group!: FormGroup;
+
   constructor(private _licenseEditService: LicenseEditService) {}
 
   ngOnInit(): void {
     console.log('InputComponent');
+    this.isOngoing = this.field.isOngoing;
   }
 
   public onFieldNameChanged() {

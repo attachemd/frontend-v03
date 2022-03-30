@@ -74,6 +74,7 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   public clients = [] as Client[];
   public products = [] as Product[];
   public selectedClientId = '';
+  public stopDrag = false;
 
   private _regConfig = fieldConfig;
 
@@ -115,6 +116,14 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
       this._dragulaService
         .dragend(this.builderContainer)
         .subscribe(({ el }) => {
+          console.log(
+            '%c dragend ',
+            'background: #2B916A; ' +
+              'color: #fff; ' +
+              'padding: 0 10px; ' +
+              'border: 0px solid #47C0BE'
+          );
+          this.stopDrag = true;
           this._shadow.innerHTML = this._shadowInnerHTML;
           // this._shadow.innerHTML = this.builder_elements_model_02[0].content;
           // el.className = 'ongoing';
@@ -140,7 +149,13 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     );
     this._subs.add(
       this._dragulaService.drag(this.builderContainer).subscribe(({ el }) => {
-        console.log('drag');
+        console.log(
+          '%c drag ',
+          'background: #D46E95; ' +
+            'color: #fff; ' +
+            'padding: 0 10px; ' +
+            'border: 0px solid #47C0BE'
+        );
         // this.renderedBuilderFieldsBeforeDrag = [
         //   ...this.builder_elements_model_02,
         // ];
@@ -196,6 +211,13 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
         })
     );
     this._dragulaService.createGroup(this.builderContainer, {
+      moves: (el: any, container: any, handle: any): any => {
+        // .classList.contains('ongoing')
+        // if (el.classList.contains('ongoing')) return false;
+        if (this.stopDrag) return false;
+
+        return true;
+      },
       accepts: (el, target, source, sibling) => {
         if (
           source?.classList.contains('builder-render') &&
@@ -234,6 +256,14 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     console.log(this.builder_elements_model_02);
     this._licenseEditService.getFieldName$().subscribe({
       next: (fieldObj: any) => {
+        console.log(
+          '%c fieldName ',
+          'background: red; ' +
+            'color: #fff; ' +
+            'padding: 0 10px; ' +
+            'border: 1px solid #000'
+        );
+        this.stopDrag = false;
         console.log('fieldName', fieldObj.fieldName);
         console.log('fieldElement', fieldObj.fieldElement);
         fieldObj.fieldElement.isOngoing = false;
@@ -428,14 +458,6 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
 
   public onSubmit(form: FormGroup) {
     // console.log('Valid?', form.valid); // true or false
-    // console.log('key', form.value.key);
-    // console.log('status', form.value.status);
-    // console.log('type', form.value.type);
-    // console.log('description', form.value.description);
-    // console.log('expiry', form.value.expiry);
-    // console.log('client', form.value.client);
-    // console.log('product', form.value.product);
-    // console.log('name', form.value.name);
     console.log('form.value', form.value);
     console.log(
       'this.builder_elements_model_02',
@@ -496,22 +518,6 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     return null;
   }
 
-  private _getRenderedBuilderFieldsNewOrder(): any[] {
-    let form_elements = document.querySelectorAll(
-      '.builder-render .builder-element'
-    );
-    let renderedBuilderFieldElements: any[] = [];
-
-    // console.log('form_element');
-    // console.log(form_elements);
-    form_elements.forEach((form_element: any) => {
-      // console.log('form_element');
-      // console.log(form_element.fieldData);
-      renderedBuilderFieldElements.push(form_element.fieldData);
-    });
-    return renderedBuilderFieldElements;
-  }
-
   private _updateTargetContainer() {
     // https://www.smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/
     // https://medium.com/@Rahulx1/understanding-event-loop-call-stack-event-job-queue-in-javascript-63dcd2c71ecd
@@ -556,8 +562,7 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
       // // this.builder_elements_model_02.pop();
       console.log('this.builder_elements_model_02');
       console.log(this.builder_elements_model_02);
-      console.log('this._getRenderedBuilderFieldsNewOrder()');
-      console.log(this._getRenderedBuilderFieldsNewOrder());
+
       this._addControls(this.myForm);
       // this._createControl();
       this._cdRef.detectChanges();
