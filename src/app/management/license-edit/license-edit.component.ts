@@ -86,12 +86,7 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   ) {
     this._regConfig.forEach((field) => {
       this.builder_elements_model_02.push(
-        new FormElement(
-          field.name,
-          field.type,
-          'new text 04',
-          field.validations
-        )
+        new FormElement(field.name, field.type, field.value, field.validations)
       );
     });
     this.myForm = this._fb.group({
@@ -377,15 +372,16 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   }
 
   public onSubmit(form: FormGroup) {
-    console.log('Valid?', form.valid); // true or false
-    console.log('key', form.value.key);
-    console.log('status', form.value.status);
-    console.log('type', form.value.type);
-    console.log('description', form.value.description);
-    console.log('expiry', form.value.expiry);
-    console.log('client', form.value.client);
-    console.log('product', form.value.product);
-    console.log('name', form.value.name);
+    // console.log('Valid?', form.valid); // true or false
+    // console.log('key', form.value.key);
+    // console.log('status', form.value.status);
+    // console.log('type', form.value.type);
+    // console.log('description', form.value.description);
+    // console.log('expiry', form.value.expiry);
+    // console.log('client', form.value.client);
+    // console.log('product', form.value.product);
+    // console.log('name', form.value.name);
+    console.log('form.value', form.value);
   }
 
   // private _initializeFormGroup(){

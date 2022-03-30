@@ -7,17 +7,18 @@ export const fieldConfig: FieldConfig[] = [
     label: 'Username',
     inputType: 'text',
     name: 'name',
+    value: 'john',
     validations: [
-      // {
-      //   name: 'required',
-      //   validator: Validators.required,
-      //   message: 'Name Required',
-      // },
-      // {
-      //   name: 'pattern',
-      //   validator: Validators.pattern('^[a-zA-Z]+$'),
-      //   message: 'Accept only text',
-      // },
+      {
+        name: 'required',
+        validator: Validators.required,
+        message: 'Name Required',
+      },
+      {
+        name: 'pattern',
+        validator: Validators.pattern('^[a-zA-Z]+$'),
+        message: 'Accept only text',
+      },
     ],
   },
   {
@@ -25,19 +26,20 @@ export const fieldConfig: FieldConfig[] = [
     label: 'Email Address',
     inputType: 'email',
     name: 'email',
+    value: 'john@gmail.com',
     validations: [
-      // {
-      //   name: 'required',
-      //   validator: Validators.required,
-      //   message: 'Email Required',
-      // },
-      // {
-      //   name: 'pattern',
-      //   validator: Validators.pattern(
-      //     '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'
-      //   ),
-      //   message: 'Invalid email',
-      // },
+      {
+        name: 'required',
+        validator: Validators.required,
+        message: 'Email Required',
+      },
+      {
+        name: 'pattern',
+        validator: Validators.pattern(
+          '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'
+        ),
+        message: 'Invalid email',
+      },
     ],
   },
   {
@@ -45,12 +47,13 @@ export const fieldConfig: FieldConfig[] = [
     label: 'Password',
     inputType: 'password',
     name: 'password',
+    value: 'pass1234',
     validations: [
-      // {
-      //   name: 'required',
-      //   validator: Validators.required,
-      //   message: 'Password Required',
-      // },
+      {
+        name: 'required',
+        validator: Validators.required,
+        message: 'Password Required',
+      },
     ],
   },
 ];
