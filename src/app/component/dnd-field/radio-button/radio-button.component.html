@@ -1,8 +1,30 @@
-<div class="demo-full-width margin-top" [formGroup]="group">
-  <label class="radio-label-padding">{{ field.label }}:</label>
-  <mat-radio-group [formControlName]="field.name">
-    <mat-radio-button *ngFor="let item of field.options" [value]="item">{{
-      item
-    }}</mat-radio-button>
-  </mat-radio-group>
+<div class="field_container">
+  <div class="field-element-header" *ngIf="field.isOngoing">
+    <div><input [(ngModel)]="field.name" /></div>
+    <div>
+      <button (click)="onFieldCanceled()">cancel</button>
+      <button (click)="onFieldNameChanged()">save</button>
+    </div>
+  </div>
+  <!-- <div class="ft-lm-edit-field">
+    <mat-form-field fxFlex="500px" [formGroup]="group">
+      <label class="radio-label-padding">{{ field.label }}:</label>
+      <mat-radio-group [formControlName]="field.name">
+        <mat-radio-button *ngFor="let item of field.options" [value]="item">{{
+          item
+        }}</mat-radio-button>
+      </mat-radio-group>
+    </mat-form-field>
+  </div> -->
+  <div class="ft-lm-edit-field" [formGroup]="group">
+    <!-- <label class="radio-label">{{ field.label }}:</label> -->
+    <div>
+      <mat-label class="ft-lm-label">{{ field.label }}</mat-label>
+    </div>
+    <mat-radio-group [formControlName]="field.name">
+      <mat-radio-button *ngFor="let item of field.options" [value]="item">
+        {{ item }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
 </div>

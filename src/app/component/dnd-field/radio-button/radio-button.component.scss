@@ -1,0 +1,31 @@
+:host(app-radio-button) {
+    display: block;
+    // background-color: red;
+  }
+  
+  :host(app-radio-button.ongoing){
+  // .ongoing {
+    border: 2px solid #2dca72;
+    padding: 10px 10px 0 10px;
+    margin-bottom: 17px;
+    border-radius: 5px;
+  }
+
+  :host(mat-radio-button){
+    padding: 10px 10px 0 10px;
+  }
+
+  .field-element-header {
+    display: flex;
+    margin: 10px 0;
+  }
+  
+
+  .field_container {
+      padding-bottom: 17px;
+  }
+
+  .ft-lm-label {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 11px;
+  }

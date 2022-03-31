@@ -11,6 +11,9 @@ export class DnDFieldComponent implements OnInit {
   @Input()
   public fields: FieldConfig[] = [];
 
+  @Input()
+  public form: any;
+
   constructor(private _licenseEditService: LicenseEditService) {}
 
   ngOnInit(): void {

@@ -92,11 +92,7 @@
         [dragula]="builderContainer"
         [(dragulaModel)]="builder_elements_model_02"
       > -->
-        <div
-          class="ft-lm-custom-fields builder-render"
-          [dragula]="builderContainer"
-          [(dragulaModel)]="builder_elements_model_02"
-        >
+        <div class="ft-lm-custom-fields">
           <!-- <div *ngFor='let formElement of builder_elements_model_02' [innerHtml]='formElement.content'></div> -->
           <!-- <div *ngFor='let formElement of builder_elements_model_02' [innerHtml]='formElement.content'></div> -->
           <!-- <div
@@ -104,8 +100,14 @@
           appDynamicField
           [type]="formElement.name"
         ></div> -->
-        <app-dnd-field [fields]="builder_elements_model_02">
-        </app-dnd-field>
+          <app-dnd-field
+            class="builder-render"
+            [dragula]="builderContainer"
+            [(dragulaModel)]="builder_elements_model_02"
+            [fields]="builder_elements_model_02"
+            [form]="myForm"
+          >
+          </app-dnd-field>
           <!-- <ng-container
             *ngFor="
               let formElement of builder_elements_model_02;
