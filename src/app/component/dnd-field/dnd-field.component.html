@@ -1,24 +1,11 @@
-<div class="field_container" [ngClass]="{ ongoing: fieldData.isOngoing }">
-  <div class="field-element-header" *ngIf="fieldData.isOngoing">
-    <div><input [(ngModel)]="fieldData.name" /></div>
-    <div>
-      <button (click)="onFieldCanceled()">
-        cancel
-      </button>
-      <button (click)="onFieldNameChanged()">
-        save
-      </button>
-    </div>
-  </div>
-
-  <div class="ft-lm-edit-field">
-    <mat-form-field fxFlex="500px">
-      <input
-        matInput
-        type="text"
-        placeholder="{{ fieldData.name }}"
-        [(ngModel)]="fieldData.content"
-      />
-    </mat-form-field>
-  </div>
-</div>
+<ng-container
+  *ngFor="
+    let formElement of fields;
+    trackBy: trackItem;
+    let i = index
+  "
+  appDynamicField
+  [field]="formElement"
+  [group]="myForm"
+  class="builder-element"
+></ng-container>

@@ -16,6 +16,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatPaginatorModule,
     MatSelectModule,
     MatSlideToggleModule,
+    MatRadioModule,
   ],
   exports: [
     MatButtonModule,
@@ -55,6 +57,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatPaginatorModule,
     MatSelectModule,
     MatSlideToggleModule,
+    MatRadioModule,
   ],
 })
 export class MaterialModule {}

@@ -104,7 +104,9 @@
           appDynamicField
           [type]="formElement.name"
         ></div> -->
-          <ng-container
+        <app-dnd-field [fields]="builder_elements_model_02">
+        </app-dnd-field>
+          <!-- <ng-container
             *ngFor="
               let formElement of builder_elements_model_02;
               trackBy: trackItem;let i=index
@@ -113,7 +115,7 @@
             [field]="formElement"
             [group]="myForm"
             class="builder-element"
-          ></ng-container>
+          ></ng-container> -->
           <!-- <div
           *ngFor="let formElement of builder_elements_model_02"
         ><div>{{formElement.name}}</div></div> -->

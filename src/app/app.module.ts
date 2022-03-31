@@ -24,6 +24,7 @@ import { DnDFieldComponent } from './component/dnd-field/dnd-field.component';
 import { AdDirective } from './directive/ad.directive';
 import { DynamicFieldDirective } from './directive/dynamic-field.directive';
 import { InputComponent } from './component/dnd-field/input/input.component';
+import { RadioButtonComponent } from './component/dnd-field/radio-button/radio-button.component';
 
 export function tokenGetter(): string | null {
   return localStorage.getItem('access');
@@ -44,6 +45,7 @@ export function tokenGetter(): string | null {
     AdDirective,
     DynamicFieldDirective,
     InputComponent,
+    RadioButtonComponent,
   ],
   imports: [
     JwtModule.forRoot({

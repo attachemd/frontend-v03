@@ -15,7 +15,7 @@
         matInput
         [type]="field.inputType"
         [placeholder]="field.name"
-        [(ngModel)]="field.content"
+        [(ngModel)]="field.value"
       />
       <ng-container
         *ngFor="let validation of field.validations"

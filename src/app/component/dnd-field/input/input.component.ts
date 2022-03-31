@@ -20,6 +20,8 @@ export class InputComponent implements OnInit {
   ngOnInit(): void {
     console.log('InputComponent');
     this.isOngoing = this.field.isOngoing;
+    console.log('this.isOngoing');
+    console.log(this.isOngoing);
   }
 
   public onFieldNameChanged() {

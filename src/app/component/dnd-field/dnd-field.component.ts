@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FieldConfig } from 'src/app/services/dnd-field/field.model';
 import { LicenseEditService } from 'src/app/services/licenses/license-edit.service';
 
 @Component({
@@ -8,25 +9,8 @@ import { LicenseEditService } from 'src/app/services/licenses/license-edit.servi
 })
 export class DnDFieldComponent implements OnInit {
   @Input()
-  public type: string = 'type';
+  public fields: FieldConfig[] = [];
 
-  @Input()
-  public content: string = 'content from dnd field';
-
-  @Input()
-  public isOngoing = false;
-
-  @Input()
-  public RenderedBuilderFields: any;
-
-  @Input()
-  public fieldData: any = {};
-
-  @Output()
-  public fieldChange = new EventEmitter();
-
-  public text = 'default value';
-  public license = { key: 'jsdfhfdhdfshklhf' };
   constructor(private _licenseEditService: LicenseEditService) {}
 
   ngOnInit(): void {
@@ -35,15 +19,20 @@ export class DnDFieldComponent implements OnInit {
     // console.log(this.fieldData);
   }
 
-  public onFieldNameChanged() {
-    let parmtr = 'new parameter from dnd-field';
-
-    this._licenseEditService.setFieldName$(parmtr, this.fieldData);
-    // this.fieldChange.emit(parmtr);
+  public trackItem(index: number, item: any) {
+    // return item.trackId;
+    return item.tracked_id;
   }
 
-  public onFieldCanceled() {
-    this._licenseEditService.setFieldName$('cancel', this.fieldData);
-    // this.fieldChange.emit(parmtr);
-  }
+  // public onFieldNameChanged() {
+  //   let parmtr = 'new parameter from dnd-field';
+
+  //   this._licenseEditService.setFieldName$(parmtr, this.fieldData);
+  //   // this.fieldChange.emit(parmtr);
+  // }
+
+  // public onFieldCanceled() {
+  //   this._licenseEditService.setFieldName$('cancel', this.fieldData);
+  //   // this.fieldChange.emit(parmtr);
+  // }
 }

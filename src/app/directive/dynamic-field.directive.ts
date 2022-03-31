@@ -5,10 +5,12 @@
 import { Directive, Input, OnInit, ViewContainerRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { InputComponent } from '../component/dnd-field/input/input.component';
+import { RadioButtonComponent } from '../component/dnd-field/radio-button/radio-button.component';
 import { FieldConfig } from '../services/dnd-field/field.model';
 
 const componentMapper = {
   input: InputComponent,
+  radiobutton: RadioButtonComponent,
 };
 
 @Directive({

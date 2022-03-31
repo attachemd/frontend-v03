@@ -31,8 +31,10 @@ class FormElement {
   constructor(
     public name: string,
     public type: string,
+    public label: string,
     public inputType: string,
-    public content: string,
+    public value: string,
+    public options: string[],
     public validations: Validation[]
   ) {
     this.tracked_id = ft_lm.formElementId++;
@@ -50,13 +52,38 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
 
   public builderContainer = 'BUILDER_CONTAINER';
   public builder_elements_model_01 = [
-    new FormElement('Form Field', 'text', 'input', 'new text 03', []),
-    new FormElement('Radio Button', 'text', 'input', 'new text 02', []),
-    new FormElement('Text Area', 'text', 'input', 'new text 01', []),
+    new FormElement(
+      'Zip Code',
+      'input',
+      'label test',
+      'text',
+      'new text 03',
+      [],
+      []
+    ),
+    new FormElement(
+      'Address',
+      'input',
+      'label test',
+      'text',
+      'new text 02',
+      [],
+      []
+    ),
+    new FormElement(
+      'Full Name',
+      'input',
+      'label test',
+      'text',
+      'new text 01',
+      [],
+      []
+    ),
   ];
 
   public renderedBuilderFieldsBeforeDrag: any[] = [];
-  public builder_elements_model_02 = [] as FieldConfig[];
+  // public builder_elements_model_02 = [] as FieldConfig[];
+  public builder_elements_model_02: any[] = [];
   // public builder_elements_model_02 = [
   //   // new FormElement(
   //   //   'Text Area',
@@ -95,8 +122,10 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
         new FormElement(
           field.name,
           field.type!,
+          field.label!,
           field.inputType!,
           field.value,
+          field.options!,
           field.validations
         )
       );
@@ -123,28 +152,14 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
               'padding: 0 10px; ' +
               'border: 0px solid #47C0BE'
           );
-          this.stopDrag = true;
+          // this.stopDrag = true;
           this._shadow.innerHTML = this._shadowInnerHTML;
-          // this._shadow.innerHTML = this.builder_elements_model_02[0].content;
-          // el.className = 'ongoing';
-          // el.classList.add('ongoing');
-          // this._shadow.className = 'ongoing';
-          // console.log('dragend');
-          // console.log("el.querySelector('.field_container')");
-          // console.log(el.querySelector('.field_container'));
-          // console.log('el.innerHTML');
-          // console.log(el.innerHTML);
 
-          // this._updateTargetContainer();
-          // console.log(this._shadowInnerHTML);
-
+          // this.renderedBuilderFieldsBeforeDrag = _.cloneDeep(
+          //   this.builder_elements_model_02
+          // );
+          // this._addControls(this.myForm);
           this._updateTargetContainer();
-          // let ongoing = el.querySelector('.field_container');
-
-          // console.log('ongoing');
-          // console.log(ongoing);
-
-          // ongoing?.classList.add('ongoing');
         })
     );
     this._subs.add(
@@ -187,8 +202,14 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
           // console.log(el.querySelector('#field_container'));
           // console.log('el.innerHTML');
           // console.log(el.innerHTML);
-
-          console.log('dropModel:');
+          console.log(
+            '%c dropModel ',
+            'background: #f5a142; ' +
+              'color: #000; ' +
+              'padding: 0 10px; ' +
+              'border: 0px solid #47C0BE'
+          );
+          this.stopDrag = true;
           console.log('el', el);
           console.log('source', source);
           console.log('target', target);
@@ -203,7 +224,14 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
       _dragulaService
         .removeModel(this.builderContainer)
         .subscribe(({ el, source, item, sourceModel }) => {
-          console.log('removeModel:');
+          console.log(
+            '%c removeModel ',
+            'background: #1975c5; ' +
+              'color: #fff; ' +
+              'padding: 0 10px; ' +
+              'border: 0px solid #47C0BE'
+          );
+          this.stopDrag = false;
           console.log(el);
           console.log(source);
           console.log(sourceModel);
@@ -235,8 +263,10 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
         return new FormElement(
           formElement.name,
           formElement.type,
+          formElement.label,
           formElement.inputType,
-          formElement.content,
+          formElement.value,
+          formElement.options,
           formElement.validations
         );
       }, //Allow item to be coppied in another div
@@ -257,7 +287,7 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     this._licenseEditService.getFieldName$().subscribe({
       next: (fieldObj: any) => {
         console.log(
-          '%c fieldName ',
+          '%c cancel & save ',
           'background: red; ' +
             'color: #fff; ' +
             'padding: 0 10px; ' +
@@ -266,11 +296,34 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
         this.stopDrag = false;
         console.log('fieldName', fieldObj.fieldName);
         console.log('fieldElement', fieldObj.fieldElement);
-        fieldObj.fieldElement.isOngoing = false;
-        console.log('renderedBuilderFieldsBeforeDrag');
-        console.log(this.renderedBuilderFieldsBeforeDrag);
+        // fieldObj.fieldElement.isOngoing = false;
+        console.log('this.renderedBuilderFieldsBeforeDrag.find');
+
+        console.log(
+          this.renderedBuilderFieldsBeforeDrag.find(
+            (item) => item.id === fieldObj.fieldElement.id
+          )
+        );
+
+        // this.renderedBuilderFieldsBeforeDrag.find(
+        //   (item) => item.id === fieldObj.fieldElement.id
+        // ).isOngoing = false;
+        // console.log('renderedBuilderFieldsBeforeDrag');
+        // console.log(this.renderedBuilderFieldsBeforeDrag);
 
         if (fieldObj.fieldName === 'cancel') {
+          console.log(
+            '%c cancel ',
+            'background: red; ' +
+              'color: #fff; ' +
+              'padding: 0 10px; ' +
+              'border: 1px solid #000'
+          );
+          let currentField = this.renderedBuilderFieldsBeforeDrag.find(
+            (item) => item.id === fieldObj.fieldElement.id
+          );
+
+          if (currentField) currentField.isOngoing = false;
           this.builder_elements_model_02 = _.cloneDeep(
             this.renderedBuilderFieldsBeforeDrag
           );
@@ -282,6 +335,19 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
           console.log(this.renderedBuilderFieldsBeforeDrag);
           // fieldObj.fieldElement = null;
         } else {
+          console.log(
+            '%c save ',
+            'background: red; ' +
+              'color: #fff; ' +
+              'padding: 0 10px; ' +
+              'border: 1px solid #000'
+          );
+          console.log('this.builder_elements_model_02');
+          console.log(this.builder_elements_model_02);
+
+          this.builder_elements_model_02.find(
+            (item) => item.id === fieldObj.fieldElement.id
+          ).isOngoing = false;
           console.log('renderedBuilderFieldsBeforeDrag.find');
           this.renderedBuilderFieldsBeforeDrag.forEach((item) => {
             console.log('item');
@@ -297,13 +363,18 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
               'padding: 0 10px; ' +
               'border: 1px solid #000'
           );
-          console.log(
-            this.renderedBuilderFieldsBeforeDrag.find(
-              (item) => item.id === fieldObj.fieldElement.id
-            ).name
-          );
+          // console.log(
+          //   this.renderedBuilderFieldsBeforeDrag.find(
+          //     (item) => item.id === fieldObj.fieldElement.id
+          //   ).name
+          // );
+          // this.myForm.removeControl(
+          //   this.renderedBuilderFieldsBeforeDrag.find(
+          //     (item) => item.id === fieldObj.fieldElement.id
+          //   ).name
+          // );
           this.myForm.removeControl(
-            this.renderedBuilderFieldsBeforeDrag.find(
+            this.builder_elements_model_02.find(
               (item) => item.id === fieldObj.fieldElement.id
             ).name
           );
@@ -478,6 +549,8 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
         this._bindValidations(field.validations || [])
       );
 
+      // console.log('Cannot find control with name');
+
       formGroup.addControl(field.name, control);
     });
   }
@@ -519,6 +592,8 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   }
 
   private _updateTargetContainer() {
+    // Error: Cannot find control with name
+    this._addControls(this.myForm);
     // https://www.smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/
     // https://medium.com/@Rahulx1/understanding-event-loop-call-stack-event-job-queue-in-javascript-63dcd2c71ecd
     // https://stackoverflow.com/questions/31698747/does-the-js-garbage-collector-clear-stack-memory
@@ -547,9 +622,13 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
       //   this.builder_elements_model_02[1].id + 1000;
       // this.builder_elements_model_02[2].id =
       //   this.builder_elements_model_02[2].id + 1000;
-      for (let builder_element_model of this.builder_elements_model_02)
+      for (let builder_element_model of this.builder_elements_model_02) {
+        console.log('builder_element_model.tracked_id');
+        console.log(builder_element_model.tracked_id);
+
         builder_element_model.tracked_id =
           builder_element_model.tracked_id! + 1000;
+      }
 
       // this._changeDetection.detectChanges();
       // this.builder_elements_model_02.push(
@@ -563,7 +642,7 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
       console.log('this.builder_elements_model_02');
       console.log(this.builder_elements_model_02);
 
-      this._addControls(this.myForm);
+      // this._addControls(this.myForm);
       // this._createControl();
       this._cdRef.detectChanges();
     }, 0);

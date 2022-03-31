@@ -56,4 +56,12 @@ export const fieldConfig: FieldConfig[] = [
       },
     ],
   },
+  {
+    type: 'radiobutton',
+    label: 'Gender',
+    name: 'gender',
+    options: ['Male', 'Female'],
+    value: 'Male',
+    validations: [],
+  },
 ];
