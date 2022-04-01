@@ -25,6 +25,10 @@ import { AdDirective } from './directive/ad.directive';
 import { DynamicFieldDirective } from './directive/dynamic-field.directive';
 import { InputComponent } from './component/dnd-field/input/input.component';
 import { RadioButtonComponent } from './component/dnd-field/radio-button/radio-button.component';
+import { ConfirmComponent } from './component/dnd-field/confirm/confirm.component';
+import { SelectComponent } from './component/dnd-field/select/select.component';
+import { CheckboxComponent } from './component/dnd-field/checkbox/checkbox.component';
+import { DateComponent } from './component/dnd-field/date/date.component';
 
 export function tokenGetter(): string | null {
   return localStorage.getItem('access');
@@ -46,6 +50,10 @@ export function tokenGetter(): string | null {
     DynamicFieldDirective,
     InputComponent,
     RadioButtonComponent,
+    ConfirmComponent,
+    SelectComponent,
+    CheckboxComponent,
+    DateComponent,
   ],
   imports: [
     JwtModule.forRoot({

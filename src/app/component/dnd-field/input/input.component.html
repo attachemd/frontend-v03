@@ -1,12 +1,6 @@
 <!-- <div class="field_container" [ngClass]="{ ongoing: field.isOngoing }"> -->
 <div class="field_container">
-  <div class="field-element-header" *ngIf="field.isOngoing">
-    <div><input [(ngModel)]="field.name" /></div>
-    <div>
-      <button (click)="onFieldCanceled()">cancel</button>
-      <button (click)="onFieldNameChanged()">save</button>
-    </div>
-  </div>
+  <app-confirm *ngIf="field.isOngoing" [field]="field"></app-confirm>
 
   <div class="ft-lm-edit-field">
     <mat-form-field fxFlex="500px" [formGroup]="group">

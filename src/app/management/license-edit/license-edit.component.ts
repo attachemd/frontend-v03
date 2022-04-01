@@ -544,6 +544,12 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   private _addControls(formGroup: FormGroup) {
     this.builder_elements_model_02.forEach((field) => {
       if (field.type === 'button') return;
+      if (field.type === 'date') field.value = new Date(field.value);
+      console.log('field.name');
+      console.log(field.name);
+      console.log('field.value');
+      console.log(field.value);
+
       const control = this._fb.control(
         field.value,
         this._bindValidations(field.validations || [])

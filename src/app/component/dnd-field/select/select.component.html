@@ -1,0 +1,18 @@
+<div class="field_container">
+  <app-confirm *ngIf="field.isOngoing" [field]="field"></app-confirm>
+
+  <div class="ft-lm-edit-field">
+    <mat-form-field
+      appearance="fill"
+      class="demo-full-width margin-top"
+      [formGroup]="group"
+    >
+      <mat-label>{{ field.label }}</mat-label>
+      <mat-select [formControlName]="field.name">
+        <mat-option *ngFor="let item of field.options" [value]="item">{{
+          item
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>

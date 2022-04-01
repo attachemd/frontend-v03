@@ -64,4 +64,32 @@ export const fieldConfig: FieldConfig[] = [
     value: 'Male',
     validations: [],
   },
+  {
+    type: 'date',
+    label: 'Date of Birth',
+    name: 'date_of_birth',
+    value: '4/14/2021',
+    validations: [
+      {
+        name: 'required',
+        validator: Validators.required,
+        message: 'Date of Birth Required',
+      },
+    ],
+  },
+  {
+    type: 'select',
+    label: 'Country',
+    name: 'country',
+    value: 'Morocco',
+    options: ['UAE', 'Morocco', 'UK', 'US'],
+    validations: [],
+  },
+  {
+    type: 'checkbox',
+    label: 'Accept Terms',
+    name: 'term',
+    value: true,
+    validations: [],
+  },
 ];

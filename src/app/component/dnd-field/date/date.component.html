@@ -1,0 +1,26 @@
+<div class="field_container">
+  <app-confirm *ngIf="field.isOngoing" [field]="field"></app-confirm>
+
+  <div class="ft-lm-edit-field">
+    <!-- appearance="fill" -->
+    <mat-form-field appearance="fill" class="demo-full-width margin-top" [formGroup]="group">
+      <mat-label>{{ field.label }}</mat-label>
+      <input matInput [matDatepicker]="picker" [formControlName]="field.name" />
+      <!-- [formControl]="date1" -->
+      <!-- [formControlName]="field.name" -->
+      <!-- [placeholder]="field.label" -->
+      <!-- [(ngModel)]="group.get('dob').value" -->
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-hint></mat-hint>
+      <ng-container
+        *ngFor="let validation of field.validations"
+        ngProjectAs="mat-error"
+      >
+        <mat-error *ngIf="group.get(field.name)?.hasError(validation.name)">
+          {{ validation.message }}
+        </mat-error>
+      </ng-container>
+    </mat-form-field>
+  </div>
+</div>

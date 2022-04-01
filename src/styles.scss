@@ -3,7 +3,7 @@
 
 @include material.mat-core();
 $workshop-primary: material.mat-palette(material.$mat-brown);
-$workshop-accent: material.mat-palette(material.$mat-pink);
+$workshop-accent: material.mat-palette(material.$mat-green);
 
 $workshop-theme: material.mat-light-theme(
   (
@@ -189,6 +189,7 @@ mat-row {
   //     color: #2DCA72;
   //     border: 2px dashed #2DCA72;
   //   background-color: #edfdf4;
+  display: block;
   color: #0054f7;
   border: 2px dashed #0054f7;
   background-color: #f8faff;
@@ -205,3 +206,28 @@ mat-row {
 /***********************/
 /***** Builder End *****/
 /***********************/
+
+// .bigbog {
+//   border: 2px solid red;
+// }
+
+// .dnd-host {
+//   display: block;
+// }
+
+.ongoing {
+  // .ongoing {
+    display: block;
+  border: 2px solid #2dca72;
+  padding: 10px 10px 0 10px;
+  margin-bottom: 17px;
+  border-radius: 5px;
+}
+
+// .field_container {
+//   padding-bottom: 17px;
+// }
+
+.ft-lm-field {
+  padding-bottom: 17px;
+}

@@ -9,6 +9,9 @@ import { LicenseEditService } from 'src/app/services/licenses/license-edit.servi
   styleUrls: ['./input.component.scss'],
 })
 export class InputComponent implements OnInit {
+  // @HostBinding('class')
+  // public readonly classList = 'dnd-host';
+
   @HostBinding('class.ongoing')
   public isOngoing: boolean = false;
 
@@ -22,17 +25,5 @@ export class InputComponent implements OnInit {
     this.isOngoing = this.field.isOngoing;
     console.log('this.isOngoing');
     console.log(this.isOngoing);
-  }
-
-  public onFieldNameChanged() {
-    let parmtr = 'new parameter from dnd-field ' + this.field.name;
-
-    this._licenseEditService.setFieldName$(parmtr, this.field);
-    // this.fieldChange.emit(parmtr);
-  }
-
-  public onFieldCanceled() {
-    this._licenseEditService.setFieldName$('cancel', this.field);
-    // this.fieldChange.emit(parmtr);
   }
 }

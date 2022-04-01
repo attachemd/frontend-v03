@@ -4,13 +4,19 @@
 
 import { Directive, Input, OnInit, ViewContainerRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { CheckboxComponent } from '../component/dnd-field/checkbox/checkbox.component';
+import { DateComponent } from '../component/dnd-field/date/date.component';
 import { InputComponent } from '../component/dnd-field/input/input.component';
 import { RadioButtonComponent } from '../component/dnd-field/radio-button/radio-button.component';
+import { SelectComponent } from '../component/dnd-field/select/select.component';
 import { FieldConfig } from '../services/dnd-field/field.model';
 
 const componentMapper = {
   input: InputComponent,
   radiobutton: RadioButtonComponent,
+  select: SelectComponent,
+  checkbox: CheckboxComponent,
+  date: DateComponent,
 };
 
 @Directive({

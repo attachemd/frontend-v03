@@ -1,0 +1,9 @@
+<div class="field_container">
+    <app-confirm *ngIf="field.isOngoing" [field]="field"></app-confirm>
+  
+    <div class="ft-lm-edit-field">
+        <div class="ft-lm-field" [formGroup]="group">
+            <mat-checkbox [formControlName]="field.name">{{ field.label }}</mat-checkbox>
+          </div>
+    </div>
+  </div>
