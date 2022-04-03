@@ -1,0 +1,6 @@
+General:
+    ☐ add edit view (builder)(crud for each field)(custom fields view)
+    ☐ CRUD for each model
+    ☐ each product has different custom fields (custom field model)
+    ☐ create and read in one go
+    ☐ add link for other models for viewing (in table view)
