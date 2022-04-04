@@ -30,6 +30,7 @@ import { SelectComponent } from './component/dnd-field/select/select.component';
 import { CheckboxComponent } from './component/dnd-field/checkbox/checkbox.component';
 import { DateComponent } from './component/dnd-field/date/date.component';
 import { CustomFieldsComponent } from './management/custom-fields/custom-fields.component';
+import { DndFieldEditComponent } from './component/dnd-field-edit/dnd-field-edit.component';
 
 export function tokenGetter(): string | null {
   return localStorage.getItem('access');
@@ -56,6 +57,7 @@ export function tokenGetter(): string | null {
     CheckboxComponent,
     DateComponent,
     CustomFieldsComponent,
+    DndFieldEditComponent,
   ],
   imports: [
     JwtModule.forRoot({

@@ -28,10 +28,9 @@ export class InputComponent implements OnInit {
   }
 
   public toggleEditVisibility(event: any, visibility: string) {
-    event.target.querySelector('button').style.display = visibility;
-  }
-
-  public show() {
-    alert('Hi!');
+    // event.target.querySelector('button').style.display = visibility;
+    event.target
+      .querySelectorAll('button')
+      .forEach((el: any) => (el.style.display = visibility));
   }
 }

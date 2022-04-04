@@ -1,0 +1,15 @@
+.icon-display {
+    position: absolute;
+    z-index: 101;
+    right: 0;
+    transform: scale(.8);
+    display: none;
+}
+
+.delete {
+    right: 0;
+}
+
+.edit {
+    right: 40px;
+}
