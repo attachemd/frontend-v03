@@ -83,7 +83,8 @@
           </mat-form-field>
         </div>
         <div class="ft-lm-custom-fields-title">
-          <h1 fxFlex="500px">Custom fields</h1>
+          <h1>Custom fields</h1>
+          <button [routerLink]="['/licenses/custom-fields', license.id]">Edit</button>
         </div>
       </div>
       <div class="ft-lm-custom-fields-content">
@@ -93,7 +94,7 @@
         [(dragulaModel)]="builder_elements_model_02"
       > -->
         <div class="ft-lm-custom-fields">
-          // FEATURE
+          <!-- // FEATURE -->
           <!-- TODO add drag handle to the dnd fields -->
           <!-- TODO add edit button to the dnd fields -->
           <!-- TODO add delete button to the dnd fields -->

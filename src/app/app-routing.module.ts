@@ -9,6 +9,7 @@ import { HomeComponent } from './component/home/home.component';
 import { LicenseComponent } from './component/license/license.component';
 import { NotFoundComponent } from './component/not-found/not-found.component';
 import { ProductComponent } from './component/product/product.component';
+import { CustomFieldsComponent } from './management/custom-fields/custom-fields.component';
 import { LicenseEditComponent } from './management/license-edit/license-edit.component';
 const routes: Routes = [
   {
@@ -32,6 +33,12 @@ const routes: Routes = [
   {
     path: 'licenses/:id',
     component: LicenseEditComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'licenses/custom-fields/:id',
+    component: CustomFieldsComponent,
     canLoad: [AuthGuard],
     canActivate: [AuthGuard],
   },

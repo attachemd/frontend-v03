@@ -518,6 +518,13 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    console.log(
+      '%c ngOnDestroy LicenseEditComponent ',
+      'background: red; ' +
+        'color: #fff; ' +
+        'padding: 0 300px; ' +
+        'border: 0px solid #47C0BE'
+    );
     this._dragulaService.destroy(this.builderContainer);
     this._subs.unsubscribe();
   }

@@ -231,3 +231,20 @@ mat-row {
 .ft-lm-field {
   padding-bottom: 17px;
 }
+
+.ft-lm-edit-field {
+  // background-color: aquamarine;
+  position: relative;
+}
+.ft-lm-edit-field:after {
+  top: 0px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  content: "";
+
+  display: block;
+  z-index: 100;
+}

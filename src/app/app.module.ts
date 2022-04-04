@@ -29,6 +29,7 @@ import { ConfirmComponent } from './component/dnd-field/confirm/confirm.componen
 import { SelectComponent } from './component/dnd-field/select/select.component';
 import { CheckboxComponent } from './component/dnd-field/checkbox/checkbox.component';
 import { DateComponent } from './component/dnd-field/date/date.component';
+import { CustomFieldsComponent } from './management/custom-fields/custom-fields.component';
 
 export function tokenGetter(): string | null {
   return localStorage.getItem('access');
@@ -54,6 +55,7 @@ export function tokenGetter(): string | null {
     SelectComponent,
     CheckboxComponent,
     DateComponent,
+    CustomFieldsComponent,
   ],
   imports: [
     JwtModule.forRoot({

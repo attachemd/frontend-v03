@@ -1,56 +1,75 @@
 <!-- TODO add search icon -->
 <!-- TODO add clear to the filter field -->
 <div fxLayoutAlign="left" class="ft-lm-search-for-field">
-    <mat-form-field fxFlex="40%">
-        <input
-            matInput
-            type="text"
-            (keyup)="doFilter($event)"
-            placeholder="Search licenses by key string, customer or product..."
-        />
-    </mat-form-field>
+  <mat-form-field fxFlex="40%">
+    <input
+      matInput
+      type="text"
+      (keyup)="doFilter($event)"
+      placeholder="Search licenses by key string, customer or product..."
+    />
+  </mat-form-field>
 </div>
 <mat-table [dataSource]="dataSource" matSort>
-    <ng-container matColumnDef="key">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>License Key</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.key}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="status">
-        <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="100px">Status</mat-header-cell>
-        <mat-cell *matCellDef="let element" [innerHTML]="setStatus(element)" fxFlex="100px"></mat-cell>
-    </ng-container>
-    <!-- TODO add expired logic or never -->
-    <ng-container matColumnDef="expiry">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Expiry</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.expiry | date}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="product">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Product</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.product.name}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="client">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Client</mat-header-cell>
-        <!-- <mat-cell *matCellDef="let element">{{element.client.first_name}} {{element.client.last_name}}</mat-cell> -->
-        <mat-cell *matCellDef="let element">{{element.client.first_name}} {{element.client.last_name}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="action">
-        <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      
-          <mat-cell *matCellDef="let row">
-              <!-- TODO show icons on hover -->
-            <!-- <button *ngIf="isVisible" mat-icon-button class="icon-display" [routerLink]="['/licenses', row.id]" routerLink="/licenses/edit" [state]="{ id:row.id , name:'Angular'}" (click)="editContact(row)" title="Edit License"><mat-icon>edit</mat-icon></button> -->
-            <button *ngIf="isVisible" color="primary" mat-icon-button class="icon-display" [routerLink]="['/licenses', row.id]" (click)="editContact(row)" title="Edit License"><mat-icon>edit</mat-icon></button>
-          </mat-cell>
-     
-      </ng-container>
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <!-- <mat-row *matRowDef="let row; columns: displayedColumns" (mouseenter) ="test($event)"  (mouseleave) ="isVisible = false"></mat-row> -->
-    <mat-row *matRowDef="let row; columns: displayedColumns" (mouseenter)="toggleEditVisibility($event, 'inline-block')" (mouseleave)="toggleEditVisibility($event, 'none')"></mat-row>
+  <ng-container matColumnDef="key">
+    <mat-header-cell *matHeaderCellDef mat-sort-header
+      >License Key</mat-header-cell
+    >
+    <mat-cell *matCellDef="let element">{{ element.key }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="100px"
+      >Status</mat-header-cell
+    >
+    <mat-cell
+      *matCellDef="let element"
+      [innerHTML]="setStatus(element)"
+      fxFlex="100px"
+    ></mat-cell>
+  </ng-container>
+  <!-- TODO add expired logic or never -->
+  <ng-container matColumnDef="expiry">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Expiry</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.expiry | date }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="product">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Product</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.product.name }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="client">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Client</mat-header-cell>
+    <!-- <mat-cell *matCellDef="let element">{{element.client.first_name}} {{element.client.last_name}}</mat-cell> -->
+    <mat-cell *matCellDef="let element"
+      >{{ element.client.first_name }} {{ element.client.last_name }}</mat-cell
+    >
+  </ng-container>
+  <ng-container matColumnDef="action">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+
+    <mat-cell *matCellDef="let row">
+      <!-- TODO show icons on hover -->
+      <!-- <button *ngIf="isVisible" mat-icon-button class="icon-display" [routerLink]="['/licenses', row.id]" routerLink="/licenses/edit" [state]="{ id:row.id , name:'Angular'}" (click)="editContact(row)" title="Edit License"><mat-icon>edit</mat-icon></button> -->
+      <button
+        *ngIf="isVisible"
+        color="primary"
+        mat-icon-button
+        class="icon-display"
+        [routerLink]="['/licenses', row.id]"
+        (click)="editContact(row)"
+        title="Edit License"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <!-- <mat-row *matRowDef="let row; columns: displayedColumns" (mouseenter) ="test($event)"  (mouseleave) ="isVisible = false"></mat-row> -->
+  <mat-row
+    *matRowDef="let row; columns: displayedColumns"
+    (mouseenter)="toggleEditVisibility($event, 'inline-block')"
+    (mouseleave)="toggleEditVisibility($event, 'none')"
+  ></mat-row>
 </mat-table>
 <!-- TODO sticky paginator to the right bottom -->
-<mat-paginator
-    [pageSize]="20"
-    [pageSizeOptions]="[5, 10, 20, 30,40]"
->
-
+<mat-paginator [pageSize]="20" [pageSizeOptions]="[5, 10, 20, 30, 40]">
 </mat-paginator>

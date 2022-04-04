@@ -26,4 +26,12 @@ export class InputComponent implements OnInit {
     console.log('this.isOngoing');
     console.log(this.isOngoing);
   }
+
+  public toggleEditVisibility(event: any, visibility: string) {
+    event.target.querySelector('button').style.display = visibility;
+  }
+
+  public show() {
+    alert('Hi!');
+  }
 }
