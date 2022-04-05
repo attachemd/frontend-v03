@@ -175,6 +175,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
           console.log('item', item);
           item.isOngoing = true;
           console.log('item', item);
+          this._dndFieldService.setFieldEditMode$(false);
         })
     );
     this._subs.add(
@@ -228,7 +229,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         );
       }, //Allow item to be coppied in another div
       // copySortSource: false,
-      removeOnSpill: true,
+      removeOnSpill: false,
       // removeOnSpill: false,
     });
   }
@@ -238,6 +239,16 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     this._dndFieldService.getStopDrag$().subscribe({
       next: (stopDrag: boolean) => {
         this.stopDrag = stopDrag;
+      },
+      error: (err: any) => {},
+    });
+    this._dndFieldService.getDeleteField$().subscribe({
+      next: (fieldId: string) => {
+        this.builder_elements_model_02 = this.builder_elements_model_02.filter(
+          function (el) {
+            return el.id != fieldId;
+          }
+        );
       },
       error: (err: any) => {},
     });
@@ -252,6 +263,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
               'border: 1px solid #000'
           );
           this.stopDrag = false;
+          this._dndFieldService.setFieldEditMode$(true);
           console.log('fieldName', fieldObj.fieldName);
           console.log('fieldElement', fieldObj.fieldElement);
           // fieldObj.fieldElement.isOngoing = false;
@@ -277,18 +289,25 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
                 'padding: 0 10px; ' +
                 'border: 1px solid #000'
             );
-            let currentField = this.renderedBuilderFieldsBeforeDrag.find(
-              (item) => item.id === fieldObj.fieldElement.id
-            );
+            console.log('renderedBuilderFieldsBeforeDrag');
+            console.log(this.renderedBuilderFieldsBeforeDrag);
+            // checking the lenght when cancel click and the field not dragged
+            // the array always empty before drag
+            if (this.renderedBuilderFieldsBeforeDrag.length > 0) {
+              // let currentField = this.renderedBuilderFieldsBeforeDrag.find(
+              //   (item) => item.id === fieldObj.fieldElement.id
+              // );
 
-            if (currentField) currentField.isOngoing = false;
-            this.builder_elements_model_02 = _.cloneDeep(
-              this.renderedBuilderFieldsBeforeDrag
-            );
-            // this.builder_elements_model_02 = [
-            //   ...this.renderedBuilderFieldsBeforeDrag,
-            // ];
-            this.renderedBuilderFieldsBeforeDrag = [];
+              // if (currentField) currentField.isOngoing = false;
+              this.builder_elements_model_02 = _.cloneDeep(
+                this.renderedBuilderFieldsBeforeDrag
+              );
+              // this.builder_elements_model_02 = [
+              //   ...this.renderedBuilderFieldsBeforeDrag,
+              // ];
+              this.renderedBuilderFieldsBeforeDrag = [];
+            }
+            fieldObj.fieldElement.isOngoing = false;
             console.log('renderedBuilderFieldsBeforeDrag');
             console.log(this.renderedBuilderFieldsBeforeDrag);
             // fieldObj.fieldElement = null;

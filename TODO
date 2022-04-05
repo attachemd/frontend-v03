@@ -4,3 +4,5 @@ General:
     ☐ each product has different custom fields (custom field model)
     ☐ create and read in one go
     ☐ add link for other models for viewing (in table view)
+    ☐ in customize field fix width when ongoing
+    ☐ stop dragging when field edit or cancel clicked

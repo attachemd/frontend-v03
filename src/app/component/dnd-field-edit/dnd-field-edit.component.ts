@@ -13,20 +13,31 @@ export class DndFieldEditComponent implements OnInit {
   @Input()
   public field: any = {};
 
-  public isEditMode = true;
+  public isFieldOnEditMode = true;
 
   constructor(private _dndFieldService: DndFieldService) {}
 
   ngOnInit(): void {
     console.log('DndFieldEditComponent');
+    this._dndFieldService.getFieldEditMode$().subscribe({
+      next: (isFieldOnEditMode: boolean) => {
+        this.isFieldOnEditMode = isFieldOnEditMode;
+      },
+      error: (err: any) => {},
+    });
   }
 
-  public show() {
+  public edit() {
     // alert('Hi!');
     this.field.isOngoing = true;
     this._dndFieldService.setStopDrag$(true);
+    this._dndFieldService.setFieldEditMode$(false);
     // this._dndFieldService.setIsOnGoing$(true);
     // console.log('this.field');
     // console.log(this.field);
+  }
+
+  public delete() {
+    this._dndFieldService.setDeleteField$(this.field.id);
   }
 }

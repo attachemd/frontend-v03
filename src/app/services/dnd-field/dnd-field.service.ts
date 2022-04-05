@@ -11,6 +11,8 @@ export class DndFieldService {
   }>(1);
 
   private _stopDrag$ = new Subject<boolean>();
+  private _fieldEditMode$ = new ReplaySubject<boolean>(1);
+  private _deleteField$ = new Subject<string>();
 
   constructor() {}
 
@@ -31,6 +33,22 @@ export class DndFieldService {
 
   public getStopDrag$(): Subject<boolean> {
     return this._stopDrag$;
+  }
+
+  public setFieldEditMode$(isfieldEditMode: boolean) {
+    this._fieldEditMode$.next(isfieldEditMode);
+  }
+
+  public getFieldEditMode$(): ReplaySubject<boolean> {
+    return this._fieldEditMode$;
+  }
+
+  public setDeleteField$(fieldId: string) {
+    this._deleteField$.next(fieldId);
+  }
+
+  public getDeleteField$(): Subject<string> {
+    return this._deleteField$;
   }
 
   public toggleEditVisibility(event: any, visibility: string) {
