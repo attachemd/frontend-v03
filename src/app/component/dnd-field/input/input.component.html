@@ -4,8 +4,8 @@
 
   <div
     class="ft-lm-edit-field"
-    (mouseenter)="toggleEditVisibility($event, 'inline-block')"
-    (mouseleave)="toggleEditVisibility($event, 'none')"
+    (mouseenter)="visibility = 'inline-block'"
+    (mouseleave)="visibility = 'none'"
   >
     <mat-form-field fxFlex="500px" [formGroup]="group">
       <input
@@ -24,6 +24,6 @@
         }}</mat-error>
       </ng-container>
     </mat-form-field>
-    <app-dnd-field-edit></app-dnd-field-edit>
+    <app-dnd-field-edit [visibility]="visibility" [field]="field"></app-dnd-field-edit>
   </div>
 </div>

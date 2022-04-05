@@ -1,9 +1,17 @@
 <div class="field_container">
   <app-confirm *ngIf="field.isOngoing" [field]="field"></app-confirm>
 
-  <div class="ft-lm-edit-field">
+  <div
+    class="ft-lm-edit-field"
+    (mouseenter)="visibility = 'inline-block'"
+    (mouseleave)="visibility = 'none'"
+  >
     <!-- appearance="fill" -->
-    <mat-form-field appearance="fill" class="demo-full-width margin-top" [formGroup]="group">
+    <mat-form-field
+      appearance="fill"
+      class="demo-full-width margin-top"
+      [formGroup]="group"
+    >
       <mat-label>{{ field.label }}</mat-label>
       <input matInput [matDatepicker]="picker" [formControlName]="field.name" />
       <!-- [formControl]="date1" -->
@@ -22,5 +30,6 @@
         </mat-error>
       </ng-container>
     </mat-form-field>
+    <app-dnd-field-edit [visibility]="visibility"></app-dnd-field-edit>
   </div>
 </div>

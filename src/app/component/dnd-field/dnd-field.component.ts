@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DndFieldService } from 'src/app/services/dnd-field/dnd-field.service';
 import { FieldConfig } from 'src/app/services/dnd-field/field.model';
-import { LicenseEditService } from 'src/app/services/licenses/license-edit.service';
 
 @Component({
   selector: 'app-dnd-field',
@@ -14,7 +14,7 @@ export class DnDFieldComponent implements OnInit {
   @Input()
   public form: any;
 
-  constructor(private _licenseEditService: LicenseEditService) {}
+  constructor(private _dndFieldService: DndFieldService) {}
 
   ngOnInit(): void {
     console.log('dnd-fieldComponent');

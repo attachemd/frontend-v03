@@ -1,6 +1,5 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { LicenseEditService } from 'src/app/services/licenses/license-edit.service';
 
 @Component({
   selector: 'app-radio-button',
@@ -16,6 +15,7 @@ export class RadioButtonComponent implements OnInit {
 
   public field!: any;
   public group!: FormGroup;
+  public visibility = 'none';
   constructor() {}
 
   ngOnInit(): void {

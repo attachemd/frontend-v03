@@ -58,13 +58,17 @@
   
   .builder-container {
     display: flex;
+    margin: 0 auto;
+    width: fit-content;
   }
   // .builder-canvas {
   //     background-color: #eee;
   // }
-  // .builder-elements-container {
-  //     background-color: rgb(233, 233, 233);
-  // }
+
+  .builder-elements-container {
+      width: 300px;
+  }
+
   .builder-elements {
     background-color: #fff;
     width: 284px;

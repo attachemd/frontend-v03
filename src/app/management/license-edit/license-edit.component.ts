@@ -9,7 +9,6 @@ import { Subscription } from 'rxjs';
 import { Client } from 'src/app/services/clients/client.model';
 import { License } from 'src/app/services/licenses/license.model';
 import { Product } from 'src/app/services/products/product.model';
-import { LicenseEditService } from 'src/app/services/licenses/license-edit.service';
 import {
   FormBuilder,
   FormControl,
@@ -21,6 +20,7 @@ import {
   Validation as Validation,
 } from 'src/app/services/dnd-field/field.model';
 import { fieldConfig } from 'src/app/services/dnd-field/field.sample';
+import { DndFieldService } from 'src/app/services/dnd-field/dnd-field.service';
 
 let ft_lm = { formElementId: 0 };
 
@@ -113,7 +113,7 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     private _http: HttpClient,
     private _route: ActivatedRoute,
     private _dragulaService: DragulaService,
-    private _licenseEditService: LicenseEditService,
+    private _dndFieldService: DndFieldService,
     private _fb: FormBuilder,
     private _cdRef: ChangeDetectorRef
   ) {
@@ -284,7 +284,7 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     // });
     console.log('this.builder_elements_model_02');
     console.log(this.builder_elements_model_02);
-    this._licenseEditService.getFieldName$().subscribe({
+    this._dndFieldService.getFieldName$().subscribe({
       next: (fieldObj: any) => {
         console.log(
           '%c cancel & save ',

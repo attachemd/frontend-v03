@@ -1,18 +1,20 @@
-<button
-color="primary"
-mat-icon-button
-class="icon-display delete"
-title="Delete Field"
-(click)="show()"
->
-<mat-icon>delete</mat-icon>
-</button>
-<button
-color="primary"
-mat-icon-button
-class="icon-display edit"
-title="Edit Field"
-(click)="show()"
->
-<mat-icon>edit</mat-icon>
-</button>
+<div *ngIf="isEditMode" class="dnd-field-edit" [ngStyle]="{display: visibility}">
+    <button
+    color="primary"
+    mat-icon-button
+    class="icon-display delete"
+    title="Delete Field"
+    (click)="show()"
+    >
+    <mat-icon>delete</mat-icon>
+    </button>
+    <button
+    color="primary"
+    mat-icon-button
+    class="icon-display edit"
+    title="Edit Field"
+    (click)="show()"
+    >
+    <mat-icon>edit</mat-icon>
+    </button>
+</div>

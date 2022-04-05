@@ -12,6 +12,7 @@ export class SelectComponent implements OnInit {
 
   public field!: any;
   public group!: FormGroup;
+  public visibility = 'none';
   constructor() {}
 
   ngOnInit(): void {

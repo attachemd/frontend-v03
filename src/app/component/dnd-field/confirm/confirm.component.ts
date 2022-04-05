@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { LicenseEditService } from 'src/app/services/licenses/license-edit.service';
+import { DndFieldService } from 'src/app/services/dnd-field/dnd-field.service';
 
 @Component({
   selector: 'app-confirm',
@@ -10,7 +10,7 @@ export class ConfirmComponent implements OnInit {
   @Input()
   public field!: any;
 
-  constructor(private _licenseEditService: LicenseEditService) {}
+  constructor(private _dndFieldService: DndFieldService) {}
 
   ngOnInit(): void {
     console.log('ConfirmComponent');
@@ -19,12 +19,12 @@ export class ConfirmComponent implements OnInit {
   public onFieldNameChanged() {
     let parmtr = 'new parameter from dnd-field ' + this.field.name;
 
-    this._licenseEditService.setFieldName$(parmtr, this.field);
+    this._dndFieldService.setFieldName$(parmtr, this.field);
     // this.fieldChange.emit(parmtr);
   }
 
   public onFieldCanceled() {
-    this._licenseEditService.setFieldName$('cancel', this.field);
+    this._dndFieldService.setFieldName$('cancel', this.field);
     // this.fieldChange.emit(parmtr);
   }
 }

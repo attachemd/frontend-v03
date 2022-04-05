@@ -11,7 +11,12 @@
       </mat-radio-group>
     </mat-form-field>
   </div> -->
-  <div class="ft-lm-edit-field" [formGroup]="group">
+  <div
+    class="ft-lm-edit-field"
+    [formGroup]="group"
+    (mouseenter)="visibility = 'inline-block'"
+    (mouseleave)="visibility = 'none'"
+  >
     <!-- <label class="radio-label">{{ field.label }}:</label> -->
     <div>
       <mat-label class="ft-lm-label">{{ field.name }}</mat-label>
@@ -23,5 +28,6 @@
         </mat-radio-button>
       </mat-radio-group>
     </div>
+    <app-dnd-field-edit [visibility]="visibility"></app-dnd-field-edit>
   </div>
 </div>

@@ -1,7 +1,11 @@
 <div class="field_container">
   <app-confirm *ngIf="field.isOngoing" [field]="field"></app-confirm>
 
-  <div class="ft-lm-edit-field">
+  <div
+    class="ft-lm-edit-field"
+    (mouseenter)="visibility = 'inline-block'"
+    (mouseleave)="visibility = 'none'"
+  >
     <mat-form-field
       appearance="fill"
       class="demo-full-width margin-top"
@@ -14,6 +18,6 @@
         }}</mat-option>
       </mat-select>
     </mat-form-field>
-    <app-dnd-field-edit></app-dnd-field-edit>
+    <app-dnd-field-edit [visibility]="visibility"></app-dnd-field-edit>
   </div>
 </div>

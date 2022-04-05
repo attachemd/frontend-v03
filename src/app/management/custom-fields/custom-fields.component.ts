@@ -6,7 +6,7 @@ import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
 import { Validation } from 'src/app/services/dnd-field/field.model';
 import { fieldConfig } from 'src/app/services/dnd-field/field.sample';
-import { LicenseEditService } from 'src/app/services/licenses/license-edit.service';
+import { DndFieldService } from 'src/app/services/dnd-field/dnd-field.service';
 
 let ft_lm = { formElementId: 0 };
 
@@ -78,7 +78,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     private _dragulaService: DragulaService,
     private _fb: FormBuilder,
     private _cdRef: ChangeDetectorRef,
-    private _licenseEditService: LicenseEditService
+    private _dndFieldService: DndFieldService
   ) {
     this._regConfig.forEach((field) => {
       this.builder_elements_model_02.push(
@@ -235,8 +235,14 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log('CustomFieldsComponent');
+    this._dndFieldService.getStopDrag$().subscribe({
+      next: (stopDrag: boolean) => {
+        this.stopDrag = stopDrag;
+      },
+      error: (err: any) => {},
+    });
     this._subs.add(
-      this._licenseEditService.getFieldName$().subscribe({
+      this._dndFieldService.getFieldName$().subscribe({
         next: (fieldObj: any) => {
           console.log(
             '%c cancel & save ',

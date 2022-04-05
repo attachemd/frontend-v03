@@ -1,9 +1,16 @@
 <div class="field_container">
-    <app-confirm *ngIf="field.isOngoing" [field]="field"></app-confirm>
-  
-    <div class="ft-lm-edit-field">
-        <div class="ft-lm-field" [formGroup]="group">
-            <mat-checkbox [formControlName]="field.name">{{ field.label }}</mat-checkbox>
-          </div>
+  <app-confirm *ngIf="field.isOngoing" [field]="field"></app-confirm>
+
+  <div
+    class="ft-lm-edit-field"
+    (mouseenter)="visibility = 'inline-block'"
+    (mouseleave)="visibility = 'none'"
+  >
+    <div class="ft-lm-field checkbox" [formGroup]="group">
+      <mat-checkbox [formControlName]="field.name">{{
+        field.label
+      }}</mat-checkbox>
     </div>
+    <app-dnd-field-edit [visibility]="visibility"></app-dnd-field-edit>
   </div>
+</div>
