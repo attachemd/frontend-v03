@@ -45,10 +45,12 @@
 
 .builder-container {
   display: flex;
+  justify-content: center;
 }
-// .builder-canvas {
-//     background-color: #eee;
-// }
+.builder-canvas {
+    // background-color: #eee;
+    width: 600px;
+}
 // .builder-elements-container {
 //     background-color: rgb(233, 233, 233);
 // }

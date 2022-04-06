@@ -140,140 +140,6 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
       product: ['', Validators.required],
     });
     this._addControls(this.myForm);
-    // this._createControl();
-    this._subs.add(
-      this._dragulaService
-        .dragend(this.builderContainer)
-        .subscribe(({ el }) => {
-          console.log(
-            '%c dragend ',
-            'background: #2B916A; ' +
-              'color: #fff; ' +
-              'padding: 0 10px; ' +
-              'border: 0px solid #47C0BE'
-          );
-          // this.stopDrag = true;
-          this._shadow.innerHTML = this._shadowInnerHTML;
-
-          // this.renderedBuilderFieldsBeforeDrag = _.cloneDeep(
-          //   this.builder_elements_model_02
-          // );
-          // this._addControls(this.myForm);
-          this._updateTargetContainer();
-        })
-    );
-    this._subs.add(
-      this._dragulaService.drag(this.builderContainer).subscribe(({ el }) => {
-        console.log(
-          '%c drag ',
-          'background: #D46E95; ' +
-            'color: #fff; ' +
-            'padding: 0 10px; ' +
-            'border: 0px solid #47C0BE'
-        );
-        // this.renderedBuilderFieldsBeforeDrag = [
-        //   ...this.builder_elements_model_02,
-        // ];
-        this.renderedBuilderFieldsBeforeDrag = _.cloneDeep(
-          this.builder_elements_model_02
-        );
-        console.log('this.renderedBuilderFieldsBeforeDrag');
-        console.log(this.renderedBuilderFieldsBeforeDrag);
-
-        this._shadow = el;
-        this._shadowInnerHTML = el.innerHTML;
-      })
-    );
-
-    this._subs.add(
-      this._dragulaService.shadow(this.builderContainer).subscribe(({ el }) => {
-        console.log('shadow');
-        el.className = 'drop-here';
-        el.innerHTML = 'Drop Here';
-      })
-    );
-
-    this._subs.add(
-      _dragulaService
-        .dropModel(this.builderContainer)
-        .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
-          // el.classList.add('ongoing');
-          // console.log("el.querySelector('#field_container')");
-          // console.log(el.querySelector('#field_container'));
-          // console.log('el.innerHTML');
-          // console.log(el.innerHTML);
-          console.log(
-            '%c dropModel ',
-            'background: #f5a142; ' +
-              'color: #000; ' +
-              'padding: 0 10px; ' +
-              'border: 0px solid #47C0BE'
-          );
-          this.stopDrag = true;
-          console.log('el', el);
-          console.log('source', source);
-          console.log('target', target);
-          console.log('sourceModel', sourceModel);
-          console.log('targetModel', targetModel);
-          console.log('item', item);
-          item.isOngoing = true;
-          console.log('item', item);
-        })
-    );
-    this._subs.add(
-      _dragulaService
-        .removeModel(this.builderContainer)
-        .subscribe(({ el, source, item, sourceModel }) => {
-          console.log(
-            '%c removeModel ',
-            'background: #1975c5; ' +
-              'color: #fff; ' +
-              'padding: 0 10px; ' +
-              'border: 0px solid #47C0BE'
-          );
-          this.stopDrag = false;
-          console.log(el);
-          console.log(source);
-          console.log(sourceModel);
-          console.log(item);
-        })
-    );
-    this._dragulaService.createGroup(this.builderContainer, {
-      moves: (el: any, container: any, handle: any): any => {
-        // .classList.contains('ongoing')
-        // if (el.classList.contains('ongoing')) return false;
-        if (this.stopDrag) return false;
-
-        return true;
-      },
-      accepts: (el, target, source, sibling) => {
-        if (
-          source?.classList.contains('builder-render') &&
-          target?.classList.contains('builder-render')
-        )
-          return true;
-        else if (!source?.classList.contains('builder-source')) return false;
-        else return true;
-      },
-
-      copy: (el, source) => {
-        return source?.classList.contains('builder-source');
-      },
-      copyItem: (formElement: FormElement) => {
-        return new FormElement(
-          formElement.name,
-          formElement.type,
-          formElement.label,
-          formElement.inputType,
-          formElement.value,
-          formElement.options,
-          formElement.validations
-        );
-      }, //Allow item to be coppied in another div
-      // copySortSource: false,
-      removeOnSpill: true,
-      // removeOnSpill: false,
-    });
   }
 
   ngOnInit(): void {
@@ -385,46 +251,6 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
       },
       error: (err: any) => {},
     });
-    let elementBuilder = $('#elem-id');
-    // variables
-
-    if (elementBuilder) {
-      let topPosition = elementBuilder.offset()!.top - 10;
-
-      // console.log('topPosition');
-      // console.log(topPosition);
-      // console.log('$(window)');
-      // console.log($(window));
-
-      window.addEventListener(
-        'scroll',
-        () => {
-          // console.log('topPosition');
-          // console.log(topPosition);
-          // console.log('$(document).scrollTop()!');
-          // console.log($(document).scrollTop()!);
-          // console.log('$(".mat-sidenav-content").scrollTop()!');
-          // console.log($('.mat-sidenav-content').scrollTop()!);
-          // console.log('window.pageYOffset');
-          // console.log(window.pageYOffset);
-          // console.log('document.body.scrollTop');
-          // console.log(document.body.scrollTop);
-
-          if ($('.mat-sidenav-content').scrollTop()! > topPosition)
-            elementBuilder.addClass('sticky');
-          else elementBuilder.removeClass('sticky');
-        },
-        true
-      );
-
-      // $(document).on('scroll', () => {
-      //   console.log('topPosition');
-      //   console.log(topPosition);
-      //   if ($(window).scrollTop()! > topPosition)
-      //     elementBuilder.addClass('sticky');
-      //   else elementBuilder.removeClass('sticky');
-      // });
-    }
 
     this._route.params.subscribe({
       next: (params: any) => {
@@ -525,7 +351,6 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
         'padding: 0 300px; ' +
         'border: 0px solid #47C0BE'
     );
-    this._dragulaService.destroy(this.builderContainer);
     this._subs.unsubscribe();
   }
 

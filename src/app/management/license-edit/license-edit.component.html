@@ -3,7 +3,7 @@
     <div class="builder-canvas">
       <div class="ft-lm-primary-fields">
         <div class="ft-lm-edit-field">
-          <mat-form-field fxFlex="500px" [formGroup]="myForm">
+          <mat-form-field fxFill [formGroup]="myForm">
             <input
               formControlName="key"
               matInput
@@ -14,7 +14,7 @@
           </mat-form-field>
         </div>
         <div class="ft-lm-edit-field">
-          <div fxFlex="500px" style="padding: 0 0 20px 0">
+          <div fxFill style="padding: 0 0 20px 0">
             <div>
               <mat-label class="ft-lm-label">Status</mat-label>
             </div>
@@ -26,7 +26,7 @@
           </div>
         </div>
         <div class="ft-lm-edit-field">
-          <mat-form-field fxFlex="500px" [formGroup]="myForm">
+          <mat-form-field fxFill [formGroup]="myForm">
             <input
               formControlName="type"
               matInput
@@ -37,7 +37,7 @@
           </mat-form-field>
         </div>
         <div class="ft-lm-edit-field">
-          <mat-form-field fxFlex="500px" [formGroup]="myForm">
+          <mat-form-field fxFill [formGroup]="myForm">
             <input
               formControlName="description"
               matInput
@@ -48,7 +48,7 @@
           </mat-form-field>
         </div>
         <div class="ft-lm-edit-field">
-          <mat-form-field fxFlex="500px" [formGroup]="myForm">
+          <mat-form-field fxFill [formGroup]="myForm">
             <input
               formControlName="expiry"
               matInput
@@ -59,7 +59,7 @@
           </mat-form-field>
         </div>
         <div class="ft-lm-edit-field">
-          <mat-form-field fxFlex="500px" appearance="fill" [formGroup]="myForm">
+          <mat-form-field fxFill appearance="fill" [formGroup]="myForm">
             <mat-label>Select a client</mat-label>
             <!-- <mat-select [(value)]="clientSelected" placeholder="Select a client"> -->
             <mat-select formControlName="client">
@@ -71,7 +71,7 @@
           </mat-form-field>
         </div>
         <div class="ft-lm-edit-field">
-          <mat-form-field fxFlex="500px" appearance="fill" [formGroup]="myForm">
+          <mat-form-field fxFill appearance="fill" [formGroup]="myForm">
             <mat-label>Select a product</mat-label>
             <!-- <mat-select [(value)]="clientSelected" placeholder="Select a client"> -->
             <mat-select formControlName="product">
@@ -107,8 +107,6 @@
         ></div> -->
           <app-dnd-field
             class="builder-render"
-            [dragula]="builderContainer"
-            [(dragulaModel)]="builder_elements_model_02"
             [fields]="builder_elements_model_02"
             [form]="myForm"
           >
@@ -131,30 +129,4 @@
     </div>
     <button type="submit" [disabled]="myForm.invalid">Send</button>
   </form>
-  <div class="builder-elements-container">
-    <div id="elem-id">
-      <h1>Drag & Drop Fields</h1>
-      <!-- <div
-        class="builder-elements builder-source"
-        [dragula]="builderContainer"
-        [dragulaModel]="builder_elements_model_01"
-        (dragulaModelChange)="builder_elements_model_01 = $event"
-      > -->
-      <div
-        class="builder-elements builder-source"
-        [dragula]="builderContainer"
-        [(dragulaModel)]="builder_elements_model_01"
-      >
-        <div
-          class="dnd-field"
-          *ngFor="let formElement of builder_elements_model_01"
-        >
-          <div class="dnd-field-icon icon-select-type-cursor"></div>
-          <div [ngClass]="'dnd-field-content' + ' ' + formElement.type">
-            <span>{{ formElement.name }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>

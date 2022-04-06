@@ -4,11 +4,15 @@ General:
     ☐ each product has different custom fields (custom field model)
     ☐ create and read in one go
     ☐ add link for other models for viewing (in table view)
+    ✔ stop dragging when field edit or delete clicked @done(22-04-06)
+    ✔ add delete dialog @done(22-04-06)
+    ✔ fix label keep modified content in dnd field on cancel @done(22-04-06)
     ✔ in (customize field) fix width when ongoing state @started(22-04-06 15:34) @done(22-04-06 16:01) @lasted(27m37s)
     ✔ stop dragging when field edit or delete clicked @done(22-04-06 15:15)
     ✔ add delete dialog @done(22-04-06 15:14)
     ☐ add (confirm field) functionality to other (dnd field)
     ☐ hide (dnd field edit) on drag
-    ☐ git rid of dnd in license edit component
+    ✔ git rid of dnd in (license edit component) @started(22-04-06 21:13) @done(22-04-06 21:37) @lasted(24m47s)
     ✔ add background underneath (dnd field edit) @started(22-04-06 16:04) @done(22-04-06 16:15) @lasted(11m35s)
     ✔ stop hover effect on field when ongoing state @started(22-04-06 17:59) @done(22-04-06 18:11) @lasted(12m38s)
+Archive:
