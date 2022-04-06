@@ -2,18 +2,18 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DndFieldService } from 'src/app/services/dnd-field/dnd-field.service';
 
 @Component({
-  selector: 'app-confirm',
-  templateUrl: './confirm.component.html',
-  styleUrls: ['./confirm.component.scss'],
+  selector: 'app-confirm-field-edit',
+  templateUrl: './confirm-field-edit.component.html',
+  styleUrls: ['./confirm-field-edit.component.scss'],
 })
-export class ConfirmComponent implements OnInit {
+export class ConfirmFieldEditComponent implements OnInit {
   @Input()
   public field!: any;
 
   constructor(private _dndFieldService: DndFieldService) {}
 
   ngOnInit(): void {
-    console.log('ConfirmComponent');
+    console.log('ConfirmFieldEditComponent');
   }
 
   public onFieldNameChanged() {
