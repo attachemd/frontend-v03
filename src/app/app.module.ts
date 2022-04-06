@@ -30,7 +30,7 @@ import { SelectComponent } from './component/dnd-field/select/select.component';
 import { CheckboxComponent } from './component/dnd-field/checkbox/checkbox.component';
 import { DateComponent } from './component/dnd-field/date/date.component';
 import { CustomFieldsComponent } from './management/custom-fields/custom-fields.component';
-import { DndFieldEditComponent } from './component/dnd-field-edit/dnd-field-edit.component';
+import { DndFieldEditComponent } from './component/dnd-field/dnd-field-edit/dnd-field-edit.component';
 import { ConfirmFieldDeleteComponent } from './component/dnd-field/confirm-field-delete/confirm-field-delete.component';
 
 export function tokenGetter(): string | null {

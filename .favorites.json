@@ -455,9 +455,9 @@
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field-edit\\dnd-field-edit.component.ts",
+        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\dnd-field-edit\\dnd-field-edit.component.ts",
         "parent_id": "a6iA5NXsOL9CHP4p",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field-edit\\dnd-field-edit.component.ts",
+        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\dnd-field-edit\\dnd-field-edit.component.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "ePXrG9VO0YbpIswW"
@@ -470,5 +470,14 @@
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "OlRUo5irQ6uwaXnH"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\confirm-field-delete\\confirm-field-delete.component.ts",
+        "parent_id": "a6iA5NXsOL9CHP4p",
+        "fsPath": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\confirm-field-delete\\confirm-field-delete.component.ts",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "ZPlaJ9tm5UeyLQ3b"
     }
 ]

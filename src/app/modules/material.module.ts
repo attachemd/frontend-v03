@@ -17,6 +17,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatSelectModule,
     MatSlideToggleModule,
     MatRadioModule,
+    MatDialogModule,
   ],
   exports: [
     MatButtonModule,
@@ -58,6 +60,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatSelectModule,
     MatSlideToggleModule,
     MatRadioModule,
+    MatDialogModule,
   ],
 })
 export class MaterialModule {}

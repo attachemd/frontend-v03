@@ -175,7 +175,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
           console.log('item', item);
           item.isOngoing = true;
           console.log('item', item);
-          this._dndFieldService.setFieldEditMode$(false);
+          this._dndFieldService.setFieldEditMode$(true);
         })
     );
     this._subs.add(
@@ -200,9 +200,17 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       moves: (el: any, container: any, handle: any): any => {
         // .classList.contains('ongoing')
         // if (el.classList.contains('ongoing')) return false;
+        console.log('el.className');
+        console.log(el.className);
+
         if (this.stopDrag) return false;
 
         return true;
+      },
+      invalid: (el: any, handle: any) => {
+        console.log('el.className');
+        console.log(el.classList.contains('icon-display'));
+        return el.classList.contains('icon-display');
       },
       accepts: (el, target, source, sibling) => {
         if (
@@ -236,6 +244,22 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log('CustomFieldsComponent');
+    this._dndFieldService.getFieldEditMode$().subscribe({
+      next: (isFieldOnEditMode: boolean) => {
+        if (isFieldOnEditMode)
+          this.renderedBuilderFieldsBeforeDrag = _.cloneDeep(
+            this.builder_elements_model_02
+          );
+        console.log('renderedBuilderFieldsBeforeDrag');
+        console.log(this.renderedBuilderFieldsBeforeDrag);
+        console.log('this.builder_elements_model_02');
+        console.log(this.builder_elements_model_02);
+      },
+      error: (err: any) => {
+        console.log('error');
+        console.log(err);
+      },
+    });
     this._dndFieldService.getStopDrag$().subscribe({
       next: (stopDrag: boolean) => {
         this.stopDrag = stopDrag;
@@ -263,7 +287,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
               'border: 1px solid #000'
           );
           this.stopDrag = false;
-          this._dndFieldService.setFieldEditMode$(true);
+          this._dndFieldService.setFieldEditMode$(false);
           console.log('fieldName', fieldObj.fieldName);
           console.log('fieldElement', fieldObj.fieldElement);
           // fieldObj.fieldElement.isOngoing = false;
@@ -291,14 +315,16 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
             );
             console.log('renderedBuilderFieldsBeforeDrag');
             console.log(this.renderedBuilderFieldsBeforeDrag);
+            // fieldObj.fieldElement.isOngoing = false;
             // checking the lenght when cancel click and the field not dragged
             // the array always empty before drag
-            if (this.renderedBuilderFieldsBeforeDrag.length > 0) {
-              // let currentField = this.renderedBuilderFieldsBeforeDrag.find(
-              //   (item) => item.id === fieldObj.fieldElement.id
-              // );
 
-              // if (currentField) currentField.isOngoing = false;
+            if (this.renderedBuilderFieldsBeforeDrag.length > 0) {
+              let currentField = this.renderedBuilderFieldsBeforeDrag.find(
+                (item) => item.id === fieldObj.fieldElement.id
+              );
+
+              if (currentField) currentField.isOngoing = false;
               this.builder_elements_model_02 = _.cloneDeep(
                 this.renderedBuilderFieldsBeforeDrag
               );
@@ -307,7 +333,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
               // ];
               this.renderedBuilderFieldsBeforeDrag = [];
             }
-            fieldObj.fieldElement.isOngoing = false;
+
             console.log('renderedBuilderFieldsBeforeDrag');
             console.log(this.renderedBuilderFieldsBeforeDrag);
             // fieldObj.fieldElement = null;
