@@ -61,9 +61,11 @@
     margin: 0 auto;
     width: fit-content;
   }
-  // .builder-canvas {
-  //     background-color: #eee;
-  // }
+
+  .builder-canvas {
+      // background-color: #eee;
+      width: 600px;
+  }
 
   .builder-elements-container {
       width: 300px;

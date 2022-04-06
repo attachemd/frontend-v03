@@ -4,7 +4,10 @@ General:
     ☐ each product has different custom fields (custom field model)
     ☐ create and read in one go
     ☐ add link for other models for viewing (in table view)
-    ☐ in customize field fix width when ongoing state
-    ☐ stop dragging when field edit or delete clicked
+    ✔ in (customize field) fix width when ongoing state @started(22-04-06 15:34) @done(22-04-06 16:01) @lasted(27m37s)
+    ✔ stop dragging when field edit or delete clicked @done(22-04-06 15:15)
+    ✔ add delete dialog @done(22-04-06 15:14)
+    ☐ add (confirm field) functionality to other (dnd field)
+    ☐ hide (dnd field edit) on drag
     ☐ git rid of dnd in license edit component
-    ☐ add delete dialog
+    ☐ add background underneath (dnd field edit)

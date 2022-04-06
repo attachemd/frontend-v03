@@ -1,5 +1,8 @@
 <div class="field_container">
-  <app-confirm-field-edit *ngIf="field.isOngoing" [field]="field"></app-confirm-field-edit>
+  <app-confirm-field-edit
+    *ngIf="field.isOngoing"
+    [field]="field"
+  ></app-confirm-field-edit>
 
   <div
     class="ft-lm-edit-field"
@@ -8,6 +11,7 @@
   >
     <!-- appearance="fill" -->
     <mat-form-field
+      fxFill
       appearance="fill"
       class="demo-full-width margin-top"
       [formGroup]="group"
