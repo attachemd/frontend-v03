@@ -16,6 +16,7 @@ export class DndFieldEditComponent implements OnInit {
   public field: any = {};
 
   public isFieldOnEditMode = false;
+  public isOnDndMode = true;
   // public visibility = 'none';
 
   constructor(
@@ -24,6 +25,21 @@ export class DndFieldEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this._dndFieldService.getDndMode$().subscribe({
+      next: (isOnDndMode) => {
+        this.isOnDndMode = isOnDndMode;
+        console.log(
+          '%c isOnDndMode ',
+          'background: green; color: #fff; padding: 0 200px; border: 0px solid #47C0BE'
+        );
+        console.log(isOnDndMode);
+      },
+      error: (err: any) => {
+        console.log('error');
+        console.log(err);
+      },
+    });
+
     console.log('DndFieldEditComponent');
     console.log(
       '%c this.isFieldOnEditMode ',
@@ -35,15 +51,15 @@ export class DndFieldEditComponent implements OnInit {
     console.log(this.isFieldOnEditMode);
     console.log('this.visibility');
     console.log(this.visibility);
-    this._dndFieldService.getVisibility$().subscribe({
-      next: (visibility: string) => {
-        this.visibility = visibility;
-      },
-      error: (err: any) => {
-        console.log('error');
-        console.log(err);
-      },
-    });
+    // this._dndFieldService.getVisibility$().subscribe({
+    //   next: (visibility: string) => {
+    //     this.visibility = visibility;
+    //   },
+    //   error: (err: any) => {
+    //     console.log('error');
+    //     console.log(err);
+    //   },
+    // });
 
     this._dndFieldService.getFieldEditMode$().subscribe({
       next: (isFieldOnEditMode: boolean) => {

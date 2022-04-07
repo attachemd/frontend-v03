@@ -13,8 +13,9 @@
         matInput
         [type]="field.inputType"
         [placeholder]="field.name"
-        [(ngModel)]="field.value"
+  
       />
+      <!-- [(ngModel)]="field.value" -->
       <ng-container
         *ngFor="let validation of field.validations"
         ngProjectAs="mat-error"

@@ -33,8 +33,4 @@ export class InputComponent implements OnInit {
     //   error: (err: any) => {},
     // });
   }
-
-  public updateVisibility(visibility: string): void {
-    this._dndFieldService.setVisibility$(visibility);
-  }
 }

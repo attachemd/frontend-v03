@@ -143,6 +143,7 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this._dndFieldService.setDndMode$(false);
     this._route.params.subscribe({
       next: (params: any) => {
         // colorfull log

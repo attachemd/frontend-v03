@@ -16,7 +16,7 @@ export class DndFieldService {
   private _stopDrag$ = new Subject<boolean>();
   private _fieldEditMode$ = new ReplaySubject<boolean>(1);
   private _deleteField$ = new Subject<string>();
-  private _visibility$ = new Subject<string>();
+  private _dndMode$ = new ReplaySubject<boolean>(1);
 
   constructor() {}
 
@@ -55,12 +55,12 @@ export class DndFieldService {
     return this._deleteField$;
   }
 
-  public setVisibility$(visibility: string) {
-    this._visibility$.next(visibility);
+  public setDndMode$(isOnDndMode: boolean) {
+    this._dndMode$.next(isOnDndMode);
   }
 
-  public getVisibility$(): Subject<string> {
-    return this._visibility$;
+  public getDndMode$(): ReplaySubject<boolean> {
+    return this._dndMode$;
   }
 
   public toggleEditVisibility(event: any, visibility: string) {

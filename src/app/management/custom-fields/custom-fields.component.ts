@@ -208,9 +208,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         return true;
       },
       invalid: (el: any, handle: any) => {
-        console.log('el.className');
-        console.log(el.classList.contains('icon-display'));
-        return el.classList.contains('icon-display');
+        return el.classList.contains('dnd-field-edit-icon');
       },
       accepts: (el, target, source, sibling) => {
         if (
@@ -244,6 +242,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log('CustomFieldsComponent');
+    this._dndFieldService.setDndMode$(true);
     this._dndFieldService.getFieldEditMode$().subscribe({
       next: (isFieldOnEditMode: boolean) => {
         if (isFieldOnEditMode)

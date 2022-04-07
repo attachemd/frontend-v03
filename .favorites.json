@@ -479,5 +479,14 @@
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "ZPlaJ9tm5UeyLQ3b"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\directive\\dynamic-field.directive.ts",
+        "parent_id": "wJolHb6WiTBDUgE9",
+        "fsPath": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\directive\\dynamic-field.directive.ts",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "0LARtu8Jf4M9vKzo"
     }
 ]
