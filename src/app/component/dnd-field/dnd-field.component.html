@@ -1,12 +1,10 @@
-<ng-container
-  *ngFor="
-    let formElement of fields;
-    trackBy: trackItem;
-    let i = index
-  "
-  appDynamicField
-  [field]="formElement"
-  [group]="form"
-  
-></ng-container>
+
+  <ng-container
+    *ngFor="let formElement of fields; trackBy: trackItem; let i = index"
+    appDynamicField
+    [field]="formElement"
+    [group]="form"
+  ></ng-container>
+
+
 <!-- class="builder-element" -->

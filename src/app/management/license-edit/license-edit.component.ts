@@ -4,21 +4,12 @@ import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
 import { Client } from 'src/app/services/clients/client.model';
 import { License } from 'src/app/services/licenses/license.model';
 import { Product } from 'src/app/services/products/product.model';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  FieldConfig,
-  Validation as Validation,
-} from 'src/app/services/dnd-field/field.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Validation } from 'src/app/services/dnd-field/field.model';
 import { fieldConfig } from 'src/app/services/dnd-field/field.sample';
 import { DndFieldService } from 'src/app/services/dnd-field/dnd-field.service';
 
@@ -82,18 +73,7 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   ];
 
   public renderedBuilderFieldsBeforeDrag: any[] = [];
-  // public builder_elements_model_02 = [] as FieldConfig[];
   public builder_elements_model_02: any[] = [];
-  // public builder_elements_model_02 = [
-  //   // new FormElement(
-  //   //   'Text Area',
-  //   //   'image',
-  //   //   '<div class="ft-lm-edit-field"><mat-form-field fxFlex="500px"><input matInput type="text" placeholder="Key" [(ngModel)]="license.key" /></mat-form-field></div>'
-  //   // ),
-  //   new FormElement('Text Area', 'input', 'new text 04'),
-  //   new FormElement('Date Picker', 'input', 'new text 05'),
-  //   new FormElement('Drop Down', 'input', 'new text 06'),
-  // ];
 
   public condition = true;
   public status = false;
@@ -112,7 +92,6 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   constructor(
     private _http: HttpClient,
     private _route: ActivatedRoute,
-    private _dragulaService: DragulaService,
     private _dndFieldService: DndFieldService,
     private _fb: FormBuilder,
     private _cdRef: ChangeDetectorRef
@@ -146,27 +125,14 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     this._dndFieldService.setDndMode$(false);
     this._route.params.subscribe({
       next: (params: any) => {
-        // colorfull log
-        console.log(
-          '%c ActivatedRoute ',
-          'background: #B8FF13; ' +
-            'color: #000; ' +
-            'padding: 10px; ' +
-            'border: 1px solid #47C0BE'
-        );
-        // this.id = params['id'];
         this._http.get<License>('/api/licenses/' + params['id']).subscribe({
           next: (license: License): void => {
-            console.log('license');
-            console.log(license);
             this.license = license;
             this.selectedClientId = this.license.client.id;
             this.myForm.controls['client'].setValue(this.license.client.id);
             this.myForm.controls['product'].setValue(this.license.product.id);
             this._http.get<Client[]>('/api/clients').subscribe({
               next: (clients: Client[]): void => {
-                console.log('clients');
-                console.log(clients);
                 this.clients = clients;
               },
               error: (error) => {
@@ -175,8 +141,6 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
             });
             this._http.get<Product[]>('/api/products').subscribe({
               next: (products: Product[]): void => {
-                console.log('products');
-                console.log(products);
                 this.products = products;
               },
               error: (error) => {
@@ -193,38 +157,7 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
         console.log('error :', error);
       },
     });
-    // console.log('history.state');
-    // console.log(history.state);
-    // this._http.get<License>('/api/licenses/' + history.state.id).subscribe({
-    //   next: (license: License): void => {
-    //     console.log('license');
-    //     console.log(license);
-    //     this.license = license;
-    //   },
-    //   error: (error) => {
-    //     console.log('error :', error);
-    //   },
-    // });
   }
-
-  // ngAfterViewInit(): void {
-  //   let elementBuilder = $('#elem-id');
-  //   // variables
-
-  //   let topPosition = elementBuilder.offset()!.top - 10;
-
-  //   console.log('topPosition');
-  //   console.log(topPosition);
-  //   console.log('$(window)');
-  //   console.log($(window));
-  //   $('body').on('scroll', () => {
-  //     console.log('topPosition');
-  //     console.log(topPosition);
-  //     if ($(window).scrollTop()! > topPosition)
-  //       elementBuilder.addClass('sticky');
-  //     else elementBuilder.removeClass('sticky');
-  //   });
-  // }
 
   public setStatus(): SafeHtml {
     return '<span title="active" class="status status-active">test</span>';
@@ -236,18 +169,10 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log(
-      '%c ngOnDestroy LicenseEditComponent ',
-      'background: red; ' +
-        'color: #fff; ' +
-        'padding: 0 300px; ' +
-        'border: 0px solid #47C0BE'
-    );
     this._subs.unsubscribe();
   }
 
   public trackItem(index: number, item: any) {
-    // return item.trackId;
     return item.tracked_id;
   }
 
@@ -258,21 +183,12 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
       'this.builder_elements_model_02',
       this.builder_elements_model_02
     );
-    // this._updateTargetContainer();
   }
-
-  // private _initializeFormGroup(){
-
-  // }
 
   private _addControls(formGroup: FormGroup) {
     this.builder_elements_model_02.forEach((field) => {
       if (field.type === 'button') return;
       if (field.type === 'date') field.value = new Date(field.value);
-      console.log('field.name');
-      console.log(field.name);
-      console.log('field.value');
-      console.log(field.value);
 
       const control = this._fb.control(
         field.value,

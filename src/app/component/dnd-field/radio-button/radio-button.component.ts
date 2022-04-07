@@ -10,17 +10,20 @@ export class RadioButtonComponent implements OnInit {
   // @HostBinding('class')
   // public readonly classList = 'dnd-host';
 
-  @HostBinding('class.ongoing')
-  public isOngoing: boolean = false;
+  // @HostBinding('class.ongoing')
+  // public isOngoing: boolean = false;
 
   public field!: any;
   public group!: FormGroup;
   public visibility = 'none';
   constructor() {}
+  @HostBinding('class.ongoing') public get isOngoing() {
+    return this.field.isOngoing;
+  }
 
   ngOnInit(): void {
     console.log('RadioButtonComponent');
-    this.isOngoing = this.field.isOngoing;
+    // this.isOngoing = this.field.isOngoing;
     console.log('this.field');
     console.log(this.field);
   }

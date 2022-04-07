@@ -1,6 +1,20 @@
 // :host(app-dnd-field) {
 //     display: block;
-//     // background-color: red;
+//     background-color: red;
+//     min-width: 100%;
+//     min-height: 100%;
+// }
+
+:host(app-dnd-field) {
+    display: block;
+    // background-color: red;
+    min-height: 400px;
+}
+
+// .builder-render-area {
+//     display: block;
+//     background-color: red;
+//     min-height: 400px;
 // }
 
 // .ongoing {

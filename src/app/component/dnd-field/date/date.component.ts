@@ -7,8 +7,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./date.component.scss'],
 })
 export class DateComponent implements OnInit {
-  @HostBinding('class.ongoing')
-  public isOngoing: boolean = false;
+  // @HostBinding('class.ongoing')
+  // public isOngoing: boolean = false;
 
   public field: any = {};
   public group!: FormGroup;
@@ -16,9 +16,12 @@ export class DateComponent implements OnInit {
   // public dob = new FormControl(new Date());
   // public dob = new FormControl(new Date('4/14/2022'));
   constructor() {}
+  @HostBinding('class.ongoing') public get isOngoing() {
+    return this.field.isOngoing;
+  }
 
   ngOnInit(): void {
-    this.isOngoing = this.field.isOngoing;
+    // this.isOngoing = this.field.isOngoing;
     // this.group.addControl(
     //   'dob',
     //   new FormControl(new Date(), Validators.required)

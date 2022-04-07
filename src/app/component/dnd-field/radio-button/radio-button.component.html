@@ -19,7 +19,7 @@
   >
     <!-- <label class="radio-label">{{ field.label }}:</label> -->
     <div>
-      <mat-label class="ft-lm-label">{{ field.name }}</mat-label>
+      <mat-label class="ft-lm-label">{{ field.label }}</mat-label>
     </div>
     <div class="ft-lm-field">
       <mat-radio-group [formControlName]="field.name">
@@ -28,6 +28,6 @@
         </mat-radio-button>
       </mat-radio-group>
     </div>
-    <app-dnd-field-edit [visibility]="visibility"></app-dnd-field-edit>
+    <app-dnd-field-edit [visibility]="visibility" [field]="field"></app-dnd-field-edit>
   </div>
 </div>

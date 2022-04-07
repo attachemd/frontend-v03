@@ -432,13 +432,6 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log(
-      '%c ngOnDestroy CustomFieldComponent ',
-      'background: red; ' +
-        'color: #fff; ' +
-        'padding: 0 300px; ' +
-        'border: 0px solid #47C0BE'
-    );
     this._dragulaService.destroy(this.builderContainer);
     this._subs.unsubscribe();
   }
@@ -447,10 +440,6 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     this.builder_elements_model_02.forEach((field) => {
       if (field.type === 'button') return;
       if (field.type === 'date') field.value = new Date(field.value);
-      console.log('field.name');
-      console.log(field.name);
-      console.log('field.value');
-      console.log(field.value);
 
       const control = this._fb.control(
         field.value,
