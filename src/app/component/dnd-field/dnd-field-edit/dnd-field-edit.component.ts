@@ -17,6 +17,7 @@ export class DndFieldEditComponent implements OnInit {
 
   public isFieldOnEditMode = false;
   public isOnDndMode = true;
+  public isDndFieldVisible = true;
   // public visibility = 'none';
 
   constructor(
@@ -25,6 +26,16 @@ export class DndFieldEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this._dndFieldService.getDndFieldVisibility$().subscribe({
+      next: (isDndFieldVisible) => {
+        this.isDndFieldVisible = isDndFieldVisible;
+      },
+      error: (err: any) => {
+        console.log('error');
+        console.log(err);
+      },
+    });
+
     this._dndFieldService.getDndMode$().subscribe({
       next: (isOnDndMode) => {
         this.isOnDndMode = isOnDndMode;
@@ -51,6 +62,7 @@ export class DndFieldEditComponent implements OnInit {
     this.field.isOngoing = true;
     this._dndFieldService.setStopDrag$(true);
     this._dndFieldService.setFieldEditMode$(true);
+    this._dndFieldService.setDndFieldVisibility$(false);
     // this._dndFieldService.setIsOnGoing$(true);
     // console.log('this.field');
     // console.log(this.field);

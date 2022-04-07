@@ -122,7 +122,8 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._dndFieldService.setDndMode$(false);
+    // this._dndFieldService.setDndMode$(false);
+    this._dndFieldService.setDndFieldVisibility$(false);
     this._route.params.subscribe({
       next: (params: any) => {
         this._http.get<License>('/api/licenses/' + params['id']).subscribe({

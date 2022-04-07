@@ -109,6 +109,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
               'padding: 0 10px; ' +
               'border: 0px solid #47C0BE'
           );
+          // this._dndFieldService.setDndFieldVisibility$(true);
           // this.stopDrag = true;
           this._shadow.innerHTML = this._shadowInnerHTML;
 
@@ -128,6 +129,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
             'padding: 0 10px; ' +
             'border: 0px solid #47C0BE'
         );
+        this._dndFieldService.setDndFieldVisibility$(false);
         // this.renderedBuilderFieldsBeforeDrag = [
         //   ...this.builder_elements_model_02,
         // ];
@@ -176,6 +178,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
           item.isOngoing = true;
           console.log('item', item);
           this._dndFieldService.setFieldEditMode$(true);
+          this._dndFieldService.setDndFieldVisibility$(false);
         })
     );
     this._subs.add(
@@ -242,7 +245,8 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log('CustomFieldsComponent');
-    this._dndFieldService.setDndMode$(true);
+    // this._dndFieldService.setDndMode$(true);
+    this._dndFieldService.setDndFieldVisibility$(true);
     this._dndFieldService.getFieldEditMode$().subscribe({
       next: (isFieldOnEditMode: boolean) => {
         if (isFieldOnEditMode)
@@ -287,6 +291,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
           );
           this.stopDrag = false;
           this._dndFieldService.setFieldEditMode$(false);
+          this._dndFieldService.setDndFieldVisibility$(true);
           console.log('fieldName', fieldObj.fieldName);
           console.log('fieldElement', fieldObj.fieldElement);
           // fieldObj.fieldElement.isOngoing = false;
