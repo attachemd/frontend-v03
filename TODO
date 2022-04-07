@@ -15,4 +15,5 @@ General:
     ✔ git rid of dnd in (license edit component) @started(22-04-06 21:13) @done(22-04-06 21:37) @lasted(24m47s)
     ✔ add background underneath (dnd field edit) @started(22-04-06 16:04) @done(22-04-06 16:15) @lasted(11m35s)
     ✔ stop hover effect on field when ongoing state @started(22-04-06 17:59) @done(22-04-06 18:11) @lasted(12m38s)
+    ✔ fix (dnd field edit) when user came from table view @started(22-04-07 09:37) @done(22-04-07 11:37) @lasted(2h28s)
 Archive:

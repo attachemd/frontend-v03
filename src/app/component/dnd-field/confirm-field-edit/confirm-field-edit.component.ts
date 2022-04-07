@@ -16,15 +16,11 @@ export class ConfirmFieldEditComponent implements OnInit {
     console.log('ConfirmFieldEditComponent');
   }
 
-  public onFieldNameChanged() {
-    let parmtr = 'new parameter from dnd-field ' + this.field.name;
-
-    this._dndFieldService.setFieldName$(parmtr, this.field);
-    // this.fieldChange.emit(parmtr);
+  public onFieldEditSaved() {
+    this._dndFieldService.setFieldName$('save', this.field);
   }
 
-  public onFieldCanceled() {
+  public onFieldEditCanceled() {
     this._dndFieldService.setFieldName$('cancel', this.field);
-    // this.fieldChange.emit(parmtr);
   }
 }

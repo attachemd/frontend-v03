@@ -16,6 +16,7 @@ export class DndFieldEditComponent implements OnInit {
   public field: any = {};
 
   public isFieldOnEditMode = false;
+  // public visibility = 'none';
 
   constructor(
     private _dndFieldService: DndFieldService,
@@ -24,6 +25,26 @@ export class DndFieldEditComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('DndFieldEditComponent');
+    console.log(
+      '%c this.isFieldOnEditMode ',
+      'background: yellow; ' +
+        'color: #000; ' +
+        'padding: 0 200px; ' +
+        'border: 0px solid #47C0BE'
+    );
+    console.log(this.isFieldOnEditMode);
+    console.log('this.visibility');
+    console.log(this.visibility);
+    this._dndFieldService.getVisibility$().subscribe({
+      next: (visibility: string) => {
+        this.visibility = visibility;
+      },
+      error: (err: any) => {
+        console.log('error');
+        console.log(err);
+      },
+    });
+
     this._dndFieldService.getFieldEditMode$().subscribe({
       next: (isFieldOnEditMode: boolean) => {
         this.isFieldOnEditMode = isFieldOnEditMode;
