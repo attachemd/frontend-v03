@@ -8,6 +8,9 @@ General:
     ☐ add link for other models for viewing (in table view)
     ☐ add search icon to the (filter input) for tables
     ☐ add clear to the (filter input)
+    ☐ add title to all buttons
+    ☐ add title to all pages
+    ☐ center all pages content (vertically & horizontally)
     ✔ stop dragging when field edit or delete clicked @done(22-04-06)
     ✔ add delete dialog @done(22-04-06)
     ✔ fix label keep modified content in dnd field on cancel @done(22-04-06)
@@ -23,4 +26,6 @@ General:
     ✔ hide (dnd field edit) on drag @done(22-04-07 21:51)
     ✔ hide (dnd field edit) from current dragged field @done(22-04-08 06:38)
     ✔ do some cleanup @started(22-04-08 09:52) @done(22-04-08 10:23) @lasted(31m55s)
-    ☐ add product table @started(22-04-08 10:40)
+    ✔ add product table @started(22-04-08 10:40) @done(22-04-08 11:54) @lasted(1h14m33s)
+    ✔ add product edit view @started(22-04-08 11:58) @done(22-04-08 14:47) @lasted(2h49m12s)
+    ☐ do some cleanup to the license edit view

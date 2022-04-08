@@ -1,0 +1,47 @@
+<div class="builder-container">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+      <div class="builder-canvas">
+        <div class="ft-lm-primary-fields">
+          <div class="ft-lm-edit-field">
+            <mat-form-field fxFill [formGroup]="myForm">
+              <input
+                formControlName="product_name"
+                matInput
+                type="text"
+                placeholder="Name"
+                [(ngModel)]="product.name"
+              />
+            </mat-form-field>
+          </div>
+          <div class="ft-lm-edit-field">
+            <mat-form-field fxFill [formGroup]="myForm">
+              <input
+                formControlName="description"
+                matInput
+                type="text"
+                placeholder="Description"
+                [(ngModel)]="product.description"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="ft-lm-custom-fields-title">
+            <h1>Custom fields</h1>
+            <button [routerLink]="['/products/custom-fields', product.id]">Edit</button>
+          </div>
+        </div>
+        <div class="ft-lm-custom-fields-content">
+          <div class="ft-lm-custom-fields">
+            <app-dnd-field
+              class="builder-render"
+              [fields]="builder_elements_model_02"
+              [form]="myForm"
+            >
+            </app-dnd-field>
+          </div>
+        </div>
+      </div>
+      <button type="submit" [disabled]="myForm.invalid">Send</button>
+    </form>
+  </div>
+  

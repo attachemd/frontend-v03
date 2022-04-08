@@ -57,12 +57,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this._paginator;
   }
 
-  public viewContact(row: any) {}
-  public editContact(row: any) {
-    console.log('row');
-    console.log(row);
-  }
-
   public toggleEditVisibility(event: any, visibility: string) {
     event.target.querySelector('button').style.display = visibility;
   }

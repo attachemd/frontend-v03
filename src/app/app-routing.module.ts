@@ -11,6 +11,7 @@ import { NotFoundComponent } from './component/not-found/not-found.component';
 import { ProductComponent } from './component/product/product.component';
 import { CustomFieldsComponent } from './management/custom-fields/custom-fields.component';
 import { LicenseEditComponent } from './management/license-edit/license-edit.component';
+import { ProductEditComponent } from './management/product-edit/product-edit.component';
 const routes: Routes = [
   {
     path: '',
@@ -51,6 +52,18 @@ const routes: Routes = [
   {
     path: 'products',
     component: ProductComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'products/:id',
+    component: ProductEditComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'products/custom-fields/:id',
+    component: CustomFieldsComponent,
     canLoad: [AuthGuard],
     canActivate: [AuthGuard],
   },
