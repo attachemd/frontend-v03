@@ -11,6 +11,8 @@ General:
     ☐ add title to all buttons
     ☐ add title to all pages
     ☐ center all pages content (vertically & horizontally)
+    ☐ style the builder canvas
+    ☐ move all edit views to side nav
     ✔ stop dragging when field edit or delete clicked @done(22-04-06)
     ✔ add delete dialog @done(22-04-06)
     ✔ fix label keep modified content in dnd field on cancel @done(22-04-06)
@@ -30,4 +32,5 @@ General:
     ✔ add product edit view @started(22-04-08 11:58) @done(22-04-08 14:47) @lasted(2h49m12s)
     ✔ do some cleanup to the license edit view @started(22-04-08 14:51) @done(22-04-08 15:19) @lasted(28m54s)
     ✔ add save button to (custom fields) view @started(22-04-08 17:58) @done(22-04-08 18:54) @lasted(56m2s)
-    ☐ style the builder canvas
+    ✔ fix fieldName$ replaySubject old values not destroyed @done(22-04-08 22:28)
+

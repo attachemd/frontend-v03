@@ -249,10 +249,10 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
           this._dndFieldService.setFieldEditMode$(false);
           this._dndFieldService.setDndFieldVisibility$(true);
 
-          if (fieldObj.fieldName === 'cancel') {
-            // checking the lenght when cancel click and the field not dragged
-            // the array always empty before drag
+          if (fieldObj.fieldName === 'cancel')
             if (this.renderedBuilderFieldsBeforeDrag.length > 0) {
+              // checking the lenght when cancel click and the field not dragged
+              // the array always empty before drag
               let currentField = this.renderedBuilderFieldsBeforeDrag.find(
                 (item) => item.id === fieldObj.fieldElement.id
               );
@@ -261,20 +261,22 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
               this.builder_elements_model_02 = _.cloneDeep(
                 this.renderedBuilderFieldsBeforeDrag
               );
-              // this.builder_elements_model_02 = [
-              //   ...this.renderedBuilderFieldsBeforeDrag,
-              // ];
               this.renderedBuilderFieldsBeforeDrag = [];
             }
-          } else {
-            this.builder_elements_model_02.find(
+
+          if (fieldObj.fieldName === 'save') {
+            // replaySubject old value (fieldObj.fieldElement) not destroyed
+            // and ft_lm.formElementId give new ids for new created
+            // fields then currentField may be undefined
+
+            let currentField = this.builder_elements_model_02.find(
               (item) => item.id === fieldObj.fieldElement.id
-            ).isOngoing = false;
-            this.myForm.removeControl(
-              this.builder_elements_model_02.find(
-                (item) => item.id === fieldObj.fieldElement.id
-              ).name
             );
+
+            if (currentField) {
+              currentField.isOngoing = false;
+              this.myForm.removeControl(currentField.name);
+            }
           }
 
           this._updateTargetContainer();
