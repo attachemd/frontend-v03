@@ -113,6 +113,11 @@ mat-row {
   // border-top: 1px solid #ffa600;
 }
 
+.mat-row:hover {
+  // background-color: rgb(249 171 0 / 20%);
+  background-color: #faf9f4;
+}
+
 .mat-column-action {
   word-wrap: break-word !important;
   white-space: unset !important;
