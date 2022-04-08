@@ -118,6 +118,10 @@ export class ProductEditComponent implements OnInit, OnDestroy {
         this._http.get<Product>('/api/products/' + params['id']).subscribe({
           next: (product: Product): void => {
             this.product = product;
+            this.myForm.controls['product_name'].setValue(this.product.name);
+            this.myForm.controls['description'].setValue(
+              this.product.description
+            );
           },
           error: (error) => {
             console.log('error :', error);

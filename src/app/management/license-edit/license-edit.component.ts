@@ -130,6 +130,13 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
           next: (license: License): void => {
             this.license = license;
             this.selectedClientId = this.license.client.id;
+            this.myForm.controls['key'].setValue(this.license.key);
+            this.myForm.controls['status'].setValue(this.license.status);
+            this.myForm.controls['type'].setValue(this.license.type);
+            this.myForm.controls['description'].setValue(
+              this.license.description
+            );
+            this.myForm.controls['expiry'].setValue(this.license.expiry);
             this.myForm.controls['client'].setValue(this.license.client.id);
             this.myForm.controls['product'].setValue(this.license.product.id);
             this._http.get<Client[]>('/api/clients').subscribe({

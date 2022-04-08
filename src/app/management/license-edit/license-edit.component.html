@@ -9,8 +9,9 @@
               matInput
               type="text"
               placeholder="Key"
-              [(ngModel)]="license.key"
+              
             />
+            <!-- [(ngModel)]="license.key" -->
           </mat-form-field>
         </div>
         <div class="ft-lm-edit-field">
@@ -20,7 +21,7 @@
             </div>
             <mat-slide-toggle
               formControlName="status"
-              [(ngModel)]="license.status"
+            
               >{{ license.status ? "active" : "inactive" }}
             </mat-slide-toggle>
           </div>
@@ -32,7 +33,7 @@
               matInput
               type="text"
               placeholder="Type"
-              [ngModel]="license.type"
+              
             />
           </mat-form-field>
         </div>
@@ -43,7 +44,7 @@
               matInput
               type="text"
               placeholder="Description"
-              [(ngModel)]="license.description"
+           
             />
           </mat-form-field>
         </div>
@@ -54,7 +55,7 @@
               matInput
               type="text"
               placeholder="Expiry"
-              [(ngModel)]="license.expiry"
+           
             />
           </mat-form-field>
         </div>
@@ -82,51 +83,8 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="ft-lm-custom-fields-title">
-          <h1>Custom product fields</h1>
-          <button [routerLink]="['/licenses/custom-fields', license.id]">Edit</button>
-        </div>
-      </div>
-      <div class="ft-lm-custom-fields-content">
-        <!-- <div
-        class="ft-lm-custom-fields builder-render"
-        [dragula]="builderContainer"
-        [(dragulaModel)]="builder_elements_model_02"
-      > -->
-        <div class="ft-lm-custom-fields">
-          <!-- // FEATURE -->
-          <!-- TODO add drag handle to the dnd fields -->
-          <!-- TODO add edit button to the dnd fields -->
-          <!-- TODO add delete button to the dnd fields -->
-          <!-- <div *ngFor='let formElement of builder_elements_model_02' [innerHtml]='formElement.content'></div> -->
-          <!-- <div *ngFor='let formElement of builder_elements_model_02' [innerHtml]='formElement.content'></div> -->
-          <!-- <div
-          *ngFor="let formElement of builder_elements_model_02"
-          appDynamicField
-          [type]="formElement.name"
-        ></div> -->
-          <app-dnd-field
-            class="builder-render"
-            [fields]="builder_elements_model_02"
-            [form]="myForm"
-          >
-          </app-dnd-field>
-          <!-- <ng-container
-            *ngFor="
-              let formElement of builder_elements_model_02;
-              trackBy: trackItem;let i=index
-            "
-            appDynamicField
-            [field]="formElement"
-            [group]="myForm"
-            class="builder-element"
-          ></ng-container> -->
-          <!-- <div
-          *ngFor="let formElement of builder_elements_model_02"
-        ><div>{{formElement.name}}</div></div> -->
-        </div>
+        <button type="submit" [disabled]="myForm.invalid">Send</button>
       </div>
     </div>
-    <button type="submit" [disabled]="myForm.invalid">Send</button>
   </form>
 </div>

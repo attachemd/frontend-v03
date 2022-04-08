@@ -9,7 +9,6 @@
                 matInput
                 type="text"
                 placeholder="Name"
-                [(ngModel)]="product.name"
               />
             </mat-form-field>
           </div>
@@ -20,7 +19,6 @@
                 matInput
                 type="text"
                 placeholder="Description"
-                [(ngModel)]="product.description"
               />
             </mat-form-field>
           </div>
@@ -39,9 +37,9 @@
             >
             </app-dnd-field>
           </div>
+          <button type="submit" [disabled]="myForm.invalid">Send</button>
         </div>
       </div>
-      <button type="submit" [disabled]="myForm.invalid">Send</button>
     </form>
   </div>
   
