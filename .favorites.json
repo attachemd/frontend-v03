@@ -260,15 +260,6 @@
         "id": "tX6cPnMzFadSlUGw"
     },
     {
-        "type": "File",
-        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\styles.scss",
-        "parent_id": "JDyPhaznQ18freGZ",
-        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\styles.scss",
-        "workspaceRoot": null,
-        "workspacePath": null,
-        "id": "94kIxFfTuLljKaHU"
-    },
-    {
         "type": "Group",
         "name": "License",
         "parent_id": "dw1N5A2TDrnkujC3",
@@ -490,12 +481,38 @@
         "id": "0LARtu8Jf4M9vKzo"
     },
     {
+        "type": "Group",
+        "name": "Product",
+        "parent_id": "dw1N5A2TDrnkujC3",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "VS4UbqZkfFu0CgHK"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\product\\product.component.ts",
+        "parent_id": "VS4UbqZkfFu0CgHK",
+        "fsPath": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\product\\product.component.ts",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "bmue6dtOQYhSU0X7"
+    },
+    {
         "type": "File",
         "name": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\TODO",
-        "parent_id": "JDyPhaznQ18freGZ",
+        "parent_id": "QcqLPCgDMxj0Trlo",
         "fsPath": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\TODO",
         "workspaceRoot": null,
         "workspacePath": null,
-        "id": "PTyDozBbus2tELI0"
+        "id": "9G28M1I6VgwZRsAC"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\styles.scss",
+        "parent_id": "QcqLPCgDMxj0Trlo",
+        "fsPath": "c:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\styles.scss",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "72YOTVXySj9iCAf8"
     }
 ]

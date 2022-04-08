@@ -1,1 +1,49 @@
-<h1 style="text-align:center;">Product</h1>
+<div fxLayoutAlign="left" class="ft-lm-search-for-field">
+  <mat-form-field fxFlex="40%">
+    <input
+      matInput
+      type="text"
+      (keyup)="doFilter($event)"
+      placeholder="Search products by name string."
+    />
+  </mat-form-field>
+</div>
+<mat-table [dataSource]="dataSource" matSort>
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef mat-sort-header
+      >Product name</mat-header-cell
+    >
+    <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef mat-sort-header
+      >Product description</mat-header-cell
+    >
+    <mat-cell *matCellDef="let element">{{ element.description }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="action">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+
+    <mat-cell *matCellDef="let row">
+      <button
+        *ngIf="isVisible"
+        color="primary"
+        mat-icon-button
+        class="icon-display"
+        [routerLink]="['/licenses', row.id]"
+        (click)="editContact(row)"
+        title="Edit License"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row
+    *matRowDef="let row; columns: displayedColumns"
+    (mouseenter)="toggleEditVisibility($event, 'inline-block')"
+    (mouseleave)="toggleEditVisibility($event, 'none')"
+  ></mat-row>
+</mat-table>
+<mat-paginator [pageSize]="20" [pageSizeOptions]="[5, 10, 20, 30, 40]">
+</mat-paginator>

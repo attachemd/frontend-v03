@@ -1,0 +1,30 @@
+.ft-lm-search-for-field {
+    margin: 20px 0 0 50px;
+}
+
+.icon-display {
+    //   color: #ADACBA;
+    //   color: #E68D4B;
+    //   color: #795548;
+      transform: scale(.8);
+      display: none;
+}
+
+.status {
+    width: 7px;
+    height: 7px;
+    border-radius: 100%;
+}
+
+.status-active {
+    background-color:#2DCA72;
+}
+
+.status-inactive {
+    background-color:#D3D3D6;
+}
+
+.mat-column-status {
+    // flex: 0 0 16px;
+    justify-content: center;
+}
