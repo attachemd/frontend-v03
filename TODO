@@ -29,3 +29,5 @@ General:
     ✔ add product table @started(22-04-08 10:40) @done(22-04-08 11:54) @lasted(1h14m33s)
     ✔ add product edit view @started(22-04-08 11:58) @done(22-04-08 14:47) @lasted(2h49m12s)
     ✔ do some cleanup to the license edit view @started(22-04-08 14:51) @done(22-04-08 15:19) @lasted(28m54s)
+    ✔ add save button to (custom fields) view @started(22-04-08 17:58) @done(22-04-08 18:54) @lasted(56m2s)
+    ☐ style the builder canvas

@@ -38,12 +38,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'licenses/custom-fields/:id',
-    component: CustomFieldsComponent,
-    canLoad: [AuthGuard],
-    canActivate: [AuthGuard],
-  },
-  {
     path: 'clients',
     component: ClientComponent,
     canLoad: [AuthGuard],

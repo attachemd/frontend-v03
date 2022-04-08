@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { Validation } from 'src/app/services/dnd-field/field.model';
 import { fieldConfig } from 'src/app/services/dnd-field/field.sample';
 import { DndFieldService } from 'src/app/services/dnd-field/dnd-field.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 let ft_lm = { formElementId: 0 };
 
@@ -35,6 +36,7 @@ class FormElement {
 })
 export class CustomFieldsComponent implements OnInit, OnDestroy {
   public myForm!: FormGroup;
+  public productId = '';
   public builderContainer = 'NEW_BUILDER_CONTAINER';
   public builder_elements_model_01 = [
     new FormElement(
@@ -78,7 +80,9 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     private _dragulaService: DragulaService,
     private _fb: FormBuilder,
     private _cdRef: ChangeDetectorRef,
-    private _dndFieldService: DndFieldService
+    private _dndFieldService: DndFieldService,
+    private _route: ActivatedRoute,
+    private _router: Router
   ) {
     this._regConfig.forEach((field) => {
       this.builder_elements_model_02.push(
@@ -188,6 +192,19 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // Get product is
+    this._subs.add(
+      this._route.params.subscribe({
+        next: (params: any) => {
+          this.productId = params['id'];
+        },
+        error: (err: any) => {
+          console.log('error');
+          console.log(err);
+        },
+      })
+    );
+
     // Enter drag and drop mode
     this._dndFieldService.setDndFieldVisibility$(true);
     this._subs.add(
@@ -286,6 +303,15 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this._dragulaService.destroy(this.builderContainer);
     this._subs.unsubscribe();
+  }
+
+  public onSubmit(form: FormGroup) {
+    console.log(
+      '%c save ',
+      'background: yellow; color: #000; padding: 0 200px; border: 0px solid #47C0BE'
+    );
+    console.log('form.value', form.value);
+    this._router.navigate(['/products/', this.productId]);
   }
 
   private _addControls(formGroup: FormGroup) {

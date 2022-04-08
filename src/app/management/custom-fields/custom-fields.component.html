@@ -1,51 +1,46 @@
 <div class="builder-container">
-
-      <div class="builder-canvas">
-        <div class="ft-lm-primary-fields">
-    
-          <div class="ft-lm-custom-fields-title">
-            <h1>Customize fields</h1>
-            <!-- <button [routerLink]="['/licenses/custom-fields', license.id]">Edit</button> -->
-          </div>
-        </div>
-        <div class="ft-lm-custom-fields-content">
-          <div class="ft-lm-custom-fields">
-            <!-- // FEATURE -->
-            <!-- TODO add drag handle to the dnd fields -->
-            <!-- TODO add edit button to the dnd fields -->
-            <!-- TODO add delete button to the dnd fields -->
-
-            <app-dnd-field
-              class="builder-render"
-              [dragula]="builderContainer"
-              [(dragulaModel)]="builder_elements_model_02"
-              [fields]="builder_elements_model_02"
-              [form]="myForm"
-            >
-            </app-dnd-field>
-          </div>
-        </div>
+  <div class="builder-canvas">
+    <div class="ft-lm-primary-fields">
+      <div class="ft-lm-custom-fields-title">
+        <h1>Customize fields</h1>
       </div>
-
-    <div class="builder-elements-container">
-      <div id="elem-id">
-        <h1>Drag & Drop Fields</h1>
-        <div
-          class="builder-elements builder-source"
-          [dragula]="builderContainer"
-          [(dragulaModel)]="builder_elements_model_01"
-        >
-          <div
-            class="dnd-field"
-            *ngFor="let formElement of builder_elements_model_01"
+    </div>
+    <div class="ft-lm-custom-fields-content">
+      <div class="ft-lm-custom-fields">
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+          <app-dnd-field
+            class="builder-render"
+            [dragula]="builderContainer"
+            [(dragulaModel)]="builder_elements_model_02"
+            [fields]="builder_elements_model_02"
+            [form]="myForm"
           >
-            <div class="dnd-field-icon icon-select-type-cursor"></div>
-            <div [ngClass]="'dnd-field-content' + ' ' + formElement.type">
-              <span>{{ formElement.name }}</span>
-            </div>
+          </app-dnd-field>
+          <!-- <button type="submit" [routerLink]="['/products/', productId]">Save</button> -->
+          <button type="submit">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="builder-elements-container">
+    <div id="elem-id">
+      <h1>Drag & Drop Fields</h1>
+      <div
+        class="builder-elements builder-source"
+        [dragula]="builderContainer"
+        [(dragulaModel)]="builder_elements_model_01"
+      >
+        <div
+          class="dnd-field"
+          *ngFor="let formElement of builder_elements_model_01"
+        >
+          <div class="dnd-field-icon icon-select-type-cursor"></div>
+          <div [ngClass]="'dnd-field-content' + ' ' + formElement.type">
+            <span>{{ formElement.name }}</span>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+</div>
