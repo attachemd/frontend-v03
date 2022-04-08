@@ -4,6 +4,7 @@ General:
     ☐ each product has different custom fields (custom field model)
     ☐ create and read in one go
     ☐ add link for other models for viewing (in table view)
+    ☐ make (dnd field) not editable on edit mode
     ✔ stop dragging when field edit or delete clicked @done(22-04-06)
     ✔ add delete dialog @done(22-04-06)
     ✔ fix label keep modified content in dnd field on cancel @done(22-04-06)
@@ -17,5 +18,4 @@ General:
     ✔ git rid of dnd in (license edit component) second part @started(22-04-07 11:56) @done(22-04-07 13:26) @lasted(1h30m)
     ✔ add (confirm field) functionality to other (dnd field) and fix (builder canvas) dimentions @started(22-04-07 13:46) @done(22-04-07 15:12) @lasted(1h26m11s)
     ✔ hide (dnd field edit) on drag @done(22-04-07 21:51)
-    ☐ make (dnd field) not editable on edit mode
-    ☐ hide (dnd field edit) from current dragged field 
+    ✔ hide (dnd field edit) from current dragged field @done(22-04-08 06:38)
