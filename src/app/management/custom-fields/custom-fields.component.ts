@@ -268,6 +268,11 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
             // replaySubject old value (fieldObj.fieldElement) not destroyed
             // and ft_lm.formElementId give new ids for new created
             // fields then currentField may be undefined
+            console.log('builder_elements_model_02');
+            console.log(this.builder_elements_model_02);
+
+            console.log('fieldObj.fieldElement');
+            console.log(fieldObj.fieldElement);
 
             let currentField = this.builder_elements_model_02.find(
               (item) => item.id === fieldObj.fieldElement.id

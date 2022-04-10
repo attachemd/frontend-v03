@@ -56,6 +56,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'products/:id',
+    component: ProductEditComponent,
+    outlet: 'edit',
+  },
+  {
     path: 'products/custom-fields/:id',
     component: CustomFieldsComponent,
     canLoad: [AuthGuard],

@@ -1,9 +1,17 @@
 import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { AppService } from 'src/app/services/app.service';
 import { Product } from 'src/app/services/products/product.model';
 
 @Component({
@@ -23,7 +31,11 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
   public dataSource = new MatTableDataSource<Product>();
 
-  constructor(private _http: HttpClient, private _sanitizer: DomSanitizer) {}
+  constructor(
+    private _http: HttpClient,
+    private _sanitizer: DomSanitizer,
+    private _appService: AppService
+  ) {}
 
   ngOnInit(): void {
     console.log('ProductComponent');
@@ -82,5 +94,9 @@ export class ProductComponent implements OnInit, AfterViewInit {
       : this._sanitizer.bypassSecurityTrustHtml(
           '<span title="inactive" class="status status-inactive"></span>'
         );
+  }
+
+  public openSideNav() {
+    this._appService.setOpenEditSideNav$(true);
   }
 }

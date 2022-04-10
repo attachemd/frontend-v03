@@ -30,7 +30,7 @@
         color="primary"
         mat-icon-button
         class="icon-display"
-        [routerLink]="['/products', row.id]"
+        [routerLink]="['', { outlets: {edit: ['products', row.id] } }]" (click)="openSideNav()"
         title="Edit Product"
       >
         <mat-icon>edit</mat-icon>

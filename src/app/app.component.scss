@@ -16,3 +16,8 @@ mat-sidenav {
     // background-color: #F1F1F4;
     border-right: none;
 }
+
+mat-sidenav.test-side-nav {
+    width: 600px;
+    background-color: #fff;
+}
