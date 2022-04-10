@@ -25,7 +25,10 @@
 
           <div class="ft-lm-custom-fields-title">
             <h1>Custom fields</h1>
-            <button [routerLink]="['/products/custom-fields', product.id]">Edit</button>
+            <!-- <button [routerLink]="['/products/custom-fields', product.id]">Edit</button> -->
+            <!-- <button [routerLink]="['/products/custom-fields', {outlets: {edit: null}}]">Edit</button> -->
+            <!-- <button [routerLink]="['',{outlets: {edit: null}}]">Edit</button> -->
+            <button [routerLink]="['',{outlets: {primary: ['products', 'custom-fields', product.id], edit: null}}]">Edit</button>
           </div>
         </div>
         <div class="ft-lm-custom-fields-content">

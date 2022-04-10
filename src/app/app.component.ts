@@ -20,7 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public sidenav01!: ElementRef;
 
   public title = 'frontend-v03';
-  public isOpened01 = true;
+  public isOpened01 = false;
   public isOpened = false;
   public _authSubscription: Subscription = new Subscription();
   constructor(

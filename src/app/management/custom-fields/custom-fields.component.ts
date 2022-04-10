@@ -318,7 +318,15 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       'background: yellow; color: #000; padding: 0 200px; border: 0px solid #47C0BE'
     );
     console.log('form.value', form.value);
-    this._router.navigate(['/products/', this.productId]);
+    // this._router.navigate(['/products/', this.productId]);
+    // this._router.navigate(['/products/', '(edit:products/2)']);
+    this._router.navigate([
+      '',
+      {
+        outlets: { primary: ['products'], edit: ['products', this.productId] },
+      },
+    ]);
+    // this._router.navigateByUrl('/products/(edit:products/2)');
   }
 
   private _addControls(formGroup: FormGroup) {

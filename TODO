@@ -33,4 +33,5 @@ General:
     ✔ do some cleanup to the license edit view @started(22-04-08 14:51) @done(22-04-08 15:19) @lasted(28m54s)
     ✔ add save button to (custom fields) view @started(22-04-08 17:58) @done(22-04-08 18:54) @lasted(56m2s)
     ✔ fix fieldName$ replaySubject old values not destroyed @done(22-04-08 22:28)
+    ✔ move product edit view to a sidenav @done(22-04-10 07:28)
 
