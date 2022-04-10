@@ -34,4 +34,5 @@ General:
     ✔ add save button to (custom fields) view @started(22-04-08 17:58) @done(22-04-08 18:54) @lasted(56m2s)
     ✔ fix fieldName$ replaySubject old values not destroyed @done(22-04-08 22:28)
     ✔ move product edit view to a sidenav @done(22-04-10 07:28)
+    ✔ move product edit view to a sidenav part 2 @done(22-04-10 22:36)
 
