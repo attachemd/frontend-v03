@@ -36,3 +36,5 @@ General:
     ✔ move product edit view to a sidenav @done(22-04-10 07:28)
     ✔ move product edit view to a sidenav part 2 @done(22-04-10 22:36)
     ✔ open product edit sidenav when routerlink already activated @done(22-04-11 05:30)
+    ✔ add functionality to save button for product edit view @done(22-04-11 05:37)
+    ☐ style the builder canvas

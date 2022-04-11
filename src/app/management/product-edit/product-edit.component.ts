@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DndFieldService } from 'src/app/services/dnd-field/dnd-field.service';
 import { Validation } from 'src/app/services/dnd-field/field.model';
@@ -88,7 +88,8 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     private _route: ActivatedRoute,
     private _dndFieldService: DndFieldService,
     private _fb: FormBuilder,
-    private _cdRef: ChangeDetectorRef
+    private _cdRef: ChangeDetectorRef,
+    private _router: Router
   ) {
     this._regConfig.forEach((field) => {
       this.builder_elements_model_02.push(
@@ -158,6 +159,12 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       'this.builder_elements_model_02',
       this.builder_elements_model_02
     );
+    this._router.navigate([
+      '',
+      {
+        outlets: { primary: ['products'], edit: null },
+      },
+    ]);
   }
 
   private _addControls(formGroup: FormGroup) {
