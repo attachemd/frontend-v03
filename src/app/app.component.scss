@@ -12,7 +12,8 @@ mat-sidenav {
 
 mat-sidenav {
     // background-color: #e0e0e0;
-    background-color: #E3DFD7;
+    // background-color: #E3DFD7;
+    background-color: #eee;
     // background-color: #F1F1F4;
     border-right: none;
 }
@@ -20,4 +21,9 @@ mat-sidenav {
 mat-sidenav.test-side-nav {
     width: 600px;
     background-color: #fff;
+}
+mat-sidenav-container#mat-sidenav-container-primary-view mat-sidenav-content {
+    display: grid;
+    // 92px for header and 40px for bottom margin
+    grid-template-rows: 92px calc(100vh - 92px - 40px);
 }

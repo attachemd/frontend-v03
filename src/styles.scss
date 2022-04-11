@@ -2,7 +2,8 @@
 @use "~@angular/material/theming" as material;
 
 @include material.mat-core();
-$workshop-primary: material.mat-palette(material.$mat-brown);
+// $workshop-primary: material.mat-palette(material.$mat-brown);
+$workshop-primary: material.mat-palette(material.$mat-grey);
 $workshop-accent: material.mat-palette(material.$mat-green);
 
 $workshop-theme: material.mat-light-theme(
@@ -26,22 +27,20 @@ body {
 }
 
 @font-face {
-  font-family: "icomoon";
-  src: url("assets/fonts/icomoon/icomoon.eot?2wykv2");
-  src: url("assets/fonts/icomoon/icomoon.eot?2wykv2#iefix")
-      format("embedded-opentype"),
-    url("assets/fonts/icomoon/icomoon.ttf?2wykv2") format("truetype"),
-    url("assets/fonts/icomoon/icomoon.woff?2wykv2") format("woff"),
-    url("assets/fonts/icomoon/icomoon.svg?2wykv2#icomoon") format("svg");
+  font-family: 'icomoon';
+  src:  url('assets/fonts/icomoon/icomoon.eot?79ahl9');
+  src:  url('assets/fonts/icomoon/icomoon.eot?79ahl9#iefix') format('embedded-opentype'),
+    url('assets/fonts/icomoon/icomoon.ttf?79ahl9') format('truetype'),
+    url('assets/fonts/icomoon/icomoon.woff?79ahl9') format('woff'),
+    url('assets/fonts/icomoon/icomoon.svg?79ahl9#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
 }
 
-[class^="icon-"],
-[class*=" icon-"] {
+[class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: "icomoon" !important;
+  font-family: 'icomoon' !important;
   // speak: never;
   font-style: normal;
   font-weight: normal;
@@ -54,6 +53,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-drag:before {
+  content: "\e901";
+}
 .icon-select-type-cursor:before {
   content: "\e900";
 }
@@ -144,41 +146,7 @@ mat-row {
 /******* Builder *******/
 /***********************/
 
-.top {
-  height: 300px;
-  border: 1px solid #ffa600;
-}
-.bottom {
-  height: 300px;
-  border: 1px solid #d0ff00;
-}
 
-.dnd-field {
-  display: inline-flex;
-  height: 35px;
-  width: max-content;
-  align-content: center;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin: 0 10px 10px 0;
-}
-
-.dnd-field > div {
-  display: flex;
-  align-items: center;
-}
-
-.dnd-field .dnd-field-icon {
-  width: 30px;
-  justify-content: center;
-}
-.dnd-field .dnd-field-content {
-  width: 100px;
-}
-// .dnd-field .dnd-field-content span {
-//     // display: inline-block;
-//     // vertical-align: middle;
-// }
 
 .many2class {
   color: red;
@@ -197,6 +165,8 @@ mat-row {
   display: block;
   color: #0054f7;
   border: 2px dashed #0054f7;
+  // color: #0090f7;
+  // border: 2px dashed #0090f7;
   background-color: #f8faff;
   margin-bottom: 17px;
   padding: 10px;

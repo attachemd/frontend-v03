@@ -10,7 +10,7 @@
   <router-outlet name="edit" (activate)="isOpened01 = true" (deactivate)="isOpened01 = false"></router-outlet> 
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-sidenav-container>
+    <mat-sidenav-container id="mat-sidenav-container-primary-view">
       <mat-sidenav mode="side" [(opened)]="isOpened" #sidenav role="navigation">
         <app-sidenav-list (closeSideNav)="sidenav.close()"></app-sidenav-list>
       </mat-sidenav>

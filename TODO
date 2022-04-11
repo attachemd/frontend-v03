@@ -11,7 +11,6 @@ General:
     ☐ add title to all buttons
     ☐ add title to all pages
     ☐ center all pages content (vertically & horizontally)
-    ☐ style the builder canvas
     ☐ move all edit views to side nav
     ✔ stop dragging when field edit or delete clicked @done(22-04-06)
     ✔ add delete dialog @done(22-04-06)
@@ -37,4 +36,4 @@ General:
     ✔ move product edit view to a sidenav part 2 @done(22-04-10 22:36)
     ✔ open product edit sidenav when routerlink already activated @done(22-04-11 05:30)
     ✔ add functionality to save button for product edit view @done(22-04-11 05:37)
-    ☐ style the builder canvas
+    ☐ style the builder canvas @started(22-04-11 10:06)

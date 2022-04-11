@@ -1,32 +1,34 @@
 <div class="builder-container">
   <div class="builder-canvas">
-    <div class="ft-lm-primary-fields">
-      <div class="ft-lm-custom-fields-title">
-        <h1>Customize fields</h1>
-      </div>
-    </div>
-    <div class="ft-lm-custom-fields-content">
-      <div class="ft-lm-custom-fields">
-        <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
-          <app-dnd-field
-            class="builder-render"
-            [dragula]="builderContainer"
-            [(dragulaModel)]="builder_elements_model_02"
-            [fields]="builder_elements_model_02"
-            [form]="myForm"
-          >
-          </app-dnd-field>
-          <!-- <button type="submit" [routerLink]="['/products/', productId]">Save</button> -->
-          <button type="submit">Save</button>
-          <!-- <button [routerLink]="['',{outlets: {primary: ['products', 'custom-fields', product.id], edit: null}}]">Edit</button> -->
-        </form>
+    <div class="builder-canvas-inner">
+      <!-- <div class="ft-lm-primary-fields">
+        <div class="ft-lm-custom-fields-title">
+          <h1>Customize fields</h1>
+        </div>
+      </div> -->
+      <div class="ft-lm-custom-fields-content">
+        <div class="ft-lm-custom-fields">
+          <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+            <app-dnd-field
+              class="builder-render"
+              [dragula]="builderContainer"
+              [(dragulaModel)]="builder_elements_model_02"
+              [fields]="builder_elements_model_02"
+              [form]="myForm"
+            >
+            </app-dnd-field>
+            <!-- <button type="submit" [routerLink]="['/products/', productId]">Save</button> -->
+            <button type="submit">Save</button>
+            <!-- <button [routerLink]="['',{outlets: {primary: ['products', 'custom-fields', product.id], edit: null}}]">Edit</button> -->
+          </form>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="builder-elements-container">
-    <div id="elem-id">
-      <h1>Drag & Drop Fields</h1>
+    <div class="builder-elements-inner-container" id="elem-id">
+      <h2 class="h-drag-drop">Drag & Drop Fields</h2>
       <div
         class="builder-elements builder-source"
         [dragula]="builderContainer"
@@ -36,9 +38,17 @@
           class="dnd-field"
           *ngFor="let formElement of builder_elements_model_01"
         >
-          <div class="dnd-field-icon icon-select-type-cursor"></div>
-          <div [ngClass]="'dnd-field-content' + ' ' + formElement.type">
-            <span>{{ formElement.name }}</span>
+          <div>
+            <div class="dnd-field-icon icon-drag"></div>
+          </div>
+          <div>
+            <div class="dnd-field-icon icon-select-type-cursor"></div>
+          </div>
+          <div>
+            <div [ngClass]="'dnd-field-content' + ' ' + formElement.type">
+              <div class="dnd-field-content-title">{{ formElement.name }}</div>
+              <div class="dnd-field-content-description">Field description</div>
+            </div>
           </div>
         </div>
       </div>
