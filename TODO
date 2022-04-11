@@ -35,4 +35,4 @@ General:
     ✔ fix fieldName$ replaySubject old values not destroyed @done(22-04-08 22:28)
     ✔ move product edit view to a sidenav @done(22-04-10 07:28)
     ✔ move product edit view to a sidenav part 2 @done(22-04-10 22:36)
-
+    ✔ open product edit sidenav when routerlink already activated @done(22-04-11 05:30)

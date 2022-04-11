@@ -32,6 +32,7 @@
         class="icon-display"
         
         [routerLink]="['', { outlets: {edit: ['products', row.id] } }]"
+        (click)="openSideNav()"
         title="Edit Product"
       >
       <!-- [routerLink]="['', { outlets: {edit: ['products', row.id] } }]" (click)="openSideNav()" -->
