@@ -4,14 +4,17 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
-import { Validation } from 'src/app/services/dnd-field/field.model';
+import {
+  FieldConfig,
+  Validation,
+} from 'src/app/services/dnd-field/field.model';
 import { fieldConfig } from 'src/app/services/dnd-field/field.sample';
 import { DndFieldService } from 'src/app/services/dnd-field/dnd-field.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 let ft_lm = { formElementId: 0 };
 
-class FormElement {
+class FormElement3 {
   public id: number;
   public tracked_id: number;
   public isOngoing = false;
@@ -28,6 +31,29 @@ class FormElement {
     this.id = this.tracked_id;
   }
 }
+class FormElement {
+  public id: number;
+  public tracked_id: number;
+  public isOngoing = false;
+  public name: string;
+  public type: string;
+  public label?: string;
+  public inputType?: string;
+  public value: string;
+  public options?: string[];
+  public validations: Validation[];
+  constructor(field: FieldConfig) {
+    this.tracked_id = ft_lm.formElementId++;
+    this.id = this.tracked_id;
+    this.name = field.name;
+    this.type = field.type;
+    this.label = field.label;
+    this.inputType = field.inputType;
+    this.value = field.value;
+    this.options = field.options;
+    this.validations = field.validations;
+  }
+}
 
 @Component({
   selector: 'app-custom-fields',
@@ -38,36 +64,67 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   public myForm!: FormGroup;
   public productId = '';
   public builderContainer = 'NEW_BUILDER_CONTAINER';
-  public builder_elements_model_01 = [
-    new FormElement(
-      'Zip Code',
-      'input',
-      'label test',
-      'text',
-      'new text 03',
-      [],
-      []
-    ),
-    new FormElement(
-      'Address',
-      'input',
-      'label test',
-      'text',
-      'new text 02',
-      [],
-      []
-    ),
-    new FormElement(
-      'Full Name',
-      'input',
-      'label test',
-      'text',
-      'new text 01',
-      [],
-      []
-    ),
-  ];
+  // public builder_elements_model_01 = [
+  //   new FormElement(
+  //     'Zip Code',
+  //     'input',
+  //     'label test',
+  //     'text',
+  //     'new text 03',
+  //     [],
+  //     []
+  //   ),
+  //   new FormElement(
+  //     'Address',
+  //     'input',
+  //     'label test',
+  //     'text',
+  //     'new text 02',
+  //     [],
+  //     []
+  //   ),
+  //   new FormElement(
+  //     'Full Name',
+  //     'input',
+  //     'label test',
+  //     'text',
+  //     'new text 01',
+  //     [],
+  //     []
+  //   ),
+  // ];
 
+  // public builder_elements_model_01 = [
+  //   new FormElement({
+  //     name: 'Zip Code',
+  //     type: 'input',
+  //     label: 'label test',
+  //     inputType: 'text',
+  //     value: 'new text 03',
+  //     options: [],
+  //     validations: [],
+  //   }),
+  //   new FormElement({
+  //     name: 'Address',
+  //     type: 'input',
+  //     label: 'label test',
+  //     inputType: 'text',
+  //     value: 'new text 02',
+  //     options: [],
+  //     validations: [],
+  //   }),
+  //   new FormElement({
+  //     name: 'Full Name',
+  //     type: 'input',
+  //     label: 'label test',
+  //     inputType: 'text',
+  //     value: 'new text 01',
+  //     options: [],
+  //     validations: [],
+  //   }),
+  // ];
+
+  public builder_elements_model_01: any[] = [];
   public builder_elements_model_02: any[] = [];
   public renderedBuilderFieldsBeforeDrag: any[] = [];
   public stopDrag = false;
@@ -84,19 +141,30 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     private _route: ActivatedRoute,
     private _router: Router
   ) {
+    // this._regConfig.forEach((field) => {
+    //   console.log('field');
+    //   console.log(field);
+
+    //   this.builder_elements_model_02.push(
+    //     new FormElement(
+    //       field.name,
+    //       field.type!,
+    //       field.label!,
+    //       field.inputType!,
+    //       field.value,
+    //       field.options!,
+    //       field.validations
+    //     )
+    //   );
+    // });
+
     this._regConfig.forEach((field) => {
-      this.builder_elements_model_02.push(
-        new FormElement(
-          field.name,
-          field.type!,
-          field.label!,
-          field.inputType!,
-          field.value,
-          field.options!,
-          field.validations
-        )
-      );
+      this.builder_elements_model_01.push(new FormElement(field));
     });
+
+    // this._regConfig.forEach((field) => {
+    //   this.builder_elements_model_02.push(new FormElement(field));
+    // });
 
     this.myForm = this._fb.group({});
 
@@ -176,15 +244,16 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         return source?.classList.contains('builder-source');
       },
       copyItem: (formElement: FormElement) => {
-        return new FormElement(
-          formElement.name,
-          formElement.type,
-          formElement.label,
-          formElement.inputType,
-          formElement.value,
-          formElement.options,
-          formElement.validations
-        );
+        // return new FormElement(
+        //   formElement.name,
+        //   formElement.type,
+        //   formElement.label,
+        //   formElement.inputType,
+        //   formElement.value,
+        //   formElement.options,
+        //   formElement.validations
+        // );
+        return new FormElement(formElement);
       }, //Allow item to be coppied in another div
       // copySortSource: false,
       removeOnSpill: false,

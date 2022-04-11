@@ -60,6 +60,10 @@
   -o-user-select: none;
 }
 
+.builder-render {
+  cursor: move;
+}
+
 .builder-container {
   // display: flex;
   display: grid;

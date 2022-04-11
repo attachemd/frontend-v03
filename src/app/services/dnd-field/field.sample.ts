@@ -4,6 +4,48 @@ import { FieldConfig } from './field.model';
 export const fieldConfig: FieldConfig[] = [
   {
     type: 'input',
+    label: 'Zip Code',
+    inputType: 'text',
+    name: 'zip_code',
+    value: 'john',
+    validations: [
+      {
+        name: 'required',
+        validator: Validators.required,
+        message: 'Name Required',
+      },
+    ],
+  },
+  {
+    type: 'input',
+    label: 'Address',
+    inputType: 'text',
+    name: 'address',
+    value: 'john',
+    validations: [
+      {
+        name: 'required',
+        validator: Validators.required,
+        message: 'Name Required',
+      },
+    ],
+  },
+  {
+    type: 'input',
+    label: 'Full Name',
+    inputType: 'text',
+    name: 'full_name',
+    value: 'john',
+    validations: [
+      {
+        name: 'required',
+        validator: Validators.required,
+        message: 'Name Required',
+      },
+    ],
+  },
+  {
+    type: 'input',
     label: 'Username',
     inputType: 'text',
     name: 'name',
