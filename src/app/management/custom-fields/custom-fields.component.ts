@@ -120,7 +120,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
 
     this._subs.add(
       this._dragulaService.drag(this.builderContainer).subscribe(({ el }) => {
-        this._dndFieldService.setDndFieldVisibility$(false);
+        this._dndFieldService.setDndFieldEditVisibility$(false);
         this.renderedBuilderFieldsPrevState = _.cloneDeep(
           this.renderedBuilderFields
         );
@@ -160,7 +160,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
           this.stopDrag = true;
           item.isOngoing = true;
           this._dndFieldService.setFieldEditMode$(true);
-          this._dndFieldService.setDndFieldVisibility$(false);
+          this._dndFieldService.setDndFieldEditVisibility$(false);
         })
     );
     this._subs.add(
@@ -214,7 +214,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     );
 
     // Enter drag and drop mode
-    this._dndFieldService.setDndFieldVisibility$(true);
+    this._dndFieldService.setDndFieldEditVisibility$(true);
     this._subs.add(
       this._dndFieldService.getFieldEditMode$().subscribe({
         next: (isFieldOnEditMode: boolean) => {
@@ -263,7 +263,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
           console.log(fieldObj.fieldElement);
           this.stopDrag = false;
           this._dndFieldService.setFieldEditMode$(false);
-          this._dndFieldService.setDndFieldVisibility$(true);
+          this._dndFieldService.setDndFieldEditVisibility$(true);
 
           if (fieldObj.fieldName === 'cancel')
             if (this.renderedBuilderFieldsPrevState.length > 0) {

@@ -2,9 +2,42 @@
 @use "~@angular/material/theming" as material;
 
 @include material.mat-core();
+$light-green: (
+    50 : #fbfce8,
+    100 : #f5f8c6,
+    200 : #eff3a0,
+    300 : #e8ee79,
+    400 : #e3ea5d,
+    500 : #dee640,
+    600 : #dae33a,
+    700 : #d5df32,
+    800 : #d1db2a,
+    900 : #c8d51c,
+    A100 : #ffffff,
+    A200 : #fcffd7,
+    A400 : #f8ffa4,
+    A700 : #f6ff8b,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
 // below defines your custom color to build a theme palette from
 // $workshop-primary: material.mat-palette(material.$mat-brown);
 $workshop-primary: material.mat-palette(material.$mat-grey);
+// $workshop-primary: material.mat-palette($light-green);
 $workshop-accent: material.mat-palette(material.$mat-green);
 
 $workshop-theme: material.mat-light-theme(
@@ -164,13 +197,15 @@ mat-row {
   //     border: 2px dashed #2DCA72;
   //   background-color: #edfdf4;
   display: block;
-  color: #009cf7;
-  border: 2px dashed #009cf7;
+  // color: #009cf7;
+  // border: 2px dashed #009cf7;
+  color: #0b5ed7;
+  border: 2px dashed #0b5ed7;
   // color: #0054f7;
   // border: 2px dashed #0054f7;
   // color: #0090f7;
   // border: 2px dashed #0090f7;
-  background-color: #f8faff;
+  background-color: rgb(247, 249, 255);
   margin-bottom: 17px;
   padding: 10px;
   text-align: center;
@@ -198,7 +233,8 @@ mat-row {
   // .ongoing {
     display: block;
   // border: 2px solid #0054f7;
-  border: 2px solid #009cf7;
+  // border: 2px solid #009cf7;
+  border: 2px solid #0b5ed7;
   padding: 17px;
   margin-bottom: 17px;
   border-radius: 5px;

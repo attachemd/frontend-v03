@@ -17,7 +17,7 @@ export class DndFieldService {
   private _fieldEditMode$ = new ReplaySubject<boolean>(1);
   private _deleteField$ = new Subject<string>();
   private _dndMode$ = new ReplaySubject<boolean>(1);
-  private _dndFieldVisibility$ = new ReplaySubject<boolean>(1);
+  private _dndFieldEditVisibility$ = new ReplaySubject<boolean>(1);
 
   constructor() {}
 
@@ -64,12 +64,12 @@ export class DndFieldService {
     return this._dndMode$;
   }
 
-  public setDndFieldVisibility$(isDndFieldVisible: boolean) {
-    this._dndFieldVisibility$.next(isDndFieldVisible);
+  public setDndFieldEditVisibility$(isDndFieldEditVisible: boolean) {
+    this._dndFieldEditVisibility$.next(isDndFieldEditVisible);
   }
 
-  public getDndFieldVisibility$(): ReplaySubject<boolean> {
-    return this._dndFieldVisibility$;
+  public getDndFieldEditVisibility$(): ReplaySubject<boolean> {
+    return this._dndFieldEditVisibility$;
   }
 
   public toggleEditVisibility(event: any, visibility: string) {
