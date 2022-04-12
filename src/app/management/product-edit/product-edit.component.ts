@@ -38,7 +38,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   public myForm!: FormGroup;
 
   public builderContainer = 'BUILDER_CONTAINER';
-  public builder_elements_model_01 = [
+  public builderFields = [
     new FormElement(
       'Zip Code',
       'input',
@@ -69,7 +69,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   ];
 
   public renderedBuilderFieldsBeforeDrag: any[] = [];
-  public builder_elements_model_02: any[] = [];
+  public renderedBuilderFields: any[] = [];
 
   public condition = true;
   public status = false;
@@ -92,7 +92,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     private _router: Router
   ) {
     this._regConfig.forEach((field) => {
-      this.builder_elements_model_02.push(
+      this.renderedBuilderFields.push(
         new FormElement(
           field.name,
           field.type!,
@@ -155,10 +155,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   public onSubmit(form: FormGroup) {
     // console.log('Valid?', form.valid); // true or false
     console.log('form.value', form.value);
-    console.log(
-      'this.builder_elements_model_02',
-      this.builder_elements_model_02
-    );
+    console.log('this.renderedBuilderFields', this.renderedBuilderFields);
     this._router.navigate([
       '',
       {
@@ -168,7 +165,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   }
 
   private _addControls(formGroup: FormGroup) {
-    this.builder_elements_model_02.forEach((field) => {
+    this.renderedBuilderFields.forEach((field) => {
       if (field.type === 'button') return;
       if (field.type === 'date') field.value = new Date(field.value);
 
@@ -193,7 +190,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       product: ['', Validators.required],
     });
 
-    this.builder_elements_model_02.forEach((field) => {
+    this.renderedBuilderFields.forEach((field) => {
       if (field.type === 'button') return;
       const control = this._fb.control(
         field.value,

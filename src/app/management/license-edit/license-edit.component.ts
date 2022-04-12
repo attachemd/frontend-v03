@@ -42,7 +42,7 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   public myForm!: FormGroup;
 
   public builderContainer = 'BUILDER_CONTAINER';
-  public builder_elements_model_01 = [
+  public builderFields = [
     new FormElement(
       'Zip Code',
       'input',
@@ -73,7 +73,7 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   ];
 
   public renderedBuilderFieldsBeforeDrag: any[] = [];
-  public builder_elements_model_02: any[] = [];
+  public renderedBuilderFields: any[] = [];
 
   public condition = true;
   public status = false;
@@ -97,7 +97,7 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     private _cdRef: ChangeDetectorRef
   ) {
     this._regConfig.forEach((field) => {
-      this.builder_elements_model_02.push(
+      this.renderedBuilderFields.push(
         new FormElement(
           field.name,
           field.type!,
@@ -188,13 +188,13 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
     // console.log('Valid?', form.valid); // true or false
     console.log('form.value', form.value);
     console.log(
-      'this.builder_elements_model_02',
-      this.builder_elements_model_02
+      'this.renderedBuilderFields',
+      this.renderedBuilderFields
     );
   }
 
   private _addControls(formGroup: FormGroup) {
-    this.builder_elements_model_02.forEach((field) => {
+    this.renderedBuilderFields.forEach((field) => {
       if (field.type === 'button') return;
       if (field.type === 'date') field.value = new Date(field.value);
 
@@ -221,7 +221,7 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
       product: ['', Validators.required],
     });
 
-    this.builder_elements_model_02.forEach((field) => {
+    this.renderedBuilderFields.forEach((field) => {
       if (field.type === 'button') return;
       const control = this._fb.control(
         field.value,
@@ -267,16 +267,16 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
       // models![0].pop();
       // console.log(models);
 
-      // this.builder_elements_model_02 = [...this.builder_elements_model_02];
-      console.log('this.builder_elements_model_02');
-      console.log(this.builder_elements_model_02);
-      // this.builder_elements_model_02[0].id =
-      //   this.builder_elements_model_02[0].id + 1000;
-      // this.builder_elements_model_02[1].id =
-      //   this.builder_elements_model_02[1].id + 1000;
-      // this.builder_elements_model_02[2].id =
-      //   this.builder_elements_model_02[2].id + 1000;
-      for (let builder_element_model of this.builder_elements_model_02) {
+      // this.renderedBuilderFields = [...this.renderedBuilderFields];
+      console.log('this.renderedBuilderFields');
+      console.log(this.renderedBuilderFields);
+      // this.renderedBuilderFields[0].id =
+      //   this.renderedBuilderFields[0].id + 1000;
+      // this.renderedBuilderFields[1].id =
+      //   this.renderedBuilderFields[1].id + 1000;
+      // this.renderedBuilderFields[2].id =
+      //   this.renderedBuilderFields[2].id + 1000;
+      for (let builder_element_model of this.renderedBuilderFields) {
         console.log('builder_element_model.tracked_id');
         console.log(builder_element_model.tracked_id);
 
@@ -285,16 +285,16 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
       }
 
       // this._changeDetection.detectChanges();
-      // this.builder_elements_model_02.push(
+      // this.renderedBuilderFields.push(
       //   new FormElement(
       //     'Text Area',
       //     'image',
       //     '<p class="many2class">new text 17</p>'
       //   )
       // );
-      // // this.builder_elements_model_02.pop();
-      console.log('this.builder_elements_model_02');
-      console.log(this.builder_elements_model_02);
+      // // this.renderedBuilderFields.pop();
+      console.log('this.renderedBuilderFields');
+      console.log(this.renderedBuilderFields);
 
       // this._addControls(this.myForm);
       // this._createControl();

@@ -1,17 +1,17 @@
 <mat-sidenav-container>
   <mat-sidenav
     mode="over"
-    [(opened)]="isOpened01"
+    [(opened)]="isEditNavOpened"
     #sidenav01
     role="edit content"
     class="test-side-nav"
     position="end"
   >
-  <router-outlet name="edit" (activate)="isOpened01 = true" (deactivate)="isOpened01 = false"></router-outlet> 
+  <router-outlet name="edit" (activate)="isEditNavOpened = true" (deactivate)="isEditNavOpened = false"></router-outlet> 
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-sidenav-container id="mat-sidenav-container-primary-view">
-      <mat-sidenav mode="side" [(opened)]="isOpened" #sidenav role="navigation">
+      <mat-sidenav mode="side" [(opened)]="isMainNavOpened" #sidenav role="navigation">
         <app-sidenav-list (closeSideNav)="sidenav.close()"></app-sidenav-list>
       </mat-sidenav>
       <mat-sidenav-content>

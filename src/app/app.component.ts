@@ -20,8 +20,8 @@ export class AppComponent implements OnInit, OnDestroy {
   public sidenav01!: ElementRef;
 
   public title = 'frontend-v03';
-  public isOpened01 = false;
-  public isOpened = false;
+  public isEditNavOpened = false;
+  public isMainNavOpened = false;
   public _authSubscription: Subscription = new Subscription();
   constructor(
     private _authService: AuthService,
@@ -33,8 +33,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._appService.getOpenEditSideNav$().subscribe({
-      next: (isOpened) => {
-        this.isOpened01 = isOpened;
+      next: (isMainNavOpened) => {
+        this.isEditNavOpened = isMainNavOpened;
       },
       error: (err: any) => {
         console.log('error');
@@ -44,7 +44,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this._authSubscription = this._authService.getAuthChange$().subscribe({
       next: (authStats) => {
-        this.isOpened = authStats;
+        this.isMainNavOpened = authStats;
         // https://angular.io/errors/NG0100
         this._cd.detectChanges();
       },

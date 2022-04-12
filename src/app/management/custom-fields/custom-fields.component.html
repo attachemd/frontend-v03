@@ -12,8 +12,8 @@
             <app-dnd-field
               class="builder-render"
               [dragula]="builderContainer"
-              [(dragulaModel)]="builder_elements_model_02"
-              [fields]="builder_elements_model_02"
+              [(dragulaModel)]="renderedBuilderFields"
+              [fields]="renderedBuilderFields"
               [form]="myForm"
             >
             </app-dnd-field>
@@ -32,11 +32,11 @@
       <div
         class="builder-elements builder-source"
         [dragula]="builderContainer"
-        [(dragulaModel)]="builder_elements_model_01"
+        [(dragulaModel)]="builderFields"
       >
         <div
           class="dnd-field"
-          *ngFor="let formElement of builder_elements_model_01"
+          *ngFor="let formElement of builderFields"
         >
           <div>
             <div class="dnd-field-icon icon-drag"></div>

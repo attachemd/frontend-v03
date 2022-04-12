@@ -10,8 +10,8 @@ export class AppService {
 
   constructor() {}
 
-  public setOpenEditSideNav$(isOpened: boolean) {
-    this._openEditSideNav$.next(isOpened);
+  public setOpenEditSideNav$(isMainNavOpened: boolean) {
+    this._openEditSideNav$.next(isMainNavOpened);
   }
 
   public getOpenEditSideNav$() {

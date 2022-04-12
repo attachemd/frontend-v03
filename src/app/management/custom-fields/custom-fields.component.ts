@@ -64,7 +64,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   public myForm!: FormGroup;
   public productId = '';
   public builderContainer = 'NEW_BUILDER_CONTAINER';
-  // public builder_elements_model_01 = [
+  // public builderFields = [
   //   new FormElement(
   //     'Zip Code',
   //     'input',
@@ -94,7 +94,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   //   ),
   // ];
 
-  // public builder_elements_model_01 = [
+  // public builderFields = [
   //   new FormElement({
   //     name: 'Zip Code',
   //     type: 'input',
@@ -124,9 +124,9 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   //   }),
   // ];
 
-  public builder_elements_model_01: any[] = [];
-  public builder_elements_model_02: any[] = [];
-  public renderedBuilderFieldsBeforeDrag: any[] = [];
+  public builderFields: any[] = [];
+  public renderedBuilderFields: any[] = [];
+  public renderedBuilderFieldsPrevState: any[] = [];
   public stopDrag = false;
 
   private _subs = new Subscription();
@@ -145,7 +145,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     //   console.log('field');
     //   console.log(field);
 
-    //   this.builder_elements_model_02.push(
+    //   this.renderedBuilderFields.push(
     //     new FormElement(
     //       field.name,
     //       field.type!,
@@ -159,11 +159,11 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     // });
 
     this._regConfig.forEach((field) => {
-      this.builder_elements_model_01.push(new FormElement(field));
+      this.builderFields.push(new FormElement(field));
     });
 
     // this._regConfig.forEach((field) => {
-    //   this.builder_elements_model_02.push(new FormElement(field));
+    //   this.renderedBuilderFields.push(new FormElement(field));
     // });
 
     this.myForm = this._fb.group({});
@@ -173,8 +173,8 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     this._subs.add(
       this._dragulaService.drag(this.builderContainer).subscribe(({ el }) => {
         this._dndFieldService.setDndFieldVisibility$(false);
-        this.renderedBuilderFieldsBeforeDrag = _.cloneDeep(
-          this.builder_elements_model_02
+        this.renderedBuilderFieldsPrevState = _.cloneDeep(
+          this.renderedBuilderFields
         );
         // Hide (dnd field edit) from current dragged field
         let dndFieldEdit = el.querySelector(
@@ -280,8 +280,8 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       this._dndFieldService.getFieldEditMode$().subscribe({
         next: (isFieldOnEditMode: boolean) => {
           if (isFieldOnEditMode)
-            this.renderedBuilderFieldsBeforeDrag = _.cloneDeep(
-              this.builder_elements_model_02
+            this.renderedBuilderFieldsPrevState = _.cloneDeep(
+              this.renderedBuilderFields
             );
         },
         error: (err: any) => {
@@ -302,10 +302,11 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     this._subs.add(
       this._dndFieldService.getDeleteField$().subscribe({
         next: (fieldId: string) => {
-          this.builder_elements_model_02 =
-            this.builder_elements_model_02.filter(function (el) {
+          this.renderedBuilderFields = this.renderedBuilderFields.filter(
+            function (el) {
               return el.id != fieldId;
-            });
+            }
+          );
         },
         error: (err: any) => {},
       })
@@ -319,31 +320,31 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
           this._dndFieldService.setDndFieldVisibility$(true);
 
           if (fieldObj.fieldName === 'cancel')
-            if (this.renderedBuilderFieldsBeforeDrag.length > 0) {
+            if (this.renderedBuilderFieldsPrevState.length > 0) {
               // checking the lenght when cancel click and the field not dragged
               // the array always empty before drag
-              let currentField = this.renderedBuilderFieldsBeforeDrag.find(
+              let currentField = this.renderedBuilderFieldsPrevState.find(
                 (item) => item.id === fieldObj.fieldElement.id
               );
 
               if (currentField) currentField.isOngoing = false;
-              this.builder_elements_model_02 = _.cloneDeep(
-                this.renderedBuilderFieldsBeforeDrag
+              this.renderedBuilderFields = _.cloneDeep(
+                this.renderedBuilderFieldsPrevState
               );
-              this.renderedBuilderFieldsBeforeDrag = [];
+              this.renderedBuilderFieldsPrevState = [];
             }
 
           if (fieldObj.fieldName === 'save') {
             // replaySubject old value (fieldObj.fieldElement) not destroyed
             // and ft_lm.formElementId give new ids for new created
             // fields then currentField may be undefined
-            console.log('builder_elements_model_02');
-            console.log(this.builder_elements_model_02);
+            console.log('renderedBuilderFields');
+            console.log(this.renderedBuilderFields);
 
             console.log('fieldObj.fieldElement');
             console.log(fieldObj.fieldElement);
 
-            let currentField = this.builder_elements_model_02.find(
+            let currentField = this.renderedBuilderFields.find(
               (item) => item.id === fieldObj.fieldElement.id
             );
 
@@ -399,7 +400,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   }
 
   private _addControls(formGroup: FormGroup) {
-    this.builder_elements_model_02.forEach((field) => {
+    this.renderedBuilderFields.forEach((field) => {
       if (field.type === 'button') return;
       if (field.type === 'date') field.value = new Date(field.value);
 
@@ -431,7 +432,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     // https://medium.com/@Rahulx1/understanding-event-loop-call-stack-event-job-queue-in-javascript-63dcd2c71ecd
     // https://stackoverflow.com/questions/31698747/does-the-js-garbage-collector-clear-stack-memory
     setTimeout(() => {
-      for (let builder_element_model of this.builder_elements_model_02)
+      for (let builder_element_model of this.renderedBuilderFields)
         builder_element_model.tracked_id =
           builder_element_model.tracked_id! + 1000;
 
