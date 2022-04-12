@@ -4,9 +4,29 @@
   margin: 10px 0;
 }
 
+.field-label-container {
+  display: flex;
+  align-items: center;
+  input {
+    padding: 7px;
+    width: 100%;
+    outline: none;
+    border: 1px solid #d7d7d7;
+    border-radius: 4px;
+    display: inline-block;
+    box-sizing: border-box;
+    transition: 0.2s ease all;
+    color: #7e7e7e;
+            &:focus {
+              border-color:#0d6efd;
+            }
+  }
+}
+
 .btns {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .confirm-btn {

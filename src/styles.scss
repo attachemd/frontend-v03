@@ -130,18 +130,20 @@ mat-header-row {
   border-bottom: none !important;
   // border-top: 1px solid #ffa600;
   // background-color: #F7F7F8;
-  background-color: #f7f4ec;
+  // background-color: #f7f4ec;
+  background-color: #F7F7F8;
   border-radius: 5px;
   min-height: 45px !important;
   margin-bottom: 10px;
 }
 
 mat-header-row div {
-  font-weight: 400;
+  font-weight: 500;
   font-size: 13px;
   // color: #6E6B84;
   // color: #000;
-  color: #683e1f;
+  // color: #683e1f;
+  color: #545454;
 }
 
 mat-row {
@@ -151,7 +153,8 @@ mat-row {
 
 .mat-row:hover {
   // background-color: rgb(249 171 0 / 20%);
-  background-color: #faf9f4;
+  // background-color: #faf9f4;
+  background-color: #f7f7f8;
 }
 
 .mat-column-action {

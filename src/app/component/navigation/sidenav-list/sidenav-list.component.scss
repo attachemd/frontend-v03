@@ -36,14 +36,16 @@
     fill: #795548;
 }
 #g25788 {
+    fill: #b7b7b7;
     // fill: #7a663d;
-    fill: #795548;
+    // fill: #795548;
 }
 
 .active {
     // background-color: #ededed !important;
-    // background-color: #E6E6EA !important;
-    background-color: #ffffff !important;
+    background-color: #E6E6EA !important;
+    // background-color: #e1e1e1 !important;
+    color: #0b5ed7;
 }
 
 // .nav-list-for-models {
@@ -51,6 +53,10 @@
 //     // background-color: #e0e0e0;
 // }
 
+.nav-list-for-models a {
+    font-size: 14px;
+    font-weight: 500;
+}
 .nav-list-for-models a:nth-of-type(1) {
     height: 100px;
 }
