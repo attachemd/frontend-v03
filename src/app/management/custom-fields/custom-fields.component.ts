@@ -315,6 +315,13 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     this._subs.add(
       this._dndFieldService.getFieldName$().subscribe({
         next: (fieldObj: any) => {
+          console.log('renderedBuilderFieldsPrevState');
+          console.log(this.renderedBuilderFieldsPrevState);
+          console.log('renderedBuilderFields');
+          console.log(this.renderedBuilderFields);
+
+          console.log('fieldObj.fieldElement');
+          console.log(fieldObj.fieldElement);
           this.stopDrag = false;
           this._dndFieldService.setFieldEditMode$(false);
           this._dndFieldService.setDndFieldVisibility$(true);
@@ -332,17 +339,13 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
                 this.renderedBuilderFieldsPrevState
               );
               this.renderedBuilderFieldsPrevState = [];
-            }
+              // click cancel and nothing there only the curren element
+            } else this.renderedBuilderFields = [];
 
           if (fieldObj.fieldName === 'save') {
             // replaySubject old value (fieldObj.fieldElement) not destroyed
             // and ft_lm.formElementId give new ids for new created
             // fields then currentField may be undefined
-            console.log('renderedBuilderFields');
-            console.log(this.renderedBuilderFields);
-
-            console.log('fieldObj.fieldElement');
-            console.log(fieldObj.fieldElement);
 
             let currentField = this.renderedBuilderFields.find(
               (item) => item.id === fieldObj.fieldElement.id

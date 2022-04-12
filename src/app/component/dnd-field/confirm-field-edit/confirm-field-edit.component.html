@@ -2,7 +2,7 @@
     <div><input [(ngModel)]="field.label" /></div>
     <div>
       <!-- // FIXME label keep modified content -->
-      <button (click)="onFieldEditCanceled()">cancel</button>
-      <button (click)="onFieldEditSaved()">save</button>
+      <button (click)="onFieldEditCanceled(); $event.preventDefault()">cancel</button>
+      <button (click)="onFieldEditSaved(); $event.preventDefault()">save</button>
     </div>
   </div>

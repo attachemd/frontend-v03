@@ -15,7 +15,7 @@
         mat-icon-button
         class="dnd-field-edit-icon delete"
         title="Delete Field"
-        (click)="delete()"
+        (click)="delete(); $event.preventDefault()"
         >
         <mat-icon>delete</mat-icon>
         </button>
