@@ -11,6 +11,8 @@ import {
 import { fieldConfig } from 'src/app/services/dnd-field/field.sample';
 import { DndFieldService } from 'src/app/services/dnd-field/dnd-field.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { suggestedFields } from 'src/app/services/dnd-field/suggested-fields.sample';
+import { essentialFields } from 'src/app/services/dnd-field/essential-fields.sample';
 
 let ft_lm = { formElementId: 0 };
 
@@ -64,73 +66,17 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   public myForm!: FormGroup;
   public productId = '';
   public builderContainer = 'NEW_BUILDER_CONTAINER';
-  // public builderFields = [
-  //   new FormElement(
-  //     'Zip Code',
-  //     'input',
-  //     'label test',
-  //     'text',
-  //     'new text 03',
-  //     [],
-  //     []
-  //   ),
-  //   new FormElement(
-  //     'Address',
-  //     'input',
-  //     'label test',
-  //     'text',
-  //     'new text 02',
-  //     [],
-  //     []
-  //   ),
-  //   new FormElement(
-  //     'Full Name',
-  //     'input',
-  //     'label test',
-  //     'text',
-  //     'new text 01',
-  //     [],
-  //     []
-  //   ),
-  // ];
 
-  // public builderFields = [
-  //   new FormElement({
-  //     name: 'Zip Code',
-  //     type: 'input',
-  //     label: 'label test',
-  //     inputType: 'text',
-  //     value: 'new text 03',
-  //     options: [],
-  //     validations: [],
-  //   }),
-  //   new FormElement({
-  //     name: 'Address',
-  //     type: 'input',
-  //     label: 'label test',
-  //     inputType: 'text',
-  //     value: 'new text 02',
-  //     options: [],
-  //     validations: [],
-  //   }),
-  //   new FormElement({
-  //     name: 'Full Name',
-  //     type: 'input',
-  //     label: 'label test',
-  //     inputType: 'text',
-  //     value: 'new text 01',
-  //     options: [],
-  //     validations: [],
-  //   }),
-  // ];
-
-  public builderFields: any[] = [];
+  public suggestedBuilderFields: any[] = [];
+  public essentialBuilderFields: any[] = [];
   public renderedBuilderFields: any[] = [];
   public renderedBuilderFieldsPrevState: any[] = [];
   public stopDrag = false;
 
   private _subs = new Subscription();
   private _regConfig = fieldConfig;
+  private _essentialFields = essentialFields;
+  private _suggestedFields = suggestedFields;
   private _shadow: any;
   private _shadowInnerHTML: string = 'test';
   constructor(
@@ -157,10 +103,12 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     //     )
     //   );
     // });
-
-    this._regConfig.forEach((field) => {
-      this.builderFields.push(new FormElement(field));
+    this._essentialFields.forEach((field) => {
+      this.essentialBuilderFields.push(new FormElement(field));
     });
+    // this._suggestedFields.forEach((field) => {
+    //   this.suggestedBuilderFields.push(new FormElement(field));
+    // });
 
     // this._regConfig.forEach((field) => {
     //   this.renderedBuilderFields.push(new FormElement(field));
@@ -244,15 +192,6 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         return source?.classList.contains('builder-source');
       },
       copyItem: (formElement: FormElement) => {
-        // return new FormElement(
-        //   formElement.name,
-        //   formElement.type,
-        //   formElement.label,
-        //   formElement.inputType,
-        //   formElement.value,
-        //   formElement.options,
-        //   formElement.validations
-        // );
         return new FormElement(formElement);
       }, //Allow item to be coppied in another div
       // copySortSource: false,

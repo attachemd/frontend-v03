@@ -42,7 +42,7 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   public myForm!: FormGroup;
 
   public builderContainer = 'BUILDER_CONTAINER';
-  public builderFields = [
+  public suggestedBuilderFields = [
     new FormElement(
       'Zip Code',
       'input',

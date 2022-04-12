@@ -2,6 +2,7 @@
 @use "~@angular/material/theming" as material;
 
 @include material.mat-core();
+// below defines your custom color to build a theme palette from
 // $workshop-primary: material.mat-palette(material.$mat-brown);
 $workshop-primary: material.mat-palette(material.$mat-grey);
 $workshop-accent: material.mat-palette(material.$mat-green);
@@ -163,8 +164,10 @@ mat-row {
   //     border: 2px dashed #2DCA72;
   //   background-color: #edfdf4;
   display: block;
-  color: #0054f7;
-  border: 2px dashed #0054f7;
+  color: #009cf7;
+  border: 2px dashed #009cf7;
+  // color: #0054f7;
+  // border: 2px dashed #0054f7;
   // color: #0090f7;
   // border: 2px dashed #0090f7;
   background-color: #f8faff;
@@ -172,6 +175,7 @@ mat-row {
   padding: 10px;
   text-align: center;
   // width: 100%;
+  border-radius: 4px;
 }
 
 // .gu-transit {
@@ -193,8 +197,9 @@ mat-row {
 .ongoing {
   // .ongoing {
     display: block;
-  border: 2px solid #0054f7;
-  padding: 10px 10px 0 10px;
+  // border: 2px solid #0054f7;
+  border: 2px solid #009cf7;
+  padding: 17px;
   margin-bottom: 17px;
   border-radius: 5px;
 }
