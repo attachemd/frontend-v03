@@ -87,11 +87,29 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-date:before {
+  content: "\e900";
+}
+.icon-select_from_list:before {
+  content: "\e903";
+}
+.icon-multiple_selection:before {
+  content: "\e904";
+}
+.icon-single_selection:before {
+  content: "\e905";
+}
+.icon-password:before {
+  content: "\e906";
+}
+.icon-text:before {
+  content: "\e907";
+}
+.icon-email:before {
+  content: "\e902";
+}
 .icon-drag:before {
   content: "\e901";
-}
-.icon-select-type-cursor:before {
-  content: "\e900";
 }
 
 /* in-flight clone */

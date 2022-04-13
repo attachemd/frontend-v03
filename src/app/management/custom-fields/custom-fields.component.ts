@@ -42,6 +42,7 @@ class FormElement {
   public label?: string;
   public inputType?: string;
   public value: string;
+  public description?: string;
   public options?: string[];
   public validations: Validation[];
   constructor(field: FieldConfig) {
@@ -52,6 +53,7 @@ class FormElement {
     this.label = field.label;
     this.inputType = field.inputType;
     this.value = field.value;
+    this.description = field.description;
     this.options = field.options;
     this.validations = field.validations;
   }
@@ -106,9 +108,9 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     this._essentialFields.forEach((field) => {
       this.essentialBuilderFields.push(new FormElement(field));
     });
-    // this._suggestedFields.forEach((field) => {
-    //   this.suggestedBuilderFields.push(new FormElement(field));
-    // });
+    this._suggestedFields.forEach((field) => {
+      this.suggestedBuilderFields.push(new FormElement(field));
+    });
 
     // this._regConfig.forEach((field) => {
     //   this.renderedBuilderFields.push(new FormElement(field));

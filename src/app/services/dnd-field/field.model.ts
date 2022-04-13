@@ -13,5 +13,6 @@ export interface FieldConfig {
   collections?: any;
   type: string;
   value?: any;
+  description?: string;
   validations: Validation[];
 }

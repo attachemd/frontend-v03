@@ -41,7 +41,8 @@
                 <div class="dnd-field-icon icon-drag"></div>
               </div>
               <div>
-                <div class="dnd-field-icon icon-select-type-cursor"></div>
+                <!-- <div class="dnd-field-icon icon-select-type-cursor"></div> -->
+                <div [ngClass]="'dnd-field-icon' + ' icon-' + formElement.name"></div>
               </div>
               <div>
                 <div [ngClass]="'dnd-field-content' + ' ' + formElement.type">
@@ -49,7 +50,7 @@
                     {{ formElement.label }}
                   </div>
                   <div class="dnd-field-content-description">
-                    Field description
+                    {{ formElement.description }}
                   </div>
                 </div>
               </div>

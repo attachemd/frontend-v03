@@ -4,10 +4,11 @@ import { FieldConfig } from './field.model';
 export const essentialFields: FieldConfig[] = [
   {
     type: 'input',
-    label: 'Text Label',
+    label: 'Text',
     inputType: 'text',
-    name: 'text_label',
+    name: 'text',
     value: '',
+    description: 'Single line of text',
     validations: [
       {
         name: 'required',
@@ -18,57 +19,11 @@ export const essentialFields: FieldConfig[] = [
   },
   {
     type: 'input',
-    label: 'Address',
-    inputType: 'text',
-    name: 'address',
-    value: 'john',
-    validations: [
-      {
-        name: 'required',
-        validator: Validators.required,
-        message: 'Name Required',
-      },
-    ],
-  },
-  {
-    type: 'input',
-    label: 'Full Name',
-    inputType: 'text',
-    name: 'full_name',
-    value: 'john',
-    validations: [
-      {
-        name: 'required',
-        validator: Validators.required,
-        message: 'Name Required',
-      },
-    ],
-  },
-  {
-    type: 'input',
-    label: 'Username',
-    inputType: 'text',
-    name: 'name',
-    value: 'john',
-    validations: [
-      {
-        name: 'required',
-        validator: Validators.required,
-        message: 'Name Required',
-      },
-      {
-        name: 'pattern',
-        validator: Validators.pattern('^[a-zA-Z]+$'),
-        message: 'Accept only text',
-      },
-    ],
-  },
-  {
-    type: 'input',
     label: 'Email Address',
     inputType: 'email',
     name: 'email',
-    value: 'john@gmail.com',
+    value: '',
+    description: 'Email validation input',
     validations: [
       {
         name: 'required',
@@ -89,7 +44,8 @@ export const essentialFields: FieldConfig[] = [
     label: 'Password',
     inputType: 'password',
     name: 'password',
-    value: 'pass1234',
+    value: '',
+    description: 'Masked characters input',
     validations: [
       {
         name: 'required',
@@ -100,38 +56,43 @@ export const essentialFields: FieldConfig[] = [
   },
   {
     type: 'radiobutton',
-    label: 'Gender',
-    name: 'gender',
-    options: ['Male', 'Female'],
-    value: 'Male',
-    validations: [],
-  },
-  {
-    type: 'date',
-    label: 'Date of Birth',
-    name: 'date_of_birth',
-    value: '4/14/2021',
-    validations: [
-      {
-        name: 'required',
-        validator: Validators.required,
-        message: 'Date of Birth Required',
-      },
-    ],
-  },
-  {
-    type: 'select',
-    label: 'Country',
-    name: 'country',
-    value: 'Morocco',
-    options: ['UAE', 'Morocco', 'UK', 'US'],
+    label: 'Single Selection',
+    name: 'single_selection',
+    options: ['Option 01', 'Option 02'],
+    value: 'Option 01',
+    description: 'Select only one item with a radio button',
     validations: [],
   },
   {
     type: 'checkbox',
-    label: 'Accept Terms',
-    name: 'term',
-    value: true,
+    label: 'Multiple Selection',
+    name: 'multiple_selection',
+    value: [],
+    options: [],
+    description: 'Select one or many options using a checkbox',
     validations: [],
+  },
+  {
+    type: 'select',
+    label: 'Select from List',
+    name: 'select_from_list',
+    value: '',
+    options: [],
+    description: 'Select option from list',
+    validations: [],
+  },
+  {
+    type: 'date',
+    label: 'Date',
+    name: 'date',
+    value: '',
+    description: 'Select a date from a datepicker',
+    validations: [
+      {
+        name: 'required',
+        validator: Validators.required,
+        message: 'Date is Required',
+      },
+    ],
   },
 ];

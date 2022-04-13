@@ -8,6 +8,7 @@ export const suggestedFields: FieldConfig[] = [
     inputType: 'text',
     name: 'zip_code',
     value: 'john',
+    description: 'Field description',
     validations: [
       {
         name: 'required',
@@ -22,6 +23,7 @@ export const suggestedFields: FieldConfig[] = [
     inputType: 'text',
     name: 'address',
     value: 'john',
+    description: 'Field description',
     validations: [
       {
         name: 'required',
@@ -36,6 +38,7 @@ export const suggestedFields: FieldConfig[] = [
     inputType: 'text',
     name: 'full_name',
     value: 'john',
+    description: 'Field description',
     validations: [
       {
         name: 'required',
@@ -50,6 +53,7 @@ export const suggestedFields: FieldConfig[] = [
     inputType: 'text',
     name: 'name',
     value: 'john',
+    description: 'Field description',
     validations: [
       {
         name: 'required',
@@ -69,6 +73,7 @@ export const suggestedFields: FieldConfig[] = [
     inputType: 'email',
     name: 'email',
     value: 'john@gmail.com',
+    description: 'Field description',
     validations: [
       {
         name: 'required',
@@ -90,6 +95,7 @@ export const suggestedFields: FieldConfig[] = [
     inputType: 'password',
     name: 'password',
     value: 'pass1234',
+    description: 'Field description',
     validations: [
       {
         name: 'required',
@@ -111,6 +117,7 @@ export const suggestedFields: FieldConfig[] = [
     label: 'Date of Birth',
     name: 'date_of_birth',
     value: '4/14/2021',
+    description: 'Field description',
     validations: [
       {
         name: 'required',
@@ -124,6 +131,7 @@ export const suggestedFields: FieldConfig[] = [
     label: 'Country',
     name: 'country',
     value: 'Morocco',
+    description: 'Field description',
     options: ['UAE', 'Morocco', 'UK', 'US'],
     validations: [],
   },
@@ -132,6 +140,7 @@ export const suggestedFields: FieldConfig[] = [
     label: 'Accept Terms',
     name: 'term',
     value: true,
+    description: 'Field description',
     validations: [],
   },
 ];
