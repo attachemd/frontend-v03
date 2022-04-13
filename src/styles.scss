@@ -87,11 +87,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-date:before {
-  content: "\e900";
+.icon-delete:before {
+  content: "\e908";
+}
+.icon-add:before {
+  content: "\e909";
 }
 .icon-select_from_list:before {
   content: "\e903";
+}
+.icon-date:before {
+  content: "\e900";
 }
 .icon-multiple_selection:before {
   content: "\e904";

@@ -1,5 +1,35 @@
 <div class="field_container">
-  <app-confirm-field-edit *ngIf="field.isOngoing" [field]="field"></app-confirm-field-edit>
+  <app-confirm-field-edit
+    *ngIf="field.isOngoing"
+    [field]="field"
+  ></app-confirm-field-edit>
+
+  <div *ngIf="field.isOngoing" class="field-element-body">
+    <div class="option-field">
+      <input type="text" value="Option 01" />
+      <button
+      class="option-field-icon icon-delete"
+      title="Delete Option"
+      >
+      </button>
+    </div>
+    <div class="option-field">
+      <input type="text" value="Option 02" />
+      <button
+      class="option-field-icon icon-delete"
+      title="Delete Option"
+      >
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="field.isOngoing">
+    <button
+    class="option-field-icon icon-add"
+    title="Add Option"
+    >
+    </button>
+  </div>
 
   <!-- <div class="ft-lm-edit-field">
     <mat-form-field fxFlex="500px" [formGroup]="group">
@@ -28,6 +58,9 @@
         </mat-radio-button>
       </mat-radio-group>
     </div>
-    <app-dnd-field-edit [visibility]="visibility" [field]="field"></app-dnd-field-edit>
+    <app-dnd-field-edit
+      [visibility]="visibility"
+      [field]="field"
+    ></app-dnd-field-edit>
   </div>
 </div>
