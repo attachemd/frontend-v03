@@ -7,7 +7,7 @@ export const essentialFields: FieldConfig[] = [
     label: 'Text',
     inputType: 'text',
     name: 'text',
-    value: '',
+    value: 'text',
     description: 'Single line of text',
     validations: [
       {
@@ -58,8 +58,8 @@ export const essentialFields: FieldConfig[] = [
     type: 'radiobutton',
     label: 'Single Selection',
     name: 'single_selection',
-    options: ['Option 01', 'Option 02'],
-    value: 'Option 01',
+    options: [],
+    value: '',
     description: 'Select only one item with a radio button',
     validations: [],
   },

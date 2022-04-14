@@ -187,10 +187,7 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
   public onSubmit(form: FormGroup) {
     // console.log('Valid?', form.valid); // true or false
     console.log('form.value', form.value);
-    console.log(
-      'this.renderedBuilderFields',
-      this.renderedBuilderFields
-    );
+    console.log('this.renderedBuilderFields', this.renderedBuilderFields);
   }
 
   private _addControls(formGroup: FormGroup) {

@@ -1,7 +1,14 @@
 import * as $ from 'jquery';
 import * as _ from 'lodash';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
 import {
@@ -81,23 +88,50 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   private _suggestedFields = suggestedFields;
   private _shadow: any;
   private _shadowInnerHTML: string = 'test';
+  // private _data = {
+  //   cities: [
+  //     {
+  //       city: 'Morocco',
+  //       options: [{ name: 'option 01' }, { name: 'option 02' }],
+  //     },
+  //     {
+  //       city: 'UAE',
+  //       options: [
+  //         { name: 'option 03' },
+  //         { name: 'option 04' },
+  //         { name: 'option 05' },
+  //       ],
+  //     },
+  //   ],
+  // };
   private _data = {
-    cities: [
+    validations: [
       {
-        city: 'Morocco',
-        addressLines: [
-          { addressLine: 'adress 01' },
-          { addressLine: 'adress 02' },
-        ],
+        name: 'required',
+        validator: Validators.required,
+        message: 'Option name Required',
       },
       {
-        city: 'UAE',
-        addressLines: [
-          { addressLine: 'adress 03' },
-          { addressLine: 'adress 04' },
-          { addressLine: 'adress 05' },
-        ],
+        name: 'pattern',
+        validator: Validators.pattern(
+          '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'
+        ),
+        message: 'Invalid option name',
       },
+    ],
+    // options: [
+    //   {
+    //     name: 'option 04',
+    //   },
+    //   { name: 'option 04' },
+    //   { name: 'option 05' },
+    // ],
+    options: [
+      {
+        name: 'john@gmail.com',
+      },
+      { name: 'john@gmail.com' },
+      { name: 'john@gmail.com' },
     ],
   };
 
@@ -121,8 +155,8 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     // });
 
     this.myForm = this._fb.group({
-      form_name: [''],
-      cities: this._fb.array([]),
+      form_name: ['the form'],
+      options: this._fb.array([]),
     });
 
     this._addControls(this.myForm);
@@ -338,6 +372,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       'background: yellow; color: #000; padding: 0 200px; border: 0px solid #47C0BE'
     );
     console.log('form.value', form.value);
+    console.log('Valid?', form.valid); // true or false
     // this._router.navigate(['/products/', this.productId]);
     // this._router.navigate(['/products/', '(edit:products/2)']);
     this._router.navigate([
@@ -349,35 +384,81 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     // this._router.navigateByUrl('/products/(edit:products/2)');
   }
 
-  private _setAddressLines(x: any) {
+  private _setOptions(options: any) {
     let arr = new FormArray([]);
 
-    x.addressLines.forEach((y: any) => {
+    options.forEach((y: any) => {
       arr.push(
         this._fb.group({
-          addressLine: y.addressLine,
+          name: y.name,
         })
       );
     });
     return arr;
   }
 
+  private _controlLicenseNumber(c: AbstractControl) {
+    const value = c.get('license_number')?.value;
+
+    return Object.keys(value).find((license_number) => c === value) || null;
+  }
+
   private _addControls(formGroup: FormGroup) {
-    let citiesControl = <FormArray>formGroup.controls['cities'];
+    let optionsControl = <FormArray>formGroup.controls['options'];
 
-    citiesControl.clear();
+    optionsControl.clear();
+    // optionsControl = this._setOptions(this._data.options);
+    // this._data.cities.forEach((x) => {
+    //   optionsControl.push(
+    //     this._fb.group({
+    //       city: x.city,
+    //       options: this._setOptions(x),
+    //     })
+    //   );
+    // });
 
-    this._data.cities.forEach((x) => {
-      citiesControl.push(
-        this._fb.group({
-          city: x.city,
-          addressLines: this._setAddressLines(x),
-        })
+    this._data.options.forEach((x) => {
+      let optionFormGroup = this._fb.group({});
+      const control = this._fb.control(
+        x.name,
+        this._bindValidations(this._data.validations || [])
       );
+
+      optionFormGroup.addControl('name', control);
+      optionsControl.push(optionFormGroup);
     });
+
+    // this._data.options.forEach((x) => {
+    //   let optionFormGroup = this._fb.group({});
+    //   let control = new FormControl();
+
+    //   control.setValue(x.name);
+    //   control.setValidators(
+    //     this._bindValidations(this._data.validations || [])
+    //   );
+
+    //   optionFormGroup.addControl('name', control);
+    //   optionsControl.push(optionFormGroup);
+    // });
+
+    formGroup = this._fb.group(
+      {
+        name: ['', [Validators.required]],
+        surname: ['', [Validators.required]],
+        phone: ['', [Validators.required]],
+        nationality: ['', [Validators.required]],
+        email: ['', Validators.email],
+        license_number: ['', [Validators.required]],
+      },
+      {
+        validator: this._controlLicenseNumber,
+      }
+    );
+
     this.renderedBuilderFields.forEach((field) => {
       if (field.type === 'button') return;
       if (field.type === 'date') field.value = new Date(field.value);
+      // if (field.type === 'radiobutton') field.value = new Date(field.value);
 
       const control = this._fb.control(
         field.value,
