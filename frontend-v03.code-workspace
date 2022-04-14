@@ -5,6 +5,7 @@
 		}
 	],
 	"settings": {
-		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint",
+		"bookmarks.saveBookmarksInProject": true
 	}
 }
