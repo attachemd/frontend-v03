@@ -16,6 +16,12 @@ export class RadioButtonComponent implements OnInit {
   public field!: any;
   public group!: FormGroup;
   public visibility = 'none';
+  public options = [
+    { name: 'Option 01' },
+    { name: 'Option 02' },
+    { name: 'Option 03' },
+  ];
+
   constructor() {}
   @HostBinding('class.ongoing') public get isOngoing() {
     return this.field.isOngoing;

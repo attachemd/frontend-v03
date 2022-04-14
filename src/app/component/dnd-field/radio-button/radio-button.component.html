@@ -5,30 +5,21 @@
   ></app-confirm-field-edit>
 
   <div *ngIf="field.isOngoing" class="field-element-body">
-    <div class="option-field">
-      <input type="text" value="Option 01" />
+    <div class="option-field" *ngFor="let optionElement of options">
+      <!-- <div class="option-field" *ngFor="let item of field.options"> -->
+      <!-- <input type="text" value="{{item}}" /> -->
+      <!-- <input type="text" value="{{ optionElement.name }}" /> -->
+      <input type="text" [(ngModel)]="optionElement.name" />
       <button
-      class="option-field-icon icon-delete"
-      title="Delete Option"
-      >
-      </button>
-    </div>
-    <div class="option-field">
-      <input type="text" value="Option 02" />
-      <button
-      class="option-field-icon icon-delete"
-      title="Delete Option"
-      >
-      </button>
+        class="option-field-icon icon-delete"
+        title="Delete Option"
+      ></button>
     </div>
   </div>
 
-  <div *ngIf="field.isOngoing">
-    <button
-    class="option-field-icon icon-add"
-    title="Add Option"
-    >
-    </button>
+  <div class="option-field-add" *ngIf="field.isOngoing">
+    <button class="option-field-icon icon-add" title="Add Option"></button>
+    <span>Add option</span>
   </div>
 
   <!-- <div class="ft-lm-edit-field">
@@ -53,8 +44,11 @@
     </div>
     <div class="ft-lm-field">
       <mat-radio-group [formControlName]="field.name">
-        <mat-radio-button *ngFor="let item of field.options" [value]="item">
+        <!-- <mat-radio-button *ngFor="let item of field.options" [value]="item">
           {{ item }}
+        </mat-radio-button> -->
+        <mat-radio-button *ngFor="let optionElement of options" [value]="optionElement.name">
+          {{ optionElement.name }}
         </mat-radio-button>
       </mat-radio-group>
     </div>

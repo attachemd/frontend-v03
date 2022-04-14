@@ -1,7 +1,7 @@
 import * as $ from 'jquery';
 import * as _ from 'lodash';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
 import {
@@ -81,6 +81,26 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   private _suggestedFields = suggestedFields;
   private _shadow: any;
   private _shadowInnerHTML: string = 'test';
+  private _data = {
+    cities: [
+      {
+        city: 'Morocco',
+        addressLines: [
+          { addressLine: 'adress 01' },
+          { addressLine: 'adress 02' },
+        ],
+      },
+      {
+        city: 'UAE',
+        addressLines: [
+          { addressLine: 'adress 03' },
+          { addressLine: 'adress 04' },
+          { addressLine: 'adress 05' },
+        ],
+      },
+    ],
+  };
+
   constructor(
     private _dragulaService: DragulaService,
     private _fb: FormBuilder,
@@ -89,22 +109,6 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     private _route: ActivatedRoute,
     private _router: Router
   ) {
-    // this._regConfig.forEach((field) => {
-    //   console.log('field');
-    //   console.log(field);
-
-    //   this.renderedBuilderFields.push(
-    //     new FormElement(
-    //       field.name,
-    //       field.type!,
-    //       field.label!,
-    //       field.inputType!,
-    //       field.value,
-    //       field.options!,
-    //       field.validations
-    //     )
-    //   );
-    // });
     this._essentialFields.forEach((field) => {
       this.essentialBuilderFields.push(new FormElement(field));
     });
@@ -116,7 +120,10 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     //   this.renderedBuilderFields.push(new FormElement(field));
     // });
 
-    this.myForm = this._fb.group({});
+    this.myForm = this._fb.group({
+      form_name: [''],
+      cities: this._fb.array([]),
+    });
 
     this._addControls(this.myForm);
 
@@ -196,13 +203,12 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       copyItem: (formElement: FormElement) => {
         return new FormElement(formElement);
       }, //Allow item to be coppied in another div
-      // copySortSource: false,
       removeOnSpill: false,
     });
   }
 
   ngOnInit(): void {
-    // Get product is
+    // Get product id
     this._subs.add(
       this._route.params.subscribe({
         next: (params: any) => {
@@ -280,7 +286,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
                 this.renderedBuilderFieldsPrevState
               );
               this.renderedBuilderFieldsPrevState = [];
-              // click cancel and nothing there only the curren element
+              // click cancel and nothing there (builder canvas) only the curren element
             } else this.renderedBuilderFields = [];
 
           if (fieldObj.fieldName === 'save') {
@@ -343,7 +349,32 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     // this._router.navigateByUrl('/products/(edit:products/2)');
   }
 
+  private _setAddressLines(x: any) {
+    let arr = new FormArray([]);
+
+    x.addressLines.forEach((y: any) => {
+      arr.push(
+        this._fb.group({
+          addressLine: y.addressLine,
+        })
+      );
+    });
+    return arr;
+  }
+
   private _addControls(formGroup: FormGroup) {
+    let citiesControl = <FormArray>formGroup.controls['cities'];
+
+    citiesControl.clear();
+
+    this._data.cities.forEach((x) => {
+      citiesControl.push(
+        this._fb.group({
+          city: x.city,
+          addressLines: this._setAddressLines(x),
+        })
+      );
+    });
     this.renderedBuilderFields.forEach((field) => {
       if (field.type === 'button') return;
       if (field.type === 'date') field.value = new Date(field.value);
