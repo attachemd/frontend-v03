@@ -104,21 +104,28 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   //     },
   //   ],
   // };
+  // BOOKMARK _data
   private _data = {
-    validations: [
-      {
-        name: 'required',
-        validator: Validators.required,
-        message: 'Option name Required',
-      },
-      {
-        name: 'pattern',
-        validator: Validators.pattern(
-          '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'
-        ),
-        message: 'Invalid option name',
-      },
-    ],
+    // validations: [
+    //   {
+    //     name: 'required',
+    //     validator: Validators.required,
+    //     message: 'Option name Required',
+    //   },
+    //   {
+    //     name: 'pattern',
+    //     validator: Validators.pattern(
+    //       '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'
+    //     ),
+    //     message: 'Invalid option name',
+    //   },
+    //   {
+    //     name: 'custom',
+    //     validator: _isduplicate,
+    //     message: 'Invalid option name',
+    //   },
+    // ],
+    validations: [Validators.required, this._isduplicate],
     // options: [
     //   {
     //     name: 'option 04',
@@ -131,7 +138,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         name: 'john@gmail.com',
       },
       { name: 'john@gmail.com' },
-      { name: 'john@gmail.com' },
+      { name: 'john03@gmail.com' },
     ],
   };
 
@@ -397,12 +404,55 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     return arr;
   }
 
-  private _controlLicenseNumber(c: AbstractControl) {
-    const value = c.get('license_number')?.value;
+  // private _controlLicenseNumber(c: AbstractControl) {
+  //   const value = c.get('options')?.value;
 
-    return Object.keys(value).find((license_number) => c === value) || null;
+  //   return Object.keys(value).find((license_number) => c === value) || null;
+  // }
+  private _isduplicate() {
+    const valueArr = this.myForm.get('options')?.value;
+    let names = valueArr.map((item: any) => {
+      return item['name'];
+    });
+    let isDuplicate = new Set(names).size !== names.length;
+
+    if (!isDuplicate) return { invalidUrl: true };
+
+    return null;
   }
 
+  private _controlLicenseNumber(formGroup: FormGroup) {
+    const valueArr = formGroup.get('options')?.value;
+    let isDuplicate = new Set(valueArr).size !== valueArr.length;
+
+    console.log('isDuplicate');
+    console.log(isDuplicate);
+    let setSize = new Set(valueArr).size;
+    let arrayLength = valueArr.length;
+
+    console.log('setSize');
+    console.log(setSize);
+    console.log('arrayLength');
+    console.log(arrayLength);
+    let obj = Object.assign({}, ...valueArr);
+
+    console.log('obj');
+    console.log(obj);
+
+    let names = valueArr.map((item: any) => {
+      return item['name'];
+    });
+
+    console.log('names');
+    console.log(names);
+    let isDuplicate02 = new Set(names).size !== names.length;
+
+    console.log('isDuplicate02');
+    console.log(isDuplicate02);
+    // return Object.keys(value).find((name) => c === value) || null;
+  }
+
+  // BOOKMARK _addControls
   private _addControls(formGroup: FormGroup) {
     let optionsControl = <FormArray>formGroup.controls['options'];
 
@@ -427,6 +477,9 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       optionFormGroup.addControl('name', control);
       optionsControl.push(optionFormGroup);
     });
+    this._controlLicenseNumber(formGroup);
+    // console.log('_controlLicenseNumber');
+    // console.log(this._controlLicenseNumber(formGroup));
 
     // this._data.options.forEach((x) => {
     //   let optionFormGroup = this._fb.group({});
@@ -441,19 +494,19 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     //   optionsControl.push(optionFormGroup);
     // });
 
-    formGroup = this._fb.group(
-      {
-        name: ['', [Validators.required]],
-        surname: ['', [Validators.required]],
-        phone: ['', [Validators.required]],
-        nationality: ['', [Validators.required]],
-        email: ['', Validators.email],
-        license_number: ['', [Validators.required]],
-      },
-      {
-        validator: this._controlLicenseNumber,
-      }
-    );
+    // formGroup = this._fb.group(
+    //   {
+    //     name: ['', [Validators.required]],
+    //     surname: ['', [Validators.required]],
+    //     phone: ['', [Validators.required]],
+    //     nationality: ['', [Validators.required]],
+    //     email: ['', Validators.email],
+    //     license_number: ['', [Validators.required]],
+    //   },
+    //   {
+    //     validator: this._controlLicenseNumber,
+    //   }
+    // );
 
     this.renderedBuilderFields.forEach((field) => {
       if (field.type === 'button') return;
