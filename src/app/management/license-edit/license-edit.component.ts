@@ -235,7 +235,9 @@ export class LicenseEditComponent implements OnInit, OnDestroy {
       const validList: any[] = [];
 
       validations.forEach((validation: Validation) => {
-        validList.push(validation.validator);
+        if (validation.name === 'required') validList.push(Validators.required);
+        else if (validation.name === 'pattern')
+          validList.push(Validators.pattern(validation.pattern));
       });
       return Validators.compose(validList);
     }

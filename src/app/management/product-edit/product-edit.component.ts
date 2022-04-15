@@ -178,35 +178,14 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     });
   }
 
-  private _createControl() {
-    // const group = this._fb.group({});
-    this.myForm = this._fb.group({
-      key: ['', [Validators.required, Validators.minLength(8)]],
-      status: [''],
-      type: ['', Validators.required],
-      description: ['', Validators.required],
-      expiry: ['', Validators.required],
-      client: ['', Validators.required],
-      product: ['', Validators.required],
-    });
-
-    this.renderedBuilderFields.forEach((field) => {
-      if (field.type === 'button') return;
-      const control = this._fb.control(
-        field.value,
-        this._bindValidations(field.validations || [])
-      );
-
-      this.myForm.addControl(field.name, control);
-    });
-  }
-
   private _bindValidations(validations: any) {
     if (validations.length > 0) {
       const validList: any[] = [];
 
       validations.forEach((validation: Validation) => {
-        validList.push(validation.validator);
+        if (validation.name === 'required') validList.push(Validators.required);
+        else if (validation.name === 'pattern')
+          validList.push(Validators.pattern(validation.pattern));
       });
       return Validators.compose(validList);
     }

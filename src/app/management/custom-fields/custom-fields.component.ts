@@ -7,6 +7,7 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { DragulaService } from 'ng2-dragula';
@@ -20,6 +21,24 @@ import { DndFieldService } from 'src/app/services/dnd-field/dnd-field.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { suggestedFields } from 'src/app/services/dnd-field/suggested-fields.sample';
 import { essentialFields } from 'src/app/services/dnd-field/essential-fields.sample';
+
+let isduplicate = (control: AbstractControl) => {
+  console.log(
+    '%c invalidUrl ',
+    'background: red; color: #fff; padding: 0 200px; border: 0px solid #47C0BE'
+  );
+
+  return { invalidUrl: true };
+  // const valueArr = this.myForm.get('options')?.value;
+  // let names = valueArr.map((item: any) => {
+  //   return item['name'];
+  // });
+  // let isDuplicate = new Set(names).size !== names.length;
+
+  // if (!isDuplicate) return { invalidUrl: true };
+
+  // return null;
+};
 
 let ft_lm = { formElementId: 0 };
 
@@ -125,7 +144,18 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     //     message: 'Invalid option name',
     //   },
     // ],
-    validations: [Validators.required, this._isduplicate],
+    validations: [
+      {
+        name: 'required',
+        validator: Validators.required,
+        message: 'Name Required',
+      },
+      // {
+      //   name: 'custom',
+      //   validator: this._isduplicate,
+      //   message: 'Invalid option name',
+      // },
+    ],
     // options: [
     //   {
     //     name: 'option 04',
@@ -135,7 +165,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     // ],
     options: [
       {
-        name: 'john@gmail.com',
+        name: 'john02@gmail.com',
       },
       { name: 'john@gmail.com' },
       { name: 'john03@gmail.com' },
@@ -161,6 +191,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     //   this.renderedBuilderFields.push(new FormElement(field));
     // });
 
+    // BOOKMARK this.myForm = this._fb.group({
     this.myForm = this._fb.group({
       form_name: ['the form'],
       options: this._fb.array([]),
@@ -391,6 +422,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     // this._router.navigateByUrl('/products/(edit:products/2)');
   }
 
+  // BOOKMARK _setOptions
   private _setOptions(options: any) {
     let arr = new FormArray([]);
 
@@ -409,14 +441,39 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
 
   //   return Object.keys(value).find((license_number) => c === value) || null;
   // }
-  private _isduplicate() {
-    const valueArr = this.myForm.get('options')?.value;
-    let names = valueArr.map((item: any) => {
+  // BOOKMARK _isDuplicate
+  private _isDuplicate(control: AbstractControl) {
+    console.log(
+      '%c invalidUrl top ',
+      'background-color: green; color: #fff; padding: 0 200px; border: 0px solid #47C0BE'
+    );
+    // return null;
+    // let options = control.parent?.parent?.value;
+    let options = control.parent?.value;
+
+    console.log('control: ');
+    console.log(control);
+    console.log('options: ');
+    console.log(options);
+
+    // return { invalidUrl: true };
+    // const valueArr = this.myForm.get('options')?.value;
+    let names = options?.map((item: any) => {
       return item['name'];
     });
-    let isDuplicate = new Set(names).size !== names.length;
 
-    if (!isDuplicate) return { invalidUrl: true };
+    if (names) {
+      let isDuplicate = new Set(names).size !== names.length;
+
+      console.log(
+        '%c invalidUrl ',
+        'background: red; color: #fff; padding: 0 200px; border: 0px solid #47C0BE'
+      );
+      console.log('isDuplicate');
+      console.log(isDuplicate);
+
+      if (isDuplicate) return { invalidUrl: true };
+    }
 
     return null;
   }
@@ -468,7 +525,12 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     // });
 
     this._data.options.forEach((x) => {
-      let optionFormGroup = this._fb.group({});
+      let optionFormGroup = this._fb.group(
+        {},
+        {
+          validators: Validators.compose([this._isDuplicate]),
+        }
+      );
       const control = this._fb.control(
         x.name,
         this._bindValidations(this._data.validations || [])
@@ -477,7 +539,8 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       optionFormGroup.addControl('name', control);
       optionsControl.push(optionFormGroup);
     });
-    this._controlLicenseNumber(formGroup);
+    // this._controlLicenseNumber(formGroup);
+
     // console.log('_controlLicenseNumber');
     // console.log(this._controlLicenseNumber(formGroup));
 
@@ -511,7 +574,35 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     this.renderedBuilderFields.forEach((field) => {
       if (field.type === 'button') return;
       if (field.type === 'date') field.value = new Date(field.value);
-      // if (field.type === 'radiobutton') field.value = new Date(field.value);
+      if (field.type === 'radiobutton') {
+        console.log('field label');
+        console.log(field.label.split(' ').join('_').toLowerCase().trim());
+
+        let optionsFormGroup = this._fb.group({});
+        let optionsControl = this._fb.array([]);
+
+        this._data.options.forEach((x) => {
+          let optionFormGroup = this._fb.group(
+            {},
+            {
+              validators: Validators.compose([this._isDuplicate]),
+            }
+          );
+          const control = this._fb.control(
+            x.name,
+            this._bindValidations(this._data.validations || [])
+          );
+
+          optionFormGroup.addControl('name', control);
+          optionsControl.push(optionFormGroup);
+        });
+        optionsFormGroup.addControl('options', optionsControl);
+        formGroup.addControl(
+          field.label.split(' ').join('_').toLowerCase().trim(),
+          optionsFormGroup
+        );
+        return;
+      }
 
       const control = this._fb.control(
         field.value,
@@ -527,7 +618,9 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       const validList: any[] = [];
 
       validations.forEach((validation: Validation) => {
-        validList.push(validation.validator);
+        if (validation.name === 'required') validList.push(Validators.required);
+        else if (validation.name === 'pattern')
+          validList.push(Validators.pattern(validation.pattern));
       });
       return Validators.compose(validList);
     }

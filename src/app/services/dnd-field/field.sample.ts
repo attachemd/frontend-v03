@@ -12,7 +12,6 @@ export const fieldConfig: FieldConfig[] = [
     validations: [
       {
         name: 'required',
-        validator: Validators.required,
         message: 'Name Required',
       },
     ],
@@ -27,7 +26,6 @@ export const fieldConfig: FieldConfig[] = [
     validations: [
       {
         name: 'required',
-        validator: Validators.required,
         message: 'Name Required',
       },
     ],
@@ -42,7 +40,6 @@ export const fieldConfig: FieldConfig[] = [
     validations: [
       {
         name: 'required',
-        validator: Validators.required,
         message: 'Name Required',
       },
     ],
@@ -57,12 +54,11 @@ export const fieldConfig: FieldConfig[] = [
     validations: [
       {
         name: 'required',
-        validator: Validators.required,
         message: 'Name Required',
       },
       {
         name: 'pattern',
-        validator: Validators.pattern('^[a-zA-Z]+$'),
+        pattern: '^[a-zA-Z]+$',
         message: 'Accept only text',
       },
     ],
@@ -77,14 +73,11 @@ export const fieldConfig: FieldConfig[] = [
     validations: [
       {
         name: 'required',
-        validator: Validators.required,
         message: 'Email Required',
       },
       {
         name: 'pattern',
-        validator: Validators.pattern(
-          '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'
-        ),
+        pattern: '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$',
         message: 'Invalid email',
       },
     ],
@@ -99,7 +92,6 @@ export const fieldConfig: FieldConfig[] = [
     validations: [
       {
         name: 'required',
-        validator: Validators.required,
         message: 'Password Required',
       },
     ],
@@ -122,7 +114,6 @@ export const fieldConfig: FieldConfig[] = [
     validations: [
       {
         name: 'required',
-        validator: Validators.required,
         message: 'Date of Birth Required',
       },
     ],

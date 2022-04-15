@@ -12,7 +12,6 @@ export const essentialFields: FieldConfig[] = [
     validations: [
       {
         name: 'required',
-        validator: Validators.required,
         message: 'Text Required',
       },
     ],
@@ -27,14 +26,11 @@ export const essentialFields: FieldConfig[] = [
     validations: [
       {
         name: 'required',
-        validator: Validators.required,
         message: 'Email Required',
       },
       {
         name: 'pattern',
-        validator: Validators.pattern(
-          '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'
-        ),
+        pattern: '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$',
         message: 'Invalid email',
       },
     ],
@@ -49,7 +45,6 @@ export const essentialFields: FieldConfig[] = [
     validations: [
       {
         name: 'required',
-        validator: Validators.required,
         message: 'Password Required',
       },
     ],
@@ -90,7 +85,6 @@ export const essentialFields: FieldConfig[] = [
     validations: [
       {
         name: 'required',
-        validator: Validators.required,
         message: 'Date is Required',
       },
     ],

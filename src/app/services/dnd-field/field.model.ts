@@ -1,6 +1,6 @@
 export interface Validation {
   name: string;
-  validator: any;
+  pattern?: any;
   message: string;
 }
 export interface FieldConfig {
