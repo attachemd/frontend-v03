@@ -21,6 +21,8 @@ import { DndFieldService } from 'src/app/services/dnd-field/dnd-field.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { suggestedFields } from 'src/app/services/dnd-field/suggested-fields.sample';
 import { essentialFields } from 'src/app/services/dnd-field/essential-fields.sample';
+import { DuplicateValidator } from 'src/app/common/errors/duplicate.validator';
+import { DuplicateService } from 'src/app/common/errors/duplicate.service';
 
 let isduplicate = (control: AbstractControl) => {
   console.log(
@@ -100,6 +102,64 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   public renderedBuilderFields: any[] = [];
   public renderedBuilderFieldsPrevState: any[] = [];
   public stopDrag = false;
+  public singles: any;
+  // BOOKMARK _data
+  public data = {
+    // validations: [
+    //   {
+    //     name: 'required',
+    //     validator: Validators.required,
+    //     message: 'Option name Required',
+    //   },
+    //   {
+    //     name: 'pattern',
+    //     validator: Validators.pattern(
+    //       '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'
+    //     ),
+    //     message: 'Invalid option name',
+    //   },
+    //   {
+    //     name: 'custom',
+    //     validator: _isduplicate,
+    //     message: 'Invalid option name',
+    //   },
+    // ],
+    validations: [
+      {
+        name: 'required',
+        message: 'Name Required',
+      },
+      {
+        name: 'pattern',
+        pattern: '^[a-zA-Z]+$',
+        message: 'Accept only text',
+      },
+      {
+        name: 'invalidUrl',
+        // validator: this._isduplicate,
+        message: 'Invalid option name',
+      },
+      // {
+      //   name: 'duplicate',
+      //   // validator: this._isduplicate,
+      //   message: 'duplicate option name',
+      // },
+    ],
+    // options: [
+    //   {
+    //     name: 'option 04',
+    //   },
+    //   { name: 'option 04' },
+    //   { name: 'option 05' },
+    // ],
+    options: [
+      {
+        name: 'johnx',
+      },
+      { name: 'johny' },
+      { name: 'johnyz' },
+    ],
+  };
 
   private _subs = new Subscription();
   private _regConfig = fieldConfig;
@@ -123,54 +183,6 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   //     },
   //   ],
   // };
-  // BOOKMARK _data
-  private _data = {
-    // validations: [
-    //   {
-    //     name: 'required',
-    //     validator: Validators.required,
-    //     message: 'Option name Required',
-    //   },
-    //   {
-    //     name: 'pattern',
-    //     validator: Validators.pattern(
-    //       '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'
-    //     ),
-    //     message: 'Invalid option name',
-    //   },
-    //   {
-    //     name: 'custom',
-    //     validator: _isduplicate,
-    //     message: 'Invalid option name',
-    //   },
-    // ],
-    validations: [
-      {
-        name: 'required',
-        validator: Validators.required,
-        message: 'Name Required',
-      },
-      // {
-      //   name: 'custom',
-      //   validator: this._isduplicate,
-      //   message: 'Invalid option name',
-      // },
-    ],
-    // options: [
-    //   {
-    //     name: 'option 04',
-    //   },
-    //   { name: 'option 04' },
-    //   { name: 'option 05' },
-    // ],
-    options: [
-      {
-        name: 'john02@gmail.com',
-      },
-      { name: 'john@gmail.com' },
-      { name: 'john03@gmail.com' },
-    ],
-  };
 
   constructor(
     private _dragulaService: DragulaService,
@@ -178,7 +190,8 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     private _cdRef: ChangeDetectorRef,
     private _dndFieldService: DndFieldService,
     private _route: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private _duplicateService: DuplicateService
   ) {
     this._essentialFields.forEach((field) => {
       this.essentialBuilderFields.push(new FormElement(field));
@@ -193,8 +206,8 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
 
     // BOOKMARK this.myForm = this._fb.group({
     this.myForm = this._fb.group({
-      form_name: ['the form'],
-      options: this._fb.array([]),
+      // form_name: ['the form'],
+      // single_selections: this._fb.array([]),
     });
 
     this._addControls(this.myForm);
@@ -372,6 +385,13 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
 
             if (currentField) {
               currentField.isOngoing = false;
+              console.log(
+                '%c currentField.name ',
+                'background-color: yellow; color: #000; padding: 0 200px; border: 1px solid #47C0BE'
+              );
+              console.log(currentField);
+              console.log(currentField.name);
+
               this.myForm.removeControl(currentField.name);
             }
           }
@@ -443,39 +463,49 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   // }
   // BOOKMARK _isDuplicate
   private _isDuplicate(control: AbstractControl) {
-    console.log(
-      '%c invalidUrl top ',
-      'background-color: green; color: #fff; padding: 0 200px; border: 0px solid #47C0BE'
-    );
-    // return null;
-    // let options = control.parent?.parent?.value;
-    let options = control.parent?.value;
-
-    console.log('control: ');
-    console.log(control);
-    console.log('options: ');
-    console.log(options);
-
-    // return { invalidUrl: true };
-    // const valueArr = this.myForm.get('options')?.value;
-    let names = options?.map((item: any) => {
-      return item['name'];
-    });
-
-    if (names) {
-      let isDuplicate = new Set(names).size !== names.length;
-
+    setTimeout(() => {
       console.log(
-        '%c invalidUrl ',
-        'background: red; color: #fff; padding: 0 200px; border: 0px solid #47C0BE'
+        '%c invalidUrl top ',
+        'background-color: green; color: #fff; padding: 0 200px; border: 0px solid #47C0BE'
       );
-      console.log('isDuplicate');
-      console.log(isDuplicate);
+      // return null;
+      let options = control.parent?.parent?.value;
+      // let options = control.parent?.value;
 
-      if (isDuplicate) return { invalidUrl: true };
-    }
+      console.log('control: ');
+      console.log(control);
+      console.log('options: ');
+      console.log(options);
 
-    return null;
+      // return { invalidUrl: true };
+      // const valueArr = this.myForm.get('options')?.value;
+      let names = options?.map((item: any) => {
+        return item['name'];
+      });
+
+      if (names) {
+        let isDuplicate = new Set(names).size !== names.length;
+
+        console.log(
+          '%c invalidUrl ',
+          'background: red; color: #fff; padding: 0 200px; border: 0px solid #47C0BE'
+        );
+        console.log('names');
+        console.log(names);
+
+        console.log('isDuplicate');
+        console.log(isDuplicate);
+
+        // if (isDuplicate) return { invalidUrl: true };
+        if (isDuplicate) return control.setErrors({ invalidUrl: true });
+      }
+      // console.log('hasError');
+      // if (control.errors) console.log(control.errors);
+      // else console.log('null');
+
+      // return control.setErrors(null);
+      return null;
+    }, 0);
   }
 
   private _controlLicenseNumber(formGroup: FormGroup) {
@@ -509,11 +539,25 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     // return Object.keys(value).find((name) => c === value) || null;
   }
 
+  private _setOtions(x: any) {
+    let arr = new FormArray([]);
+
+    x.options.forEach((y: any) => {
+      arr.push(
+        this._fb.group({
+          name: y.name,
+        })
+      );
+    });
+    return arr;
+  }
+
   // BOOKMARK _addControls
   private _addControls(formGroup: FormGroup) {
-    let optionsControl = <FormArray>formGroup.controls['options'];
+    // let optionsControl = <FormArray>formGroup.controls['options'];
 
-    optionsControl.clear();
+    // optionsControl.clear();
+
     // optionsControl = this._setOptions(this._data.options);
     // this._data.cities.forEach((x) => {
     //   optionsControl.push(
@@ -524,21 +568,22 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     //   );
     // });
 
-    this._data.options.forEach((x) => {
-      let optionFormGroup = this._fb.group(
-        {},
-        {
-          validators: Validators.compose([this._isDuplicate]),
-        }
-      );
-      const control = this._fb.control(
-        x.name,
-        this._bindValidations(this._data.validations || [])
-      );
+    // this._data.options.forEach((x) => {
+    //   let optionFormGroup = this._fb.group(
+    //     {},
+    //     {
+    //       validators: Validators.compose([this._isDuplicate]),
+    //     }
+    //   );
+    //   const control = this._fb.control(
+    //     x.name,
+    //     this._bindValidations(this._data.validations || [])
+    //   );
 
-      optionFormGroup.addControl('name', control);
-      optionsControl.push(optionFormGroup);
-    });
+    //   optionFormGroup.addControl('name', control);
+    //   optionsControl.push(optionFormGroup);
+    // });
+
     // this._controlLicenseNumber(formGroup);
 
     // console.log('_controlLicenseNumber');
@@ -574,45 +619,106 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     this.renderedBuilderFields.forEach((field) => {
       if (field.type === 'button') return;
       if (field.type === 'date') field.value = new Date(field.value);
+      // if (field.type === 'radiobutton') {
+      //   console.log('field label');
+      //   console.log(field.label.split(' ').join('_').toLowerCase().trim());
+
+      //   let optionsFormGroup = this._fb.group({});
+      //   let optionsControl = this._fb.array([]);
+
+      //   this.data.options.forEach((x) => {
+      //     let optionFormGroup = this._fb.group(
+      //       {},
+      //       {
+      //         validators: Validators.compose([this._isDuplicate]),
+      //       }
+      //     );
+      //     const control = this._fb.control(
+      //       x.name,
+      //       this._bindValidations(this.data.validations || [])
+      //     );
+
+      //     optionFormGroup.addControl('name', control);
+      //     optionsControl.push(optionFormGroup);
+      //   });
+      //   optionsFormGroup.addControl('options', optionsControl);
+      //   formGroup.addControl(
+      //     // field.label.split(' ').join('_').toLowerCase().trim(),
+      //     field.name + '_editor',
+      //     optionsFormGroup
+      //   );
+      //   // return;
+      // }
+
       if (field.type === 'radiobutton') {
-        console.log('field label');
-        console.log(field.label.split(' ').join('_').toLowerCase().trim());
+        // let control = <FormArray>this.myForm.controls['single_selections'];
+
+        // control.push(
+        //   this._fb.group({
+        //     single_selection: field.name,
+        //     options: this._setOtions(this._data),
+        //   })
+        // );
+
+        // return;
 
         let optionsFormGroup = this._fb.group({});
         let optionsControl = this._fb.array([]);
 
-        this._data.options.forEach((x) => {
+        this.data.options.forEach((x) => {
           let optionFormGroup = this._fb.group(
-            {},
-            {
-              validators: Validators.compose([this._isDuplicate]),
-            }
+            {}
+            // {
+            //   validators: Validators.compose([this._isDuplicate]),
+            //   // validators: Validators.compose([]),
+            // }
           );
+
+          console.log('x.name');
+          console.log(x.name);
+
           const control = this._fb.control(
             x.name,
-            this._bindValidations(this._data.validations || [])
+            this._bindValidations(this.data.validations || [])
           );
 
           optionFormGroup.addControl('name', control);
           optionsControl.push(optionFormGroup);
         });
         optionsFormGroup.addControl('options', optionsControl);
+
         formGroup.addControl(
-          field.label.split(' ').join('_').toLowerCase().trim(),
+          field.label.split(' ').join('_').toLowerCase().trim() + '_editor',
           optionsFormGroup
         );
-        return;
+
+        // const control2 = this._fb.control(
+        //   field.value,
+        //   this._bindValidations(this._data.validations || [])
+        // );
+
+        // formGroup.addControl(field.name, control2);
+        // return;
       }
 
-      const control = this._fb.control(
-        field.value,
-        this._bindValidations(field.validations || [])
-      );
+      // const control = this._fb.control(
+      //   field.value,
+      //   this._bindValidations(field.validations || [])
+      // );
 
-      formGroup.addControl(field.name, control);
+      // formGroup.addControl(field.name, control);
     });
+    // this.singles = (
+    //   (formGroup.get('single_selection_editor') as FormGroup)?.controls[
+    //     'options'
+    //   ] as FormArray
+    // )?.controls;
+
+    // console.log('singles');
+    // console.log(this.singles);
   }
 
+  // BOOKMARK _bindValidations
   private _bindValidations(validations: any) {
     if (validations.length > 0) {
       const validList: any[] = [];
@@ -621,6 +727,12 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         if (validation.name === 'required') validList.push(Validators.required);
         else if (validation.name === 'pattern')
           validList.push(Validators.pattern(validation.pattern));
+        else if (validation.name === 'invalidUrl')
+          validList.push(this._isDuplicate);
+        // else if (validation.name === 'duplicate')
+        //   validList.push(
+        //     DuplicateValidator.createValidator(this._duplicateService)
+        //   );
       });
       return Validators.compose(validList);
     }

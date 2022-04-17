@@ -14,6 +14,11 @@ export const fieldConfig: FieldConfig[] = [
         name: 'required',
         message: 'Name Required',
       },
+      {
+        name: 'pattern',
+        pattern: '^[a-zA-Z]+$',
+        message: 'Accept only text',
+      },
     ],
   },
   {
