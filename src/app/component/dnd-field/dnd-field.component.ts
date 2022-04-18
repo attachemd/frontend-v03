@@ -14,6 +14,9 @@ export class DnDFieldComponent implements OnInit {
   @Input()
   public form: any;
 
+  @Input()
+  public data: any;
+
   constructor(private _dndFieldService: DndFieldService) {}
 
   ngOnInit(): void {

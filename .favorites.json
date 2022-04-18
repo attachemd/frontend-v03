@@ -9,45 +9,45 @@
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\common\\roles\\user-groups.service.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\common\\roles\\user-groups.service.ts",
         "parent_id": "quaeW0AjbBMzNx6k",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\common\\roles\\user-groups.service.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\common\\roles\\user-groups.service.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "LOMm3jvSnoQ6Nf8r"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\common\\guards\\manager.guard.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\common\\guards\\manager.guard.ts",
         "parent_id": "quaeW0AjbBMzNx6k",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\common\\guards\\manager.guard.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\common\\guards\\manager.guard.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "JFD2AjlfWqPS9Hh3"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\services\\auth\\auth.service.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\services\\auth\\auth.service.ts",
         "parent_id": "quaeW0AjbBMzNx6k",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\services\\auth\\auth.service.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\services\\auth\\auth.service.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "AurpkoECLJe1wGvh"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\services\\auth\\auth-data.model.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\services\\auth\\auth-data.model.ts",
         "parent_id": "quaeW0AjbBMzNx6k",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\services\\auth\\auth-data.model.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\services\\auth\\auth-data.model.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "RjViFDXC894zy6ga"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\services\\auth\\user.model.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\services\\auth\\user.model.ts",
         "parent_id": "quaeW0AjbBMzNx6k",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\services\\auth\\user.model.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\services\\auth\\user.model.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "17szyXY9plLEIuGJ"
@@ -62,27 +62,27 @@
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\app-routing.module.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\app-routing.module.ts",
         "parent_id": "JDyPhaznQ18freGZ",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\app-routing.module.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\app-routing.module.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "35QhSaDCRjrFql4s"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\app.module.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\app.module.ts",
         "parent_id": "JDyPhaznQ18freGZ",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\app.module.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\app.module.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "0Zn7SkA42Mqz6CEP"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\common\\guards\\entry.guard.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\common\\guards\\entry.guard.ts",
         "parent_id": "quaeW0AjbBMzNx6k",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\common\\guards\\entry.guard.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\common\\guards\\entry.guard.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "s0NfnZ1rULm4dB7z"
@@ -113,18 +113,18 @@
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\auth\\login\\login.component.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\auth\\login\\login.component.ts",
         "parent_id": "qgYHjo9P20T48Cnl",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\auth\\login\\login.component.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\auth\\login\\login.component.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "OHhYTUWnBJcsaG7N"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\navigation\\header\\header.component.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\navigation\\header\\header.component.ts",
         "parent_id": "xABUSDwPCdGiYtfV",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\navigation\\header\\header.component.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\navigation\\header\\header.component.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "U9eg7aVuRWbdhkSI"
@@ -139,9 +139,9 @@
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\auth\\signup\\signup.component.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\auth\\signup\\signup.component.ts",
         "parent_id": "tDMICLbUHjnOlJzk",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\auth\\signup\\signup.component.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\auth\\signup\\signup.component.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "B21KP9UEzvaZNCgS"
@@ -156,18 +156,18 @@
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\cypress\\integration\\spec.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\cypress\\integration\\spec.ts",
         "parent_id": "ZoW8pVCUDMbhEzY7",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\cypress\\integration\\spec.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\cypress\\integration\\spec.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "8Cu3PmNctqdapbYg"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\cypress.json",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\cypress.json",
         "parent_id": "ZoW8pVCUDMbhEzY7",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\cypress.json",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\cypress.json",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "ArEOaJ45uGZlKBgX"
@@ -182,9 +182,9 @@
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\home\\home.component.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\home\\home.component.ts",
         "parent_id": "BRTUxnOpmYezufwF",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\home\\home.component.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\home\\home.component.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "tnOyoqXIH7xfZGC9"
@@ -200,18 +200,18 @@
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\package.json",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\package.json",
         "parent_id": "QcqLPCgDMxj0Trlo",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\package.json",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\package.json",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "1XdUbhv5MLNjqITe"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\services\\licenses\\license.model.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\services\\licenses\\license.model.ts",
         "parent_id": "BRTUxnOpmYezufwF",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\services\\licenses\\license.model.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\services\\licenses\\license.model.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "4PMWdwXenaU53ibt"
@@ -226,9 +226,9 @@
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\modules\\material.module.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\modules\\material.module.ts",
         "parent_id": "64E9c8HjlTLDYhwB",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\modules\\material.module.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\modules\\material.module.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "SBkRbWqzUp2D9cAL"
@@ -243,18 +243,18 @@
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\app.component.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\app.component.ts",
         "parent_id": "JDyPhaznQ18freGZ",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\app.component.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\app.component.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "8VQlimEkAFPvgD0O"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\navigation\\sidenav-list\\sidenav-list.component.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\navigation\\sidenav-list\\sidenav-list.component.ts",
         "parent_id": "lP19tayhKL6xCZSR",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\navigation\\sidenav-list\\sidenav-list.component.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\navigation\\sidenav-list\\sidenav-list.component.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "tX6cPnMzFadSlUGw"
@@ -269,36 +269,36 @@
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\license\\license.component.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\license\\license.component.ts",
         "parent_id": "wJolHb6WiTBDUgE9",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\license\\license.component.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\license\\license.component.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "7SbGc5ed0ZvEiFk2"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\management\\license-edit\\license-edit.component.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\management\\license-edit\\license-edit.component.ts",
         "parent_id": "wJolHb6WiTBDUgE9",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\management\\license-edit\\license-edit.component.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\management\\license-edit\\license-edit.component.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "a1vLDygBfHCizjr8"
     },
     {
         "type": "Directory",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\assets",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\assets",
         "parent_id": "QcqLPCgDMxj0Trlo",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\assets",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\assets",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "nr3N4FptfxhY8q0L"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\angular.json",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\angular.json",
         "parent_id": "QcqLPCgDMxj0Trlo",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\angular.json",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\angular.json",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "6Oj9dheBaV5NyRuw"
@@ -313,18 +313,18 @@
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\client\\client.component.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\client\\client.component.ts",
         "parent_id": "RYHEqgZXCoSzjaBr",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\client\\client.component.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\client\\client.component.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "JHuskMFRKQlVI8jd"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\services\\licenses\\license-edit.service.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\services\\licenses\\license-edit.service.ts",
         "parent_id": "wJolHb6WiTBDUgE9",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\services\\licenses\\license-edit.service.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\services\\licenses\\license-edit.service.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "vF6c8Uxr4DyMWka3"
@@ -339,36 +339,36 @@
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\dnd-field.component.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\dnd-field.component.ts",
         "parent_id": "a6iA5NXsOL9CHP4p",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\dnd-field.component.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\dnd-field.component.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "4UqbSioNgGZVdL87"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\directive\\dynamic-field.directive.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\directive\\dynamic-field.directive.ts",
         "parent_id": "a6iA5NXsOL9CHP4p",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\directive\\dynamic-field.directive.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\directive\\dynamic-field.directive.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "DfpXJUvS0PKy8qHW"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\confirm-field-edit\\confirm-field-edit.component.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\confirm-field-edit\\confirm-field-edit.component.ts",
         "parent_id": "a6iA5NXsOL9CHP4p",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\confirm-field-edit\\confirm-field-edit.component.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\confirm-field-edit\\confirm-field-edit.component.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "XbTkct3ZLUOylKqs"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\management\\custom-fields\\custom-fields.component.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\management\\custom-fields\\custom-fields.component.ts",
         "parent_id": "a6iA5NXsOL9CHP4p",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\management\\custom-fields\\custom-fields.component.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\management\\custom-fields\\custom-fields.component.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "OJHAwCWE8PvZs3SM"
@@ -383,90 +383,90 @@
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\checkbox\\checkbox.component.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\checkbox\\checkbox.component.ts",
         "parent_id": "jJYzrshGDgIFvxnV",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\checkbox\\checkbox.component.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\checkbox\\checkbox.component.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "S6eildsWJjI8P2NT"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\date\\date.component.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\date\\date.component.ts",
         "parent_id": "jJYzrshGDgIFvxnV",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\date\\date.component.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\date\\date.component.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "UfVt3d69vIG5Szjb"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\input\\input.component.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\input\\input.component.ts",
         "parent_id": "jJYzrshGDgIFvxnV",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\input\\input.component.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\input\\input.component.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "LYjwXByIqUAN0aWn"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\radio-button\\radio-button.component.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\radio-button\\radio-button.component.ts",
         "parent_id": "jJYzrshGDgIFvxnV",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\radio-button\\radio-button.component.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\radio-button\\radio-button.component.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "rtSj03VFYnJalTof"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\dnd-field.component.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\dnd-field.component.ts",
         "parent_id": "jJYzrshGDgIFvxnV",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\dnd-field.component.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\dnd-field.component.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "GS3jq4X9Na2uMksw"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\select\\select.component.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\select\\select.component.ts",
         "parent_id": "jJYzrshGDgIFvxnV",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\select\\select.component.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\select\\select.component.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "QVlqsTYF0ftSIpZH"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\dnd-field-edit\\dnd-field-edit.component.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\dnd-field-edit\\dnd-field-edit.component.ts",
         "parent_id": "a6iA5NXsOL9CHP4p",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\dnd-field-edit\\dnd-field-edit.component.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\dnd-field-edit\\dnd-field-edit.component.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "ePXrG9VO0YbpIswW"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\services\\dnd-field\\dnd-field.service.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\services\\dnd-field\\dnd-field.service.ts",
         "parent_id": "a6iA5NXsOL9CHP4p",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\services\\dnd-field\\dnd-field.service.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\services\\dnd-field\\dnd-field.service.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "OlRUo5irQ6uwaXnH"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\confirm-field-delete\\confirm-field-delete.component.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\confirm-field-delete\\confirm-field-delete.component.ts",
         "parent_id": "a6iA5NXsOL9CHP4p",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\confirm-field-delete\\confirm-field-delete.component.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\confirm-field-delete\\confirm-field-delete.component.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "ZPlaJ9tm5UeyLQ3b"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\directive\\dynamic-field.directive.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\directive\\dynamic-field.directive.ts",
         "parent_id": "wJolHb6WiTBDUgE9",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\directive\\dynamic-field.directive.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\directive\\dynamic-field.directive.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "0LARtu8Jf4M9vKzo"
@@ -481,45 +481,45 @@
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\product\\product.component.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\product\\product.component.ts",
         "parent_id": "VS4UbqZkfFu0CgHK",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\product\\product.component.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\component\\product\\product.component.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "bmue6dtOQYhSU0X7"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\TODO",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\TODO",
         "parent_id": "QcqLPCgDMxj0Trlo",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\TODO",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\TODO",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "9G28M1I6VgwZRsAC"
     },
     {
         "type": "File",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\styles.scss",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\styles.scss",
         "parent_id": "QcqLPCgDMxj0Trlo",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\styles.scss",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\styles.scss",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "72YOTVXySj9iCAf8"
     },
     {
         "type": "File",
-        "name": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\management\\product-edit\\product-edit.component.ts",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\management\\product-edit\\product-edit.component.ts",
         "parent_id": "VS4UbqZkfFu0CgHK",
-        "fsPath": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\management\\product-edit\\product-edit.component.ts",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\src\\app\\management\\product-edit\\product-edit.component.ts",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "6jupeR09iqYtFgrx"
     },
     {
         "type": "File",
-        "name": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\snippets.md",
+        "name": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\snippets.md",
         "parent_id": "QcqLPCgDMxj0Trlo",
-        "fsPath": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\snippets.md",
+        "fsPath": "C:\\Users\\user\\Documents\\Projects\\fullstack\\frontend-v03\\snippets.md",
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "2WNXrKJwobuIGgBz"

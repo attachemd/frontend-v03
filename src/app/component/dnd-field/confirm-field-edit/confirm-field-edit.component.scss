@@ -17,9 +17,9 @@
     box-sizing: border-box;
     transition: 0.2s ease all;
     color: #7e7e7e;
-            &:focus {
-              border-color:#0d6efd;
-            }
+    &:focus {
+      border-color: #0d6efd;
+    }
   }
 }
 
@@ -51,6 +51,17 @@
     color: #000;
     background-color: #dddddd;
     border-color: #dddddd;
+  }
+  &:disabled {
+    cursor: auto;
+    color: #b1b1b1;
+    background-color: #f9f9f9;
+    border-color: #ececec;
+    &:hover {
+      color: #b1b1b1;
+    background-color: #f9f9f9;
+    border-color: #ececec;
+    }
   }
 }
 .save {

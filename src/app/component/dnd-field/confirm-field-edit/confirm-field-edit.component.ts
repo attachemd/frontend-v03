@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { DndFieldService } from 'src/app/services/dnd-field/dnd-field.service';
 
 @Component({
@@ -9,6 +10,9 @@ import { DndFieldService } from 'src/app/services/dnd-field/dnd-field.service';
 export class ConfirmFieldEditComponent implements OnInit {
   @Input()
   public field!: any;
+
+  @Input()
+  public group!: FormGroup;
 
   constructor(private _dndFieldService: DndFieldService) {}
 

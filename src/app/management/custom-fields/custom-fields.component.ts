@@ -103,7 +103,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   public renderedBuilderFieldsPrevState: any[] = [];
   public stopDrag = false;
   public singles: any;
-  // BOOKMARK _data
+  // BOOKMARK data
   public data = {
     // validations: [
     //   {
@@ -127,7 +127,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     validations: [
       {
         name: 'required',
-        message: 'Name Required',
+        message: 'Option name required',
       },
       {
         name: 'pattern',
@@ -135,9 +135,9 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         message: 'Accept only text',
       },
       {
-        name: 'invalidUrl',
+        name: 'duplicated',
         // validator: this._isduplicate,
-        message: 'Invalid option name',
+        message: 'The option name must be unique',
       },
       // {
       //   name: 'duplicate',
@@ -323,11 +323,30 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       })
     );
     this._subs.add(
+      this._dndFieldService.getUpdateControls$().subscribe({
+        next: () => {
+          console.log(
+            '%c this._updateTargetContainer ',
+            'background: yellow; color: #000; padding: 0 200px; border: 0px solid #47C0BE'
+          );
+
+          this._updateTargetContainer();
+        },
+        error: (err: any) => {
+          console.log('error');
+          console.log(err);
+        },
+      })
+    );
+    this._subs.add(
       this._dndFieldService.getStopDrag$().subscribe({
         next: (stopDrag: boolean) => {
           this.stopDrag = stopDrag;
         },
-        error: (err: any) => {},
+        error: (err: any) => {
+          console.log('error');
+          console.log(err);
+        },
       })
     );
 
@@ -464,18 +483,26 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   // BOOKMARK _isDuplicate
   private _isDuplicate(control: AbstractControl) {
     setTimeout(() => {
-      console.log(
-        '%c invalidUrl top ',
-        'background-color: green; color: #fff; padding: 0 200px; border: 0px solid #47C0BE'
-      );
+      // console.log(
+      //   '%c duplicated top ',
+      //   'background-color: green; color: #fff; padding: 0 200px; border: 0px solid #47C0BE'
+      // );
       // return null;
       let options = control.parent?.parent?.value;
+      let opt = control.parent?.parent as FormArray;
       // let options = control.parent?.value;
 
-      console.log('control: ');
-      console.log(control);
-      console.log('options: ');
-      console.log(options);
+      // console.log('control');
+      // console.log(control.value);
+      // console.log('control.errors');
+      // console.log(control.errors);
+      // console.log('control.parent?.parent');
+      // console.log(control.parent?.parent);
+
+      // console.log('control: ');
+      // console.log(control);
+      // console.log('options: ');
+      // console.log(options);
 
       // return { invalidUrl: true };
       // const valueArr = this.myForm.get('options')?.value;
@@ -483,28 +510,61 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         return item['name'];
       });
 
+      // console.log('control.parent?.parent?.controls');
+      // console.log(control.parent?.parent?.controls);
+      // if (opt)
+      //   opt['controls'].forEach((item: any) => {
+      //     console.log('item: ' + item);
+      //     console.log(item);
+      //   });
+
+      // if (opt)
+      //   for (let controlItem of opt['controls']) {
+      //     console.log('controlItem');
+      //     console.log(controlItem);
+      //     controlItem.setErrors(null);
+      //   }
+
+      // if (control.parent?.parent)
+      //   for (let controlItem of control.parent?.parent.controls) {
+      //   }
+
       if (names) {
         let isDuplicate = new Set(names).size !== names.length;
 
-        console.log(
-          '%c invalidUrl ',
-          'background: red; color: #fff; padding: 0 200px; border: 0px solid #47C0BE'
-        );
-        console.log('names');
-        console.log(names);
+        // console.log(
+        //   '%c duplicated ',
+        //   'background: red; color: #fff; padding: 0 200px; border: 0px solid #47C0BE'
+        // );
+        // console.log('names');
+        // console.log(names);
 
-        console.log('isDuplicate');
-        console.log(isDuplicate);
+        // console.log('isDuplicate');
+        // console.log(isDuplicate);
 
         // if (isDuplicate) return { invalidUrl: true };
-        if (isDuplicate) return control.setErrors({ invalidUrl: true });
+        console.log('control.errors');
+        console.log(control.errors);
+
+        // return control.setErrors(null);
+        if (isDuplicate) control.setErrors({ duplicated: true });
       }
       // console.log('hasError');
       // if (control.errors) console.log(control.errors);
       // else console.log('null');
 
       // return control.setErrors(null);
+
+      // if (control.hasError('duplicated')) {
+      //   console.log(
+      //     '%c control ',
+      //     'background: yellow; color: #fff; padding: 0 200px; border: 0px solid #47C0BE'
+      //   );
+
+      //   return control.setErrors(null);
+      // }
       return null;
+      // return control.setErrors(null);
     }, 0);
   }
 
@@ -555,7 +615,12 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   // BOOKMARK _addControls
   private _addControls(formGroup: FormGroup) {
     // let optionsControl = <FormArray>formGroup.controls['options'];
-
+    // (
+    //   (formGroup.get('single_selection_editor') as FormGroup)?.controls[
+    //     'options'
+    //   ] as FormArray
+    // )?.clear();
+    formGroup.removeControl('single_selection_editor');
     // optionsControl.clear();
 
     // optionsControl = this._setOptions(this._data.options);
@@ -665,6 +730,9 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         let optionsFormGroup = this._fb.group({});
         let optionsControl = this._fb.array([]);
 
+        console.log('this.data.options');
+        console.log(this.data.options);
+
         this.data.options.forEach((x) => {
           let optionFormGroup = this._fb.group(
             {}
@@ -674,8 +742,8 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
             // }
           );
 
-          console.log('x.name');
-          console.log(x.name);
+          // console.log('x.name');
+          // console.log(x.name);
 
           const control = this._fb.control(
             x.name,
@@ -686,11 +754,15 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
           optionsControl.push(optionFormGroup);
         });
         optionsFormGroup.addControl('options', optionsControl);
+        console.log('optionsFormGroup');
+        console.log(optionsFormGroup);
 
         formGroup.addControl(
           field.label.split(' ').join('_').toLowerCase().trim() + '_editor',
           optionsFormGroup
         );
+        console.log('formGroup');
+        console.log(formGroup);
 
         // const control2 = this._fb.control(
         //   field.value,
@@ -701,12 +773,12 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         // return;
       }
 
-      // const control = this._fb.control(
-      //   field.value,
-      //   this._bindValidations(field.validations || [])
-      // );
+      const control = this._fb.control(
+        field.value,
+        this._bindValidations(field.validations || [])
+      );
 
-      // formGroup.addControl(field.name, control);
+      formGroup.addControl(field.name, control);
     });
     // this.singles = (
     //   (formGroup.get('single_selection_editor') as FormGroup)?.controls[
@@ -727,7 +799,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         if (validation.name === 'required') validList.push(Validators.required);
         else if (validation.name === 'pattern')
           validList.push(Validators.pattern(validation.pattern));
-        else if (validation.name === 'invalidUrl')
+        else if (validation.name === 'duplicated')
           validList.push(this._isDuplicate);
         // else if (validation.name === 'duplicate')
         //   validList.push(
@@ -741,6 +813,13 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
 
   private _updateTargetContainer() {
     // Error: Cannot find control with name
+    console.log(
+      '%c _updateTargetContainer ',
+      'background: red; color: #fff; padding: 0 200px; border: 0px solid #47C0BE'
+    );
+    console.log('data');
+    console.log(this.data);
+
     this._addControls(this.myForm);
     // https://www.smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/
     // https://medium.com/@Rahulx1/understanding-event-loop-call-stack-event-job-queue-in-javascript-63dcd2c71ecd

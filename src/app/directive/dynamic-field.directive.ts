@@ -29,6 +29,9 @@ export class DynamicFieldDirective implements OnInit {
   @Input()
   public group!: FormGroup;
 
+  @Input()
+  public data!: any;
+
   public componentRef: any;
   constructor(private _viewContainerRef: ViewContainerRef) {}
 
@@ -39,5 +42,6 @@ export class DynamicFieldDirective implements OnInit {
 
     this.componentRef.instance.field = this.field;
     this.componentRef.instance.group = this.group;
+    this.componentRef.instance.data = this.data;
   }
 }

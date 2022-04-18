@@ -1,5 +1,6 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { FormArray, FormGroup, ValidationErrors } from '@angular/forms';
+import { DndFieldService } from 'src/app/services/dnd-field/dnd-field.service';
 
 @Component({
   selector: 'app-radio-button',
@@ -15,6 +16,7 @@ export class RadioButtonComponent implements OnInit {
 
   public field!: any;
   public group!: FormGroup;
+  public data!: any;
   public visibility = 'none';
   public options = [
     { name: 'Option 01' },
@@ -25,12 +27,17 @@ export class RadioButtonComponent implements OnInit {
   public validations = [
     {
       name: 'required',
-      message: 'Name Required',
+      message: 'Option name required',
     },
     {
       name: 'pattern',
       pattern: '^[a-zA-Z]+$',
       message: 'Accept only text',
+    },
+    {
+      name: 'duplicated',
+      // validator: this._isduplicate,
+      message: 'The option name must be unique',
     },
     // {
     //   name: 'custom',
@@ -41,7 +48,7 @@ export class RadioButtonComponent implements OnInit {
 
   public singles: any;
 
-  constructor() {}
+  constructor(private _dndFieldService: DndFieldService) {}
   @HostBinding('class.ongoing') public get isOngoing() {
     return this.field.isOngoing;
   }
@@ -49,8 +56,8 @@ export class RadioButtonComponent implements OnInit {
   ngOnInit(): void {
     console.log('RadioButtonComponent');
     // this.isOngoing = this.field.isOngoing;
-    console.log('this.field');
-    console.log(this.field);
+    // console.log('this.field');
+    // console.log(this.field);
     this.singles = (
       (this.group.get('single_selection_editor') as FormGroup)?.controls[
         'options'
@@ -66,6 +73,23 @@ export class RadioButtonComponent implements OnInit {
     //   console.log('item.value.name');
     //   console.log(item.value.name);
     // });
+  }
+
+  public addOption() {
+    this.data.options.push({
+      name: '',
+    });
+    console.log('data');
+    console.log(this.data);
+    this._dndFieldService.setUpdateControls$();
+    let singles = (
+      (this.group.get('single_selection_editor') as FormGroup)?.controls[
+        'options'
+      ] as FormArray
+    )?.controls;
+
+    console.log('singles');
+    console.log(singles);
   }
 
   public log(val: any) {

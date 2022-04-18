@@ -3,76 +3,41 @@
   <app-confirm-field-edit
     *ngIf="field.isOngoing"
     [field]="field"
+    [group]="group"
   ></app-confirm-field-edit>
-  <button mat-raised-button color="primary" [disabled]="!group.valid">
-    Submit
-  </button>
   <!-- <div [formGroup]="group" *ngIf="field.isOngoing"> -->
   <div [formGroup]="group" *ngIf="true">
     <div formGroupName="single_selection_editor">
-      <!-- <div *ngIf="field.isOngoing" class="field-element-body" [formGroup]="group.get('single_selection')?.value"> -->
-      <!-- <div *ngIf="field.isOngoing" class="field-element-body" [formArrayName]="group.get('single_selection')?.value.options"> -->
       <div class="field-element-body" formArrayName="options">
-        <!-- <div class="option-field" *ngFor="let option of options; let i=index"> -->
-        <!-- <div
-          class="option-field"
-          *ngFor="
-            let option of group.get('single_selection')?.value.options;
-            let i = index
-          "
-        > -->
-
         <div class="option-field" *ngFor="let option of singles; let i = index">
-          <!-- <div class="option-field" *ngFor="let item of field.options"> -->
-          <!-- <input type="text" value="{{item}}" /> -->
-          <!-- <input type="text" value="{{ optionElement.name }}" /> -->
-          <div [formGroupName]="i">
-            <!-- <input [formControlName]="'name'" type="text" [(ngModel)]="optionElement.name" /> -->
-            <input formControlName="name" type="text" />
-            {{ log('option?.controls.name.errors') }}
-            {{ log(option?.controls.name.errors) }}
-            <!-- {{ log('option?.controls.name') }}
-            {{ log(option?.controls.name.value) }}
-            {{ log(option?.controls.name) }} -->
-            <div *ngIf="(
-              option?.controls.name.dirty ||
-              option?.controls.name.touched
-             ) &&
-             option?.controls.name.hasError('invalidUrl')"
- >
-   Please provide your username.
- </div>
-            <ng-container
-              *ngFor="let validation of validations"
-              ngProjectAs="mat-error"
-            >
-              <!-- {{ getFormValidationErrors(option) }} -->
-              <!-- <mat-error *ngIf="option?.controls.name?.hasError(validation.name)">
-                {{validation.message}}</mat-error> -->
-              <mat-error
+
+          <ng-container [formGroupName]="i">
+            <div class="option-field-and-icon-container">
+              <input formControlName="name" type="text" />
+              <button
+                class="option-field-icon icon-delete"
+                title="Delete Option"
+              ></button>
+            </div>
+            <ng-container *ngFor="let validation of data.validations">
+              <div
+                class="single-selection-error"
                 *ngIf="
-                  group.hasError(validation.name, [
-                    'single_selection_editor',
-                    'options',
-                    i,
-                    'name'
-                  ])
+                (option?.controls.name.dirty ||
+                option?.controls.name.touched) &&
+                  option?.controls.name.hasError(validation.name)
                 "
               >
                 {{ validation.message }}
-              </mat-error>
+              </div>
             </ng-container>
-            <button
-              class="option-field-icon icon-delete"
-              title="Delete Option"
-            ></button>
-          </div>
+          </ng-container>
         </div>
       </div>
     </div>
   </div>
   <div class="option-field-add" *ngIf="field.isOngoing">
-    <button class="option-field-icon icon-add" title="Add Option"></button>
+    <button class="option-field-icon icon-add" title="Add Option" (click)="addOption(); $event.preventDefault()"></button>
     <span>Add option</span>
   </div>
 
@@ -96,7 +61,7 @@
     <div>
       <mat-label class="ft-lm-label">{{ field.label }}</mat-label>
     </div>
-    <div class="ft-lm-field" *ngIf="false">
+    <div class="ft-lm-field" *ngIf="true">
       <!-- <mat-radio-group [formControlName]="field.label.split(' ').join('_').toLowerCase().trim()"> -->
       <mat-radio-group [formControlName]="field.name">
         <!-- <mat-radio-button *ngFor="let item of field.options" [value]="item">
@@ -117,22 +82,3 @@
     ></app-dnd-field-edit>
   </div>
 </div>
-
-<!-- <div formArrayName="addressLines">
-  <div style="margin-top:5px; margin-bottom:5px;" 
-    *ngFor="let lines of city.get('addressLines').controls; let j=index">
-      <div [formGroupName]="j">
-        <div class="form-group">
-          <label style="margin-right:5px;" class="col-form-label" for="emailId">Address Line {{ j + 1 }}</label>
-          <input formControlName="addressLine"
-            class="form-control"
-            style="margin-right:5px;"
-            type="email"
-            placeholder="Adress lines"
-            id="address"
-            name="address"
-          />
-      </div>
-    </div>
-  </div >
-</div > -->

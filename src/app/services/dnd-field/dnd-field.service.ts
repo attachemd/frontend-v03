@@ -14,6 +14,7 @@ export class DndFieldService {
   }>(1);
 
   private _stopDrag$ = new Subject<boolean>();
+  private _updateControls$ = new Subject<void>();
   private _fieldEditMode$ = new ReplaySubject<boolean>(1);
   private _deleteField$ = new Subject<string>();
   private _dndMode$ = new ReplaySubject<boolean>(1);
@@ -38,6 +39,14 @@ export class DndFieldService {
 
   public getStopDrag$(): Subject<boolean> {
     return this._stopDrag$;
+  }
+
+  public setUpdateControls$() {
+    this._updateControls$.next();
+  }
+
+  public getUpdateControls$(): Subject<void> {
+    return this._updateControls$;
   }
 
   public setFieldEditMode$(isfieldEditMode: boolean) {
