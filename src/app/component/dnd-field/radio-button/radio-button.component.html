@@ -20,6 +20,8 @@
               ></button>
             </div>
             <ng-container *ngFor="let validation of data.validations">
+              <!-- (option?.controls.name.dirty ||
+              option?.controls.name.touched) && -->
               <div
                 class="single-selection-error"
                 *ngIf="
