@@ -76,6 +76,18 @@ export class RadioButtonComponent implements OnInit {
   }
 
   public addOption() {
+    // this.getFormValidationErrors(this.group.get('single_selection_editor'));
+    // let opt = (this.group.get('single_selection_editor') as FormGroup)
+    //   ?.controls['options'] as FormArray;
+
+    // if (opt)
+    //   opt['controls'].forEach((item: any) => {
+    //     console.log('item.errors: ');
+    //     console.log(item);
+    //     console.log(item.value);
+    //     console.log(item.errors);
+    //   });
+    return;
     this.data.options.push({
       name: '',
     });
@@ -101,6 +113,8 @@ export class RadioButtonComponent implements OnInit {
   public getFormValidationErrors(formGroup: any) {
     Object.keys(formGroup.controls).forEach((key) => {
       const controlErrors: ValidationErrors = formGroup.get(key).errors;
+
+      console.log('nothing!');
 
       if (controlErrors != null)
         Object.keys(controlErrors).forEach((keyError) => {

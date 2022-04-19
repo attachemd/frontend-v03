@@ -492,6 +492,9 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       let opt = control.parent?.parent as FormArray;
       // let options = control.parent?.value;
 
+      console.log("formGroup.get('single_selection_editor')?.errors");
+      console.log(control.parent?.parent?.parent?.errors);
+
       // console.log('control');
       // console.log(control.value);
       // console.log('control.errors');
@@ -512,11 +515,72 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
 
       // console.log('control.parent?.parent?.controls');
       // console.log(control.parent?.parent?.controls);
-      // if (opt)
-      //   opt['controls'].forEach((item: any) => {
-      //     console.log('item: ' + item);
-      //     console.log(item);
-      //   });
+      // if (opt) console.log('--------------------------');
+      console.log(
+        '%c -------------------------- ',
+        'background-color: yellow; color: #000; padding: 0 200px; border: 0px solid #47C0BE'
+      );
+
+      function getOccurrence(array: any, value: any) {
+        var count = 0;
+
+        array.forEach((v: any) => v.name === value && count++);
+        return count;
+      }
+      function removeItemOnce(arr: any, value: any) {
+        var index = arr.indexOf(value);
+
+        if (index > -1) arr.splice(index, 1);
+
+        return arr;
+      }
+      // let filteredArray = opt.value.filter(
+      //   (e: any) => e.name !== control.value
+      // );
+
+      // let filteredArray = removeItemOnce(opt.value);
+
+      // console.log('filteredArray');
+      // console.log(filteredArray);
+
+      // let found = filteredArray.find((x: any) => x.name === control.value);
+
+      // console.log('control.value');
+      // console.log(control.value);
+
+      // console.log('found');
+      // console.log(found);
+
+      // let count = getOccurrence(opt.value, control.value);
+
+      // console.log('count === 1');
+      // console.log(count === 1);
+
+      opt['controls'].forEach((item: any) => {
+        console.log('item.controls.name.value: ');
+        console.log(item.controls.name.value);
+        console.log('item.controls.name.errors: ');
+        console.log(item.controls.name.errors);
+        console.log("item.controls.name.hasError('duplicated')");
+        console.log(item.controls.name.hasError('duplicated'));
+        let count = getOccurrence(opt.value, item.controls.name.value);
+
+        console.log('count === 1');
+        console.log(count === 1);
+
+        // if (found !== undefined) control.setErrors({ duplicated: true });
+        // if (item.controls.name.hasError('duplicated'))
+        //   item.controls.name.setErrors(null);
+        // control.setErrors({ duplicated: true });
+        if (!item.controls.name.errors)
+          if (count === 1) item.controls.name.setErrors(null);
+          else item.controls.name.setErrors({ duplicated: true });
+        else if (item.controls.name.hasError('duplicated') && count === 1)
+          item.controls.name.setErrors(null);
+
+        console.log("item.controls.name.hasError('duplicated')");
+        console.log(item.controls.name.hasError('duplicated'));
+      });
 
       // if (opt)
       //   for (let controlItem of opt['controls']) {
@@ -547,7 +611,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         console.log(control.errors);
 
         // return control.setErrors(null);
-        if (isDuplicate) control.setErrors({ duplicated: true });
+        // if (isDuplicate) control.setErrors({ duplicated: true });
       }
       // console.log('hasError');
       // if (control.errors) console.log(control.errors);
@@ -563,7 +627,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
 
       //   return control.setErrors(null);
       // }
-      return null;
+      // return null;
       // return control.setErrors(null);
     }, 0);
   }
