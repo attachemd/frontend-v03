@@ -326,7 +326,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         next: () => {
           console.log(
             '%c this._updateTargetContainer ',
-            'background: yellow; color: #000; padding: 0 200px; border: 0px solid #47C0BE'
+            'background: #f2c080; color: #555a60; padding: 10px 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
           );
 
           this._updateTargetContainer();
@@ -362,6 +362,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       })
     );
 
+    // BOOKMARK save cancel
     this._subs.add(
       this._dndFieldService.getFieldName$().subscribe({
         next: (fieldObj: any) => {
@@ -687,14 +688,28 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     //     'options'
     //   ] as FormArray
     // )?.clear();
+    // formGroup = this._fb.group({});
     Object.keys(formGroup.controls).forEach((key) => {
-      // console.log('key');
-      // console.log(key);
+      console.log('key');
+      console.log(key);
 
       // console.log('formGroup.controls[key]');
       // console.log(formGroup.controls[key]);
       formGroup.removeControl(key);
     });
+    console.log("formGroup.value['single_selection_editor17']?.options");
+    console.log(formGroup.controls);
+
+    if (formGroup.value['single_selection_editor17']?.options)
+      formGroup.value['single_selection_editor17'].options.forEach(
+        (item: any) => {
+          console.log('item');
+          console.log(item);
+        }
+      );
+    console.log('formGroup');
+    console.log(formGroup);
+
     // formGroup.removeControl('single_selection_editor');
     // formGroup.removeControl(this.generatedFieldName(field, '_editor'));
     // formGroup = this._fb.group({});
@@ -792,6 +807,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       //   // return;
       // }
 
+      // BOOKMARK RADIOBUTTON
       if (field.type === 'radiobutton') {
         // let control = <FormArray>this.myForm.controls['single_selections'];
 
@@ -807,23 +823,35 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         let optionsFormGroup = this._fb.group({});
         let optionsControl = this._fb.array([]);
 
-        console.log('this.data.options');
-        console.log(this.data['options']);
-        let fieldOptions = formGroup.get(
-          this.generatedFieldName(field, '_editor')
-        )?.value.options;
+        console.log(
+          '%c RADIOBUTTON ',
+          'background: #555a60; color: #f2c080; padding: 10px 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+        );
 
+        if (this.data[this.generatedFieldName(field, '_editor')])
+          this.data[this.generatedFieldName(field, '_editor')][
+            'options'
+          ].forEach((item: any) => {
+            console.log('item');
+            console.log(item);
+          });
+        let fieldOptions =
+          this.data[this.generatedFieldName(field, '_editor')]?.options;
+
+        console.log("this.generatedFieldName(field, '_editor')");
+        console.log(this.generatedFieldName(field, '_editor'));
         console.log('fieldOptions');
         console.log(fieldOptions);
+        console.log("this.data['options']");
+        console.log(this.data['options']);
+
         let newData: any = (this.data[
           this.generatedFieldName(field, '_editor') as keyof typeof this.data
         ] = {});
 
-        console.log(newData['options']);
+        newData['options'] = fieldOptions ?? [...this.data['options']];
 
-        newData.options = fieldOptions ?? this.data['options'];
-
-        newData.options.forEach((x: any) => {
+        newData['options'].forEach((x: any) => {
           let optionFormGroup = this._fb.group(
             {}
             // {
@@ -831,9 +859,6 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
             //   // validators: Validators.compose([]),
             // }
           );
-
-          // console.log('x.name');
-          // console.log(x.name);
 
           const control = this._fb.control(
             x.name,
@@ -844,22 +869,11 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
           optionsControl.push(optionFormGroup);
         });
         optionsFormGroup.addControl('options', optionsControl);
-        console.log('optionsFormGroup');
-        console.log(optionsFormGroup);
 
         formGroup.addControl(
           this.generatedFieldName(field, '_editor'),
           optionsFormGroup
         );
-        console.log('formGroup');
-        console.log(formGroup);
-
-        // const control2 = this._fb.control(
-        //   field.value,
-        //   this._bindValidations(this._data.validations || [])
-        // );
-
-        // formGroup.addControl(field.name, control2);
         // return;
       }
 
@@ -903,12 +917,6 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
 
   private _updateTargetContainer() {
     // Error: Cannot find control with name
-    console.log(
-      '%c _updateTargetContainer ',
-      'background: red; color: #fff; padding: 0 200px; border: 0px solid #47C0BE'
-    );
-    console.log('data');
-    console.log(this.data);
 
     this._addControls(this.myForm);
     // https://www.smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/

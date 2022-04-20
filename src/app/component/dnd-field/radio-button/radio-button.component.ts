@@ -60,25 +60,31 @@ export class RadioButtonComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('RadioButtonComponent');
+
     const valueArr = this.group.get(
       this.generatedFieldName(this.field, '_editor')
     );
-
-    console.log('valueArr');
-    console.log(valueArr);
 
     this.group.valueChanges.subscribe({
       next: (form) => {
         // keep data model updated
         let generatedFieldName = this.generatedFieldName(this.field, '_editor');
 
-        console.log(
-          '%c form values ',
-          'background-color: #2B916A; color: #B8DACD; padding: 0 200px; border: 0px solid #47C0BE'
-        );
-        console.log(form[generatedFieldName]?.options);
+        console.log('generatedFieldName');
+        console.log(generatedFieldName);
+
+        if (this.data[generatedFieldName])
+          this.data[generatedFieldName]['options'].forEach((item: any) => {
+            console.log('item');
+            console.log(item);
+          });
+
         if (form[generatedFieldName]?.options)
-          this.data.options = [...form[generatedFieldName]?.options];
+          // this.data.options = [...form[generatedFieldName]?.options];
+          this.data[this.generatedFieldName(this.field, '_editor')].options = [
+            ...form[generatedFieldName]?.options,
+          ];
+
         // this.data.options = form[generatedFieldName]?.options;
       },
     });
@@ -97,9 +103,33 @@ export class RadioButtonComponent implements OnInit {
   }
 
   public addOption() {
-    this.data.options.push({
+    console.log('----------------');
+    console.log('data');
+    console.log(this.data);
+    console.log("this.generatedFieldName(this.field, '_editor')");
+    console.log(this.generatedFieldName(this.field, '_editor'));
+    console.log("this.data[this.generatedFieldName(this.field, '_editor')]");
+    console.log(this.data[this.generatedFieldName(this.field, '_editor')]);
+    console.log(
+      "this.data[this.generatedFieldName(this.field, '_editor')]['options']"
+    );
+    console.log(
+      this.data[this.generatedFieldName(this.field, '_editor')]['options']
+    );
+
+    this.data[this.generatedFieldName(this.field, '_editor')]['options'].push({
       name: '',
     });
+    // this.data[this.generatedFieldName(this.field, '_editor')]['options2'].push({
+    //   name: '',
+    // });
+    if (this.data[this.generatedFieldName(this.field, '_editor')])
+      this.data[this.generatedFieldName(this.field, '_editor')][
+        'options'
+      ].forEach((item: any) => {
+        console.log('item');
+        console.log(item);
+      });
     console.log('data');
     console.log(this.data);
     this._dndFieldService.setUpdateControls$();
@@ -108,7 +138,10 @@ export class RadioButtonComponent implements OnInit {
   public deleteOption(index: number) {
     console.log('index');
     console.log(index);
-    this.data.options.splice(index, 1);
+    this.data[this.generatedFieldName(this.field, '_editor')].options.splice(
+      index,
+      1
+    );
     this._dndFieldService.setUpdateControls$();
   }
 

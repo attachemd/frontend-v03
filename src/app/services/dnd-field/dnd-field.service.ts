@@ -91,7 +91,7 @@ export class DndFieldService {
 
   public generatedFieldName(field: FieldConfig, prefix?: string) {
     return (
-      field.label?.split(' ').join('_').toLowerCase().trim() +
+      field.name.split(' ').join('_').toLowerCase().trim() +
       (prefix ?? '') +
       field.id
     );
