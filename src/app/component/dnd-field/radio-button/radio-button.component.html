@@ -1,22 +1,21 @@
-<!-- <div class="field_container" [formGroup]="group.controls('single_selection')"> -->
 <div class="field_container">
   <app-confirm-field-edit
     *ngIf="field.isOngoing"
     [field]="field"
     [group]="group"
   ></app-confirm-field-edit>
-  <!-- <div [formGroup]="group" *ngIf="field.isOngoing"> -->
-  <div [formGroup]="group" *ngIf="true">
-    <div formGroupName="single_selection_editor">
+  <div [formGroup]="group" *ngIf="field.isOngoing">
+    <!-- <div [formGroup]="group" *ngIf="true"> -->
+    <div [formGroupName]="generatedFieldName(field, '_editor')">
       <div class="field-element-body" formArrayName="options">
-        <div class="option-field" *ngFor="let option of singles; let i = index">
-
+        <div class="option-field" *ngFor="let option of options?.controls; let i = index">
           <ng-container [formGroupName]="i">
             <div class="option-field-and-icon-container">
               <input formControlName="name" type="text" />
               <button
                 class="option-field-icon icon-delete"
                 title="Delete Option"
+                (click)="deleteOption(i); $event.preventDefault()"
               ></button>
             </div>
             <ng-container *ngFor="let validation of data.validations">
@@ -24,10 +23,7 @@
               option?.controls.name.touched) && -->
               <div
                 class="single-selection-error"
-                *ngIf="
-      
-                  option?.controls.name.hasError(validation.name)
-                "
+                *ngIf="option?.controls.name.hasError(validation.name)"
               >
                 {{ validation.message }}
               </div>
@@ -38,7 +34,11 @@
     </div>
   </div>
   <div class="option-field-add" *ngIf="field.isOngoing">
-    <button class="option-field-icon icon-add" title="Add Option" (click)="addOption(); $event.preventDefault()"></button>
+    <button
+      class="option-field-icon icon-add"
+      title="Add Option"
+      (click)="addOption(); $event.preventDefault()"
+    ></button>
     <span>Add option</span>
   </div>
 
@@ -64,12 +64,17 @@
     </div>
     <div class="ft-lm-field" *ngIf="true">
       <!-- <mat-radio-group [formControlName]="field.label.split(' ').join('_').toLowerCase().trim()"> -->
-      <mat-radio-group [formControlName]="field.name">
+      <mat-radio-group [formControlName]="generatedFieldName(field)">
         <!-- <mat-radio-button *ngFor="let item of field.options" [value]="item">
           {{ item }}
         </mat-radio-button> -->
+        <!-- <mat-radio-button
+          *ngFor="let optionElement of data.options; index as i"
+          [value]="optionElement.name"
+        > -->
+
         <mat-radio-button
-          *ngFor="let optionElement of options; index as i"
+          *ngFor="let optionElement of options?.value; index as i"
           [value]="optionElement.name"
         >
           <!-- [checked]="i === 0" -->

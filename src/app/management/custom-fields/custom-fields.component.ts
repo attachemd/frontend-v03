@@ -104,7 +104,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   public stopDrag = false;
   public singles: any;
   // BOOKMARK data
-  public data = {
+  public data: { [k: string]: any } = {
     // validations: [
     //   {
     //     name: 'required',
@@ -207,7 +207,6 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     // BOOKMARK this.myForm = this._fb.group({
     this.myForm = this._fb.group({
       // form_name: ['the form'],
-      // single_selections: this._fb.array([]),
     });
 
     this._addControls(this.myForm);
@@ -461,6 +460,10 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     // this._router.navigateByUrl('/products/(edit:products/2)');
   }
 
+  public generatedFieldName(field: FieldConfig, prefix?: any) {
+    return this._dndFieldService.generatedFieldName(field, prefix);
+  }
+
   // BOOKMARK _setOptions
   private _setOptions(options: any) {
     let arr = new FormArray([]);
@@ -492,8 +495,8 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       let opt = control.parent?.parent as FormArray;
       // let options = control.parent?.value;
 
-      console.log("formGroup.get('single_selection_editor')?.errors");
-      console.log(control.parent?.parent?.parent?.errors);
+      // console.log("formGroup.get('single_selection_editor')?.errors");
+      // console.log(control.parent?.parent?.parent?.errors);
 
       // console.log('control');
       // console.log(control.value);
@@ -516,10 +519,10 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       // console.log('control.parent?.parent?.controls');
       // console.log(control.parent?.parent?.controls);
       // if (opt) console.log('--------------------------');
-      console.log(
-        '%c -------------------------- ',
-        'background-color: yellow; color: #000; padding: 0 200px; border: 0px solid #47C0BE'
-      );
+      // console.log(
+      //   '%c -------------------------- ',
+      //   'background-color: yellow; color: #000; padding: 0 200px; border: 0px solid #47C0BE'
+      // );
 
       function getOccurrence(array: any, value: any) {
         var count = 0;
@@ -557,16 +560,16 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       // console.log(count === 1);
 
       opt['controls'].forEach((item: any) => {
-        console.log('item.controls.name.value: ');
-        console.log(item.controls.name.value);
-        console.log('item.controls.name.errors: ');
-        console.log(item.controls.name.errors);
-        console.log("item.controls.name.hasError('duplicated')");
-        console.log(item.controls.name.hasError('duplicated'));
+        // console.log('item.controls.name.value: ');
+        // console.log(item.controls.name.value);
+        // console.log('item.controls.name.errors: ');
+        // console.log(item.controls.name.errors);
+        // console.log("item.controls.name.hasError('duplicated')");
+        // console.log(item.controls.name.hasError('duplicated'));
         let count = getOccurrence(opt.value, item.controls.name.value);
 
-        console.log('count === 1');
-        console.log(count === 1);
+        // console.log('count === 1');
+        // console.log(count === 1);
 
         // if (found !== undefined) control.setErrors({ duplicated: true });
         // if (item.controls.name.hasError('duplicated'))
@@ -578,8 +581,8 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         else if (item.controls.name.hasError('duplicated') && count === 1)
           item.controls.name.setErrors(null);
 
-        console.log("item.controls.name.hasError('duplicated')");
-        console.log(item.controls.name.hasError('duplicated'));
+        // console.log("item.controls.name.hasError('duplicated')");
+        // console.log(item.controls.name.hasError('duplicated'));
       });
 
       // if (opt)
@@ -607,8 +610,8 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         // console.log(isDuplicate);
 
         // if (isDuplicate) return { invalidUrl: true };
-        console.log('control.errors');
-        console.log(control.errors);
+        // console.log('control.errors');
+        // console.log(control.errors);
 
         // return control.setErrors(null);
         // if (isDuplicate) control.setErrors({ duplicated: true });
@@ -684,7 +687,17 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     //     'options'
     //   ] as FormArray
     // )?.clear();
-    formGroup.removeControl('single_selection_editor');
+    Object.keys(formGroup.controls).forEach((key) => {
+      // console.log('key');
+      // console.log(key);
+
+      // console.log('formGroup.controls[key]');
+      // console.log(formGroup.controls[key]);
+      formGroup.removeControl(key);
+    });
+    // formGroup.removeControl('single_selection_editor');
+    // formGroup.removeControl(this.generatedFieldName(field, '_editor'));
+    // formGroup = this._fb.group({});
     // optionsControl.clear();
 
     // optionsControl = this._setOptions(this._data.options);
@@ -795,9 +808,22 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         let optionsControl = this._fb.array([]);
 
         console.log('this.data.options');
-        console.log(this.data.options);
+        console.log(this.data['options']);
+        let fieldOptions = formGroup.get(
+          this.generatedFieldName(field, '_editor')
+        )?.value.options;
 
-        this.data.options.forEach((x) => {
+        console.log('fieldOptions');
+        console.log(fieldOptions);
+        let newData: any = (this.data[
+          this.generatedFieldName(field, '_editor') as keyof typeof this.data
+        ] = {});
+
+        console.log(newData['options']);
+
+        newData.options = fieldOptions ?? this.data['options'];
+
+        newData.options.forEach((x: any) => {
           let optionFormGroup = this._fb.group(
             {}
             // {
@@ -811,7 +837,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
 
           const control = this._fb.control(
             x.name,
-            this._bindValidations(this.data.validations || [])
+            this._bindValidations(this.data['validations'] || [])
           );
 
           optionFormGroup.addControl('name', control);
@@ -822,7 +848,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         console.log(optionsFormGroup);
 
         formGroup.addControl(
-          field.label.split(' ').join('_').toLowerCase().trim() + '_editor',
+          this.generatedFieldName(field, '_editor'),
           optionsFormGroup
         );
         console.log('formGroup');
@@ -842,7 +868,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         this._bindValidations(field.validations || [])
       );
 
-      formGroup.addControl(field.name, control);
+      formGroup.addControl(this.generatedFieldName(field), control);
     });
     // this.singles = (
     //   (formGroup.get('single_selection_editor') as FormGroup)?.controls[

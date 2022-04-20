@@ -1,6 +1,12 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
-import { FormArray, FormGroup, ValidationErrors } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+} from '@angular/forms';
 import { DndFieldService } from 'src/app/services/dnd-field/dnd-field.service';
+import { FieldConfig } from 'src/app/services/dnd-field/field.model';
 
 @Component({
   selector: 'app-radio-button',
@@ -18,11 +24,6 @@ export class RadioButtonComponent implements OnInit {
   public group!: FormGroup;
   public data!: any;
   public visibility = 'none';
-  public options = [
-    { name: 'Option 01' },
-    { name: 'Option 02' },
-    { name: 'Option 03' },
-  ];
 
   public validations = [
     {
@@ -46,62 +47,69 @@ export class RadioButtonComponent implements OnInit {
     // },
   ];
 
-  public singles: any;
+  public options: any;
 
-  constructor(private _dndFieldService: DndFieldService) {}
+  constructor(
+    private _dndFieldService: DndFieldService,
+    private _fb: FormBuilder
+  ) {}
+
   @HostBinding('class.ongoing') public get isOngoing() {
     return this.field.isOngoing;
   }
 
   ngOnInit(): void {
     console.log('RadioButtonComponent');
+    const valueArr = this.group.get(
+      this.generatedFieldName(this.field, '_editor')
+    );
+
+    console.log('valueArr');
+    console.log(valueArr);
+
+    this.group.valueChanges.subscribe({
+      next: (form) => {
+        // keep data model updated
+        let generatedFieldName = this.generatedFieldName(this.field, '_editor');
+
+        console.log(
+          '%c form values ',
+          'background-color: #2B916A; color: #B8DACD; padding: 0 200px; border: 0px solid #47C0BE'
+        );
+        console.log(form[generatedFieldName]?.options);
+        if (form[generatedFieldName]?.options)
+          this.data.options = [...form[generatedFieldName]?.options];
+        // this.data.options = form[generatedFieldName]?.options;
+      },
+    });
     // this.isOngoing = this.field.isOngoing;
     // console.log('this.field');
     // console.log(this.field);
-    this.singles = (
-      (this.group.get('single_selection_editor') as FormGroup)?.controls[
-        'options'
-      ] as FormArray
-    )?.controls;
-    // console.log('this.singles');
-    // console.log(this.singles);
-    // console.log(this.singles?.values);
-    // console.log(this.group.get('single_selection')?.value.options);
-    // this.singles?.forEach((item: any) => {
-    //   console.log('item.controls.name.value');
-    //   console.log(item.controls.name.value);
-    //   console.log('item.value.name');
-    //   console.log(item.value.name);
-    // });
+    this.options = (
+      this.group.get(
+        this.generatedFieldName(this.field, '_editor')
+      ) as FormGroup
+    )?.controls['options'] as FormArray;
+  }
+
+  public generatedFieldName(field: FieldConfig, prefix?: any) {
+    return this._dndFieldService.generatedFieldName(field, prefix);
   }
 
   public addOption() {
-    // this.getFormValidationErrors(this.group.get('single_selection_editor'));
-    // let opt = (this.group.get('single_selection_editor') as FormGroup)
-    //   ?.controls['options'] as FormArray;
-
-    // if (opt)
-    //   opt['controls'].forEach((item: any) => {
-    //     console.log('item.errors: ');
-    //     console.log(item);
-    //     console.log(item.value);
-    //     console.log(item.errors);
-    //   });
-    return;
     this.data.options.push({
       name: '',
     });
     console.log('data');
     console.log(this.data);
     this._dndFieldService.setUpdateControls$();
-    let singles = (
-      (this.group.get('single_selection_editor') as FormGroup)?.controls[
-        'options'
-      ] as FormArray
-    )?.controls;
+  }
 
-    console.log('singles');
-    console.log(singles);
+  public deleteOption(index: number) {
+    console.log('index');
+    console.log(index);
+    this.data.options.splice(index, 1);
+    this._dndFieldService.setUpdateControls$();
   }
 
   public log(val: any) {

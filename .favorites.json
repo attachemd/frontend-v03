@@ -523,5 +523,40 @@
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "2WNXrKJwobuIGgBz"
+    },
+    {
+        "type": "Group",
+        "name": "Single Selection",
+        "parent_id": "a6iA5NXsOL9CHP4p",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "nHCiB9FdDpMThUvy"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\radio-button\\radio-button.component.ts",
+        "parent_id": "nHCiB9FdDpMThUvy",
+        "fsPath": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\radio-button\\radio-button.component.ts",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "cS6xIZFLjW9faRJA"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\management\\custom-fields\\custom-fields.component.ts",
+        "parent_id": "nHCiB9FdDpMThUvy",
+        "fsPath": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\management\\custom-fields\\custom-fields.component.ts",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "NldI2CGijAEn3h80"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\services\\dnd-field\\dnd-field.service.ts",
+        "parent_id": "nHCiB9FdDpMThUvy",
+        "fsPath": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\services\\dnd-field\\dnd-field.service.ts",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "W6tMsvbnEY25GSzp"
     }
 ]

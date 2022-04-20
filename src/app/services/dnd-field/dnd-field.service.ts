@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject, Subject } from 'rxjs';
+import { FieldConfig } from './field.model';
 
 @Injectable({
   providedIn: 'root',
@@ -86,5 +87,13 @@ export class DndFieldService {
     event.target
       .querySelectorAll('button')
       .forEach((el: any) => (el.style.display = visibility));
+  }
+
+  public generatedFieldName(field: FieldConfig, prefix?: string) {
+    return (
+      field.label?.split(' ').join('_').toLowerCase().trim() +
+      (prefix ?? '') +
+      field.id
+    );
   }
 }
