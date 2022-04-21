@@ -73,17 +73,18 @@ export class RadioButtonComponent implements OnInit {
         console.log('generatedFieldName');
         console.log(generatedFieldName);
 
-        if (this.data[generatedFieldName])
-          this.data[generatedFieldName]['options'].forEach((item: any) => {
-            console.log('item');
-            console.log(item);
-          });
+        // if (this.data[generatedFieldName])
+        //   this.data[generatedFieldName]['options'].forEach((item: any) => {
+        //     console.log('item');
+        //     console.log(item);
+        //   });
 
-        if (form[generatedFieldName]?.options)
-          // this.data.options = [...form[generatedFieldName]?.options];
-          this.data[this.generatedFieldName(this.field, '_editor')].options = [
-            ...form[generatedFieldName]?.options,
-          ];
+        // if (form[generatedFieldName]?.options)
+        //   // this.data.options = [...form[generatedFieldName]?.options];
+
+        //   this.data[this.generatedFieldName(this.field, '_editor')].options = [
+        //     ...form[generatedFieldName]?.options,
+        //   ];
 
         // this.data.options = form[generatedFieldName]?.options;
       },
@@ -103,46 +104,64 @@ export class RadioButtonComponent implements OnInit {
   }
 
   public addOption() {
-    console.log('----------------');
-    console.log('data');
-    console.log(this.data);
-    console.log("this.generatedFieldName(this.field, '_editor')");
-    console.log(this.generatedFieldName(this.field, '_editor'));
-    console.log("this.data[this.generatedFieldName(this.field, '_editor')]");
-    console.log(this.data[this.generatedFieldName(this.field, '_editor')]);
-    console.log(
-      "this.data[this.generatedFieldName(this.field, '_editor')]['options']"
-    );
-    console.log(
-      this.data[this.generatedFieldName(this.field, '_editor')]['options']
+    let optionFormGroup = this._fb.group(
+      {}
+      // {
+      //   validators: Validators.compose([this._isDuplicate]),
+      //   // validators: Validators.compose([]),
+      // }
     );
 
-    this.data[this.generatedFieldName(this.field, '_editor')]['options'].push({
-      name: '',
-    });
-    // this.data[this.generatedFieldName(this.field, '_editor')]['options2'].push({
+    const control = this._fb.control(
+      '',
+      this._dndFieldService.bindValidations(this.data['validations'] || [])
+    );
+
+    optionFormGroup.addControl('name', control);
+    this.options.push(optionFormGroup);
+    // return;
+    // console.log('----------------');
+    // console.log('data');
+    // console.log(this.data);
+    // console.log("this.generatedFieldName(this.field, '_editor')");
+    // console.log(this.generatedFieldName(this.field, '_editor'));
+    // console.log("this.data[this.generatedFieldName(this.field, '_editor')]");
+    // console.log(this.data[this.generatedFieldName(this.field, '_editor')]);
+    // console.log(
+    //   "this.data[this.generatedFieldName(this.field, '_editor')]['options']"
+    // );
+    // console.log(
+    //   this.data[this.generatedFieldName(this.field, '_editor')]['options']
+    // );
+
+    // this.data[this.generatedFieldName(this.field, '_editor')]['options'].push({
     //   name: '',
     // });
-    if (this.data[this.generatedFieldName(this.field, '_editor')])
-      this.data[this.generatedFieldName(this.field, '_editor')][
-        'options'
-      ].forEach((item: any) => {
-        console.log('item');
-        console.log(item);
-      });
-    console.log('data');
-    console.log(this.data);
-    this._dndFieldService.setUpdateControls$();
+    // // this.data[this.generatedFieldName(this.field, '_editor')]['options2'].push({
+    // //   name: '',
+    // // });
+    // if (this.data[this.generatedFieldName(this.field, '_editor')])
+    //   this.data[this.generatedFieldName(this.field, '_editor')][
+    //     'options'
+    //   ].forEach((item: any) => {
+    //     console.log('item');
+    //     console.log(item);
+    //   });
+    // console.log('data');
+    // console.log(this.data);
+    // this._dndFieldService.setUpdateControls$();
   }
 
   public deleteOption(index: number) {
-    console.log('index');
-    console.log(index);
-    this.data[this.generatedFieldName(this.field, '_editor')].options.splice(
-      index,
-      1
-    );
-    this._dndFieldService.setUpdateControls$();
+    this.options.removeAt(index);
+    // return;
+    // console.log('index');
+    // console.log(index);
+    // this.data[this.generatedFieldName(this.field, '_editor')].options.splice(
+    //   index,
+    //   1
+    // );
+    // this._dndFieldService.setUpdateControls$();
   }
 
   public log(val: any) {

@@ -158,6 +158,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       },
       { name: 'johny' },
       { name: 'johnyz' },
+      { name: 'johnm' },
     ],
   };
 
@@ -411,7 +412,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
               console.log(currentField);
               console.log(currentField.name);
 
-              this.myForm.removeControl(currentField.name);
+              // this.myForm.removeControl(currentField.name);
             }
           }
 
@@ -689,14 +690,19 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     //   ] as FormArray
     // )?.clear();
     // formGroup = this._fb.group({});
-    Object.keys(formGroup.controls).forEach((key) => {
-      console.log('key');
-      console.log(key);
+    console.log(
+      '%c formGroup.removeControl ',
+      'background-color: #CDDC2B; color: #000; padding: 5px 20px; border: 0px solid #47C0BE'
+    );
 
-      // console.log('formGroup.controls[key]');
-      // console.log(formGroup.controls[key]);
-      formGroup.removeControl(key);
-    });
+    // Object.keys(formGroup.controls).forEach((key) => {
+    //   console.log('key');
+    //   console.log(key);
+
+    //   // console.log('formGroup.controls[key]');
+    //   // console.log(formGroup.controls[key]);
+    //   formGroup.removeControl(key);
+    // });
     console.log("formGroup.value['single_selection_editor17']?.options");
     console.log(formGroup.controls);
 
@@ -809,6 +815,11 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
 
       // BOOKMARK RADIOBUTTON
       if (field.type === 'radiobutton') {
+        console.log(
+          '%c radiobutton ',
+          'background-color: #F7C73B; color: #000; padding: 5px 20px; border: 0px solid #47C0BE'
+        );
+
         // let control = <FormArray>this.myForm.controls['single_selections'];
 
         // control.push(
@@ -823,35 +834,38 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         let optionsFormGroup = this._fb.group({});
         let optionsControl = this._fb.array([]);
 
-        console.log(
-          '%c RADIOBUTTON ',
-          'background: #555a60; color: #f2c080; padding: 10px 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
-        );
+        // console.log(
+        //   '%c RADIOBUTTON ',
+        //   'background: #555a60; color: #f2c080; padding: 10px 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+        // );
 
-        if (this.data[this.generatedFieldName(field, '_editor')])
-          this.data[this.generatedFieldName(field, '_editor')][
-            'options'
-          ].forEach((item: any) => {
-            console.log('item');
-            console.log(item);
-          });
-        let fieldOptions =
-          this.data[this.generatedFieldName(field, '_editor')]?.options;
+        // if (this.data[this.generatedFieldName(field, '_editor')])
+        //   this.data[this.generatedFieldName(field, '_editor')][
+        //     'options'
+        //   ].forEach((item: any) => {
+        //     console.log('item');
+        //     console.log(item);
+        //   });
+        // let fieldOptions =
+        //   this.data[this.generatedFieldName(field, '_editor')]?.options;
 
-        console.log("this.generatedFieldName(field, '_editor')");
-        console.log(this.generatedFieldName(field, '_editor'));
-        console.log('fieldOptions');
-        console.log(fieldOptions);
-        console.log("this.data['options']");
-        console.log(this.data['options']);
+        // console.log("this.generatedFieldName(field, '_editor')");
+        // console.log(this.generatedFieldName(field, '_editor'));
+        // console.log('fieldOptions');
+        // console.log(fieldOptions);
+        // console.log("this.data['options']");
+        // console.log(this.data['options']);
 
-        let newData: any = (this.data[
-          this.generatedFieldName(field, '_editor') as keyof typeof this.data
-        ] = {});
+        // let newData: any = (this.data[
+        //   this.generatedFieldName(field, '_editor') as keyof typeof this.data
+        // ] = {});
 
-        newData['options'] = fieldOptions ?? [...this.data['options']];
+        // newData['options'] = fieldOptions ?? [...this.data['options']];
 
-        newData['options'].forEach((x: any) => {
+        let options = formGroup.get(this.generatedFieldName(field, '_editor'))
+          ?.value.options ?? [...this.data['options']];
+
+        options.forEach((x: any) => {
           let optionFormGroup = this._fb.group(
             {}
             // {
