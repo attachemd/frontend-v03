@@ -2,6 +2,7 @@
 import { Component, HostBinding } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { DndFieldService } from 'src/app/services/dnd-field/dnd-field.service';
+import { FieldConfig } from 'src/app/services/dnd-field/field.model';
 
 @Component({
   selector: 'app-input',
@@ -21,5 +22,9 @@ export class InputComponent {
   constructor(private _dndFieldService: DndFieldService) {}
   @HostBinding('class.ongoing') public get isOngoing() {
     return this.field.isOngoing;
+  }
+
+  public generatedFieldName(field: FieldConfig, prefix?: any) {
+    return this._dndFieldService.generatedFieldName(field, prefix);
   }
 }

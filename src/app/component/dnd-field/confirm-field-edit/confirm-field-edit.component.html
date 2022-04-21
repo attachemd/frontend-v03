@@ -3,13 +3,13 @@
   <div class="btns">
     <!-- // FIXME label keep modified content -->
     <button
-    class="confirm-btn save"
-    [disabled]="!group.valid"
-    (click)="onFieldEditSaved(); $event.preventDefault()"
-    (keyup.enter)="onFieldEditSaved(); $event.preventDefault()"
-  >
-    save
-  </button>
+      class="confirm-btn save"
+      [disabled]="!(this.options?.valid ?? true)"
+      (click)="onFieldEditSaved(); $event.preventDefault()"
+      (keyup.enter)="onFieldEditSaved(); $event.preventDefault()"
+    >
+      save
+    </button>
     <button
       class="confirm-btn cancel"
       (click)="onFieldEditCanceled(); $event.preventDefault()"

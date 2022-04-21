@@ -8,7 +8,10 @@
     <!-- <div [formGroup]="group" *ngIf="true"> -->
     <div [formGroupName]="generatedFieldName(field, '_editor')">
       <div class="field-element-body" formArrayName="options">
-        <div class="option-field" *ngFor="let option of options?.controls; let i = index">
+        <div
+          class="option-field"
+          *ngFor="let option of options?.controls; let i = index"
+        >
           <ng-container [formGroupName]="i">
             <div class="option-field-and-icon-container">
               <input formControlName="name" type="text" />

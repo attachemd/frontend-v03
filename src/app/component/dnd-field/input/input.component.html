@@ -1,6 +1,10 @@
 <!-- <div class="field_container" [ngClass]="{ ongoing: field.isOngoing }"> -->
 <div class="field_container">
-  <app-confirm-field-edit *ngIf="field.isOngoing" [field]="field"></app-confirm-field-edit>
+  <app-confirm-field-edit
+    *ngIf="field.isOngoing"
+    [field]="field"
+    [group]="group"
+  ></app-confirm-field-edit>
 
   <div
     class="ft-lm-edit-field"
@@ -9,7 +13,7 @@
   >
     <mat-form-field fxFill [formGroup]="group">
       <input
-        [formControlName]="field.name"
+        [formControlName]="generatedFieldName(field)"
         matInput
         [type]="field.inputType"
         [placeholder]="field.label"
@@ -25,6 +29,9 @@
       </ng-container>
     </mat-form-field>
     <!-- <app-dnd-field-edit [visibility]="visibility" [field]="field"></app-dnd-field-edit> -->
-    <app-dnd-field-edit [visibility]="visibility" [field]="field"></app-dnd-field-edit>
+    <app-dnd-field-edit
+      [visibility]="visibility"
+      [field]="field"
+    ></app-dnd-field-edit>
   </div>
 </div>

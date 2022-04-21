@@ -567,5 +567,22 @@
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "KuwX2QNIgSh0P6UZ"
+    },
+    {
+        "type": "Group",
+        "name": "Text",
+        "parent_id": "a6iA5NXsOL9CHP4p",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "icS0Qa9X5bz6r1UH"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\input\\input.component.ts",
+        "parent_id": "icS0Qa9X5bz6r1UH",
+        "fsPath": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\app\\component\\dnd-field\\input\\input.component.ts",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "EQmBWUsyq8I1vebh"
     }
 ]

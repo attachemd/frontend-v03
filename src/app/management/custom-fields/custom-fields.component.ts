@@ -102,6 +102,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   public essentialBuilderFields: any[] = [];
   public renderedBuilderFields: any[] = [];
   public renderedBuilderFieldsPrevState: any[] = [];
+  // stop the form builder drag & drop
   public stopDrag = false;
   public singles: any;
   // BOOKMARK data
