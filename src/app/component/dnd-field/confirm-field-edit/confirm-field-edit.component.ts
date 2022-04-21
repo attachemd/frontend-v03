@@ -21,10 +21,16 @@ export class ConfirmFieldEditComponent implements OnInit {
   }
 
   public onFieldEditSaved() {
-    this._dndFieldService.setFieldName$('save', this.field);
+    this._dndFieldService.setActionAndField$({
+      action: 'save',
+      fieldElement: this.field,
+    });
   }
 
   public onFieldEditCanceled() {
-    this._dndFieldService.setFieldName$('cancel', this.field);
+    this._dndFieldService.setActionAndField$({
+      action: 'cancel',
+      fieldElement: this.field,
+    });
   }
 }

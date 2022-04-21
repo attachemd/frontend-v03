@@ -57,3 +57,4 @@ General:
             ✔ playing with custom validation in reactive form part 03 @done(22-04-17 23:30)
             ✔ work with reactive form errors hundling @done(22-04-19 06:59)
             ✔ finish single selection field @done(22-04-21 05:09)
+    ✔ when a user drags and drops a (dnd field if there is only one) onto the builder canvas, the (dnd field edit) does not appear. @started(22-04-21 10:03) @done(22-04-21 12:30) @lasted(2h47m36s)

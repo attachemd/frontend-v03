@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, FormArray, Validators } from '@angular/forms';
 import { ReplaySubject, Subject } from 'rxjs';
-import { FieldConfig, Validation } from './field.model';
+import { FieldConfig, ActionAndField, Validation } from './field.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,10 +10,7 @@ export class DndFieldService {
   /**
    * used for (confirm field edit) communications.
    */
-  private _fieldName$ = new ReplaySubject<{
-    fieldName: string;
-    fieldElement: any;
-  }>(1);
+  private _actionAndField$ = new ReplaySubject<ActionAndField>(1);
 
   private _stopDrag$ = new Subject<boolean>();
   private _updateControls$ = new Subject<void>();
@@ -24,15 +21,12 @@ export class DndFieldService {
 
   constructor() {}
 
-  public setFieldName$(fieldName: string, fieldElement: any) {
-    this._fieldName$.next({ fieldName, fieldElement });
+  public setActionAndField$(actionAndField: ActionAndField) {
+    this._actionAndField$.next(actionAndField);
   }
 
-  public getFieldName$(): ReplaySubject<{
-    fieldName: string;
-    fieldElement: any;
-  }> {
-    return this._fieldName$;
+  public getActionAndField$(): ReplaySubject<ActionAndField> {
+    return this._actionAndField$;
   }
 
   public setStopDrag$(stopDrag: boolean) {

@@ -13,6 +13,7 @@ import {
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
 import {
+  ActionAndField,
   FieldConfig,
   Validation,
 } from 'src/app/services/dnd-field/field.model';
@@ -168,6 +169,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   private _suggestedFields = suggestedFields;
   private _shadow: any;
   private _shadowInnerHTML: string = 'test';
+  private _dragDropTracker = true;
   // private _data = {
   //   cities: [
   //     {
@@ -214,6 +216,8 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
 
     this._subs.add(
       this._dragulaService.drag(this.builderContainer).subscribe(({ el }) => {
+        console.log('drag start');
+        this._dragDropTracker = true;
         this._dndFieldService.setDndFieldEditVisibility$(false);
         this.renderedBuilderFieldsPrevState = _.cloneDeep(
           this.renderedBuilderFields
@@ -230,12 +234,29 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         this._shadowInnerHTML = el.innerHTML;
       })
     );
+    this._subs.add(
+      this._dragulaService
+        .drop(this.builderContainer)
+        .subscribe(({ el, target, source, sibling }) => {
+          console.log('drop');
+          this._dragDropTracker = false;
+        })
+    );
 
     this._subs.add(
       this._dragulaService
         .dragend(this.builderContainer)
         .subscribe(({ el }) => {
+          console.log('drag end');
           this._shadow.innerHTML = this._shadowInnerHTML;
+          console.log('this._dragDropTracker');
+          console.log(this._dragDropTracker);
+
+          if (this._dragDropTracker) {
+            this._dndFieldService.setDndFieldEditVisibility$(true);
+            this._dragDropTracker = false;
+          }
+
           this._updateTargetContainer();
         })
     );
@@ -251,6 +272,8 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       _dragulaService
         .dropModel(this.builderContainer)
         .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
+          console.log('dropModel');
+
           this.stopDrag = true;
           item.isOngoing = true;
           this._dndFieldService.setFieldEditMode$(true);
@@ -365,25 +388,25 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
 
     // BOOKMARK save cancel
     this._subs.add(
-      this._dndFieldService.getFieldName$().subscribe({
-        next: (fieldObj: any) => {
-          console.log('renderedBuilderFieldsPrevState');
-          console.log(this.renderedBuilderFieldsPrevState);
-          console.log('renderedBuilderFields');
-          console.log(this.renderedBuilderFields);
+      this._dndFieldService.getActionAndField$().subscribe({
+        next: (actionAndField: ActionAndField) => {
+          // console.log('renderedBuilderFieldsPrevState');
+          // console.log(this.renderedBuilderFieldsPrevState);
+          // console.log('renderedBuilderFields');
+          // console.log(this.renderedBuilderFields);
 
-          console.log('fieldObj.fieldElement');
-          console.log(fieldObj.fieldElement);
+          // console.log('fieldObj.fieldElement');
+          // console.log(fieldObj.fieldElement);
           this.stopDrag = false;
           this._dndFieldService.setFieldEditMode$(false);
           this._dndFieldService.setDndFieldEditVisibility$(true);
 
-          if (fieldObj.fieldName === 'cancel')
+          if (actionAndField.action === 'cancel')
             if (this.renderedBuilderFieldsPrevState.length > 0) {
               // checking the lenght when cancel click and the field not dragged
               // the array always empty before drag
               let currentField = this.renderedBuilderFieldsPrevState.find(
-                (item) => item.id === fieldObj.fieldElement.id
+                (item) => item.id === actionAndField.fieldElement.id
               );
 
               if (currentField) currentField.isOngoing = false;
@@ -394,26 +417,24 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
               // click cancel and nothing there (builder canvas) only the curren element
             } else this.renderedBuilderFields = [];
 
-          if (fieldObj.fieldName === 'save') {
+          if (actionAndField.action === 'save') {
             // replaySubject old value (fieldObj.fieldElement) not destroyed
             // and ft_lm.formElementId give new ids for new created
             // fields then currentField may be undefined
 
             let currentField = this.renderedBuilderFields.find(
-              (item) => item.id === fieldObj.fieldElement.id
+              (item) => item.id === actionAndField.fieldElement.id
             );
 
-            if (currentField) {
-              currentField.isOngoing = false;
-              console.log(
-                '%c currentField.name ',
-                'background-color: yellow; color: #000; padding: 0 200px; border: 1px solid #47C0BE'
-              );
-              console.log(currentField);
-              console.log(currentField.name);
+            if (currentField) currentField.isOngoing = false;
+            // console.log(
+            //   '%c currentField.name ',
+            //   'background-color: yellow; color: #000; padding: 5px 20px; border: 0px solid #47C0BE'
+            // );
+            // console.log(currentField);
+            // console.log(currentField.name);
 
-              // this.myForm.removeControl(currentField.name);
-            }
+            // this.myForm.removeControl(currentField.name);
           }
 
           this._updateTargetContainer();
@@ -690,10 +711,10 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     //   ] as FormArray
     // )?.clear();
     // formGroup = this._fb.group({});
-    console.log(
-      '%c formGroup.removeControl ',
-      'background-color: #CDDC2B; color: #000; padding: 5px 20px; border: 0px solid #47C0BE'
-    );
+    // console.log(
+    //   '%c formGroup.removeControl ',
+    //   'background-color: #CDDC2B; color: #000; padding: 5px 20px; border: 0px solid #47C0BE'
+    // );
 
     // Object.keys(formGroup.controls).forEach((key) => {
     //   console.log('key');
@@ -703,18 +724,18 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     //   // console.log(formGroup.controls[key]);
     //   formGroup.removeControl(key);
     // });
-    console.log("formGroup.value['single_selection_editor17']?.options");
-    console.log(formGroup.controls);
+    // console.log("formGroup.value['single_selection_editor17']?.options");
+    // console.log(formGroup.controls);
 
-    if (formGroup.value['single_selection_editor17']?.options)
-      formGroup.value['single_selection_editor17'].options.forEach(
-        (item: any) => {
-          console.log('item');
-          console.log(item);
-        }
-      );
-    console.log('formGroup');
-    console.log(formGroup);
+    // if (formGroup.value['single_selection_editor17']?.options)
+    //   formGroup.value['single_selection_editor17'].options.forEach(
+    //     (item: any) => {
+    //       console.log('item');
+    //       console.log(item);
+    //     }
+    //   );
+    // console.log('formGroup');
+    // console.log(formGroup);
 
     // formGroup.removeControl('single_selection_editor');
     // formGroup.removeControl(this.generatedFieldName(field, '_editor'));

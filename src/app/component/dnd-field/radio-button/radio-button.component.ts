@@ -65,30 +65,30 @@ export class RadioButtonComponent implements OnInit {
       this.generatedFieldName(this.field, '_editor')
     );
 
-    this.group.valueChanges.subscribe({
-      next: (form) => {
-        // keep data model updated
-        let generatedFieldName = this.generatedFieldName(this.field, '_editor');
+    // this.group.valueChanges.subscribe({
+    //   next: (form) => {
+    //     // keep data model updated
+    //     let generatedFieldName = this.generatedFieldName(this.field, '_editor');
 
-        console.log('generatedFieldName');
-        console.log(generatedFieldName);
+    //     console.log('generatedFieldName');
+    //     console.log(generatedFieldName);
 
-        // if (this.data[generatedFieldName])
-        //   this.data[generatedFieldName]['options'].forEach((item: any) => {
-        //     console.log('item');
-        //     console.log(item);
-        //   });
+    //     // if (this.data[generatedFieldName])
+    //     //   this.data[generatedFieldName]['options'].forEach((item: any) => {
+    //     //     console.log('item');
+    //     //     console.log(item);
+    //     //   });
 
-        // if (form[generatedFieldName]?.options)
-        //   // this.data.options = [...form[generatedFieldName]?.options];
+    //     // if (form[generatedFieldName]?.options)
+    //     //   // this.data.options = [...form[generatedFieldName]?.options];
 
-        //   this.data[this.generatedFieldName(this.field, '_editor')].options = [
-        //     ...form[generatedFieldName]?.options,
-        //   ];
+    //     //   this.data[this.generatedFieldName(this.field, '_editor')].options = [
+    //     //     ...form[generatedFieldName]?.options,
+    //     //   ];
 
-        // this.data.options = form[generatedFieldName]?.options;
-      },
-    });
+    //     // this.data.options = form[generatedFieldName]?.options;
+    //   },
+    // });
     // this.isOngoing = this.field.isOngoing;
     // console.log('this.field');
     // console.log(this.field);

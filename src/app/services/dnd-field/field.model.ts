@@ -16,3 +16,8 @@ export interface FieldConfig {
   description?: string;
   validations: Validation[];
 }
+
+export interface ActionAndField {
+  action: string;
+  fieldElement: any;
+}
