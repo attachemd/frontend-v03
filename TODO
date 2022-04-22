@@ -59,4 +59,5 @@ General:
             ✔ finish single selection field @done(22-04-21 05:09)
     ✔ fix: when a user drags and drops a (dnd field if there is only one) onto the builder canvas, the (dnd field edit) does not appear. @started(22-04-21 10:03) @done(22-04-21 12:30) @lasted(2h47m36s)
     ✔ fix: disabled state of save button when only (options) is available in (confirm field edit) @done(22-04-21 21:55)
-    ☐ move (custom field edit) methods to a sevice and update (product edit) view
+    ☐ move (custom field) methods to a sevice and update (product edit) view
+    ☐ save (custom field) from to the database
