@@ -6,15 +6,15 @@ export interface Validation {
 export interface FieldConfig {
   tracked_id?: number;
   id?: number;
-  label?: string;
   name: string;
+  type: string;
+  validations: Validation[];
+  label?: string;
   inputType?: string;
   options?: string[];
   collections?: any;
-  type: string;
   value?: any;
   description?: string;
-  validations: Validation[];
 }
 
 export interface ActionAndField {

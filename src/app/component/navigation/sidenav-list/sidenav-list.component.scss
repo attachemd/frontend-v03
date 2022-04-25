@@ -43,9 +43,10 @@
 
 .active {
     // background-color: #ededed !important;
-    background-color: #E6E6EA !important;
+    background-color: #ebebeb !important;
     // background-color: #e1e1e1 !important;
-    color: #0b5ed7;
+    // color: #0b5ed7;
+    color: var(--main);
 }
 
 // .nav-list-for-models {

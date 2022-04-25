@@ -24,6 +24,8 @@ import { suggestedFields } from 'src/app/services/dnd-field/suggested-fields.sam
 import { essentialFields } from 'src/app/services/dnd-field/essential-fields.sample';
 import { DuplicateValidator } from 'src/app/common/errors/duplicate.validator';
 import { DuplicateService } from 'src/app/common/errors/duplicate.service';
+import { FormService } from 'src/app/services/forms/form.service';
+import { Form } from 'src/app/services/forms/form.model';
 
 let isduplicate = (control: AbstractControl) => {
   console.log(
@@ -45,23 +47,6 @@ let isduplicate = (control: AbstractControl) => {
 
 let ft_lm = { formElementId: 0 };
 
-class FormElement3 {
-  public id: number;
-  public tracked_id: number;
-  public isOngoing = false;
-  constructor(
-    public name: string,
-    public type: string,
-    public label: string,
-    public inputType: string,
-    public value: string,
-    public options: string[],
-    public validations: Validation[]
-  ) {
-    this.tracked_id = ft_lm.formElementId++;
-    this.id = this.tracked_id;
-  }
-}
 class FormElement {
   public id: number;
   public tracked_id: number;
@@ -195,7 +180,8 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     private _dndFieldService: DndFieldService,
     private _route: ActivatedRoute,
     private _router: Router,
-    private _duplicateService: DuplicateService
+    private _duplicateService: DuplicateService,
+    private _form: FormService
   ) {
     this._essentialFields.forEach((field) => {
       this.essentialBuilderFields.push(new FormElement(field));
@@ -210,7 +196,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
 
     // BOOKMARK this.myForm = this._fb.group({
     this.myForm = this._fb.group({
-      // form_name: ['the form'],
+      form_name: ['the form'],
     });
 
     this._addControls(this.myForm);
@@ -473,14 +459,25 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     );
     console.log('form.value', form.value);
     console.log('Valid?', form.valid); // true or false
+    this._form.create({ name: form.value.form_name }).subscribe({
+      next: (form) => {
+        if (form)
+          console.log(
+            '%c this._form.create ',
+            'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
+          );
+      },
+    });
     // this._router.navigate(['/products/', this.productId]);
     // this._router.navigate(['/products/', '(edit:products/2)']);
-    this._router.navigate([
-      '',
-      {
-        outlets: { primary: ['products'], edit: ['products', this.productId] },
-      },
-    ]);
+
+    // this._router.navigate([
+    //   '',
+    //   {
+    //     outlets: { primary: ['products'], edit: ['products', this.productId] },
+    //   },
+    // ]);
+
     // this._router.navigateByUrl('/products/(edit:products/2)');
   }
 

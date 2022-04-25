@@ -51,6 +51,21 @@ $workshop-theme: material.mat-light-theme(
 
 @include material.angular-material-theme($workshop-theme);
 
+:root {
+  // --main: #2199e8;
+  // --main: #0b5ed7;
+  // --main: #7878F1;
+  // --main-btn-txt: #fff;
+  // --main: #3a2bdc;
+  // --main-btn-bg: #3a2bdc;
+  // --main-btn-txt: #fff;
+  --main: #0d6efd;
+  --main-btn-bg: #0d6efd;
+  --main-btn-txt: #fff;
+  --blue: #00b;
+  --fullwidth: 100%;
+}
+
 html,
 body {
   height: 100%;
@@ -226,8 +241,10 @@ mat-row {
   display: block;
   // color: #009cf7;
   // border: 2px dashed #009cf7;
-  color: #0b5ed7;
-  border: 2px dashed #0b5ed7;
+  // color: #0b5ed7;
+  // border: 2px dashed #0b5ed7;
+  color: var(--main);
+  border: 2px dashed var(--main);
   // color: #0054f7;
   // border: 2px dashed #0054f7;
   // color: #0090f7;
@@ -261,7 +278,8 @@ mat-row {
     display: block;
   // border: 2px solid #0054f7;
   // border: 2px solid #009cf7;
-  border: 2px solid #0b5ed7;
+  // border: 2px solid #0b5ed7;
+  border: 2px solid var(--main);
   padding: 17px;
   margin-bottom: 17px;
   border-radius: 5px;

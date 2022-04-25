@@ -66,12 +66,16 @@
   }
 }
 .save {
-  color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
+  color: var(--main-btn-txt);
+  // background-color: #0d6efd;
+  // border-color: #0d6efd;
+  background-color: var(--main-btn-bg);
+  border-color: var(--main-btn-bg);
   &:hover {
-    color: #fff;
-    background-color: #0b5ed7;
-    border-color: #0a58ca;
+    color: var(--main-btn-txt);
+    // background-color: #0b5ed7;
+    // border-color: #0a58ca;
+    background-color: var(--main-btn-bg);
+    border-color: var(--main-btn-bg);
   }
 }
