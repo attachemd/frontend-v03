@@ -6,7 +6,10 @@ import {
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
-
+interface PathParams {
+  id?: string;
+  name?: string;
+}
 /**
  * CrudGeneric : provision of CRUD on a type T
  */
@@ -33,14 +36,49 @@ export abstract class GeneriCRUD<T> {
   }
 
   /**
+   * Gets the list of entities T
+   */
+  public fetchAll() {
+    return this._fetchAll();
+  }
+
+  /**
+   * Gets an entity T
+   * @param id : the required id
+   */
+  public fetch(pathParams: PathParams) {
+    const urlId = this._getUrl(pathParams.id, pathParams.name);
+
+    return this._http
+      .get<T>(urlId)
+      .pipe(catchError((error) => this._catchError(error)));
+  }
+
+  /***
+   * PROTECTED
+   ****/
+  /**
+   * Gets the list of entities T
+   */
+  protected _fetchAll() {
+    const url = this._getUrl();
+
+    return this._http
+      .get(url)
+      .pipe(catchError((error) => of(this._catchError(error))));
+  }
+
+  /**
    * Determines the API URL to use, with or without id
    * @param id
+   * @param name
    * @protected
    */
-  protected _getUrl(id = null) {
+  protected _getUrl(id?: string, name?: string) {
     let url = this.getRootUrl();
 
-    if (id !== null) url = `${url}${id}/`;
+    if (id) url = `${url}/by_id/${id}`;
+    if (name) url = `${url}/by_name/${name}`;
 
     return url;
   }

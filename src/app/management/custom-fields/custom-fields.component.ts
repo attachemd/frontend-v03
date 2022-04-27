@@ -72,6 +72,34 @@ class FormElement {
     this.validations = field.validations;
   }
 }
+class FormElement2 {
+  public id: number;
+  public tracked_id: number;
+  public isOngoing = false;
+  public name: string;
+  public type: string;
+  public label?: string;
+  public inputType?: string;
+  public value: string;
+  public description?: string;
+  public options?: string[];
+  public validations: Validation[];
+  constructor(field: any) {
+    let fieldItem = field.form_element_template;
+
+    this.tracked_id = ft_lm.formElementId++;
+    this.id = Number(fieldItem.form_element_template_id);
+    this.name = fieldItem.name;
+    this.type = fieldItem.form_element_type.name;
+    this.label = fieldItem.label;
+    // FIXME remove inputType
+    this.inputType = fieldItem.name;
+    this.value = '';
+    this.description = fieldItem.description;
+    this.options = [];
+    this.validations = fieldItem.validations;
+  }
+}
 
 @Component({
   selector: 'app-custom-fields',
@@ -183,12 +211,12 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     private _duplicateService: DuplicateService,
     private _form: FormService
   ) {
-    this._essentialFields.forEach((field) => {
-      this.essentialBuilderFields.push(new FormElement(field));
-    });
-    this._suggestedFields.forEach((field) => {
-      this.suggestedBuilderFields.push(new FormElement(field));
-    });
+    // this._essentialFields.forEach((field) => {
+    //   this.essentialBuilderFields.push(new FormElement(field));
+    // });
+    // this._suggestedFields.forEach((field) => {
+    //   this.suggestedBuilderFields.push(new FormElement(field));
+    // });
 
     // this._regConfig.forEach((field) => {
     //   this.renderedBuilderFields.push(new FormElement(field));
@@ -303,6 +331,32 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this._form.fetchAll().subscribe({
+      next: (forms) => {
+        if (forms)
+          console.log(
+            '%c forms ',
+            'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
+          );
+        console.log(forms);
+      },
+    });
+    this._form.fetch({ name: 'essential fields' }).subscribe({
+      next: (form) => {
+        if (form)
+          console.log(
+            '%c form ',
+            'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
+          );
+        console.log(form);
+      },
+    });
+    this._essentialFields.forEach((field) => {
+      this.essentialBuilderFields.push(new FormElement(field));
+    });
+    this._suggestedFields.forEach((field) => {
+      this.suggestedBuilderFields.push(new FormElement(field));
+    });
     // Get product id
     this._subs.add(
       this._route.params.subscribe({
