@@ -74,7 +74,7 @@ export class DndFieldEditComponent implements OnInit {
       .afterClosed()
       .subscribe({
         next: (result) => {
-          if (result) this._dndFieldService.setDeleteField$(this.field.id);
+          if (result) this._dndFieldService.setDeleteField$(this.field);
         },
         error: (error: any) => {
           console.log('error');

@@ -18,6 +18,7 @@ General:
     ☐ fix autocomplete when password field added to the form builder canvas
     ☐ save form builder as draft
     ☐ remove (form element input type) from #backend
+    ☐ add drag and drop to the field options
     ✔ stop dragging when field edit or delete clicked @done(22-04-06)
     ✔ add delete dialog @done(22-04-06)
     ✔ fix label keep modified content in dnd field on cancel @done(22-04-06)

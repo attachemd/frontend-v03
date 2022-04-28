@@ -4,7 +4,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 interface PathParams {
   id?: string;
@@ -46,7 +46,7 @@ export abstract class GeneriCRUD<T> {
    * Gets an entity T
    * @param id : the required id
    */
-  public fetch(pathParams: PathParams) {
+  public fetch(pathParams: PathParams): Observable<any> {
     const urlId = this._getUrl(pathParams.id, pathParams.name);
 
     return this._http

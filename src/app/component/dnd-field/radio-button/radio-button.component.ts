@@ -99,6 +99,11 @@ export class RadioButtonComponent implements OnInit {
     )?.controls['options'] as FormArray;
   }
 
+  public deleteFieldControl() {
+    this.group.removeControl(this.generatedFieldName(this.field, '_editor'));
+    this.group.removeControl(this.generatedFieldName(this.field));
+  }
+
   public generatedFieldName(field: FieldConfig, prefix?: any) {
     return this._dndFieldService.generatedFieldName(field, prefix);
   }

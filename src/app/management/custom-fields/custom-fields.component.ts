@@ -91,7 +91,7 @@ class FormElement2 {
     this.id = Number(fieldItem.form_element_template_id);
     this.name = fieldItem.name;
     this.type = fieldItem.form_element_type.name;
-    this.label = fieldItem.label;
+    this.label = field.label;
     // FIXME remove inputType
     this.inputType = fieldItem.name;
     this.value = '';
@@ -227,7 +227,8 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       form_name: ['the form'],
     });
 
-    this._addControls(this.myForm);
+    // this._addControls(this.myForm);
+    // this._addControls2();
 
     this._subs.add(
       this._dragulaService.drag(this.builderContainer).subscribe(({ el }) => {
@@ -349,11 +350,14 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
             'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
           );
         console.log(form);
+        form.form_element_fields.forEach((field: any) => {
+          this.essentialBuilderFields.push(new FormElement2(field));
+        });
       },
     });
-    this._essentialFields.forEach((field) => {
-      this.essentialBuilderFields.push(new FormElement(field));
-    });
+    // this._essentialFields.forEach((field) => {
+    //   this.essentialBuilderFields.push(new FormElement(field));
+    // });
     this._suggestedFields.forEach((field) => {
       this.suggestedBuilderFields.push(new FormElement(field));
     });
@@ -416,10 +420,11 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
 
     this._subs.add(
       this._dndFieldService.getDeleteField$().subscribe({
-        next: (fieldId: string) => {
+        next: (field: any) => {
+          this._dndFieldService.deleteFieldControl(this.myForm, field);
           this.renderedBuilderFields = this.renderedBuilderFields.filter(
             function (el) {
-              return el.id != fieldId;
+              return el.id != field.id;
             }
           );
         },
@@ -539,473 +544,17 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     return this._dndFieldService.generatedFieldName(field, prefix);
   }
 
-  // BOOKMARK _setOptions
-  private _setOptions(options: any) {
-    let arr = new FormArray([]);
-
-    options.forEach((y: any) => {
-      arr.push(
-        this._fb.group({
-          name: y.name,
-        })
-      );
-    });
-    return arr;
-  }
-
-  // private _controlLicenseNumber(c: AbstractControl) {
-  //   const value = c.get('options')?.value;
-
-  //   return Object.keys(value).find((license_number) => c === value) || null;
-  // }
-  // BOOKMARK _isDuplicate
-  private _isDuplicate(control: AbstractControl) {
-    setTimeout(() => {
-      // console.log(
-      //   '%c duplicated top ',
-      //   'background-color: green; color: #fff; padding: 0 200px; border: 0px solid #47C0BE'
-      // );
-      // return null;
-      let options = control.parent?.parent?.value;
-      let opt = control.parent?.parent as FormArray;
-      // let options = control.parent?.value;
-
-      // console.log("formGroup.get('single_selection_editor')?.errors");
-      // console.log(control.parent?.parent?.parent?.errors);
-
-      // console.log('control');
-      // console.log(control.value);
-      // console.log('control.errors');
-      // console.log(control.errors);
-      // console.log('control.parent?.parent');
-      // console.log(control.parent?.parent);
-
-      // console.log('control: ');
-      // console.log(control);
-      // console.log('options: ');
-      // console.log(options);
-
-      // return { invalidUrl: true };
-      // const valueArr = this.myForm.get('options')?.value;
-      let names = options?.map((item: any) => {
-        return item['name'];
-      });
-
-      // console.log('control.parent?.parent?.controls');
-      // console.log(control.parent?.parent?.controls);
-      // if (opt) console.log('--------------------------');
-      // console.log(
-      //   '%c -------------------------- ',
-      //   'background-color: yellow; color: #000; padding: 0 200px; border: 0px solid #47C0BE'
-      // );
-
-      function getOccurrence(array: any, value: any) {
-        var count = 0;
-
-        array.forEach((v: any) => v.name === value && count++);
-        return count;
-      }
-      function removeItemOnce(arr: any, value: any) {
-        var index = arr.indexOf(value);
-
-        if (index > -1) arr.splice(index, 1);
-
-        return arr;
-      }
-      // let filteredArray = opt.value.filter(
-      //   (e: any) => e.name !== control.value
-      // );
-
-      // let filteredArray = removeItemOnce(opt.value);
-
-      // console.log('filteredArray');
-      // console.log(filteredArray);
-
-      // let found = filteredArray.find((x: any) => x.name === control.value);
-
-      // console.log('control.value');
-      // console.log(control.value);
-
-      // console.log('found');
-      // console.log(found);
-
-      // let count = getOccurrence(opt.value, control.value);
-
-      // console.log('count === 1');
-      // console.log(count === 1);
-
-      opt['controls'].forEach((item: any) => {
-        // console.log('item.controls.name.value: ');
-        // console.log(item.controls.name.value);
-        // console.log('item.controls.name.errors: ');
-        // console.log(item.controls.name.errors);
-        // console.log("item.controls.name.hasError('duplicated')");
-        // console.log(item.controls.name.hasError('duplicated'));
-        let count = getOccurrence(opt.value, item.controls.name.value);
-
-        // console.log('count === 1');
-        // console.log(count === 1);
-
-        // if (found !== undefined) control.setErrors({ duplicated: true });
-        // if (item.controls.name.hasError('duplicated'))
-        //   item.controls.name.setErrors(null);
-        // control.setErrors({ duplicated: true });
-        if (!item.controls.name.errors)
-          if (count === 1) item.controls.name.setErrors(null);
-          else item.controls.name.setErrors({ duplicated: true });
-        else if (item.controls.name.hasError('duplicated') && count === 1)
-          item.controls.name.setErrors(null);
-
-        // console.log("item.controls.name.hasError('duplicated')");
-        // console.log(item.controls.name.hasError('duplicated'));
-      });
-
-      // if (opt)
-      //   for (let controlItem of opt['controls']) {
-      //     console.log('controlItem');
-      //     console.log(controlItem);
-      //     controlItem.setErrors(null);
-      //   }
-
-      // if (control.parent?.parent)
-      //   for (let controlItem of control.parent?.parent.controls) {
-      //   }
-
-      if (names) {
-        let isDuplicate = new Set(names).size !== names.length;
-
-        // console.log(
-        //   '%c duplicated ',
-        //   'background: red; color: #fff; padding: 0 200px; border: 0px solid #47C0BE'
-        // );
-        // console.log('names');
-        // console.log(names);
-
-        // console.log('isDuplicate');
-        // console.log(isDuplicate);
-
-        // if (isDuplicate) return { invalidUrl: true };
-        // console.log('control.errors');
-        // console.log(control.errors);
-
-        // return control.setErrors(null);
-        // if (isDuplicate) control.setErrors({ duplicated: true });
-      }
-      // console.log('hasError');
-      // if (control.errors) console.log(control.errors);
-      // else console.log('null');
-
-      // return control.setErrors(null);
-
-      // if (control.hasError('duplicated')) {
-      //   console.log(
-      //     '%c control ',
-      //     'background: yellow; color: #fff; padding: 0 200px; border: 0px solid #47C0BE'
-      //   );
-
-      //   return control.setErrors(null);
-      // }
-      // return null;
-      // return control.setErrors(null);
-    }, 0);
-  }
-
-  private _controlLicenseNumber(formGroup: FormGroup) {
-    const valueArr = formGroup.get('options')?.value;
-    let isDuplicate = new Set(valueArr).size !== valueArr.length;
-
-    console.log('isDuplicate');
-    console.log(isDuplicate);
-    let setSize = new Set(valueArr).size;
-    let arrayLength = valueArr.length;
-
-    console.log('setSize');
-    console.log(setSize);
-    console.log('arrayLength');
-    console.log(arrayLength);
-    let obj = Object.assign({}, ...valueArr);
-
-    console.log('obj');
-    console.log(obj);
-
-    let names = valueArr.map((item: any) => {
-      return item['name'];
-    });
-
-    console.log('names');
-    console.log(names);
-    let isDuplicate02 = new Set(names).size !== names.length;
-
-    console.log('isDuplicate02');
-    console.log(isDuplicate02);
-    // return Object.keys(value).find((name) => c === value) || null;
-  }
-
-  private _setOtions(x: any) {
-    let arr = new FormArray([]);
-
-    x.options.forEach((y: any) => {
-      arr.push(
-        this._fb.group({
-          name: y.name,
-        })
-      );
-    });
-    return arr;
-  }
-
-  // BOOKMARK _addControls
-  private _addControls(formGroup: FormGroup) {
-    // let optionsControl = <FormArray>formGroup.controls['options'];
-    // (
-    //   (formGroup.get('single_selection_editor') as FormGroup)?.controls[
-    //     'options'
-    //   ] as FormArray
-    // )?.clear();
-    // formGroup = this._fb.group({});
-    // console.log(
-    //   '%c formGroup.removeControl ',
-    //   'background-color: #CDDC2B; color: #000; padding: 5px 20px; border: 0px solid #47C0BE'
-    // );
-
-    // Object.keys(formGroup.controls).forEach((key) => {
-    //   console.log('key');
-    //   console.log(key);
-
-    //   // console.log('formGroup.controls[key]');
-    //   // console.log(formGroup.controls[key]);
-    //   formGroup.removeControl(key);
-    // });
-    // console.log("formGroup.value['single_selection_editor17']?.options");
-    // console.log(formGroup.controls);
-
-    // if (formGroup.value['single_selection_editor17']?.options)
-    //   formGroup.value['single_selection_editor17'].options.forEach(
-    //     (item: any) => {
-    //       console.log('item');
-    //       console.log(item);
-    //     }
-    //   );
-    // console.log('formGroup');
-    // console.log(formGroup);
-
-    // formGroup.removeControl('single_selection_editor');
-    // formGroup.removeControl(this.generatedFieldName(field, '_editor'));
-    // formGroup = this._fb.group({});
-    // optionsControl.clear();
-
-    // optionsControl = this._setOptions(this._data.options);
-    // this._data.cities.forEach((x) => {
-    //   optionsControl.push(
-    //     this._fb.group({
-    //       city: x.city,
-    //       options: this._setOptions(x),
-    //     })
-    //   );
-    // });
-
-    // this._data.options.forEach((x) => {
-    //   let optionFormGroup = this._fb.group(
-    //     {},
-    //     {
-    //       validators: Validators.compose([this._isDuplicate]),
-    //     }
-    //   );
-    //   const control = this._fb.control(
-    //     x.name,
-    //     this._bindValidations(this._data.validations || [])
-    //   );
-
-    //   optionFormGroup.addControl('name', control);
-    //   optionsControl.push(optionFormGroup);
-    // });
-
-    // this._controlLicenseNumber(formGroup);
-
-    // console.log('_controlLicenseNumber');
-    // console.log(this._controlLicenseNumber(formGroup));
-
-    // this._data.options.forEach((x) => {
-    //   let optionFormGroup = this._fb.group({});
-    //   let control = new FormControl();
-
-    //   control.setValue(x.name);
-    //   control.setValidators(
-    //     this._bindValidations(this._data.validations || [])
-    //   );
-
-    //   optionFormGroup.addControl('name', control);
-    //   optionsControl.push(optionFormGroup);
-    // });
-
-    // formGroup = this._fb.group(
-    //   {
-    //     name: ['', [Validators.required]],
-    //     surname: ['', [Validators.required]],
-    //     phone: ['', [Validators.required]],
-    //     nationality: ['', [Validators.required]],
-    //     email: ['', Validators.email],
-    //     license_number: ['', [Validators.required]],
-    //   },
-    //   {
-    //     validator: this._controlLicenseNumber,
-    //   }
-    // );
-
-    this.renderedBuilderFields.forEach((field) => {
-      if (field.type === 'button') return;
-      if (field.type === 'date') field.value = new Date(field.value);
-      // if (field.type === 'radiobutton') {
-      //   console.log('field label');
-      //   console.log(field.label.split(' ').join('_').toLowerCase().trim());
-
-      //   let optionsFormGroup = this._fb.group({});
-      //   let optionsControl = this._fb.array([]);
-
-      //   this.data.options.forEach((x) => {
-      //     let optionFormGroup = this._fb.group(
-      //       {},
-      //       {
-      //         validators: Validators.compose([this._isDuplicate]),
-      //       }
-      //     );
-      //     const control = this._fb.control(
-      //       x.name,
-      //       this._bindValidations(this.data.validations || [])
-      //     );
-
-      //     optionFormGroup.addControl('name', control);
-      //     optionsControl.push(optionFormGroup);
-      //   });
-      //   optionsFormGroup.addControl('options', optionsControl);
-      //   formGroup.addControl(
-      //     // field.label.split(' ').join('_').toLowerCase().trim(),
-      //     field.name + '_editor',
-      //     optionsFormGroup
-      //   );
-      //   // return;
-      // }
-
-      // BOOKMARK RADIOBUTTON
-      if (field.type === 'radiobutton') {
-        console.log(
-          '%c radiobutton ',
-          'background-color: #F7C73B; color: #000; padding: 5px 20px; border: 0px solid #47C0BE'
-        );
-
-        // let control = <FormArray>this.myForm.controls['single_selections'];
-
-        // control.push(
-        //   this._fb.group({
-        //     single_selection: field.name,
-        //     options: this._setOtions(this._data),
-        //   })
-        // );
-
-        // return;
-
-        let optionsFormGroup = this._fb.group({});
-        let optionsControl = this._fb.array([]);
-
-        // console.log(
-        //   '%c RADIOBUTTON ',
-        //   'background: #555a60; color: #f2c080; padding: 10px 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
-        // );
-
-        // if (this.data[this.generatedFieldName(field, '_editor')])
-        //   this.data[this.generatedFieldName(field, '_editor')][
-        //     'options'
-        //   ].forEach((item: any) => {
-        //     console.log('item');
-        //     console.log(item);
-        //   });
-        // let fieldOptions =
-        //   this.data[this.generatedFieldName(field, '_editor')]?.options;
-
-        // console.log("this.generatedFieldName(field, '_editor')");
-        // console.log(this.generatedFieldName(field, '_editor'));
-        // console.log('fieldOptions');
-        // console.log(fieldOptions);
-        // console.log("this.data['options']");
-        // console.log(this.data['options']);
-
-        // let newData: any = (this.data[
-        //   this.generatedFieldName(field, '_editor') as keyof typeof this.data
-        // ] = {});
-
-        // newData['options'] = fieldOptions ?? [...this.data['options']];
-
-        let options = formGroup.get(this.generatedFieldName(field, '_editor'))
-          ?.value.options ?? [...this.data['options']];
-
-        options.forEach((x: any) => {
-          let optionFormGroup = this._fb.group(
-            {}
-            // {
-            //   validators: Validators.compose([this._isDuplicate]),
-            //   // validators: Validators.compose([]),
-            // }
-          );
-
-          const control = this._fb.control(
-            x.name,
-            this._bindValidations(this.data['validations'] || [])
-          );
-
-          optionFormGroup.addControl('name', control);
-          optionsControl.push(optionFormGroup);
-        });
-        optionsFormGroup.addControl('options', optionsControl);
-
-        formGroup.addControl(
-          this.generatedFieldName(field, '_editor'),
-          optionsFormGroup
-        );
-        // return;
-      }
-
-      const control = this._fb.control(
-        field.value,
-        this._bindValidations(field.validations || [])
-      );
-
-      formGroup.addControl(this.generatedFieldName(field), control);
-    });
-    // this.singles = (
-    //   (formGroup.get('single_selection_editor') as FormGroup)?.controls[
-    //     'options'
-    //   ] as FormArray
-    // )?.controls;
-
-    // console.log('singles');
-    // console.log(this.singles);
-  }
-
-  // BOOKMARK _bindValidations
-  private _bindValidations(validations: any) {
-    if (validations.length > 0) {
-      const validList: any[] = [];
-
-      validations.forEach((validation: Validation) => {
-        if (validation.name === 'required') validList.push(Validators.required);
-        else if (validation.name === 'pattern')
-          validList.push(Validators.pattern(validation.pattern));
-        else if (validation.name === 'duplicated')
-          validList.push(this._isDuplicate);
-        // else if (validation.name === 'duplicate')
-        //   validList.push(
-        //     DuplicateValidator.createValidator(this._duplicateService)
-        //   );
-      });
-      return Validators.compose(validList);
-    }
-    return null;
+  private _addControls() {
+    this._dndFieldService.addControls(this.myForm, this.renderedBuilderFields);
   }
 
   private _updateTargetContainer() {
     // Error: Cannot find control with name
+    console.log('this.renderedBuilderFields');
+    console.log(this.renderedBuilderFields);
 
-    this._addControls(this.myForm);
+    // this._dndFieldService.addControls(this.myForm, this.renderedBuilderFields);
+    this._addControls();
     // https://www.smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/
     // https://medium.com/@Rahulx1/understanding-event-loop-call-stack-event-job-queue-in-javascript-63dcd2c71ecd
     // https://stackoverflow.com/questions/31698747/does-the-js-garbage-collector-clear-stack-memory
