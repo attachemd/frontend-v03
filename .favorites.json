@@ -286,15 +286,6 @@
         "id": "a1vLDygBfHCizjr8"
     },
     {
-        "type": "Directory",
-        "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\assets",
-        "parent_id": "QcqLPCgDMxj0Trlo",
-        "fsPath": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\assets",
-        "workspaceRoot": null,
-        "workspacePath": null,
-        "id": "nr3N4FptfxhY8q0L"
-    },
-    {
         "type": "File",
         "name": "C:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\angular.json",
         "parent_id": "QcqLPCgDMxj0Trlo",
@@ -594,5 +585,14 @@
         "workspacePath": null,
         "id": "BrqQ8RMPaTzSoOw3",
         "label": "🟨 generic_crud.service.ts"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\assets\\styles\\_variables.scss",
+        "parent_id": "QcqLPCgDMxj0Trlo",
+        "fsPath": "c:\\Users\\Me\\Documents\\Me\\fullstack\\frontend-v03\\src\\assets\\styles\\_variables.scss",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "7LvilFfbgaIQe3zM"
     }
 ]

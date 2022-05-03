@@ -176,7 +176,7 @@ export class DndFieldService {
     return null;
   }
 
-  public addControls(formGroup: FormGroup, renderedBuilderFields: any) {
+  public addControls2(formGroup: FormGroup, renderedBuilderFields: any) {
     // let optionsControl = <FormArray>formGroup.controls['options'];
     // (
     //   (formGroup.get('single_selection_editor') as FormGroup)?.controls[
@@ -400,6 +400,99 @@ export class DndFieldService {
 
     // console.log('singles');
     // console.log(this.singles);
+  }
+
+  public addControls(formGroup: FormGroup, formElementFields: any) {
+    // delete all form controls
+    Object.keys(formGroup.controls).forEach((key) => {
+      formGroup.removeControl(key);
+    });
+
+    // create form name (form control)
+    formGroup.addControl(
+      'name',
+      this._fb.control('the form2', this.bindValidations([]))
+    );
+
+    // create form_element_fields (form array)
+    formGroup.addControl('form_element_fields', this._fb.array([]));
+
+    formElementFields.forEach((formElementField: any) => {
+      let elementTemplate = formElementField.form_element_template;
+
+      if (elementTemplate.form_element_type.name === 'radiobutton') {
+        let formElementFieldsControl = <FormArray>(
+          formGroup.controls['form_element_fields']
+        );
+
+        let formElementListValuesControl = this._fb.array([]);
+        let formElementFieldGroup = this._fb.group({
+          form_element_list_values: formElementListValuesControl,
+        });
+
+        // create field selected_option (form control)
+        formElementFieldGroup.addControl(
+          'selected_option',
+          this._fb.control('', this.bindValidations([]))
+        );
+
+        // create field name (form control)
+        formElementFieldGroup.addControl(
+          'id',
+          this._fb.control(formElementField.id, this.bindValidations([]))
+        );
+
+        // create field name (form control)
+        formElementFieldGroup.addControl(
+          'name',
+          this._fb.control(formElementField.name, this.bindValidations([]))
+        );
+
+        // create form_element_template (form group)
+        formElementFieldGroup.addControl(
+          'form_element_template',
+          this._fb.group({
+            id: this._fb.control(elementTemplate.id, this.bindValidations([])),
+          })
+        );
+
+        // create form_element_list_values (form array)
+        formElementField.form_element_list_values.forEach(
+          (formElementListValue: any) => {
+            let formElementListValueGroup = this._fb.group({});
+
+            console.log('formElementListValue.name');
+            console.log(formElementListValue.name);
+
+            const control = this._fb.control(
+              formElementListValue.name,
+              this.bindValidations(this.data['validations'] || [])
+            );
+
+            formElementListValueGroup.addControl('name', control);
+            formElementListValuesControl.push(formElementListValueGroup);
+          }
+        );
+
+        // const control = this._fb.control(
+        //   field.value,
+        //   this.bindValidations(field.validations || [])
+        // );
+
+        // formGroup.addControl(this.generatedFieldName(field), control);
+
+        // formElementListValuesGroup.addControl(
+        //   'form_element_list_values',
+        //   formElementListValuesControl
+        // );
+
+        // formGroup.addControl('form_element_fields', formElementListValuesGroup);
+        // formElementFieldsControl.push(formElementListValuesControl);
+        formElementFieldsControl.push(formElementFieldGroup);
+      }
+    });
+    console.log('formGroup');
+    console.log(formGroup);
   }
 
   public deleteFieldControl(group: FormGroup, field: any) {

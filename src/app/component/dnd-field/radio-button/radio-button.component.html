@@ -3,37 +3,43 @@
     *ngIf="field.isOngoing"
     [field]="field"
     [group]="group"
+    [index]="index"
   ></app-confirm-field-edit>
   <div [formGroup]="group" *ngIf="field.isOngoing">
     <!-- <div [formGroup]="group" *ngIf="true"> -->
-    <div [formGroupName]="generatedFieldName(field, '_editor')">
-      <div class="field-element-body" formArrayName="options">
+    <div formArrayName="form_element_fields">
+      <ng-container [formGroupName]="index">
         <div
-          class="option-field"
-          *ngFor="let option of options?.controls; let i = index"
+          class="field-element-body"
+          formArrayName="form_element_list_values"
         >
-          <ng-container [formGroupName]="i">
-            <div class="option-field-and-icon-container">
-              <input formControlName="name" type="text" />
-              <button
-                class="option-field-icon icon-delete"
-                title="Delete Option"
-                (click)="deleteOption(i); $event.preventDefault()"
-              ></button>
-            </div>
-            <ng-container *ngFor="let validation of data.validations">
-              <!-- (option?.controls.name.dirty ||
-              option?.controls.name.touched) && -->
-              <div
-                class="single-selection-error"
-                *ngIf="option?.controls.name.hasError(validation.name)"
-              >
-                {{ validation.message }}
+          <div
+            class="option-field"
+            *ngFor="let option of options?.controls; let i = index"
+          >
+            <ng-container [formGroupName]="i">
+              <div class="option-field-and-icon-container">
+                <input formControlName="name" type="text" />
+                <button
+                  class="option-field-icon icon-delete"
+                  title="Delete Option"
+                  (click)="deleteOption(i); $event.preventDefault()"
+                ></button>
               </div>
+              <ng-container *ngFor="let validation of data.validations">
+                <!-- (option?.controls.name.dirty ||
+              option?.controls.name.touched) && -->
+                <div
+                  class="single-selection-error"
+                  *ngIf="option?.controls.name.hasError(validation.name)"
+                >
+                  {{ validation.message }}
+                </div>
+              </ng-container>
             </ng-container>
-          </ng-container>
+          </div>
         </div>
-      </div>
+      </ng-container>
     </div>
   </div>
   <div class="option-field-add" *ngIf="field.isOngoing">
@@ -63,28 +69,32 @@
   >
     <!-- <label class="radio-label">{{ field.label }}:</label> -->
     <div>
-      <mat-label class="ft-lm-label">{{ field.label }}</mat-label>
+      <mat-label class="ft-lm-label">{{ field.name }}</mat-label>
     </div>
-    <div class="ft-lm-field" *ngIf="true">
-      <!-- <mat-radio-group [formControlName]="field.label.split(' ').join('_').toLowerCase().trim()"> -->
-      <mat-radio-group [formControlName]="generatedFieldName(field)">
-        <!-- <mat-radio-button *ngFor="let item of field.options" [value]="item">
+    <ng-container formArrayName="form_element_fields">
+      <ng-container formGroupName="0">
+        <div class="ft-lm-field" *ngIf="true">
+          <!-- <mat-radio-group [formControlName]="field.label.split(' ').join('_').toLowerCase().trim()"> -->
+          <mat-radio-group formControlName="selected_option">
+            <!-- <mat-radio-button *ngFor="let item of field.options" [value]="item">
           {{ item }}
         </mat-radio-button> -->
-        <!-- <mat-radio-button
+            <!-- <mat-radio-button
           *ngFor="let optionElement of data.options; index as i"
           [value]="optionElement.name"
         > -->
 
-        <mat-radio-button
-          *ngFor="let optionElement of options?.value; index as i"
-          [value]="optionElement.name"
-        >
-          <!-- [checked]="i === 0" -->
-          {{ optionElement.name }}
-        </mat-radio-button>
-      </mat-radio-group>
-    </div>
+            <mat-radio-button
+              *ngFor="let optionElement of options?.value; index as i"
+              [value]="optionElement.name"
+            >
+              <!-- [checked]="i === 0" -->
+              {{ optionElement.name }}
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </ng-container>
+    </ng-container>
     <app-dnd-field-edit
       [visibility]="visibility"
       [field]="field"

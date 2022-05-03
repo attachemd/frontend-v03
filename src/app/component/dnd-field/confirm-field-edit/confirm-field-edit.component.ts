@@ -15,6 +15,9 @@ export class ConfirmFieldEditComponent implements OnInit {
   @Input()
   public group!: FormGroup;
 
+  @Input()
+  public index!: number;
+
   public options: any;
 
   constructor(private _dndFieldService: DndFieldService) {}
@@ -25,11 +28,15 @@ export class ConfirmFieldEditComponent implements OnInit {
     console.log(this.group);
     console.log('group.valid');
     console.log(this.group.valid);
+    // this.options = (
+    //   this.group.get(
+    //     this.generatedFieldName(this.field, '_editor')
+    //   ) as FormGroup
+    // )?.controls['options'] as FormArray;
     this.options = (
-      this.group.get(
-        this.generatedFieldName(this.field, '_editor')
-      ) as FormGroup
-    )?.controls['options'] as FormArray;
+      (this.group.controls['form_element_fields'] as FormArray)
+        .controls[0] as FormGroup
+    ).controls['form_element_list_values'] as FormArray;
     console.log('this.options');
     console.log(this.options?.valid);
   }

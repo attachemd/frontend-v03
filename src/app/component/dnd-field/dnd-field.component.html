@@ -1,10 +1,11 @@
-
+<!-- BOOKMARK index -->
   <ng-container
     *ngFor="let formElement of fields; trackBy: trackItem; let i = index"
     appDynamicField
     [field]="formElement"
     [group]="form"
     [data]="data"
+    [index]="i"
   ></ng-container>
 
 

@@ -1,46 +1,55 @@
-<form class="builder-container" [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+<form
+  class="builder-container"
+  [formGroup]="myForm"
+  (ngSubmit)="onSubmit(myForm)"
+>
   <!-- <div class="builder-container"> -->
-    <div class="builder-canvas">
-      <div class="builder-canvas-inner">
-        <!-- <div class="ft-lm-primary-fields">
+  <div class="builder-canvas">
+    <div class="builder-canvas-inner">
+      <!-- <div class="ft-lm-primary-fields">
         <div class="ft-lm-custom-fields-title">
           <h1>Customize fields</h1>
         </div>
       </div> -->
-        <div class="ft-lm-custom-fields-content">
-          <div class="ft-lm-custom-fields">
-            <app-dnd-field
-              class="builder-render"
-              [dragula]="builderContainer"
-              [(dragulaModel)]="renderedBuilderFields"
-              [fields]="renderedBuilderFields"
-              [form]="myForm"
-              [data]="data"
-            >
-            </app-dnd-field>
-            <!-- <button type="submit" [routerLink]="['/products/', productId]">Save</button> -->
-            <!-- <button [disabled]="!myForm.valid" type="submit">Save</button> -->
-            <!-- <button [routerLink]="['',{outlets: {primary: ['products', 'custom-fields', product.id], edit: null}}]">Edit</button> -->
-          </div>
+      <div class="ft-lm-custom-fields-content">
+        <div class="ft-lm-custom-fields">
+          <app-dnd-field
+            class="builder-render"
+            [dragula]="builderContainer"
+            [(dragulaModel)]="renderedBuilderFields"
+            [fields]="renderedBuilderFields"
+            [form]="myForm"
+            [data]="data"
+          >
+          </app-dnd-field>
+          <!-- <button type="submit" [routerLink]="['/products/', productId]">Save</button> -->
+          <!-- <button [disabled]="!myForm.valid" type="submit">Save</button> -->
+          <!-- <button [routerLink]="['',{outlets: {primary: ['products', 'custom-fields', product.id], edit: null}}]">Edit</button> -->
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="builder-elements-container">
-      <div class="builder-elements-grid">
-        <div class="builder-elements-fields">
-          <div class="builder-elements-inner-container" id="elem-id">
-            <h2 class="h-drag-drop">Drag & Drop Fields</h2>
-            <mat-tab-group dynamicHeight class="builder-elements-tab-group">
-              <mat-tab label="Essential">
+  <div class="builder-elements-container">
+    <div class="builder-elements-grid">
+      <div class="builder-elements-fields">
+        <div class="builder-elements-inner-container" id="elem-id">
+          <h2 class="h-drag-drop">Drag & Drop Fields</h2>
+          <mat-tab-group dynamicHeight class="builder-elements-tab-group">
+            <mat-tab label="Essential">
+              <div
+                class="builder-elements builder-source"
+                [dragula]="builderContainer"
+                [(dragulaModel)]="essentialBuilderFields"
+              >
                 <div
-                  class="builder-elements builder-source"
-                  [dragula]="builderContainer"
-                  [(dragulaModel)]="essentialBuilderFields"
+                  class="dnd-field"
+                  *ngFor="let formElement of essentialBuilderFields"
                 >
-                  <div
-                    class="dnd-field"
-                    *ngFor="let formElement of essentialBuilderFields"
+                  <ng-container
+                    *ngIf="
+                      formElement.form_element_template as element_template
+                    "
                   >
                     <div>
                       <div class="dnd-field-icon icon-drag"></div>
@@ -49,64 +58,69 @@
                       <!-- <div class="dnd-field-icon icon-select-type-cursor"></div> -->
                       <div
                         [ngClass]="
-                          'dnd-field-icon' + ' icon-' + formElement.name
+                          'dnd-field-icon' + ' icon-' + element_template.name
                         "
                       ></div>
                     </div>
                     <div>
                       <div
-                        [ngClass]="'dnd-field-content' + ' ' + formElement.type"
+                        [ngClass]="
+                          'dnd-field-content' +
+                          ' ' +
+                          element_template.form_element_type.type
+                        "
                       >
                         <div class="dnd-field-content-title">
-                          {{ formElement.label }}
+                          {{ formElement.name }}
                         </div>
                         <div class="dnd-field-content-description">
-                          {{ formElement.description }}
+                          {{ element_template.description }}
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </ng-container>
                 </div>
-              </mat-tab>
-              <mat-tab label="Suggested">
+              </div>
+            </mat-tab>
+            <mat-tab label="Suggested">
+              <div
+                class="builder-elements builder-source"
+                [dragula]="builderContainer"
+                [(dragulaModel)]="suggestedBuilderFields"
+              >
                 <div
-                  class="builder-elements builder-source"
-                  [dragula]="builderContainer"
-                  [(dragulaModel)]="suggestedBuilderFields"
+                  class="dnd-field"
+                  *ngFor="let formElement of suggestedBuilderFields"
                 >
-                  <div
-                    class="dnd-field"
-                    *ngFor="let formElement of suggestedBuilderFields"
-                  >
-                    <div>
-                      <div class="dnd-field-icon icon-drag"></div>
-                    </div>
-                    <div>
-                      <div class="dnd-field-icon icon-select-type-cursor"></div>
-                    </div>
-                    <div>
-                      <div
-                        [ngClass]="'dnd-field-content' + ' ' + formElement.type"
-                      >
-                        <div class="dnd-field-content-title">
-                          {{ formElement.label }}
-                        </div>
-                        <div class="dnd-field-content-description">
-                          Field description
-                        </div>
+                  <div>
+                    <div class="dnd-field-icon icon-drag"></div>
+                  </div>
+                  <div>
+                    <div class="dnd-field-icon icon-select-type-cursor"></div>
+                  </div>
+                  <div>
+                    <div
+                      [ngClass]="'dnd-field-content' + ' ' + formElement.type"
+                    >
+                      <div class="dnd-field-content-title">
+                        {{ formElement.name }}
+                      </div>
+                      <div class="dnd-field-content-description">
+                        Field description
                       </div>
                     </div>
                   </div>
                 </div>
-              </mat-tab>
-            </mat-tab-group>
-          </div>
-        </div>
-        <div class="builder-elements-btns">
-          <!-- <button>save</button> -->
-          <button [disabled]="!myForm.valid" type="submit">Save</button>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
         </div>
       </div>
+      <div class="builder-elements-btns">
+        <!-- <button>save</button> -->
+        <button [disabled]="!myForm.valid" type="submit">Save</button>
+      </div>
     </div>
+  </div>
   <!-- </div> -->
 </form>

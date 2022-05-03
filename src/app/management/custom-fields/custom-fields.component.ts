@@ -101,6 +101,63 @@ class FormElement2 {
   }
 }
 
+// BOOKMARK FormElement3
+// in builder we don't need validation for the form element field
+// we need it in the creation of the form element template
+class FormElement3 {
+  public name?: string;
+  public id: number;
+  public form_element_template: any;
+  public form_element_list_values: any;
+  public tracked_id: number;
+  public isOngoing = false;
+  // public name: string;
+  // public type: string;
+  // public inputType?: string;
+  // public value: string;
+  // public description?: string;
+  // public options?: string[];
+  public validations: Validation[];
+  constructor(field: any) {
+    let fieldItem = field.form_element_template;
+
+    this.name = field.name;
+    this.tracked_id = ft_lm.formElementId++;
+    this.id = this.tracked_id;
+    this.form_element_template = field.form_element_template;
+    // this.form_element_list_values = _.cloneDeep(field.form_element_list_values);
+    this.form_element_list_values = field.form_element_list_values;
+    // this.name = fieldItem.name;
+    // this.type = fieldItem.form_element_type.name;
+    // // FIXME remove inputType
+    // this.inputType = fieldItem.name;
+    // this.value = '';
+    // this.description = fieldItem.description;
+    // this.options = [];
+    this.validations = [
+      {
+        name: 'required',
+        message: 'Option name required',
+      },
+      {
+        name: 'pattern',
+        pattern: '^[a-zA-Z]+$',
+        message: 'Accept only text',
+      },
+      {
+        name: 'duplicated',
+        // validator: this._isduplicate,
+        message: 'The option name must be unique',
+      },
+      // {
+      //   name: 'duplicate',
+      //   // validator: this._isduplicate,
+      //   message: 'duplicate option name',
+      // },
+    ];
+  }
+}
+
 @Component({
   selector: 'app-custom-fields',
   templateUrl: './custom-fields.component.html',
@@ -224,7 +281,8 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
 
     // BOOKMARK this.myForm = this._fb.group({
     this.myForm = this._fb.group({
-      form_name: ['the form'],
+      // name: ['the form'],
+      // form_element_fields: this._fb.array([]),
     });
 
     // this._addControls(this.myForm);
@@ -303,6 +361,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
           this.stopDrag = false;
         })
     );
+    // BOOKMARK _dragulaService.createGroup
     this._dragulaService.createGroup(this.builderContainer, {
       moves: (el: any, container: any, handle: any): any => {
         if (this.stopDrag) return false;
@@ -324,8 +383,17 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       copy: (el, source) => {
         return source?.classList.contains('builder-source');
       },
-      copyItem: (formElement: FormElement) => {
-        return new FormElement(formElement);
+      copyItem: (formElement: FormElement3) => {
+        console.log(
+          '%c formElement ',
+          'background: #f2c080; color: #555a60; padding: 10px 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+        );
+        console.log(formElement);
+
+        return new FormElement3(formElement);
+        // return formElement;
+        // return _.cloneDeep(formElement);
+        // return { ...formElement };
       }, //Allow item to be coppied in another div
       removeOnSpill: false,
     });
@@ -342,6 +410,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         console.log(forms);
       },
     });
+    // BOOKMARK fetch essential fields
     this._form.fetch({ name: 'essential fields' }).subscribe({
       next: (form) => {
         if (form)
@@ -351,8 +420,11 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
           );
         console.log(form);
         form.form_element_fields.forEach((field: any) => {
-          this.essentialBuilderFields.push(new FormElement2(field));
+          this.essentialBuilderFields.push(new FormElement3(field));
         });
+        console.log('this.essentialBuilderFields');
+        console.log(this.essentialBuilderFields);
+        this._addControls();
       },
     });
     // this._essentialFields.forEach((field) => {
@@ -468,11 +540,28 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
             // and ft_lm.formElementId give new ids for new created
             // fields then currentField may be undefined
 
+            let formElementFieldsControlValue = (
+              this.myForm.controls['form_element_fields'] as FormArray
+            ).value;
+
+            console.log('formElementFieldsControl');
+            console.log(formElementFieldsControlValue);
+
+            let currentFormElementField = formElementFieldsControlValue.find(
+              (item: any) => item.id === actionAndField.fieldElement.id
+            );
+
             let currentField = this.renderedBuilderFields.find(
               (item) => item.id === actionAndField.fieldElement.id
             );
 
-            if (currentField) currentField.isOngoing = false;
+            if (currentField) {
+              currentField.isOngoing = false;
+              if (currentFormElementField)
+                currentField.form_element_list_values =
+                  currentFormElementField.form_element_list_values;
+              currentField.name = currentFormElementField.name;
+            }
             // console.log(
             //   '%c currentField.name ',
             //   'background-color: yellow; color: #000; padding: 5px 20px; border: 0px solid #47C0BE'
@@ -550,11 +639,16 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
 
   private _updateTargetContainer() {
     // Error: Cannot find control with name
+    console.log('this.essentialBuilderFields');
+    console.log(this.essentialBuilderFields);
     console.log('this.renderedBuilderFields');
     console.log(this.renderedBuilderFields);
+    console.log('this.myForm');
+    console.log(this.myForm);
 
     // this._dndFieldService.addControls(this.myForm, this.renderedBuilderFields);
     this._addControls();
+
     // https://www.smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/
     // https://medium.com/@Rahulx1/understanding-event-loop-call-stack-event-job-queue-in-javascript-63dcd2c71ecd
     // https://stackoverflow.com/questions/31698747/does-the-js-garbage-collector-clear-stack-memory

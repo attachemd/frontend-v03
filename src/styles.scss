@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @use "~@angular/material/theming" as material;
+@import 'assets/styles/variables';
+
 
 @include material.mat-core();
 $light-green: (
@@ -51,22 +53,50 @@ $workshop-theme: material.mat-light-theme(
 
 @include material.angular-material-theme($workshop-theme);
 
+// $my-colours: ( // Define your colour map
+//    'cyan': (#B2EBF2, #80DEEA, #4DD0E1, #26C6DA, #00BCD4, #00ACC1),
+//    'blue': (#B2EBF2, #80DEEA, #4DD0E1, #26C6DA, #00BCD4, #00ACC1)
+// );
+
+// @each $map in $my-colours {
+//     $name: nth($map, 1); // Returns the name of the map
+//     $map: map-get($my-colours, $name); // Returns a sub-map
+//     $i: 0; // For your class naming
+
+//     @each $colour in $map {
+//         $i: $i+1; // Increase the iteration value
+
+//         .color-#{$name}-#{$i*100} {
+//             color: $colour;
+//         }
+//     }
+// }
+
+
+
 :root {
-  // --main: #2199e8;
-  // --main: #0b5ed7;
-  // --main: #7878F1;
-  // --main-btn-txt: #fff;
-  // --main: #3a2bdc;
-  // --main-btn-bg: #3a2bdc;
-  // --main-btn-txt: #fff;
+  // --rgb-main: #2199e8;
+  // --rgb-main: #0b5ed7;
+  // --rgb-main: #7878F1;
+  // --rgb-main-btn-txt: #fff;
+  // --rgb-main: #3a2bdc;
+  // --rgb-main-btn-bg: #3a2bdc;
+  // --rgb-main-btn-txt: #fff;
 
-  --main: #0d6efd;
-  --main-btn-bg: #0d6efd;
+  // --rgb-main: #0d6efd;
+  // --rgb-main-btn-bg: #0d6efd;
 
-  // --main: #0dbbfd;
-  //   --main-btn-bg: #0dbbfd;
+  // rgb(34 0 255)
+  // --rgb-main: #2200ff;
+  --hsl-main: 248deg 100%
+  --rgb-main: 34 0 255;
+  --rgb-main-btn-bg: #2200ff;
+  // --rgb-main-btn-bg: main-color();
 
-  --main-btn-txt: #fff;
+  // --rgb-main: #0dbbfd;
+  //   --rgb-main-btn-bg: #0dbbfd;
+
+  --rgb-main-btn-txt: #fff;
   --blue: #00b;
   --fullwidth: 100%;
 }
@@ -248,13 +278,13 @@ mat-row {
   // border: 2px dashed #009cf7;
   // color: #0b5ed7;
   // border: 2px dashed #0b5ed7;
-  color: var(--main);
-  border: 2px dashed var(--main);
+  color: primary-color();
+  border: 2px dashed primary-color();
   // color: #0054f7;
   // border: 2px dashed #0054f7;
   // color: #0090f7;
   // border: 2px dashed #0090f7;
-  background-color: rgb(247, 249, 255);
+  background-color: primary-color(97%);
   margin-bottom: 17px;
   padding: 10px;
   text-align: center;
@@ -284,7 +314,9 @@ mat-row {
   // border: 2px solid #0054f7;
   // border: 2px solid #009cf7;
   // border: 2px solid #0b5ed7;
-  border: 2px solid var(--main);
+  // border: 2px solid rgb(var(--rgb-main) / 1);
+  border: 2px solid primary-color();
+  // border: 2px solid var(--rgb-main-btn-bg);
   padding: 17px;
   margin-bottom: 17px;
   border-radius: 5px;

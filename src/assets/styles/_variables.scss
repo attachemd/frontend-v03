@@ -1,0 +1,16 @@
+@use "sass:color";
+// Brand color:
+$primary-color: #2200ff;
+$secondary-color: #fff;
+// Base color:
+$body-bg-color: #2200ff;
+$body-text-color: #2200ff;
+$body-border-color: #2200ff;
+$body-link-color: #2200ff;
+$body-link-hover-color: #2200ff;
+@function primary-color($lightness-level: 0%) {
+    @return color.scale($primary-color, $lightness: $lightness-level);
+  }
+@function secondary-color($lightness-level: 0%) {
+    @return color.scale($secondary-color, $lightness: $lightness-level);
+  }

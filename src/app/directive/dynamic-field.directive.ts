@@ -24,10 +24,13 @@ const componentMapper = {
 })
 export class DynamicFieldDirective implements OnInit {
   @Input()
-  public field!: FieldConfig;
+  public field!: any;
 
   @Input()
   public group!: FormGroup;
+
+  @Input()
+  public index!: number;
 
   @Input()
   public data!: any;
@@ -37,11 +40,14 @@ export class DynamicFieldDirective implements OnInit {
 
   ngOnInit(): void {
     this.componentRef = this._viewContainerRef.createComponent(
-      (componentMapper as any)[this.field.type]
+      (componentMapper as any)[
+        this.field.form_element_template.form_element_type.name
+      ]
     );
 
     this.componentRef.instance.field = this.field;
     this.componentRef.instance.group = this.group;
+    this.componentRef.instance.index = this.index;
     this.componentRef.instance.data = this.data;
   }
 }

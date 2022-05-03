@@ -1,3 +1,6 @@
+@import '~src/assets/styles/_variables.scss';
+// @import '../../../../assets/styles/variables';
+
 .field-element-header {
   display: grid;
   grid-template-columns: 50% 50%;
@@ -66,16 +69,12 @@
   }
 }
 .save {
-  color: var(--main-btn-txt);
-  // background-color: #0d6efd;
-  // border-color: #0d6efd;
-  background-color: var(--main-btn-bg);
-  border-color: var(--main-btn-bg);
+  color: secondary-color();
+  background-color: primary-color();
+  border-color: primary-color();;
   &:hover {
-    color: var(--main-btn-txt);
-    // background-color: #0b5ed7;
-    // border-color: #0a58ca;
-    background-color: var(--main-btn-bg);
-    border-color: var(--main-btn-bg);
+    color: secondary-color();
+    background-color: primary-color();;
+    border-color: primary-color();;
   }
 }

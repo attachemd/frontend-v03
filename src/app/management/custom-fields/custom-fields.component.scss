@@ -1,3 +1,5 @@
+@import '~src/assets/styles/_variables.scss';
+
 .ft-lm-primary-fields {
   // background-color: #2DCA72;
   margin: 0 50px;
@@ -79,7 +81,7 @@
   margin: 0 40px;
   // border: 1px solid #e5e5e5;
   // border: 1px solid #0b5ed7;
-  border: 1px solid var(--main);
+  border: 1px solid $body-border-color;
 }
 
 .builder-canvas {
@@ -173,7 +175,7 @@
   // border: 1px solid #0054f7;
   // border: 1px solid #009cf7;
   // border: 1px solid #0b5ed7;
-  border: 1px solid var(--main);
+  border: 1px solid $body-border-color;
   // border: 1px solid #0090f7;
 }
 

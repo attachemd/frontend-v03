@@ -22,6 +22,7 @@ export class RadioButtonComponent implements OnInit {
 
   public field!: any;
   public group!: FormGroup;
+  public index!: number;
   public data!: any;
   public visibility = 'none';
 
@@ -61,9 +62,9 @@ export class RadioButtonComponent implements OnInit {
   ngOnInit(): void {
     console.log('RadioButtonComponent');
 
-    const valueArr = this.group.get(
-      this.generatedFieldName(this.field, '_editor')
-    );
+    // const valueArr = this.group.get(
+    //   this.generatedFieldName(this.field, '_editor')
+    // );
 
     // this.group.valueChanges.subscribe({
     //   next: (form) => {
@@ -92,11 +93,31 @@ export class RadioButtonComponent implements OnInit {
     // this.isOngoing = this.field.isOngoing;
     // console.log('this.field');
     // console.log(this.field);
+    // this.options = (
+    //   this.group.get(
+    //     this.generatedFieldName(this.field, '_editor')
+    //   ) as FormGroup
+    // )?.controls['options'] as FormArray;
+    let formElementFieldsControlValue = (
+      this.group.controls['form_element_fields'] as FormArray
+    ).value;
+
+    let currentFormElementField = formElementFieldsControlValue.find(
+      (item: any) => item.id === this.field.id
+    );
+    let index = formElementFieldsControlValue.indexOf(currentFormElementField);
+
+    console.log(
+      '%c index ',
+      'background: #f2c080; color: #555a60; padding: 10px 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+    );
+    console.log(index);
+
     this.options = (
-      this.group.get(
-        this.generatedFieldName(this.field, '_editor')
-      ) as FormGroup
-    )?.controls['options'] as FormArray;
+      (this.group.controls['form_element_fields'] as FormArray).controls[
+        this.index
+      ] as FormGroup
+    ).controls['form_element_list_values'] as FormArray;
   }
 
   public deleteFieldControl() {
@@ -109,6 +130,11 @@ export class RadioButtonComponent implements OnInit {
   }
 
   public addOption() {
+    console.log(
+      '%c field ',
+      'background: #f2c080; color: #555a60; padding: 10px 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+    );
+    console.log(this.field);
     let optionFormGroup = this._fb.group(
       {}
       // {
@@ -124,6 +150,7 @@ export class RadioButtonComponent implements OnInit {
 
     optionFormGroup.addControl('name', control);
     this.options.push(optionFormGroup);
+    // this.field.form_element_list_values = this.options.value;
     // return;
     // console.log('----------------');
     // console.log('data');
