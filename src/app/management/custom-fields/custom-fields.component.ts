@@ -607,7 +607,9 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     );
     console.log('form.value', form.value);
     console.log('Valid?', form.valid); // true or false
-    this._form.create({ name: form.value.form_name }).subscribe({
+    let objToSend = { name: form.value.form_name };
+
+    this._form.create(form.value).subscribe({
       next: (form) => {
         if (form)
           console.log(
