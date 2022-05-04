@@ -402,6 +402,7 @@ export class DndFieldService {
     // console.log(this.singles);
   }
 
+  // BOOKMARK add control
   public addControls(formGroup: FormGroup, formElementFields: any) {
     // delete all form controls
     Object.keys(formGroup.controls).forEach((key) => {
@@ -416,44 +417,56 @@ export class DndFieldService {
 
     // create form_element_fields (form array)
     formGroup.addControl('form_element_fields', this._fb.array([]));
+    let formElementFieldsControl = <FormArray>(
+      formGroup.controls['form_element_fields']
+    );
 
     formElementFields.forEach((formElementField: any) => {
+      console.log(
+        '%c formElementField ',
+        'background: #ffa600; color: #000; padding: 10px 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+      );
+      console.log(formElementField);
+
       let elementTemplate = formElementField.form_element_template;
+      let formElementFieldGroup = this._fb.group({});
+
+      // create field name (form control)
+      formElementFieldGroup.addControl(
+        'id',
+        this._fb.control(formElementField.id, this.bindValidations([]))
+      );
+
+      // create field name (form control)
+      formElementFieldGroup.addControl(
+        'name',
+        this._fb.control(formElementField.name, this.bindValidations([]))
+      );
+
+      // create form_element_template (form group)
+      formElementFieldGroup.addControl(
+        'form_element_template',
+        this._fb.group({
+          id: this._fb.control(elementTemplate.id, this.bindValidations([])),
+        })
+      );
 
       if (elementTemplate.form_element_type.name === 'radiobutton') {
-        let formElementFieldsControl = <FormArray>(
-          formGroup.controls['form_element_fields']
-        );
-
         let formElementListValuesControl = this._fb.array([]);
-        let formElementFieldGroup = this._fb.group({
-          form_element_list_values: formElementListValuesControl,
-        });
+        // let formElementFieldGroup = this._fb.group({
+        //   form_element_list_values: formElementListValuesControl,
+        // });
+
+        // create field form_element_list_values (form array)
+        formElementFieldGroup.addControl(
+          'form_element_list_values',
+          formElementListValuesControl
+        );
 
         // create field selected_option (form control)
         formElementFieldGroup.addControl(
           'selected_option',
           this._fb.control('', this.bindValidations([]))
-        );
-
-        // create field name (form control)
-        formElementFieldGroup.addControl(
-          'id',
-          this._fb.control(formElementField.id, this.bindValidations([]))
-        );
-
-        // create field name (form control)
-        formElementFieldGroup.addControl(
-          'name',
-          this._fb.control(formElementField.name, this.bindValidations([]))
-        );
-
-        // create form_element_template (form group)
-        formElementFieldGroup.addControl(
-          'form_element_template',
-          this._fb.group({
-            id: this._fb.control(elementTemplate.id, this.bindValidations([])),
-          })
         );
 
         // create form_element_list_values (form array)
@@ -488,8 +501,14 @@ export class DndFieldService {
 
         // formGroup.addControl('form_element_fields', formElementListValuesGroup);
         // formElementFieldsControl.push(formElementListValuesControl);
-        formElementFieldsControl.push(formElementFieldGroup);
-      }
+      } else if (elementTemplate.form_element_type.name === 'input')
+        // create field selected_option (form control)
+        formElementFieldGroup.addControl(
+          'tika',
+          this._fb.control('', this.bindValidations([]))
+        );
+
+      formElementFieldsControl.push(formElementFieldGroup);
     });
     console.log('formGroup');
     console.log(formGroup);

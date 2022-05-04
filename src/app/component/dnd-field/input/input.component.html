@@ -4,6 +4,7 @@
     *ngIf="field.isOngoing"
     [field]="field"
     [group]="group"
+    [index]="index"
   ></app-confirm-field-edit>
 
   <div
@@ -12,20 +13,27 @@
     (mouseleave)="visibility = 'none'"
   >
     <mat-form-field fxFill [formGroup]="group">
-      <input
-        [formControlName]="generatedFieldName(field)"
-        matInput
-        [type]="field.inputType"
-        [placeholder]="field.label"
-      />
-      <!-- [(ngModel)]="field.value" -->
-      <ng-container
-        *ngFor="let validation of field.validations"
-        ngProjectAs="mat-error"
-      >
-        <mat-error *ngIf="group.get(field.name)?.hasError(validation.name)">{{
-          validation.message
-        }}</mat-error>
+      <ng-container formArrayName="form_element_fields">
+        <ng-container [formGroupName]="index">
+          {{log('------------ index -------------')}}
+          {{log(index)}}
+          <input
+            formControlName="tika"
+            matInput
+            [type]="field.inputType"
+            [placeholder]="field.label"
+          />
+          <!-- [(ngModel)]="field.value" -->
+          <ng-container
+            *ngFor="let validation of field.validations"
+            ngProjectAs="mat-error"
+          >
+            <mat-error
+              *ngIf="group.get(field.name)?.hasError(validation.name)"
+              >{{ validation.message }}</mat-error
+            >
+          </ng-container>
+        </ng-container>
       </ng-container>
     </mat-form-field>
     <!-- <app-dnd-field-edit [visibility]="visibility" [field]="field"></app-dnd-field-edit> -->

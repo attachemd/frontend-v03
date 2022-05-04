@@ -61,7 +61,11 @@ export class RadioButtonComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('RadioButtonComponent');
-
+    console.log(
+      '%c index ',
+      'background: red; color: #fff; padding: 10px 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+    );
+    console.log(this.index);
     // const valueArr = this.group.get(
     //   this.generatedFieldName(this.field, '_editor')
     // );

@@ -411,7 +411,8 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       },
     });
     // BOOKMARK fetch essential fields
-    this._form.fetch({ name: 'essential fields' }).subscribe({
+    // get essential fields form
+    this._form.fetch({ id: '1' }).subscribe({
       next: (form) => {
         if (form)
           console.log(

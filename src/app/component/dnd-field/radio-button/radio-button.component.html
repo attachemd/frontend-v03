@@ -72,7 +72,7 @@
       <mat-label class="ft-lm-label">{{ field.name }}</mat-label>
     </div>
     <ng-container formArrayName="form_element_fields">
-      <ng-container formGroupName="0">
+      <ng-container [formGroupName]="index">
         <div class="ft-lm-field" *ngIf="true">
           <!-- <mat-radio-group [formControlName]="field.label.split(' ').join('_').toLowerCase().trim()"> -->
           <mat-radio-group formControlName="selected_option">
