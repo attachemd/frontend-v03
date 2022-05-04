@@ -34,8 +34,9 @@ export class ConfirmFieldEditComponent implements OnInit {
     //   ) as FormGroup
     // )?.controls['options'] as FormArray;
     this.options = (
-      (this.group.controls['form_element_fields'] as FormArray)
-        .controls[0] as FormGroup
+      (this.group.controls['form_element_fields'] as FormArray).controls[
+        this.index
+      ] as FormGroup
     ).controls['form_element_list_values'] as FormArray;
     console.log('this.options');
     console.log(this.options?.valid);
