@@ -10,7 +10,7 @@
           <!-- // FIXME label keep modified content -->
           <button
             class="confirm-btn save"
-            [disabled]="!(this.options?.valid ?? true)"
+            [disabled]="!(this.options?.valid ?? true) || (this.options?.value.length === 0)"
             (click)="onFieldEditSaved(); $event.preventDefault()"
             (keyup.enter)="onFieldEditSaved(); $event.preventDefault()"
           >
