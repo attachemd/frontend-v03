@@ -13,6 +13,9 @@ $body-link-hover-color: #2200ff;
 @function primary-color($lightness-level: 0%) {
     @return color.scale($primary-color, $lightness: $lightness-level);
   }
+@function primary-text-color($alpha: 100%) {
+    @return rgba($primary-text-color, $alpha);
+  }
 @function secondary-color($lightness-level: 0%) {
     @return color.scale($secondary-color, $lightness: $lightness-level);
   }

@@ -257,7 +257,51 @@ mat-row {
 /******* Builder *******/
 /***********************/
 
+.confirm-btn {
+  margin-left: 10px;
+  cursor: pointer;
+  outline: 0;
+  color: #000;
+  background-color: #ececec;
+  border-color: #ececec;
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+  border: 1px solid transparent;
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
+  &:hover {
+    color: #000;
+    background-color: #dddddd;
+    border-color: #dddddd;
+  }
+  &:disabled {
+    cursor: auto;
+    color: #b1b1b1;
+    background-color: #f9f9f9;
+    border-color: #ececec;
+    &:hover {
+      color: #b1b1b1;
+    background-color: #f9f9f9;
+    border-color: #ececec;
+    }
+  }
+}
+.save {
+  color: $primary-text-color;
+  background-color: primary-color();
+  border-color: primary-color();;
+  &:hover {
+    color: $primary-text-color;
+    background-color: primary-color();;
+    border-color: primary-color();;
+  }
+}
 
 .many2class {
   color: red;

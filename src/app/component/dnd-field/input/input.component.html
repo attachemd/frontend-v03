@@ -18,10 +18,10 @@
           {{log('------------ index -------------')}}
           {{log(index)}}
           <input
-            formControlName="tika"
+            formControlName="input"
             matInput
             [type]="field.inputType"
-            [placeholder]="field.label"
+            [placeholder]="formElement.value.name"
           />
           <!-- [(ngModel)]="field.value" -->
           <ng-container

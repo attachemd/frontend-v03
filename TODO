@@ -68,4 +68,6 @@ General:
         ✔ updated @done(22-04-28 13:03)
         ✔ add & remove form_element_list_values @done(22-05-03 23:22)
         ✔ first save @done(22-05-04 11:49)
+        ✔ feat: show disabled button when no option there in [selection fields] @done(22-05-04)
+        ✔ fix: disabled button not working when multiple field @done(22-05-04)
         ☐ generalize the save to all essential fields 

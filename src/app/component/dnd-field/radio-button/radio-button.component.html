@@ -5,8 +5,8 @@
     [group]="group"
     [index]="index"
   ></app-confirm-field-edit>
+
   <div [formGroup]="group" *ngIf="field.isOngoing">
-    <!-- <div [formGroup]="group" *ngIf="true"> -->
     <div formArrayName="form_element_fields">
       <ng-container [formGroupName]="index">
         <div
@@ -42,6 +42,7 @@
       </ng-container>
     </div>
   </div>
+
   <div class="option-field-add" *ngIf="field.isOngoing">
     <button
       class="option-field-icon icon-add"
@@ -50,45 +51,24 @@
     ></button>
     <span>Add option</span>
   </div>
-
-  <!-- <div class="ft-lm-edit-field">
-    <mat-form-field fxFlex="500px" [formGroup]="group">
-      <label class="radio-label-padding">{{ field.label }}:</label>
-      <mat-radio-group [formControlName]="field.name">
-        <mat-radio-button *ngFor="let item of field.options" [value]="item">{{
-          item
-        }}</mat-radio-button>
-      </mat-radio-group>
-    </mat-form-field>
-  </div> -->
+  
   <div
     class="ft-lm-edit-field"
     [formGroup]="group"
     (mouseenter)="visibility = 'inline-block'"
     (mouseleave)="visibility = 'none'"
   >
-    <!-- <label class="radio-label">{{ field.label }}:</label> -->
     <div>
-      <mat-label class="ft-lm-label">{{ field.name }}</mat-label>
+      <mat-label class="ft-lm-label">{{ formElement.value.name }}</mat-label>
     </div>
     <ng-container formArrayName="form_element_fields">
       <ng-container [formGroupName]="index">
         <div class="ft-lm-field" *ngIf="true">
-          <!-- <mat-radio-group [formControlName]="field.label.split(' ').join('_').toLowerCase().trim()"> -->
           <mat-radio-group formControlName="selected_option">
-            <!-- <mat-radio-button *ngFor="let item of field.options" [value]="item">
-          {{ item }}
-        </mat-radio-button> -->
-            <!-- <mat-radio-button
-          *ngFor="let optionElement of data.options; index as i"
-          [value]="optionElement.name"
-        > -->
-
             <mat-radio-button
               *ngFor="let optionElement of options?.value; index as i"
               [value]="optionElement.name"
             >
-              <!-- [checked]="i === 0" -->
               {{ optionElement.name }}
             </mat-radio-button>
           </mat-radio-group>

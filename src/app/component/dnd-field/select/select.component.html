@@ -2,14 +2,62 @@
   <app-confirm-field-edit
     *ngIf="field.isOngoing"
     [field]="field"
+    [group]="group"
+    [index]="index"
   ></app-confirm-field-edit>
+
+  <div [formGroup]="group" *ngIf="field.isOngoing">
+    <div formArrayName="form_element_fields">
+      <ng-container [formGroupName]="index">
+        <div
+          class="field-element-body"
+          formArrayName="form_element_list_values"
+        >
+          <div
+            class="option-field"
+            *ngFor="let option of options?.controls; let i = index"
+          >
+            <ng-container [formGroupName]="i">
+              <div class="option-field-and-icon-container">
+                <input formControlName="name" type="text" />
+                <button
+                  class="option-field-icon icon-delete"
+                  title="Delete Option"
+                  (click)="deleteOption(i); $event.preventDefault()"
+                ></button>
+              </div>
+              <ng-container *ngFor="let validation of data.validations">
+                <!-- (option?.controls.name.dirty ||
+              option?.controls.name.touched) && -->
+                <div
+                  class="single-selection-error"
+                  *ngIf="option?.controls.name.hasError(validation.name)"
+                >
+                  {{ validation.message }}
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="option-field-add" *ngIf="field.isOngoing">
+    <button
+      class="option-field-icon icon-add"
+      title="Add Option"
+      (click)="addOption(); $event.preventDefault()"
+    ></button>
+    <span>Add option</span>
+  </div>
 
   <div
     class="ft-lm-edit-field"
     (mouseenter)="visibility = 'inline-block'"
     (mouseleave)="visibility = 'none'"
   >
-    <mat-form-field
+    <!-- <mat-form-field
       fxFill
       appearance="fill"
       class="demo-full-width margin-top"
@@ -21,7 +69,29 @@
           item
         }}</mat-option>
       </mat-select>
+    </mat-form-field> -->
+
+    <mat-form-field
+      fxFill
+      appearance="fill"
+      class="demo-full-width margin-top"
+      [formGroup]="group"
+    >
+    <ng-container formArrayName="form_element_fields" *ngIf="true">
+      <ng-container [formGroupName]="index">
+      <mat-label>{{ field.name }}</mat-label>
+      <mat-select formControlName="selected_option">
+        <mat-option *ngFor="let option of options?.value" [value]="option.name">{{
+          option.name
+        }}</mat-option>
+      </mat-select>
+    </ng-container>
+  </ng-container>
     </mat-form-field>
-    <app-dnd-field-edit [visibility]="visibility" [field]="field"></app-dnd-field-edit>
+
+    <app-dnd-field-edit
+      [visibility]="visibility"
+      [field]="field"
+    ></app-dnd-field-edit>
   </div>
 </div>

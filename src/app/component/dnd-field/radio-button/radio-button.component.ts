@@ -49,6 +49,7 @@ export class RadioButtonComponent implements OnInit {
   ];
 
   public options: any;
+  public formElement: any;
 
   constructor(
     private _dndFieldService: DndFieldService,
@@ -116,12 +117,11 @@ export class RadioButtonComponent implements OnInit {
       'background: #f2c080; color: #555a60; padding: 10px 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
     );
     console.log(index);
-
-    this.options = (
-      (this.group.controls['form_element_fields'] as FormArray).controls[
-        this.index
-      ] as FormGroup
-    ).controls['form_element_list_values'] as FormArray;
+    this.formElement = (this.group.controls['form_element_fields'] as FormArray)
+      .controls[this.index] as FormGroup;
+    this.options = this.formElement.controls[
+      'form_element_list_values'
+    ] as FormArray;
   }
 
   public deleteFieldControl() {

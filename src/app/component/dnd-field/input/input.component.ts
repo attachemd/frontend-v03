@@ -1,6 +1,6 @@
 // https://stackoverflow.com/questions/34641281/how-to-add-class-to-host-element
 import { Component, HostBinding, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormGroup } from '@angular/forms';
 import { DndFieldService } from 'src/app/services/dnd-field/dnd-field.service';
 import { FieldConfig } from 'src/app/services/dnd-field/field.model';
 
@@ -17,6 +17,7 @@ export class InputComponent implements OnInit {
   public group!: FormGroup;
   public visibility = 'none';
   public index!: number;
+  public formElement: any;
 
   // public isOngoing: boolean = false;
 
@@ -32,6 +33,8 @@ export class InputComponent implements OnInit {
       'background: red; color: #fff; padding: 10px 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
     );
     console.log(this.index);
+    this.formElement = (this.group.controls['form_element_fields'] as FormArray)
+      .controls[this.index] as FormGroup;
   }
 
   public log(val: any) {

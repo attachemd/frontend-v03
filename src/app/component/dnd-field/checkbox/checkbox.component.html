@@ -1,5 +1,8 @@
 <div class="field_container">
-  <app-confirm-field-edit *ngIf="field.isOngoing" [field]="field"></app-confirm-field-edit>
+  <app-confirm-field-edit
+    *ngIf="field.isOngoing"
+    [field]="field"
+  ></app-confirm-field-edit>
 
   <div
     class="ft-lm-edit-field"
@@ -11,6 +14,9 @@
         field.label
       }}</mat-checkbox>
     </div>
-    <app-dnd-field-edit [visibility]="visibility" [field]="field"></app-dnd-field-edit>
+    <app-dnd-field-edit
+      [visibility]="visibility"
+      [field]="field"
+    ></app-dnd-field-edit>
   </div>
 </div>

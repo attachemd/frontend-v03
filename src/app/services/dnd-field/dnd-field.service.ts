@@ -451,7 +451,10 @@ export class DndFieldService {
         })
       );
 
-      if (elementTemplate.form_element_type.name === 'radiobutton') {
+      if (
+        elementTemplate.form_element_type.name === 'radiobutton' ||
+        elementTemplate.form_element_type.name === 'select'
+      ) {
         let formElementListValuesControl = this._fb.array([]);
         // let formElementFieldGroup = this._fb.group({
         //   form_element_list_values: formElementListValuesControl,
@@ -504,7 +507,7 @@ export class DndFieldService {
       } else if (elementTemplate.form_element_type.name === 'input')
         // create field selected_option (form control)
         formElementFieldGroup.addControl(
-          'tika',
+          'input',
           this._fb.control('', this.bindValidations([]))
         );
 

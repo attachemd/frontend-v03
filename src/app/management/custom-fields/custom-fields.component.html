@@ -118,7 +118,11 @@
       </div>
       <div class="builder-elements-btns">
         <!-- <button>save</button> -->
-        <button [disabled]="!myForm.valid" type="submit">Save</button>
+        <div class="builder-elements-btns-inner-container">
+          <button class="confirm-btn save" [disabled]="!myForm.valid" type="submit">Save</button>
+          <button class="confirm-btn cancel" (click)="$event.preventDefault()">Cancel</button>
+        </div>
+
       </div>
     </div>
   </div>

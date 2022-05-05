@@ -1,4 +1,4 @@
-@import '~src/assets/styles/_variables.scss';
+@import "~src/assets/styles/_variables.scss";
 
 .ft-lm-primary-fields {
   // background-color: #2DCA72;
@@ -116,7 +116,14 @@
 
 .builder-elements-btns {
   height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+// .builder-elements-btns-inner-container {
+//   height: 50px;
+// }
 
 .builder-elements-inner-container {
   padding: 10px 0;
@@ -169,55 +176,71 @@
   border: 1px solid transparent;
   padding: 7px 0;
   cursor: move;
-}
-.dnd-field:hover {
-  // border: 1px solid orange;
-  // border: 1px solid #0054f7;
-  // border: 1px solid #009cf7;
-  // border: 1px solid #0b5ed7;
-  border: 1px solid $body-border-color;
-  // border: 1px solid #0090f7;
+
+  > div {
+    display: flex;
+    align-items: center;
+  }
+
+  .dnd-field-icon {
+    width: 30px;
+    // justify-content: center;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    margin: 5px;
+    // background-color: #f8f9fc;
+    // background-color: #ebe9f1;
+    background-color: #f3f3f3;
+    font-size: 18px;
+    border-radius: 4px;
+    color: #7a7a89;
+  }
+  .icon-drag {
+    font-size: 14px;
+    background-color: transparent;
+    width: 20px;
+  }
+  .dnd-field-content {
+    padding: 0 5px;
+  }
+
+  .dnd-field-content > div {
+    font-size: 12px;
+  }
+
+  .dnd-field-content-title {
+    color: #000;
+    font-weight: 500;
+  }
+  .dnd-field-content-description {
+    color: rgb(133, 133, 133);
+  }
+  &:hover {
+    // border: 1px solid orange;
+    // border: 1px solid #0054f7;
+    // border: 1px solid #009cf7;
+    // border: 1px solid #0b5ed7;
+    border: 1px solid $body-border-color;
+    background-color: primary-color();
+    // border: 1px solid #0090f7;
+    .dnd-field-icon {
+      color: primary-text-color(90%);
+      background-color: primary-color(20%);
+    }
+    .icon-drag {
+      background-color: transparent;
+    }
+  
+    .dnd-field-content-title {
+      color: $primary-text-color;
+    }
+    .dnd-field-content-description {
+      color: primary-text-color(60%);
+    }
+  }
 }
 
-.dnd-field > div {
-  display: flex;
-  align-items: center;
-}
-
-.dnd-field .dnd-field-icon {
-  width: 30px;
-  // justify-content: center;
-  height: 30px;
-  text-align: center;
-  line-height: 30px;
-  margin: 5px;
-  // background-color: #f8f9fc;
-  // background-color: #ebe9f1;
-  background-color: #f3f3f3;
-  font-size: 18px;
-  border-radius: 4px;
-  color: #7a7a89;
-}
-.dnd-field .icon-drag {
-  font-size: 14px;
-  background-color: transparent;
-  width: 20px;
-}
-.dnd-field .dnd-field-content {
-  padding: 0 5px;
-}
-
-.dnd-field .dnd-field-content > div {
-  font-size: 12px;
-}
-
-.dnd-field-content-title {
-  color: #000;
-  font-weight: 500;
-}
-.dnd-field-content-description {
-  color: rgb(133, 133, 133);
-}
 // .dnd-field .dnd-field-content span {
 //     // display: inline-block;
 //     // vertical-align: middle;
