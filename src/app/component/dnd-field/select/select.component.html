@@ -77,16 +77,18 @@
       class="demo-full-width margin-top"
       [formGroup]="group"
     >
-    <ng-container formArrayName="form_element_fields" *ngIf="true">
-      <ng-container [formGroupName]="index">
-      <mat-label>{{ field.name }}</mat-label>
-      <mat-select formControlName="selected_option">
-        <mat-option *ngFor="let option of options?.value" [value]="option.name">{{
-          option.name
-        }}</mat-option>
-      </mat-select>
-    </ng-container>
-  </ng-container>
+      <ng-container formArrayName="form_element_fields" *ngIf="true">
+        <ng-container [formGroupName]="index">
+          <mat-label class="ft-lm-label">{{ formElement.value.name }}</mat-label>
+          <mat-select formControlName="selected_option">
+            <mat-option
+              *ngFor="let option of options?.value"
+              [value]="option.name"
+              >{{ option.name }}</mat-option
+            >
+          </mat-select>
+        </ng-container>
+      </ng-container>
     </mat-form-field>
 
     <app-dnd-field-edit

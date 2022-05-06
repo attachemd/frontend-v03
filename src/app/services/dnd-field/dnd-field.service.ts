@@ -504,6 +504,65 @@ export class DndFieldService {
 
         // formGroup.addControl('form_element_fields', formElementListValuesGroup);
         // formElementFieldsControl.push(formElementListValuesControl);
+      } else if (elementTemplate.form_element_type.name === 'checkbox') {
+        let formElementListValuesControl = this._fb.array([]);
+        // let formElementFieldGroup = this._fb.group({
+        //   form_element_list_values: formElementListValuesControl,
+        // });
+
+        // create field form_element_list_values (form array)
+        formElementFieldGroup.addControl(
+          'form_element_list_values',
+          formElementListValuesControl
+        );
+
+        // create field selected_option (form control)
+        formElementFieldGroup.addControl(
+          'selected_options',
+          this._fb.group({})
+        );
+
+        let selectedOptions = formElementFieldGroup.get(
+          'selected_options'
+        ) as FormGroup;
+
+        // create form_element_list_values (form array)
+        formElementField.form_element_list_values.forEach(
+          (formElementListValue: any) => {
+            let formElementListValueGroup = this._fb.group({});
+
+            console.log('formElementListValue.name');
+            console.log(formElementListValue.name);
+
+            formElementListValueGroup.addControl(
+              'name',
+              this._fb.control(
+                formElementListValue.name,
+                this.bindValidations(this.data['validations'] || [])
+              )
+            );
+            selectedOptions.addControl(
+              formElementListValue.name,
+              this._fb.control(false, this.bindValidations([]))
+            );
+            formElementListValuesControl.push(formElementListValueGroup);
+          }
+        );
+
+        // const control = this._fb.control(
+        //   field.value,
+        //   this.bindValidations(field.validations || [])
+        // );
+
+        // formGroup.addControl(this.generatedFieldName(field), control);
+
+        // formElementListValuesGroup.addControl(
+        //   'form_element_list_values',
+        //   formElementListValuesControl
+        // );
+
+        // formGroup.addControl('form_element_fields', formElementListValuesGroup);
+        // formElementFieldsControl.push(formElementListValuesControl);
       } else if (elementTemplate.form_element_type.name === 'input')
         // create field selected_option (form control)
         formElementFieldGroup.addControl(

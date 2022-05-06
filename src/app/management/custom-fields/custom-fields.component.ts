@@ -434,6 +434,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     this._suggestedFields.forEach((field) => {
       this.suggestedBuilderFields.push(new FormElement(field));
     });
+
     // Get product id
     this._subs.add(
       this._route.params.subscribe({

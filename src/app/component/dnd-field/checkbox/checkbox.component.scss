@@ -1,3 +1,76 @@
 .checkbox {
     padding-top: 10px;
 }
+.checkbox-label {
+    padding-right: 10px;
+    display: inline;
+}
+
+.ft-lm-label {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 11px;
+  }
+
+.option-field {
+    display: flex;
+      flex-direction: row;
+    input {
+      padding: 3px 7px;
+      width: 100%;
+      outline: none;
+      border: 1px solid #d7d7d7;
+      border-radius: 4px;
+      display: inline-block;
+      box-sizing: border-box;
+      transition: 0.2s ease all;
+      color: #7e7e7e;
+      margin: 5px 0;
+      color: #7e7e7e;
+              &:focus {
+                border-color:#0d6efd;
+              }
+    }
+  }
+  
+  .option-field-and-icon-container {
+    display: grid;
+    grid-template-columns: 100px 50px;
+  }
+  
+  .option-field-icon {
+    cursor: pointer;
+    outline: 0;
+    // color: #7B7989;
+    color: #000;
+    background-color: transparent;
+    border-color: transparent;
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1;
+    text-align: center;
+    border: 1px solid transparent;
+    font-size: 16px;
+    width: fit-content;
+  }
+  
+  // .icon-add {
+  //   margin: 7px 0
+  // }
+  
+  .option-field-add {
+    border-bottom: 1px solid #d7d7d7;
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    span {
+      font-size: 13px;
+    }
+  }
+  
+  .single-selection-error {
+    font-size: 12px;
+    color: rgb(255, 0, 76);
+    display: flex;
+    align-items: center;
+  }
