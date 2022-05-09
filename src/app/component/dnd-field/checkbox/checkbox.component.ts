@@ -16,27 +16,39 @@ export class CheckboxComponent implements OnInit, OnDestroy {
   public visibility = 'none';
   public options: any;
   public formElement: any;
+  public isControlsAdded = false;
 
   private _subs = new Subscription();
 
   constructor(
     private _dndFieldService: DndFieldService,
     private _fb: FormBuilder
-  ) {}
+  ) {
+    console.log(
+      '%c CheckboxComponent constructor',
+      'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+    );
+    console.log('this.isControlsAdded');
+    console.log(this.isControlsAdded);
+  }
 
   @HostBinding('class.ongoing') public get isOngoing() {
     return this.field.isOngoing;
   }
 
   ngOnInit() {
+    console.log(
+      '%c CheckboxComponent ',
+      'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+    );
     this.formElement = (this.group.controls['form_element_fields'] as FormArray)
       .controls[this.index] as FormGroup;
-    this.options = this.formElement.controls[
+    this.options = this.formElement?.controls[
       'form_element_list_values'
     ] as FormArray;
 
     this._subs.add(
-      this.options.valueChanges.subscribe((value: any) => {
+      this.options?.valueChanges.subscribe((value: any) => {
         console.log(value);
         let selectedOptions = this.formElement.get(
           'selected_options'
@@ -54,8 +66,17 @@ export class CheckboxComponent implements OnInit, OnDestroy {
             this._fb.control(false, this._dndFieldService.bindValidations([]))
           );
         });
+        this.isControlsAdded = true;
+        console.log('this.isControlsAdded');
+        console.log(this.isControlsAdded);
       })
     );
+  }
+
+  public log(val: any) {
+    // console.log('from RadioButtonComponent');
+
+    console.log(val);
   }
 
   public addOption() {

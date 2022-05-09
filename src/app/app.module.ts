@@ -33,6 +33,7 @@ import { CustomFieldsComponent } from './management/custom-fields/custom-fields.
 import { DndFieldEditComponent } from './component/dnd-field/dnd-field-edit/dnd-field-edit.component';
 import { ConfirmFieldDeleteComponent } from './component/dnd-field/confirm-field-delete/confirm-field-delete.component';
 import { ProductEditComponent } from './management/product-edit/product-edit.component';
+import { InvokeDirective } from './directive/invoke.directive';
 
 export function tokenGetter(): string | null {
   return localStorage.getItem('access');
@@ -52,6 +53,7 @@ export function tokenGetter(): string | null {
     DnDFieldComponent,
     AdDirective,
     DynamicFieldDirective,
+    InvokeDirective,
     InputComponent,
     RadioButtonComponent,
     ConfirmFieldEditComponent,

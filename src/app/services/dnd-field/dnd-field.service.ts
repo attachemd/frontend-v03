@@ -505,6 +505,8 @@ export class DndFieldService {
         // formGroup.addControl('form_element_fields', formElementListValuesGroup);
         // formElementFieldsControl.push(formElementListValuesControl);
       } else if (elementTemplate.form_element_type.name === 'checkbox') {
+        console.log('equal checkbox');
+
         let formElementListValuesControl = this._fb.array([]);
         // let formElementFieldGroup = this._fb.group({
         //   form_element_list_values: formElementListValuesControl,
@@ -529,6 +531,9 @@ export class DndFieldService {
         // create form_element_list_values (form array)
         formElementField.form_element_list_values.forEach(
           (formElementListValue: any) => {
+            console.log('--formElementListValue.name--');
+            console.log(formElementListValue.name);
+
             let formElementListValueGroup = this._fb.group({});
 
             console.log('formElementListValue.name');

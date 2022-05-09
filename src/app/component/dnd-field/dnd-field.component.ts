@@ -17,6 +17,8 @@ export class DnDFieldComponent implements OnInit {
   @Input()
   public data: any;
 
+  public d: any;
+
   constructor(private _dndFieldService: DndFieldService) {}
 
   ngOnInit(): void {
@@ -28,6 +30,21 @@ export class DnDFieldComponent implements OnInit {
   public trackItem(index: number, item: any) {
     // return item.trackId;
     return item.tracked_id;
+  }
+
+  public log(val: any) {
+    // console.log('from RadioButtonComponent');
+
+    console.log(val);
+  }
+
+  public myFunction(index: any) {
+    console.log(
+      '%c index ',
+      'background: green; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+    );
+
+    console.log(index);
   }
 
   // public onFieldNameChanged() {

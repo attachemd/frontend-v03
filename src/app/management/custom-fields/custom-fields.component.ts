@@ -241,6 +241,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   private _shadow: any;
   private _shadowInnerHTML: string = 'test';
   private _dragDropTracker = true;
+  private _isControlsAdded = false;
   // private _data = {
   //   cities: [
   //     {
@@ -312,7 +313,10 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       this._dragulaService
         .drop(this.builderContainer)
         .subscribe(({ el, target, source, sibling }) => {
-          console.log('drop');
+          console.log(
+            '%c drop ',
+            'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+          );
           this._dragDropTracker = false;
         })
     );
@@ -321,10 +325,14 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       this._dragulaService
         .dragend(this.builderContainer)
         .subscribe(({ el }) => {
-          console.log('drag end');
+          console.log(
+            '%c drag end ',
+            'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+          );
+
           this._shadow.innerHTML = this._shadowInnerHTML;
-          console.log('this._dragDropTracker');
-          console.log(this._dragDropTracker);
+          // console.log('this._dragDropTracker');
+          // console.log(this._dragDropTracker);
 
           if (this._dragDropTracker) {
             this._dndFieldService.setDndFieldEditVisibility$(true);
@@ -347,11 +355,18 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         .dropModel(this.builderContainer)
         .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
           console.log('dropModel');
+          if (
+            source?.classList.contains('builder-render') &&
+            target?.classList.contains('builder-render')
+          )
+            this._isControlsAdded = true;
+          else this._isControlsAdded = false;
 
           this.stopDrag = true;
           item.isOngoing = true;
           this._dndFieldService.setFieldEditMode$(true);
           this._dndFieldService.setDndFieldEditVisibility$(false);
+          // this._updateTargetContainer();
         })
     );
     this._subs.add(
@@ -643,24 +658,40 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
 
   private _updateTargetContainer() {
     // Error: Cannot find control with name
+    console.log(
+      '%c _updateTargetContainer ',
+      'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+    );
     console.log('this.essentialBuilderFields');
     console.log(this.essentialBuilderFields);
     console.log('this.renderedBuilderFields');
     console.log(this.renderedBuilderFields);
     console.log('this.myForm');
     console.log(this.myForm);
+    for (let builder_element_model of this.renderedBuilderFields) {
+      console.log('builder_element_model.form_element_list_values[0].name');
+      console.log(builder_element_model.form_element_list_values[0]?.name);
+    }
 
     // this._dndFieldService.addControls(this.myForm, this.renderedBuilderFields);
-    this._addControls();
-
+    if (!this._isControlsAdded) this._addControls();
+    // debugger;
     // https://www.smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/
     // https://medium.com/@Rahulx1/understanding-event-loop-call-stack-event-job-queue-in-javascript-63dcd2c71ecd
     // https://stackoverflow.com/questions/31698747/does-the-js-garbage-collector-clear-stack-memory
     setTimeout(() => {
-      for (let builder_element_model of this.renderedBuilderFields)
+      console.log(
+        '%c before ',
+        'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+      );
+      for (let builder_element_model of this.renderedBuilderFields) {
+        console.log('builder_element_model.form_element_list_values[0].name');
+        console.log(builder_element_model.form_element_list_values[0]?.name);
+
         builder_element_model.tracked_id =
           builder_element_model.tracked_id! + 1000;
-
+      }
+      if (this._isControlsAdded) this._addControls();
       this._cdRef.detectChanges();
     }, 0);
   }

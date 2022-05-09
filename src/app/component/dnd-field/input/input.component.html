@@ -15,8 +15,6 @@
     <mat-form-field fxFill [formGroup]="group">
       <ng-container formArrayName="form_element_fields">
         <ng-container [formGroupName]="index">
-          {{log('------------ index -------------')}}
-          {{log(index)}}
           <input
             formControlName="input"
             matInput

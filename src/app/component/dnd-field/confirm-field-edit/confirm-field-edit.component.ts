@@ -24,10 +24,10 @@ export class ConfirmFieldEditComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('ConfirmFieldEditComponent');
-    console.log('group');
-    console.log(this.group);
-    console.log('group.valid');
-    console.log(this.group.valid);
+    // console.log('group');
+    // console.log(this.group);
+    // console.log('group.valid');
+    // console.log(this.group.valid);
     // this.options = (
     //   this.group.get(
     //     this.generatedFieldName(this.field, '_editor')
@@ -37,9 +37,9 @@ export class ConfirmFieldEditComponent implements OnInit {
       (this.group.controls['form_element_fields'] as FormArray).controls[
         this.index
       ] as FormGroup
-    ).controls['form_element_list_values'] as FormArray;
-    console.log('this.options');
-    console.log(this.options?.valid);
+    )?.controls['form_element_list_values'] as FormArray;
+    // console.log('this.options');
+    // console.log(this.options?.valid);
   }
 
   public generatedFieldName(field: FieldConfig, prefix?: any) {

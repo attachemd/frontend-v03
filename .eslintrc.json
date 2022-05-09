@@ -21,7 +21,7 @@
         "@typescript-eslint/explicit-member-accessibility": [
             "warn",
             {
-                "ignoredMethodNames": ["constructor", "ngOnInit", "ngOnDestroy", "ngAfterViewInit", "ngOnChanges"]
+                "ignoredMethodNames": ["constructor", "ngOnInit", "ngOnDestroy", "ngAfterViewInit", "ngOnChanges", "ngAfterContentInit"]
             }
         ],
         "@angular-eslint/directive-selector": [
