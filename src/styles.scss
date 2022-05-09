@@ -4,6 +4,38 @@
 
 
 @include material.mat-core();
+$mat-purpule: (
+    50 : #e4e0ff,
+    100 : #bdb3ff,
+    200 : #9180ff,
+    300 : #644dff,
+    400 : #4326ff,
+    500 : #2200ff,
+    600 : #1e00ff,
+    700 : #1900ff,
+    800 : #1400ff,
+    900 : #0c00ff,
+    A100 : #ffffff,
+    A200 : #f2f2ff,
+    A400 : #c0bfff,
+    A700 : #a7a6ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
 $light-green: (
     50 : #fbfce8,
     100 : #f5f8c6,
@@ -38,7 +70,8 @@ $light-green: (
 );
 // below defines your custom color to build a theme palette from
 // $workshop-primary: material.mat-palette(material.$mat-brown);
-$workshop-primary: material.mat-palette(material.$mat-grey);
+// $workshop-primary: material.mat-palette(material.$mat-grey);
+$workshop-primary: material.mat-palette($mat-purpule);
 // $workshop-primary: material.mat-palette($light-green);
 $workshop-accent: material.mat-palette(material.$mat-green);
 
