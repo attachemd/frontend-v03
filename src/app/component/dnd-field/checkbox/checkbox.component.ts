@@ -73,6 +73,38 @@ export class CheckboxComponent implements OnInit, OnDestroy {
     );
   }
 
+  public test() {
+    let formElement = (this.group.controls['form_element_fields'] as FormArray)
+      .controls[this.index] as FormGroup;
+
+    let optionName = (this.getOptions() as any).controls[0]?.controls['name']
+      .value;
+
+    // console.log('(this.getOptions() as any)[0]');
+    // console.log((this.getOptions() as any).controls[0]?.controls['name'].value);
+    // console.log("formElement.controls['selected_options']");
+    // console.log(
+    //   (formElement.controls['selected_options'] as FormGroup)?.contains(
+    //     optionName
+    //   )
+    // );
+
+    // return formElement.contains('selected_options');
+    return (formElement.controls['selected_options'] as FormGroup)?.contains(
+      optionName
+    );
+  }
+
+  public getFormElement(): FormGroup {
+    return (this.group.controls['form_element_fields'] as FormArray).controls[
+      this.index
+    ] as FormGroup;
+  }
+
+  public getOptions(): FormArray {
+    return this.formElement?.controls['form_element_list_values'] as FormArray;
+  }
+
   public log(val: any) {
     // console.log('from RadioButtonComponent');
 

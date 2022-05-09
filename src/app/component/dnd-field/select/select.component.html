@@ -71,25 +71,28 @@
       </mat-select>
     </mat-form-field> -->
 
-    <mat-form-field
-      fxFill
-      appearance="fill"
-      class="demo-full-width margin-top"
-      [formGroup]="group"
-    >
-      <ng-container formArrayName="form_element_fields" *ngIf="true">
+    <ng-container [formGroup]="group">
+      <ng-container formArrayName="form_element_fields">
         <ng-container [formGroupName]="index">
-          <mat-label class="ft-lm-label">{{ formElement.value.name }}</mat-label>
-          <mat-select formControlName="selected_option">
-            <mat-option
-              *ngFor="let option of options?.value"
-              [value]="option.name"
-              >{{ option.name }}</mat-option
-            >
-          </mat-select>
+          <mat-form-field
+            fxFill
+            appearance="fill"
+            class="demo-full-width margin-top"
+          >
+            <mat-label class="ft-lm-label">{{
+              formElement.value.name
+            }}</mat-label>
+            <mat-select formControlName="selected_option">
+              <mat-option
+                *ngFor="let option of options?.value"
+                [value]="option.name"
+                >{{ option.name }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
         </ng-container>
       </ng-container>
-    </mat-form-field>
+    </ng-container>
 
     <app-dnd-field-edit
       [visibility]="visibility"

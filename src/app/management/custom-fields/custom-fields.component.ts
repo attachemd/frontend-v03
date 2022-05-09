@@ -355,6 +355,13 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         .dropModel(this.builderContainer)
         .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
           console.log('dropModel');
+          console.log('sourceModel');
+          console.log(sourceModel);
+          console.log('targetModel');
+          console.log(targetModel);
+          console.log('item');
+          console.log(item);
+
           if (
             source?.classList.contains('builder-render') &&
             target?.classList.contains('builder-render')
@@ -668,13 +675,14 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     console.log(this.renderedBuilderFields);
     console.log('this.myForm');
     console.log(this.myForm);
-    for (let builder_element_model of this.renderedBuilderFields) {
-      console.log('builder_element_model.form_element_list_values[0].name');
-      console.log(builder_element_model.form_element_list_values[0]?.name);
-    }
+    // for (let builder_element_model of this.renderedBuilderFields) {
+    //   console.log('builder_element_model.form_element_list_values[0].name');
+    //   console.log(builder_element_model?.form_element_list_values[0]?.name);
+    // }
 
     // this._dndFieldService.addControls(this.myForm, this.renderedBuilderFields);
-    if (!this._isControlsAdded) this._addControls();
+    // if (!this._isControlsAdded) this._addControls();
+    this._addControls();
     // debugger;
     // https://www.smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/
     // https://medium.com/@Rahulx1/understanding-event-loop-call-stack-event-job-queue-in-javascript-63dcd2c71ecd
@@ -684,14 +692,14 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         '%c before ',
         'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
       );
-      for (let builder_element_model of this.renderedBuilderFields) {
-        console.log('builder_element_model.form_element_list_values[0].name');
-        console.log(builder_element_model.form_element_list_values[0]?.name);
+      // console.log('builder_element_model.form_element_list_values[0].name');
+      // console.log(builder_element_model.form_element_list_values[0]?.name);
 
+      for (let builder_element_model of this.renderedBuilderFields)
         builder_element_model.tracked_id =
           builder_element_model.tracked_id! + 1000;
-      }
-      if (this._isControlsAdded) this._addControls();
+
+      // if (this._isControlsAdded) this._addControls();
       this._cdRef.detectChanges();
     }, 0);
   }

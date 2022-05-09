@@ -2,6 +2,8 @@
   <app-confirm-field-edit
     *ngIf="field.isOngoing"
     [field]="field"
+    [group]="group"
+    [index]="index"
   ></app-confirm-field-edit>
 
   <div
@@ -10,30 +12,47 @@
     (mouseleave)="visibility = 'none'"
   >
     <!-- appearance="fill" -->
-    <mat-form-field
-      fxFill
-      appearance="fill"
-      class="demo-full-width margin-top"
-      [formGroup]="group"
-    >
-      <mat-label>{{ field.label }}</mat-label>
-      <input matInput [matDatepicker]="picker" [formControlName]="field.name" />
-      <!-- [formControl]="date1" -->
-      <!-- [formControlName]="field.name" -->
-      <!-- [placeholder]="field.label" -->
-      <!-- [(ngModel)]="group.get('dob').value" -->
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-      <mat-hint></mat-hint>
-      <ng-container
-        *ngFor="let validation of field.validations"
-        ngProjectAs="mat-error"
-      >
-        <mat-error *ngIf="group.get(field.name)?.hasError(validation.name)">
-          {{ validation.message }}
-        </mat-error>
+    <ng-container [formGroup]="group">
+      <ng-container formArrayName="form_element_fields">
+        <ng-container [formGroupName]="index">
+          <mat-form-field
+            fxFill
+            appearance="fill"
+            class="demo-full-width margin-top"
+          >
+            <mat-label>{{ field.name }}</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              [formControlName]="field.name.toLowerCase()"
+            />
+            <!-- [formControl]="date1" -->
+            <!-- [formControlName]="field.name" -->
+            <!-- [placeholder]="field.label" -->
+            <!-- [(ngModel)]="group.get('dob').value" -->
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-hint></mat-hint>
+            <ng-container
+              *ngFor="let validation of field.validations"
+              ngProjectAs="mat-error"
+            >
+              <mat-error
+                *ngIf="group.get(field.name)?.hasError(validation.name)"
+              >
+                {{ validation.message }}
+              </mat-error>
+            </ng-container>
+          </mat-form-field>
+        </ng-container>
       </ng-container>
-    </mat-form-field>
-    <app-dnd-field-edit [visibility]="visibility" [field]="field"></app-dnd-field-edit>
+    </ng-container>
+    <app-dnd-field-edit
+      [visibility]="visibility"
+      [field]="field"
+    ></app-dnd-field-edit>
   </div>
 </div>

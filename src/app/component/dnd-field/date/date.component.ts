@@ -12,6 +12,7 @@ export class DateComponent implements OnInit {
 
   public field: any = {};
   public group!: FormGroup;
+  public index!: number;
   public visibility = 'none';
   // public dob = new FormControl(new Date());
   // public dob = new FormControl(new Date('4/14/2022'));

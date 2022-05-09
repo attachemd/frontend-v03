@@ -568,7 +568,12 @@ export class DndFieldService {
 
         // formGroup.addControl('form_element_fields', formElementListValuesGroup);
         // formElementFieldsControl.push(formElementListValuesControl);
-      } else if (elementTemplate.form_element_type.name === 'input')
+      } else if (elementTemplate.form_element_type.name === 'date')
+        formElementFieldGroup.addControl(
+          'date',
+          this._fb.control('', this.bindValidations([]))
+        );
+      else if (elementTemplate.form_element_type.name === 'input')
         // create field selected_option (form control)
         formElementFieldGroup.addControl(
           'input',
