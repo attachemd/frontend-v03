@@ -1,48 +1,79 @@
 <div class="builder-container">
-    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
-      <div class="builder-canvas">
-        <div class="ft-lm-primary-fields">
-          <div class="ft-lm-edit-field">
-            <mat-form-field fxFill [formGroup]="myForm">
-              <input
-                formControlName="product_name"
-                matInput
-                type="text"
-                placeholder="Name"
-              />
-            </mat-form-field>
-          </div>
-          <div class="ft-lm-edit-field">
-            <mat-form-field fxFill [formGroup]="myForm">
-              <input
-                formControlName="description"
-                matInput
-                type="text"
-                placeholder="Description"
-              />
-            </mat-form-field>
-          </div>
-
-          <div class="ft-lm-custom-fields-title">
-            <h1>Custom fields</h1>
-            <!-- <button [routerLink]="['/products/custom-fields', product.id]">Edit</button> -->
-            <!-- <button [routerLink]="['/products/custom-fields', {outlets: {edit: null}}]">Edit</button> -->
-            <!-- <button [routerLink]="['',{outlets: {edit: null}}]">Edit</button> -->
-            <button [routerLink]="['',{outlets: {primary: ['products', 'custom-fields', product.id], edit: null}}]">Edit</button>
-          </div>
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+    <div class="builder-canvas">
+      <div class="ft-lm-primary-fields">
+        <div class="ft-lm-edit-field">
+          <mat-form-field fxFill [formGroup]="myForm">
+            <input
+              formControlName="product_name"
+              matInput
+              type="text"
+              placeholder="Name"
+            />
+          </mat-form-field>
         </div>
-        <div class="ft-lm-custom-fields-content">
-          <div class="ft-lm-custom-fields" *ngIf="false">
-            <app-dnd-field
-              class="builder-render"
-              [fields]="renderedBuilderFields"
-              [form]="myForm"
-            >
-            </app-dnd-field>
-          </div>
-          <button type="submit" [disabled]="myForm.invalid">Save</button>
+        <div class="ft-lm-edit-field">
+          <mat-form-field fxFill [formGroup]="myForm">
+            <input
+              formControlName="description"
+              matInput
+              type="text"
+              placeholder="Description"
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="ft-lm-custom-fields-title">
+          <h2>Custom fields</h2>
+          <!-- <button [routerLink]="['/products/custom-fields', product.id]">Edit</button> -->
+          <!-- <button [routerLink]="['/products/custom-fields', {outlets: {edit: null}}]">Edit</button> -->
+          <!-- <button [routerLink]="['',{outlets: {edit: null}}]">Edit</button> -->
+          <!-- <button [routerLink]="['',{outlets: {primary: ['products', 'custom-fields', product.id], edit: null}}]">Edit</button> -->
         </div>
       </div>
-    </form>
-  </div>
-  
+      <div class="ft-lm-custom-fields-content">
+        <div class="ft-lm-custom-fields" *ngIf="false">
+          <app-dnd-field
+            class="builder-render"
+            [fields]="renderedBuilderFields"
+            [form]="myForm"
+          >
+          </app-dnd-field>
+        </div>
+        <div class="action-buttons">
+          <div>
+            <button
+              class="confirm-btn save"
+              [routerLink]="[
+                '',
+                {
+                  outlets: {
+                    primary: ['products', 'custom-fields', product.id],
+                    side: null
+                  }
+                }
+              ]"
+              (click)="$event.preventDefault()"
+            >
+              Add Field
+            </button>
+          </div>
+          <div>
+            <button
+              class="confirm-btn save"
+              type="submit"
+              [disabled]="myForm.invalid"
+            >
+              Save
+            </button>
+            <button
+              class="confirm-btn cancel"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

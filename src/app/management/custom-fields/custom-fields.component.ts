@@ -643,7 +643,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       },
     });
     // this._router.navigate(['/products/', this.productId]);
-    // this._router.navigate(['/products/', '(edit:products/2)']);
+    // this._router.navigGate(['/products/', '(edit:products/2)']);
 
     // this._router.navigate([
     //   '',

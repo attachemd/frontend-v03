@@ -10,9 +10,9 @@
 </div>
 <mat-table [dataSource]="dataSource" matSort>
   <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef mat-sort-header
-      >Product name</mat-header-cell
-    >
+    <mat-header-cell *matHeaderCellDef mat-sort-header>
+      Product name
+    </mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="description">
@@ -25,17 +25,28 @@
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
 
     <mat-cell *matCellDef="let row">
+        <button
+          *ngIf="isVisible"
+          color="primary"
+          mat-icon-button
+          class="icon-display"
+          [routerLink]="['', { outlets: { side: ['products', 'display', row.id] } }]"
+          (click)="openSideNav()"
+          title="Edit Product"
+        >
+          <!-- [routerLink]="['', { outlets: {edit: ['products', row.id] } }]" (click)="openSideNav()" -->
+          <mat-icon>visibility</mat-icon>
+        </button>
       <button
         *ngIf="isVisible"
         color="primary"
         mat-icon-button
         class="icon-display"
-        
-        [routerLink]="['', { outlets: {edit: ['products', row.id] } }]"
+        [routerLink]="['', { outlets: { side: ['products', 'edit', row.id] } }]"
         (click)="openSideNav()"
         title="Edit Product"
       >
-      <!-- [routerLink]="['', { outlets: {edit: ['products', row.id] } }]" (click)="openSideNav()" -->
+        <!-- [routerLink]="['', { outlets: {edit: ['products', row.id] } }]" (click)="openSideNav()" -->
         <mat-icon>edit</mat-icon>
       </button>
     </mat-cell>

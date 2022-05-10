@@ -17,7 +17,6 @@ import { NotFoundComponent } from './component/not-found/not-found.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { LicenseComponent } from './component/license/license.component';
 import { ClientComponent } from './component/client/client.component';
-import { ProductComponent } from './component/product/product.component';
 import { LicenseEditComponent } from './management/license-edit/license-edit.component';
 import { DragulaModule } from 'ng2-dragula';
 import { DnDFieldComponent } from './component/dnd-field/dnd-field.component';
@@ -34,6 +33,8 @@ import { DndFieldEditComponent } from './component/dnd-field/dnd-field-edit/dnd-
 import { ConfirmFieldDeleteComponent } from './component/dnd-field/confirm-field-delete/confirm-field-delete.component';
 import { ProductEditComponent } from './management/product-edit/product-edit.component';
 import { InvokeDirective } from './directive/invoke.directive';
+import { ProductListComponent } from './component/product/product-list/product-list.component';
+import { ProductDisplayComponent } from './component/product/product-display/product-display.component';
 
 export function tokenGetter(): string | null {
   return localStorage.getItem('access');
@@ -48,7 +49,7 @@ export function tokenGetter(): string | null {
     NotFoundComponent,
     LicenseComponent,
     ClientComponent,
-    ProductComponent,
+    ProductListComponent,
     LicenseEditComponent,
     DnDFieldComponent,
     AdDirective,
@@ -64,6 +65,8 @@ export function tokenGetter(): string | null {
     DndFieldEditComponent,
     ConfirmFieldDeleteComponent,
     ProductEditComponent,
+    ProductListComponent,
+    ProductDisplayComponent,
   ],
   imports: [
     JwtModule.forRoot({

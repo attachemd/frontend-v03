@@ -1,0 +1,15 @@
+.entity-container {
+    width: 100%;
+    margin: 40px;
+}
+
+.entity-item {
+    margin: 10px 0;
+    .entity-title {
+        margin-right: 20px;
+        font-size: 12px;
+    }
+    .entity-content {
+        font-weight: 500;
+    }
+}

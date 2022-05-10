@@ -1,12 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import {
-  AfterViewInit,
-  Component,
-  EventEmitter,
-  OnInit,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -15,11 +8,11 @@ import { AppService } from 'src/app/services/app.service';
 import { Product } from 'src/app/services/products/product.model';
 
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss'],
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.scss'],
 })
-export class ProductComponent implements OnInit, AfterViewInit {
+export class ProductListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort, { static: true })
   private _sort!: MatSort;
 
@@ -70,7 +63,12 @@ export class ProductComponent implements OnInit, AfterViewInit {
   }
 
   public toggleEditVisibility(event: any, visibility: string) {
-    event.target.querySelector('button').style.display = visibility;
+    // event.target.querySelector('button').style.display = visibility;
+    const buttons = event.target.querySelectorAll('button');
+
+    buttons.forEach(
+      (button: HTMLElement) => (button.style.display = visibility)
+    );
   }
 
   public doFilter(event: KeyboardEvent) {
