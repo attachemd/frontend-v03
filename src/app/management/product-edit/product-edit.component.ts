@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { DndFieldService } from 'src/app/services/dnd-field/dnd-field.service';
 import { Validation } from 'src/app/services/dnd-field/field.model';
 import { fieldConfig } from 'src/app/services/dnd-field/field.sample';
+import { FormService } from 'src/app/services/forms/form.service';
 import { Product } from 'src/app/services/products/product.model';
 
 let ft_lm = { formElementId: 0 };
@@ -89,7 +90,8 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     private _dndFieldService: DndFieldService,
     private _fb: FormBuilder,
     private _cdRef: ChangeDetectorRef,
-    private _router: Router
+    private _router: Router,
+    private _form: FormService
   ) {
     this._regConfig.forEach((field) => {
       this.renderedBuilderFields.push(
@@ -123,6 +125,16 @@ export class ProductEditComponent implements OnInit, OnDestroy {
             this.myForm.controls['description'].setValue(
               this.product.description
             );
+            this._form.fetch({ id: '1' }).subscribe({
+              next: (form) => {
+                if (form)
+                  console.log(
+                    '%c form ',
+                    'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
+                  );
+                console.log(form);
+              },
+            });
           },
           error: (error) => {
             console.log('error :', error);

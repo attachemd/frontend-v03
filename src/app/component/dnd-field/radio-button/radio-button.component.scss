@@ -14,6 +14,7 @@
 .option-field {
   display: flex;
   flex-direction: row;
+  align-items: center;
   input {
     padding: 3px 7px;
     width: 100%;
@@ -68,9 +69,32 @@
   }
 }
 
+// .single-selection-error {
+//   font-size: 12px;
+//   color: rgb(255, 0, 76);
+//   display: flex;
+//   align-items: center;
+// }
+
+// .single-selection-error {
+//   font-size: 12px;
+//   color: #2200ff;
+//   display: flex;
+//   align-items: center;
+//   background-color: #ddff00;
+//   padding: 0 10px;
+//   height: 20px;
+//   border-radius: 3px;
+// }
+
 .single-selection-error {
   font-size: 12px;
-  color: rgb(255, 0, 76);
+  color: #ff007b;
   display: flex;
   align-items: center;
+  background-color: #ff007b1c;
+  padding: 0 10px;
+  height: 20px;
+  border-radius: 3px;
+  font-weight: 500;
 }
