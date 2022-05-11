@@ -108,7 +108,7 @@ class FormElement3 {
   public name?: string;
   public id: number;
   public form_element_template: any;
-  public form_element_list_values: any;
+  public form_element_options: any;
   public tracked_id: number;
   public isOngoing = false;
   // public name: string;
@@ -125,8 +125,8 @@ class FormElement3 {
     this.tracked_id = ft_lm.formElementId++;
     this.id = this.tracked_id;
     this.form_element_template = field.form_element_template;
-    // this.form_element_list_values = _.cloneDeep(field.form_element_list_values);
-    this.form_element_list_values = field.form_element_list_values;
+    // this.form_element_options = _.cloneDeep(field.form_element_options);
+    this.form_element_options = field.form_element_options;
     // this.name = fieldItem.name;
     // this.type = fieldItem.form_element_type.name;
     // // FIXME remove inputType
@@ -582,8 +582,8 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
             if (currentField) {
               currentField.isOngoing = false;
               if (currentFormElementField)
-                currentField.form_element_list_values =
-                  currentFormElementField.form_element_list_values;
+                currentField.form_element_options =
+                  currentFormElementField.form_element_options;
               currentField.name = currentFormElementField.name;
             }
             // console.log(
@@ -676,8 +676,8 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     console.log('this.myForm');
     console.log(this.myForm);
     // for (let builder_element_model of this.renderedBuilderFields) {
-    //   console.log('builder_element_model.form_element_list_values[0].name');
-    //   console.log(builder_element_model?.form_element_list_values[0]?.name);
+    //   console.log('builder_element_model.form_element_options[0].name');
+    //   console.log(builder_element_model?.form_element_options[0]?.name);
     // }
 
     // this._dndFieldService.addControls(this.myForm, this.renderedBuilderFields);
@@ -692,8 +692,8 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         '%c before ',
         'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
       );
-      // console.log('builder_element_model.form_element_list_values[0].name');
-      // console.log(builder_element_model.form_element_list_values[0]?.name);
+      // console.log('builder_element_model.form_element_options[0].name');
+      // console.log(builder_element_model.form_element_options[0]?.name);
 
       for (let builder_element_model of this.renderedBuilderFields)
         builder_element_model.tracked_id =

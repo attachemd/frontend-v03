@@ -44,7 +44,7 @@ export class CheckboxComponent implements OnInit, OnDestroy {
     this.formElement = (this.group.controls['form_element_fields'] as FormArray)
       .controls[this.index] as FormGroup;
     this.options = this.formElement?.controls[
-      'form_element_list_values'
+      'form_element_options'
     ] as FormArray;
 
     this._subs.add(
@@ -57,12 +57,12 @@ export class CheckboxComponent implements OnInit, OnDestroy {
         selectedOptions ??
           this.formElement.addControl('selected_options', this._fb.group({}));
 
-        this.options.value.forEach((formElementListValue: any) => {
-          console.log('formElementListValue');
-          console.log(formElementListValue);
+        this.options.value.forEach((formElementOption: any) => {
+          console.log('formElementOption');
+          console.log(formElementOption);
 
           selectedOptions.addControl(
-            formElementListValue.name,
+            formElementOption.name,
             this._fb.control(false, this._dndFieldService.bindValidations([]))
           );
         });
@@ -102,7 +102,7 @@ export class CheckboxComponent implements OnInit, OnDestroy {
   }
 
   public getOptions(): FormArray {
-    return this.formElement?.controls['form_element_list_values'] as FormArray;
+    return this.formElement?.controls['form_element_options'] as FormArray;
   }
 
   public log(val: any) {
@@ -132,7 +132,7 @@ export class CheckboxComponent implements OnInit, OnDestroy {
 
     optionFormGroup.addControl('name', control);
     this.options.push(optionFormGroup);
-    // this.field.form_element_list_values = this.options.value;
+    // this.field.form_element_options = this.options.value;
     // return;
     // console.log('----------------');
     // console.log('data');

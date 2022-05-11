@@ -455,15 +455,15 @@ export class DndFieldService {
         elementTemplate.form_element_type.name === 'radiobutton' ||
         elementTemplate.form_element_type.name === 'select'
       ) {
-        let formElementListValuesControl = this._fb.array([]);
+        let formElementOptionsControl = this._fb.array([]);
         // let formElementFieldGroup = this._fb.group({
-        //   form_element_list_values: formElementListValuesControl,
+        //   form_element_options: formElementOptionsControl,
         // });
 
-        // create field form_element_list_values (form array)
+        // create field form_element_options (form array)
         formElementFieldGroup.addControl(
-          'form_element_list_values',
-          formElementListValuesControl
+          'form_element_options',
+          formElementOptionsControl
         );
 
         // create field selected_option (form control)
@@ -472,21 +472,21 @@ export class DndFieldService {
           this._fb.control('', this.bindValidations([]))
         );
 
-        // create form_element_list_values (form array)
-        formElementField.form_element_list_values.forEach(
-          (formElementListValue: any) => {
-            let formElementListValueGroup = this._fb.group({});
+        // create form_element_options (form array)
+        formElementField.form_element_options.forEach(
+          (formElementOption: any) => {
+            let formElementOptionGroup = this._fb.group({});
 
-            console.log('formElementListValue.name');
-            console.log(formElementListValue.name);
+            console.log('formElementOption.name');
+            console.log(formElementOption.name);
 
             const control = this._fb.control(
-              formElementListValue.name,
+              formElementOption.name,
               this.bindValidations(this.data['validations'] || [])
             );
 
-            formElementListValueGroup.addControl('name', control);
-            formElementListValuesControl.push(formElementListValueGroup);
+            formElementOptionGroup.addControl('name', control);
+            formElementOptionsControl.push(formElementOptionGroup);
           }
         );
 
@@ -497,25 +497,25 @@ export class DndFieldService {
 
         // formGroup.addControl(this.generatedFieldName(field), control);
 
-        // formElementListValuesGroup.addControl(
-        //   'form_element_list_values',
-        //   formElementListValuesControl
+        // formElementOptionsGroup.addControl(
+        //   'form_element_options',
+        //   formElementOptionsControl
         // );
 
-        // formGroup.addControl('form_element_fields', formElementListValuesGroup);
-        // formElementFieldsControl.push(formElementListValuesControl);
+        // formGroup.addControl('form_element_fields', formElementOptionsGroup);
+        // formElementFieldsControl.push(formElementOptionsControl);
       } else if (elementTemplate.form_element_type.name === 'checkbox') {
         console.log('equal checkbox');
 
-        let formElementListValuesControl = this._fb.array([]);
+        let formElementOptionsControl = this._fb.array([]);
         // let formElementFieldGroup = this._fb.group({
-        //   form_element_list_values: formElementListValuesControl,
+        //   form_element_options: formElementOptionsControl,
         // });
 
-        // create field form_element_list_values (form array)
+        // create field form_element_options (form array)
         formElementFieldGroup.addControl(
-          'form_element_list_values',
-          formElementListValuesControl
+          'form_element_options',
+          formElementOptionsControl
         );
 
         // create field selected_option (form control)
@@ -528,29 +528,29 @@ export class DndFieldService {
           'selected_options'
         ) as FormGroup;
 
-        // create form_element_list_values (form array)
-        formElementField.form_element_list_values.forEach(
-          (formElementListValue: any) => {
-            console.log('--formElementListValue.name--');
-            console.log(formElementListValue.name);
+        // create form_element_options (form array)
+        formElementField.form_element_options.forEach(
+          (formElementOption: any) => {
+            console.log('--formElementOption.name--');
+            console.log(formElementOption.name);
 
-            let formElementListValueGroup = this._fb.group({});
+            let formElementOptionGroup = this._fb.group({});
 
-            console.log('formElementListValue.name');
-            console.log(formElementListValue.name);
+            console.log('formElementOption.name');
+            console.log(formElementOption.name);
 
-            formElementListValueGroup.addControl(
+            formElementOptionGroup.addControl(
               'name',
               this._fb.control(
-                formElementListValue.name,
+                formElementOption.name,
                 this.bindValidations(this.data['validations'] || [])
               )
             );
             selectedOptions.addControl(
-              formElementListValue.name,
+              formElementOption.name,
               this._fb.control(false, this.bindValidations([]))
             );
-            formElementListValuesControl.push(formElementListValueGroup);
+            formElementOptionsControl.push(formElementOptionGroup);
           }
         );
 
@@ -561,13 +561,13 @@ export class DndFieldService {
 
         // formGroup.addControl(this.generatedFieldName(field), control);
 
-        // formElementListValuesGroup.addControl(
-        //   'form_element_list_values',
-        //   formElementListValuesControl
+        // formElementOptionsGroup.addControl(
+        //   'form_element_options',
+        //   formElementOptionsControl
         // );
 
-        // formGroup.addControl('form_element_fields', formElementListValuesGroup);
-        // formElementFieldsControl.push(formElementListValuesControl);
+        // formGroup.addControl('form_element_fields', formElementOptionsGroup);
+        // formElementFieldsControl.push(formElementOptionsControl);
       } else if (elementTemplate.form_element_type.name === 'date')
         formElementFieldGroup.addControl(
           'date',

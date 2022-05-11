@@ -120,7 +120,7 @@ export class RadioButtonComponent implements OnInit {
     this.formElement = (this.group.controls['form_element_fields'] as FormArray)
       .controls[this.index] as FormGroup;
     this.options = this.formElement.controls[
-      'form_element_list_values'
+      'form_element_options'
     ] as FormArray;
   }
 
@@ -154,7 +154,7 @@ export class RadioButtonComponent implements OnInit {
 
     optionFormGroup.addControl('name', control);
     this.options.push(optionFormGroup);
-    // this.field.form_element_list_values = this.options.value;
+    // this.field.form_element_options = this.options.value;
     // return;
     // console.log('----------------');
     // console.log('data');

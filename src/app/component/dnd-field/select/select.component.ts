@@ -29,7 +29,7 @@ export class SelectComponent implements OnInit {
     this.formElement = (this.group.controls['form_element_fields'] as FormArray)
       .controls[this.index] as FormGroup;
     this.options = this.formElement.controls[
-      'form_element_list_values'
+      'form_element_options'
     ] as FormArray;
   }
 
