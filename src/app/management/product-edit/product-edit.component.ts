@@ -30,6 +30,60 @@ class FormElement {
   }
 }
 
+class FormElement3 {
+  public name?: string;
+  public id: number;
+  public form_element_template: any;
+  public form_element_options: any;
+  public tracked_id: number;
+  public isOngoing = false;
+  // public name: string;
+  // public type: string;
+  // public inputType?: string;
+  // public value: string;
+  // public description?: string;
+  // public options?: string[];
+  public validations: Validation[];
+  constructor(field: any) {
+    let fieldItem = field.form_element_template;
+
+    this.name = field.name;
+    this.tracked_id = ft_lm.formElementId++;
+    this.id = this.tracked_id;
+    this.form_element_template = field.form_element_template;
+    // this.form_element_options = _.cloneDeep(field.form_element_options);
+    this.form_element_options = field.form_element_options;
+    // this.name = fieldItem.name;
+    // this.type = fieldItem.form_element_type.name;
+    // // FIXME remove inputType
+    // this.inputType = fieldItem.name;
+    // this.value = '';
+    // this.description = fieldItem.description;
+    // this.options = [];
+    this.validations = [
+      {
+        name: 'required',
+        message: 'Option name required',
+      },
+      {
+        name: 'pattern',
+        pattern: '^[a-zA-Z]+$',
+        message: 'Accept only text',
+      },
+      {
+        name: 'duplicated',
+        // validator: this._isduplicate,
+        message: 'The option name must be unique',
+      },
+      // {
+      //   name: 'duplicate',
+      //   // validator: this._isduplicate,
+      //   message: 'duplicate option name',
+      // },
+    ];
+  }
+}
+
 @Component({
   selector: 'app-product-edit',
   templateUrl: './product-edit.component.html',
@@ -93,24 +147,24 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     private _router: Router,
     private _form: FormService
   ) {
-    this._regConfig.forEach((field) => {
-      this.renderedBuilderFields.push(
-        new FormElement(
-          field.name,
-          field.type!,
-          field.label!,
-          field.inputType!,
-          field.value,
-          field.options!,
-          field.validations
-        )
-      );
-    });
+    // this._regConfig.forEach((field) => {
+    //   this.renderedBuilderFields.push(
+    //     new FormElement(
+    //       field.name,
+    //       field.type!,
+    //       field.label!,
+    //       field.inputType!,
+    //       field.value,
+    //       field.options!,
+    //       field.validations
+    //     )
+    //   );
+    // });
     this.myForm = this._fb.group({
       product_name: ['', [Validators.required, Validators.minLength(8)]],
       description: ['', Validators.required],
     });
-    this._addControls(this.myForm);
+    this._addControls();
   }
 
   ngOnInit(): void {
@@ -125,13 +179,20 @@ export class ProductEditComponent implements OnInit, OnDestroy {
             this.myForm.controls['description'].setValue(
               this.product.description
             );
-            this._form.fetch({ id: '1' }).subscribe({
+            this._form.fetch({ id: '2' }).subscribe({
               next: (form) => {
-                if (form)
-                  console.log(
-                    '%c form ',
-                    'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
-                  );
+                if (form) {
+                  form.form_element_fields.forEach((field: any) => {
+                    this.renderedBuilderFields.push(new FormElement3(field));
+                  });
+                  console.log('this.essentialBuilderFields');
+                  console.log(this.renderedBuilderFields);
+                  this._addControls();
+                }
+                console.log(
+                  '%c form ',
+                  'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
+                );
                 console.log(form);
               },
             });
@@ -180,31 +241,38 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     ]);
   }
 
-  private _addControls(formGroup: FormGroup) {
-    this.renderedBuilderFields.forEach((field) => {
-      if (field.type === 'button') return;
-      if (field.type === 'date') field.value = new Date(field.value);
-
-      const control = this._fb.control(
-        field.value,
-        this._bindValidations(field.validations || [])
-      );
-
-      formGroup.addControl(field.name, control);
-    });
+  private _addControls() {
+    this._dndFieldService.addControls(this.myForm, this.renderedBuilderFields, [
+      'product_name',
+      'description',
+    ]);
   }
 
-  private _bindValidations(validations: any) {
-    if (validations.length > 0) {
-      const validList: any[] = [];
+  // private _addControls(formGroup: FormGroup) {
+  //   this.renderedBuilderFields.forEach((field) => {
+  //     if (field.type === 'button') return;
+  //     if (field.type === 'date') field.value = new Date(field.value);
 
-      validations.forEach((validation: Validation) => {
-        if (validation.name === 'required') validList.push(Validators.required);
-        else if (validation.name === 'pattern')
-          validList.push(Validators.pattern(validation.pattern));
-      });
-      return Validators.compose(validList);
-    }
-    return null;
-  }
+  //     const control = this._fb.control(
+  //       field.value,
+  //       this._bindValidations(field.validations || [])
+  //     );
+
+  //     formGroup.addControl(field.name, control);
+  //   });
+  // }
+
+  // private _bindValidations(validations: any) {
+  //   if (validations.length > 0) {
+  //     const validList: any[] = [];
+
+  //     validations.forEach((validation: Validation) => {
+  //       if (validation.name === 'required') validList.push(Validators.required);
+  //       else if (validation.name === 'pattern')
+  //         validList.push(Validators.pattern(validation.pattern));
+  //     });
+  //     return Validators.compose(validList);
+  //   }
+  //   return null;
+  // }
 }

@@ -403,9 +403,26 @@ export class DndFieldService {
   }
 
   // BOOKMARK add control
-  public addControls(formGroup: FormGroup, formElementFields: any) {
+  public addControls(
+    formGroup: FormGroup,
+    formElementFields: any,
+    exclude: string[] = []
+  ) {
+    console.log('formGroup');
+    console.log(formGroup);
+
     // delete all form controls
     Object.keys(formGroup.controls).forEach((key) => {
+      console.log(
+        '%c key ',
+        'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+      );
+      console.log(key);
+      let x = exclude.find((item: any) => item === key);
+
+      console.log('x');
+      console.log(x);
+
       formGroup.removeControl(key);
     });
 
@@ -579,7 +596,6 @@ export class DndFieldService {
           'input',
           this._fb.control('', this.bindValidations([]))
         );
-
       formElementFieldsControl.push(formElementFieldGroup);
     });
     console.log('formGroup');

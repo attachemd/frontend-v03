@@ -19,6 +19,7 @@ General:
     ☐ save form builder as draft
     ☐ remove (form element input type) from #backend
     ☐ add drag and drop to the field options
+    ☐ add a limit and offset to the query #backend
     ✔ stop dragging when field edit or delete clicked @done(22-04-06)
     ✔ add delete dialog @done(22-04-06)
     ✔ fix label keep modified content in dnd field on cancel @done(22-04-06)
