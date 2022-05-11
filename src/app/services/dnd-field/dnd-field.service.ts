@@ -421,9 +421,9 @@ export class DndFieldService {
       let x = exclude.find((item: any) => item === key);
 
       console.log('x');
-      console.log(x);
+      console.log(x ?? true);
 
-      formGroup.removeControl(key);
+      x ?? formGroup.removeControl(key);
     });
 
     // create form name (form control)
