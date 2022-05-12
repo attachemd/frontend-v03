@@ -483,9 +483,9 @@ export class DndFieldService {
           formElementOptionsControl
         );
 
-        // create field selected_option (form control)
+        // create field selected_value (form control)
         formElementFieldGroup.addControl(
-          'selected_option',
+          'selected_value',
           this._fb.control('', this.bindValidations([]))
         );
 
@@ -535,14 +535,14 @@ export class DndFieldService {
           formElementOptionsControl
         );
 
-        // create field selected_option (form control)
+        // create field selected_value (form control)
         formElementFieldGroup.addControl(
-          'selected_options',
+          'selected_list_value',
           this._fb.group({})
         );
 
         let selectedOptions = formElementFieldGroup.get(
-          'selected_options'
+          'selected_list_value'
         ) as FormGroup;
 
         // create form_element_options (form array)
@@ -587,13 +587,14 @@ export class DndFieldService {
         // formElementFieldsControl.push(formElementOptionsControl);
       } else if (elementTemplate.form_element_type.name === 'date')
         formElementFieldGroup.addControl(
-          'date',
+          // 'date',
+          'selected_value',
           this._fb.control('', this.bindValidations([]))
         );
       else if (elementTemplate.form_element_type.name === 'input')
-        // create field selected_option (form control)
+        // create field selected_value (form control)
         formElementFieldGroup.addControl(
-          'input',
+          'selected_value',
           this._fb.control('', this.bindValidations([]))
         );
       formElementFieldsControl.push(formElementFieldGroup);

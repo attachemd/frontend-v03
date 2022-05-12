@@ -51,11 +51,14 @@ export class CheckboxComponent implements OnInit, OnDestroy {
       this.options?.valueChanges.subscribe((value: any) => {
         console.log(value);
         let selectedOptions = this.formElement.get(
-          'selected_options'
+          'selected_list_value'
         ) as FormGroup;
 
         selectedOptions ??
-          this.formElement.addControl('selected_options', this._fb.group({}));
+          this.formElement.addControl(
+            'selected_list_value',
+            this._fb.group({})
+          );
 
         this.options.value.forEach((formElementOption: any) => {
           console.log('formElementOption');
@@ -82,15 +85,15 @@ export class CheckboxComponent implements OnInit, OnDestroy {
 
     // console.log('(this.getOptions() as any)[0]');
     // console.log((this.getOptions() as any).controls[0]?.controls['name'].value);
-    // console.log("formElement.controls['selected_options']");
+    // console.log("formElement.controls['selected_list_value']");
     // console.log(
-    //   (formElement.controls['selected_options'] as FormGroup)?.contains(
+    //   (formElement.controls['selected_list_value'] as FormGroup)?.contains(
     //     optionName
     //   )
     // );
 
-    // return formElement.contains('selected_options');
-    return (formElement.controls['selected_options'] as FormGroup)?.contains(
+    // return formElement.contains('selected_list_value');
+    return (formElement.controls['selected_list_value'] as FormGroup)?.contains(
       optionName
     );
   }

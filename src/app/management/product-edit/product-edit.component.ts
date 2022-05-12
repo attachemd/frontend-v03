@@ -228,7 +228,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   public onSubmit(form: FormGroup) {
     console.log(
       '%c save ',
-      'background: yellow; color: #000; padding: 0 200px; border: 0px solid #47C0BE'
+      'background: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
     );
     console.log('form.value', form.value);
     console.log('Valid?', form.valid); // true or false

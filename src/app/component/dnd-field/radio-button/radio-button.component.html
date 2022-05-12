@@ -64,7 +64,7 @@
     <ng-container formArrayName="form_element_fields">
       <ng-container [formGroupName]="index">
         <div class="ft-lm-field" *ngIf="true">
-          <mat-radio-group formControlName="selected_option">
+          <mat-radio-group formControlName="selected_value">
             <mat-radio-button
               *ngFor="let optionElement of options?.value; index as i"
               [value]="optionElement.name"

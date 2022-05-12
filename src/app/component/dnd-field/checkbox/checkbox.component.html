@@ -6,7 +6,7 @@
     [index]="index"
   ></app-confirm-field-edit>
   <!-- {{log('from checkbox component html')}}
-  {{log(formElement?.value['selected_options'])}}
+  {{log(formElement?.value['selected_list_value'])}}
   {{log('index')}}
   {{log(index)}} -->
   <div [formGroup]="group" *ngIf="field.isOngoing">
@@ -84,18 +84,18 @@
             log('getFormElement().value')
           }}
           {{
-            log(getFormElement().value.selected_options)
+            log(getFormElement().value.selected_list_value)
           }}
           {{
             log(test())
           }} -->
-          <ng-container formGroupName="selected_options">
+          <ng-container formGroupName="selected_list_value">
             <ng-container *ngFor="let option of getOptions()?.value; index as i">
               <div class="checkbox-label">
                 <!-- {{log('index')}}
                 {{log(option.name)}}
                 {{log(index)}}
-                {{log(formElement.controls['selected_options'].value[option.name])}} -->
+                {{log(formElement.controls['selected_list_value'].value[option.name])}} -->
                 <mat-checkbox [formControlName]="option.name">{{
                   option.name
                 }}</mat-checkbox>

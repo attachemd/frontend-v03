@@ -16,9 +16,9 @@
       <ng-container formArrayName="form_element_fields">
         <ng-container [formGroupName]="index">
           <input
-            formControlName="input"
+            formControlName="selected_value"
             matInput
-            [type]="field.inputType"
+            [type]="field.form_element_template.form_element_type.input_type"
             [placeholder]="formElement.value.name"
           />
           <!-- [(ngModel)]="field.value" -->
