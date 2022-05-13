@@ -182,6 +182,12 @@ export class ProductEditComponent implements OnInit, OnDestroy {
             this._form.fetch({ id: '2' }).subscribe({
               next: (form) => {
                 if (form) {
+                  console.log(
+                    '%c product fetched form ',
+                    'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+                  );
+                  console.log(form);
+
                   form.form_element_fields.forEach((field: any) => {
                     this.renderedBuilderFields.push(new FormElement3(field));
                   });

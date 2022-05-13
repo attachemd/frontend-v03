@@ -441,7 +441,7 @@ export class DndFieldService {
     formElementFields.forEach((formElementField: any) => {
       console.log(
         '%c formElementField ',
-        'background: #ffa600; color: #000; padding: 10px 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+        'background: #ffa600; color: #000; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
       );
       console.log(formElementField);
 
@@ -503,6 +503,11 @@ export class DndFieldService {
             );
 
             formElementOptionGroup.addControl('name', control);
+            // create field id (form control)
+            formElementOptionGroup.addControl(
+              'id',
+              this._fb.control(formElementOption.id, this.bindValidations([]))
+            );
             formElementOptionsControl.push(formElementOptionGroup);
           }
         );
@@ -536,14 +541,16 @@ export class DndFieldService {
         );
 
         // create field selected_value (form control)
+        let selectedOptions = this._fb.group({});
+
         formElementFieldGroup.addControl(
           'selected_list_value',
-          this._fb.group({})
+          selectedOptions
         );
-
-        let selectedOptions = formElementFieldGroup.get(
-          'selected_list_value'
-        ) as FormGroup;
+        // FIXME refactor selectedOptions
+        // let selectedOptions = formElementFieldGroup.get(
+        //   'selected_list_value'
+        // ) as FormGroup;
 
         // create form_element_options (form array)
         formElementField.form_element_options.forEach(
@@ -562,6 +569,10 @@ export class DndFieldService {
                 formElementOption.name,
                 this.bindValidations(this.data['validations'] || [])
               )
+            );
+            formElementOptionGroup.addControl(
+              'id',
+              this._fb.control(formElementOption.id, this.bindValidations([]))
             );
             selectedOptions.addControl(
               formElementOption.name,
