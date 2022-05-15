@@ -107,7 +107,11 @@ class FormElement2 {
 class FormElement3 {
   public name?: string;
   public id: number;
+  public state: string;
+  public sort_id: number;
   public form_element_template: any;
+  public selected_value: any;
+  public selected_list_values: any;
   public form_element_options: any;
   public tracked_id: number;
   public isOngoing = false;
@@ -123,8 +127,14 @@ class FormElement3 {
 
     this.name = field.name;
     this.tracked_id = ft_lm.formElementId++;
-    this.id = this.tracked_id;
+    this.state = field.state ?? 'old';
+    this.sort_id = field.sort_id ?? 0;
+    // this.id = field.id ?? this.tracked_id;
+    this.id = field.id;
+    // this.id = field.id ?? '';
     this.form_element_template = field.form_element_template;
+    this.selected_value = null;
+    this.selected_list_values = null;
     // this.form_element_options = _.cloneDeep(field.form_element_options);
     this.form_element_options = field.form_element_options;
     // this.name = fieldItem.name;
@@ -406,12 +416,13 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         return source?.classList.contains('builder-source');
       },
       copyItem: (formElement: FormElement3) => {
+        formElement.state = 'new';
         console.log(
-          '%c formElement ',
+          '%c copyItem formElement ',
           'background: #f2c080; color: #555a60; padding: 10px 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
         );
         console.log(formElement);
-
+        // formElement.id = 0;
         return new FormElement3(formElement);
         // return formElement;
         // return _.cloneDeep(formElement);
@@ -450,6 +461,32 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         this._addControls();
       },
     });
+
+    this._form.fetch({ id: '2' }).subscribe({
+      next: (form) => {
+        if (form) {
+          console.log(
+            '%c product fetched form ',
+            'background: #CDDC2B; color: #000; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+          );
+          console.log(form);
+
+          form.form_element_fields.forEach((field: any) => {
+            this.renderedBuilderFields.push(new FormElement3(field));
+          });
+          console.log('this.essentialBuilderFields');
+          console.log(this.renderedBuilderFields);
+          this.myForm.addControl('id', this._fb.control(form.id ?? '', []));
+          this._addControls();
+        }
+        console.log(
+          '%c form ',
+          'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
+        );
+        console.log(form);
+      },
+    });
+
     // this._essentialFields.forEach((field) => {
     //   this.essentialBuilderFields.push(new FormElement(field));
     // });
@@ -624,6 +661,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     this._subs.unsubscribe();
   }
 
+  // BOOKMARK onSubmit
   public onSubmit(form: FormGroup) {
     console.log(
       '%c save ',
@@ -633,15 +671,40 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     console.log('Valid?', form.valid); // true or false
     let objToSend = { name: form.value.form_name };
 
-    this._form.create(form.value).subscribe({
-      next: (form) => {
-        if (form)
-          console.log(
-            '%c this._form.create ',
-            'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
-          );
-      },
-    });
+    // this._form.create(form.value).subscribe({
+    //   next: (form) => {
+    //     if (form)
+    //       console.log(
+    //         '%c this._form.create ',
+    //         'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
+    //       );
+    //   },
+    // });
+
+    // this._form.update(form.value).subscribe({
+    //   next: (form) => {
+    //     if (form) {
+    //       console.log(
+    //         '%c this._form.update ',
+    //         'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
+    //       );
+    //       console.log(form);
+    //     }
+    //   },
+    // });
+
+    // this._form.updateOrCreate(form.value).subscribe({
+    //   next: (form) => {
+    //     if (form) {
+    //       console.log(
+    //         '%c this._form.update ',
+    //         'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
+    //       );
+    //       console.log(form);
+    //     }
+    //   },
+    // });
+
     // this._router.navigate(['/products/', this.productId]);
     // this._router.navigGate(['/products/', '(edit:products/2)']);
 

@@ -105,6 +105,12 @@ export class CheckboxComponent implements OnInit, OnDestroy {
   }
 
   public getOptions(): FormArray {
+    // console.log(
+    //   '%c getOptions ',
+    //   'background: gray; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+    // );
+    // console.log(this.formElement);
+
     return this.formElement?.controls['form_element_options'] as FormArray;
   }
 

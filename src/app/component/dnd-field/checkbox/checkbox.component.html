@@ -13,10 +13,7 @@
     <!-- <div [formGroup]="group" *ngIf="false"> -->
     <div formArrayName="form_element_fields">
       <ng-container [formGroupName]="index">
-        <div
-          class="field-element-body"
-          formArrayName="form_element_options"
-        >
+        <div class="field-element-body" formArrayName="form_element_options">
           <div
             class="option-field"
             *ngFor="let option of options?.controls; let i = index"
@@ -90,7 +87,9 @@
             log(test())
           }} -->
           <ng-container formGroupName="selected_list_value">
-            <ng-container *ngFor="let option of getOptions()?.value; index as i">
+            <ng-container
+              *ngFor="let option of getOptions()?.value; index as i"
+            >
               <div class="checkbox-label">
                 <!-- {{log('index')}}
                 {{log(option.name)}}

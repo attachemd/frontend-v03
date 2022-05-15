@@ -307,7 +307,6 @@ export class DndFieldService {
       //   // return;
       // }
 
-      // BOOKMARK RADIOBUTTON
       if (field.type === 'radiobutton') {
         console.log(
           '%c radiobutton ',
@@ -408,6 +407,7 @@ export class DndFieldService {
     formElementFields: any,
     exclude: string[] = []
   ) {
+    exclude.push('id');
     console.log('formGroup');
     console.log(formGroup);
 
@@ -427,6 +427,10 @@ export class DndFieldService {
     });
 
     // create form name (form control)
+    // formGroup.addControl(
+    //   'id',
+    //   this._fb.control('the form2', this.bindValidations([]))
+    // );
     formGroup.addControl(
       'name',
       this._fb.control('the form2', this.bindValidations([]))
@@ -453,6 +457,14 @@ export class DndFieldService {
         'id',
         this._fb.control(formElementField.id, this.bindValidations([]))
       );
+      formElementFieldGroup.addControl(
+        'sort_id',
+        this._fb.control(formElementField.sort_id, this.bindValidations([]))
+      );
+      formElementFieldGroup.addControl(
+        'state',
+        this._fb.control(formElementField.state, this.bindValidations([]))
+      );
 
       // create field name (form control)
       formElementFieldGroup.addControl(
@@ -468,6 +480,7 @@ export class DndFieldService {
         })
       );
 
+      // BOOKMARK radiobutton & select
       if (
         elementTemplate.form_element_type.name === 'radiobutton' ||
         elementTemplate.form_element_type.name === 'select'
@@ -486,7 +499,10 @@ export class DndFieldService {
         // create field selected_value (form control)
         formElementFieldGroup.addControl(
           'selected_value',
-          this._fb.control('', this.bindValidations([]))
+          this._fb.control(
+            formElementField.selected_value?.value ?? '',
+            this.bindValidations([])
+          )
         );
 
         // create form_element_options (form array)
@@ -526,6 +542,8 @@ export class DndFieldService {
 
         // formGroup.addControl('form_element_fields', formElementOptionsGroup);
         // formElementFieldsControl.push(formElementOptionsControl);
+
+        // BOOKMARK checkbox
       } else if (elementTemplate.form_element_type.name === 'checkbox') {
         console.log('equal checkbox');
 
@@ -553,34 +571,58 @@ export class DndFieldService {
         // ) as FormGroup;
 
         // create form_element_options (form array)
-        formElementField.form_element_options.forEach(
-          (formElementOption: any) => {
-            console.log('--formElementOption.name--');
-            console.log(formElementOption.name);
-
-            let formElementOptionGroup = this._fb.group({});
-
-            console.log('formElementOption.name');
-            console.log(formElementOption.name);
-
-            formElementOptionGroup.addControl(
-              'name',
-              this._fb.control(
-                formElementOption.name,
-                this.bindValidations(this.data['validations'] || [])
-              )
-            );
-            formElementOptionGroup.addControl(
-              'id',
-              this._fb.control(formElementOption.id, this.bindValidations([]))
-            );
-            selectedOptions.addControl(
-              formElementOption.name,
-              this._fb.control(false, this.bindValidations([]))
-            );
-            formElementOptionsControl.push(formElementOptionGroup);
-          }
+        console.log(
+          '%c getOptions ',
+          'background: gray; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
         );
+        console.log('formElementField.selected_list_values');
+        console.log(formElementField);
+
+        let optionList =
+          formElementField.selected_list_values ??
+          formElementField.form_element_options;
+        // formElementField.form_element_options.forEach(
+
+        optionList.forEach((option: any) => {
+          let optionName = option.form_element_option?.name ?? option.name;
+          let optionValue = option.value ?? '';
+          let optionId = option.form_element_option?.id ?? option.id;
+
+          console.log('optionName');
+          console.log(optionName);
+          console.log('optionValue');
+          console.log(optionValue);
+          console.log('optionId');
+          console.log(optionId);
+
+          // console.log('--formElementOption.name--');
+          // console.log(formElementOption.name);
+
+          let formElementOptionGroup = this._fb.group({});
+
+          // console.log('formElementOption.name');
+          // console.log(formElementOption.name);
+
+          formElementOptionGroup.addControl(
+            'name',
+            this._fb.control(
+              optionName,
+              this.bindValidations(this.data['validations'] || [])
+            )
+          );
+          formElementOptionGroup.addControl(
+            'id',
+            this._fb.control(optionId, this.bindValidations([]))
+          );
+          selectedOptions.addControl(
+            optionName,
+            this._fb.control(
+              optionValue.toLowerCase() === 'true',
+              this.bindValidations([])
+            )
+          );
+          formElementOptionsControl.push(formElementOptionGroup);
+        });
 
         // const control = this._fb.control(
         //   field.value,
@@ -596,18 +638,35 @@ export class DndFieldService {
 
         // formGroup.addControl('form_element_fields', formElementOptionsGroup);
         // formElementFieldsControl.push(formElementOptionsControl);
+
+        // BOOKMARK date
       } else if (elementTemplate.form_element_type.name === 'date')
         formElementFieldGroup.addControl(
           // 'date',
           'selected_value',
-          this._fb.control('', this.bindValidations([]))
+          this._fb.control(
+            formElementField.selected_value?.value ?? '',
+            this.bindValidations([])
+          )
         );
-      else if (elementTemplate.form_element_type.name === 'input')
+      // BOOKMARK input
+      else if (elementTemplate.form_element_type.name === 'input') {
         // create field selected_value (form control)
+        console.log(
+          '%c formElementField.selected_value ',
+          'background: black; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+        );
+        console.log(formElementField.selected_value);
+
         formElementFieldGroup.addControl(
           'selected_value',
-          this._fb.control('', this.bindValidations([]))
+          this._fb.control(
+            formElementField.selected_value?.value ?? '',
+            // '',
+            this.bindValidations([])
+          )
         );
+      }
       formElementFieldsControl.push(formElementFieldGroup);
     });
     console.log('formGroup');

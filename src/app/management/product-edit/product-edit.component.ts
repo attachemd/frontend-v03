@@ -35,6 +35,8 @@ class FormElement3 {
   public id: number;
   public form_element_template: any;
   public form_element_options: any;
+  public selected_value: any;
+  public selected_list_values: any;
   public tracked_id: number;
   public isOngoing = false;
   // public name: string;
@@ -49,8 +51,10 @@ class FormElement3 {
 
     this.name = field.name;
     this.tracked_id = ft_lm.formElementId++;
-    this.id = this.tracked_id;
+    this.id = field.id;
     this.form_element_template = field.form_element_template;
+    this.selected_value = field.selected_value;
+    this.selected_list_values = field.selected_list_values;
     // this.form_element_options = _.cloneDeep(field.form_element_options);
     this.form_element_options = field.form_element_options;
     // this.name = fieldItem.name;
@@ -179,12 +183,13 @@ export class ProductEditComponent implements OnInit, OnDestroy {
             this.myForm.controls['description'].setValue(
               this.product.description
             );
+            // BOOKMARK fetch
             this._form.fetch({ id: '2' }).subscribe({
               next: (form) => {
                 if (form) {
                   console.log(
                     '%c product fetched form ',
-                    'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+                    'background: #CDDC2B; color: #000; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
                   );
                   console.log(form);
 
@@ -231,6 +236,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     return item.tracked_id;
   }
 
+  // BOOKMARK onSubmit
   public onSubmit(form: FormGroup) {
     console.log(
       '%c save ',
@@ -239,6 +245,15 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     console.log('form.value', form.value);
     console.log('Valid?', form.valid); // true or false
     console.log('this.renderedBuilderFields', this.renderedBuilderFields);
+    this._form.create(form.value, 'fill_form').subscribe({
+      next: (form) => {
+        if (form)
+          console.log(
+            '%c this._form.create: fill_form ',
+            'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
+          );
+      },
+    });
     this._router.navigate([
       '',
       {
