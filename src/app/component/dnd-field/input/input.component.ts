@@ -21,34 +21,18 @@ export class InputComponent implements OnInit {
 
   // public isOngoing: boolean = false;
 
-  constructor(private _dndFieldService: DndFieldService) {
-    console.log(
-      '%c InputComponent constructor ',
-      'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
-    );
-  }
+  constructor(private _dndFieldService: DndFieldService) {}
 
   @HostBinding('class.ongoing') public get isOngoing() {
     return this.field.isOngoing;
   }
 
   ngOnInit(): void {
-    console.log(
-      '%c InputComponent ',
-      'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
-    );
-    // console.log(
-    //   '%c index ',
-    //   'background: red; color: #fff; padding: 10px 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
-    // );
-    // console.log(this.index);
     this.formElement = (this.group.controls['form_element_fields'] as FormArray)
       .controls[this.index] as FormGroup;
   }
 
   public log(val: any) {
-    // console.log('from RadioButtonComponent');
-
     console.log(val);
   }
 

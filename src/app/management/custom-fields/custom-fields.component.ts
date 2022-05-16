@@ -106,7 +106,7 @@ class FormElement2 {
 // we need it in the creation of the form element template
 class FormElement3 {
   public name?: string;
-  public id: number;
+  public id: string;
   public state: string;
   public sort_id: number;
   public form_element_template: any;
@@ -129,8 +129,8 @@ class FormElement3 {
     this.tracked_id = ft_lm.formElementId++;
     this.state = field.state ?? 'old';
     this.sort_id = field.sort_id ?? 0;
-    // this.id = field.id ?? this.tracked_id;
-    this.id = field.id;
+    this.id = field.id ?? this.tracked_id;
+    // this.id = field.id;
     // this.id = field.id ?? '';
     this.form_element_template = field.form_element_template;
     this.selected_value = null;
@@ -181,6 +181,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   public suggestedBuilderFields: any[] = [];
   public essentialBuilderFields: any[] = [];
   public renderedBuilderFields: any[] = [];
+  public deletedFields: any[] = [];
   public renderedBuilderFieldsPrevState: any[] = [];
   // stop the form builder drag & drop
   public stopDrag = false;
@@ -417,6 +418,9 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       },
       copyItem: (formElement: FormElement3) => {
         formElement.state = 'new';
+        let newId = this._generateUniqueIdFromCurrentFields();
+
+        formElement.id = newId;
         console.log(
           '%c copyItem formElement ',
           'background: #f2c080; color: #555a60; padding: 10px 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
@@ -554,15 +558,22 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       })
     );
 
+    // BOOKMARK delete field
     this._subs.add(
       this._dndFieldService.getDeleteField$().subscribe({
         next: (field: any) => {
+          if (field.state === 'old') {
+            field.state = 'deleted';
+            this.deletedFields.push(field);
+          }
           this._dndFieldService.deleteFieldControl(this.myForm, field);
           this.renderedBuilderFields = this.renderedBuilderFields.filter(
             function (el) {
               return el.id != field.id;
             }
           );
+          console.log('this.deletedFields');
+          console.log(this.deletedFields);
         },
         error: (err: any) => {},
       })
@@ -696,6 +707,12 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     //   },
     // });
 
+    let fieldsForServer = this.renderedBuilderFields.concat(this.deletedFields);
+
+    this._addControls(fieldsForServer);
+    console.log('form.value');
+    console.log(form.value);
+
     this._form.updateOrCreate(form.value).subscribe({
       next: (form) => {
         if (form) {
@@ -725,8 +742,30 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     return this._dndFieldService.generatedFieldName(field, prefix);
   }
 
-  private _addControls() {
-    this._dndFieldService.addControls(this.myForm, this.renderedBuilderFields);
+  private _addControls(fields = this.renderedBuilderFields) {
+    this._dndFieldService.addControls(this.myForm, fields);
+  }
+
+  private _generateUniqueIdFromCurrentFields(): string {
+    let newId = Math.random().toString().slice(2, 11);
+
+    console.log('newId');
+    console.log(newId);
+    console.log('this.renderedBuilderFields');
+    console.log(this.renderedBuilderFields);
+
+    if (
+      this.renderedBuilderFields.some((field) => {
+        console.log('field.id');
+        console.log(field.id);
+        console.log('newId');
+        console.log(newId);
+
+        return field.id === newId;
+      })
+    )
+      return this._generateUniqueIdFromCurrentFields();
+    else return newId;
   }
 
   private _updateTargetContainer() {

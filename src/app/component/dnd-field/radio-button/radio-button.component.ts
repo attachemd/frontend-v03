@@ -62,11 +62,6 @@ export class RadioButtonComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('RadioButtonComponent');
-    console.log(
-      '%c index ',
-      'background: red; color: #fff; padding: 10px 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
-    );
-    console.log(this.index);
     // const valueArr = this.group.get(
     //   this.generatedFieldName(this.field, '_editor')
     // );
@@ -112,11 +107,6 @@ export class RadioButtonComponent implements OnInit {
     );
     let index = formElementFieldsControlValue.indexOf(currentFormElementField);
 
-    console.log(
-      '%c index ',
-      'background: #f2c080; color: #555a60; padding: 10px 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
-    );
-    console.log(index);
     this.formElement = (this.group.controls['form_element_fields'] as FormArray)
       .controls[this.index] as FormGroup;
     this.options = this.formElement.controls[

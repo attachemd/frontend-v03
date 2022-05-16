@@ -44,16 +44,7 @@ export class DynamicFieldDirective implements OnInit {
         this.field.form_element_template.form_element_type.name
       ]
     );
-    // console.log(
-    //   '%c this.index ',
-    //   'background: #B297F1; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
-    // );
-    // console.log(this.index);
-    console.log('this.field.sort_id');
-    console.log(this.field.sort_id);
-
     this.field.sort_id = this.index;
-    // console.log(this.field);
 
     this.componentRef.instance.field = this.field;
     this.componentRef.instance.group = this.group;

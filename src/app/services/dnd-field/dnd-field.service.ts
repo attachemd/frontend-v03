@@ -408,20 +408,10 @@ export class DndFieldService {
     exclude: string[] = []
   ) {
     exclude.push('id');
-    console.log('formGroup');
-    console.log(formGroup);
 
     // delete all form controls
     Object.keys(formGroup.controls).forEach((key) => {
-      console.log(
-        '%c key ',
-        'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
-      );
-      console.log(key);
       let x = exclude.find((item: any) => item === key);
-
-      console.log('x');
-      console.log(x ?? true);
 
       x ?? formGroup.removeControl(key);
     });
@@ -443,12 +433,6 @@ export class DndFieldService {
     );
 
     formElementFields.forEach((formElementField: any) => {
-      console.log(
-        '%c formElementField ',
-        'background: #ffa600; color: #000; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
-      );
-      console.log(formElementField);
-
       let elementTemplate = formElementField.form_element_template;
       let formElementFieldGroup = this._fb.group({});
 
@@ -510,9 +494,6 @@ export class DndFieldService {
           (formElementOption: any) => {
             let formElementOptionGroup = this._fb.group({});
 
-            console.log('formElementOption.name');
-            console.log(formElementOption.name);
-
             const control = this._fb.control(
               formElementOption.name,
               this.bindValidations(this.data['validations'] || [])
@@ -545,8 +526,6 @@ export class DndFieldService {
 
         // BOOKMARK checkbox
       } else if (elementTemplate.form_element_type.name === 'checkbox') {
-        console.log('equal checkbox');
-
         let formElementOptionsControl = this._fb.array([]);
         // let formElementFieldGroup = this._fb.group({
         //   form_element_options: formElementOptionsControl,
@@ -571,12 +550,6 @@ export class DndFieldService {
         // ) as FormGroup;
 
         // create form_element_options (form array)
-        console.log(
-          '%c getOptions ',
-          'background: gray; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
-        );
-        console.log('formElementField.selected_list_values');
-        console.log(formElementField);
 
         let optionList =
           formElementField.selected_list_values ??
@@ -588,20 +561,7 @@ export class DndFieldService {
           let optionValue = option.value ?? '';
           let optionId = option.form_element_option?.id ?? option.id;
 
-          console.log('optionName');
-          console.log(optionName);
-          console.log('optionValue');
-          console.log(optionValue);
-          console.log('optionId');
-          console.log(optionId);
-
-          // console.log('--formElementOption.name--');
-          // console.log(formElementOption.name);
-
           let formElementOptionGroup = this._fb.group({});
-
-          // console.log('formElementOption.name');
-          // console.log(formElementOption.name);
 
           formElementOptionGroup.addControl(
             'name',
@@ -650,13 +610,8 @@ export class DndFieldService {
           )
         );
       // BOOKMARK input
-      else if (elementTemplate.form_element_type.name === 'input') {
+      else if (elementTemplate.form_element_type.name === 'input')
         // create field selected_value (form control)
-        console.log(
-          '%c formElementField.selected_value ',
-          'background: black; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
-        );
-        console.log(formElementField.selected_value);
 
         formElementFieldGroup.addControl(
           'selected_value',
@@ -666,11 +621,9 @@ export class DndFieldService {
             this.bindValidations([])
           )
         );
-      }
+
       formElementFieldsControl.push(formElementFieldGroup);
     });
-    console.log('formGroup');
-    console.log(formGroup);
   }
 
   public deleteFieldControl(group: FormGroup, field: any) {
