@@ -71,6 +71,5 @@ General:
         ✔ first save @done(22-05-04 11:49)
         ✔ feat: show disabled button when no option there in [selection fields] @done(22-05-04)
         ✔ fix: disabled button not working when multiple field @done(22-05-04)
-        ✔ feat: add entity edit and display @done(22-05-10 14:48)
-        ☐ generalize the save to all essential fields 
-        ☐ patch sort_id for all form element field #backend
+        ✔ feat: add entity edit and display @done(22-05-10 14:48) 
+        ☐ update sort_id for all form_element_field #backend

@@ -470,11 +470,14 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
             'background: #CDDC2B; color: #000; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
           );
           console.log(form);
+          form.form_element_fields.sort((a: any, b: any) =>
+            a.sort_id > b.sort_id ? 1 : b.sort_id > a.sort_id ? -1 : 0
+          );
 
           form.form_element_fields.forEach((field: any) => {
             this.renderedBuilderFields.push(new FormElement3(field));
           });
-          console.log('this.essentialBuilderFields');
+          console.log('this.renderedBuilderFields');
           console.log(this.renderedBuilderFields);
           this.myForm.addControl('id', this._fb.control(form.id ?? '', []));
           this._addControls();
@@ -693,17 +696,17 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     //   },
     // });
 
-    // this._form.updateOrCreate(form.value).subscribe({
-    //   next: (form) => {
-    //     if (form) {
-    //       console.log(
-    //         '%c this._form.update ',
-    //         'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
-    //       );
-    //       console.log(form);
-    //     }
-    //   },
-    // });
+    this._form.updateOrCreate(form.value).subscribe({
+      next: (form) => {
+        if (form) {
+          console.log(
+            '%c this._form.update ',
+            'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
+          );
+          console.log(form);
+        }
+      },
+    });
 
     // this._router.navigate(['/products/', this.productId]);
     // this._router.navigGate(['/products/', '(edit:products/2)']);
