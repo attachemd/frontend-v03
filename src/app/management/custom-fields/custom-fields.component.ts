@@ -709,10 +709,18 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
 
     let fieldsForServer = this.renderedBuilderFields.concat(this.deletedFields);
 
+    // console.log('this.renderedBuilderFields');
+    // console.log(this.renderedBuilderFields);
+
     this._addControls(fieldsForServer);
     console.log('form.value');
     console.log(form.value);
 
+    // on saving update the [form element field] state with 'old'
+    // why - the server will create it again when saving again
+    this.renderedBuilderFields.forEach((field, index, array) => {
+      field.state = 'old';
+    });
     this._form.updateOrCreate(form.value).subscribe({
       next: (form) => {
         if (form) {
