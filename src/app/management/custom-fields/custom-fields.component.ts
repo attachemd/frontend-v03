@@ -750,20 +750,23 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     let obj = _.cloneDeep(form.value);
 
     obj.deleted_option_ids = this.deletedOptions;
-    this._form.updateOrCreate(obj).subscribe({
-      next: (form) => {
-        if (form) {
-          console.log(
-            '%c this._form.update ',
-            'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
-          );
-          console.log(form);
-          // on saving free up deletedFields
-          // why - for not sending it back to the server when saving again
-          this.deletedFields = [];
-        }
-      },
-    });
+    console.log('obj.deleted_option_ids');
+    console.log(obj.deleted_option_ids);
+
+    // this._form.updateOrCreate(obj).subscribe({
+    //   next: (form) => {
+    //     if (form) {
+    //       console.log(
+    //         '%c this._form.update ',
+    //         'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
+    //       );
+    //       console.log(form);
+    //       // on saving free up deletedFields
+    //       // why - for not sending it back to the server when saving again
+    //       this.deletedFields = [];
+    //     }
+    //   },
+    // });
 
     // this._router.navigate(['/products/', this.productId]);
     // this._router.navigGate(['/products/', '(edit:products/2)']);

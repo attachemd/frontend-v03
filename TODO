@@ -83,4 +83,5 @@ General:
         ☐ when deleting one option delete that option only from [form element field]
         ☐ if an option deleted and has a value associated with it delete that value
         ☐ edit option name
-        ☐ fix 9 number in form elment field database
+        ☐ fix 9 number in [form elment field] database
+        ☐ fix when deleting added option and save confirm and save form builder not deleting
