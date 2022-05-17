@@ -123,6 +123,7 @@ export class RadioButtonComponent implements OnInit {
     return this._dndFieldService.generatedFieldName(field, prefix);
   }
 
+  // BOOKMARK add option
   public addOption() {
     console.log(
       '%c field ',
@@ -143,6 +144,7 @@ export class RadioButtonComponent implements OnInit {
     );
 
     optionFormGroup.addControl('name', control);
+    optionFormGroup.addControl('state', this._fb.control('new', []));
     this.options.push(optionFormGroup);
     // this.field.form_element_options = this.options.value;
     // return;
@@ -178,7 +180,14 @@ export class RadioButtonComponent implements OnInit {
     // this._dndFieldService.setUpdateControls$();
   }
 
+  // BOOKMARK delete option
   public deleteOption(index: number) {
+    console.log('this.options');
+    console.log(this.options.controls[index]);
+    let option = this.options.controls[index].value;
+
+    if (option.state === 'old')
+      this._dndFieldService.setDeletedOptionId$(option.id);
     this.options.removeAt(index);
     // return;
     // console.log('index');

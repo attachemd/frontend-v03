@@ -82,6 +82,7 @@ export class DndFieldService {
   private _deleteField$ = new Subject<any>();
   private _dndMode$ = new ReplaySubject<boolean>(1);
   private _dndFieldEditVisibility$ = new ReplaySubject<boolean>(1);
+  private _deletedOptionId$ = new Subject<string>();
 
   constructor(private _fb: FormBuilder) {}
 
@@ -139,6 +140,14 @@ export class DndFieldService {
 
   public getDndFieldEditVisibility$(): ReplaySubject<boolean> {
     return this._dndFieldEditVisibility$;
+  }
+
+  public setDeletedOptionId$(deletedOptionId: string) {
+    this._deletedOptionId$.next(deletedOptionId);
+  }
+
+  public getDeletedOptionId$(): Subject<string> {
+    return this._deletedOptionId$;
   }
 
   public toggleEditVisibility(event: any, visibility: string) {
@@ -505,6 +514,13 @@ export class DndFieldService {
               'id',
               this._fb.control(formElementOption.id, this.bindValidations([]))
             );
+            formElementOptionGroup.addControl(
+              'state',
+              this._fb.control(
+                formElementOption.state,
+                this.bindValidations([])
+              )
+            );
             formElementOptionsControl.push(formElementOptionGroup);
           }
         );
@@ -573,6 +589,10 @@ export class DndFieldService {
           formElementOptionGroup.addControl(
             'id',
             this._fb.control(optionId, this.bindValidations([]))
+          );
+          formElementOptionGroup.addControl(
+            'state',
+            this._fb.control(option.state, this.bindValidations([]))
           );
           selectedOptions.addControl(
             optionName,

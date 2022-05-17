@@ -136,6 +136,9 @@ class FormElement3 {
     this.selected_value = null;
     this.selected_list_values = null;
     // this.form_element_options = _.cloneDeep(field.form_element_options);
+    field.form_element_options.forEach((option: any) => {
+      if (option.state ?? option.state !== 'new') option.state = 'old';
+    });
     this.form_element_options = field.form_element_options;
     // this.name = fieldItem.name;
     // this.type = fieldItem.form_element_type.name;
@@ -182,6 +185,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   public essentialBuilderFields: any[] = [];
   public renderedBuilderFields: any[] = [];
   public deletedFields: any[] = [];
+  public deletedOptions: any[] = [];
   public renderedBuilderFieldsPrevState: any[] = [];
   // stop the form builder drag & drop
   public stopDrag = false;
@@ -394,6 +398,23 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
           this.stopDrag = false;
         })
     );
+
+    this._subs.add(
+      this._dndFieldService.getDeletedOptionId$().subscribe({
+        next: (deletedOptionId) => {
+          console.log('deletedOptionId');
+          console.log(deletedOptionId);
+          this.deletedOptions.push(deletedOptionId);
+          console.log('this.deletedOptions');
+          console.log(this.deletedOptions);
+        },
+        error: (err: any) => {
+          console.log('error');
+          console.log(err);
+        },
+      })
+    );
+
     // BOOKMARK _dragulaService.createGroup
     this._dragulaService.createGroup(this.builderContainer, {
       moves: (el: any, container: any, handle: any): any => {
@@ -614,7 +635,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
             // replaySubject old value (fieldObj.fieldElement) not destroyed
             // and ft_lm.formElementId give new ids for new created
             // fields then currentField may be undefined
-
+            // BOOKMARK options to renderedBuilderFields
             let formElementFieldsControlValue = (
               this.myForm.controls['form_element_fields'] as FormArray
             ).value;
@@ -645,6 +666,8 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
             // console.log(currentField.name);
 
             // this.myForm.removeControl(currentField.name);
+            console.log('this.renderedBuilderFields');
+            console.log(this.renderedBuilderFields);
           }
 
           this._updateTargetContainer();
@@ -720,8 +743,14 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     // why - the server will create it again when saving again
     this.renderedBuilderFields.forEach((field, index, array) => {
       field.state = 'old';
+      field.form_element_options.forEach((option: any) => {
+        if (option.state) option.state = 'old';
+      });
     });
-    this._form.updateOrCreate(form.value).subscribe({
+    let obj = _.cloneDeep(form.value);
+
+    obj.deleted_option_ids = this.deletedOptions;
+    this._form.updateOrCreate(obj).subscribe({
       next: (form) => {
         if (form) {
           console.log(

@@ -75,8 +75,12 @@ General:
         ✔ update sort_id for all form_element_field #backend @done(22-05-16 11:18)
         ✔ update the form element option @done(22-05-16)
         ✔ fix: deleted field sent back to the server when saving again @done(22-05-17 10:54)
-        ☐ update field state with 'old' on saving
+        ✔ update field state with 'old' on saving @done(22-05-17 11:34)
+        do crud operations to only one option:
+            ☐ mark edited option with state string in ['old', 'new', 'edited', 'added']
+            ☐ for deleted option mark [form element field] state with 
         ☐ when deleting a field delete the value associated with it
         ☐ when deleting one option delete that option only from [form element field]
         ☐ if an option deleted and has a value associated with it delete that value
         ☐ edit option name
+        ☐ fix 9 number in form elment field database
