@@ -174,49 +174,52 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // this._dndFieldService.setDndMode$(false);
     this._dndFieldService.setDndFieldEditVisibility$(false);
-    this._route.params.subscribe({
-      next: (params: any) => {
-        this._http.get<Product>('/api/products/' + params['id']).subscribe({
-          next: (product: Product): void => {
-            this.product = product;
-            this.myForm.controls['product_name'].setValue(this.product.name);
-            this.myForm.controls['description'].setValue(
-              this.product.description
-            );
-            // BOOKMARK fetch
-            this._form.fetch({ id: '2' }).subscribe({
-              next: (form) => {
-                if (form) {
+    this._subs.add(
+      this._route.params.subscribe({
+        next: (params: any) => {
+          this._http.get<Product>('/api/products/' + params['id']).subscribe({
+            next: (product: Product): void => {
+              this.product = product;
+              this.myForm.controls['product_name'].setValue(this.product.name);
+              this.myForm.controls['description'].setValue(
+                this.product.description
+              );
+              // BOOKMARK fetch
+
+              this._form.fetch({ id: '2' }).subscribe({
+                next: (form) => {
+                  if (form) {
+                    console.log(
+                      '%c product fetched form ',
+                      'background: #CDDC2B; color: #000; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+                    );
+                    console.log(form);
+
+                    form.form_element_fields.forEach((field: any) => {
+                      this.renderedBuilderFields.push(new FormElement3(field));
+                    });
+                    console.log('this.essentialBuilderFields');
+                    console.log(this.renderedBuilderFields);
+                    this._addControls();
+                  }
                   console.log(
-                    '%c product fetched form ',
-                    'background: #CDDC2B; color: #000; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+                    '%c form ',
+                    'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
                   );
                   console.log(form);
-
-                  form.form_element_fields.forEach((field: any) => {
-                    this.renderedBuilderFields.push(new FormElement3(field));
-                  });
-                  console.log('this.essentialBuilderFields');
-                  console.log(this.renderedBuilderFields);
-                  this._addControls();
-                }
-                console.log(
-                  '%c form ',
-                  'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
-                );
-                console.log(form);
-              },
-            });
-          },
-          error: (error) => {
-            console.log('error :', error);
-          },
-        });
-      },
-      error: (error) => {
-        console.log('error :', error);
-      },
-    });
+                },
+              });
+            },
+            error: (error) => {
+              console.log('error :', error);
+            },
+          });
+        },
+        error: (error) => {
+          console.log('error :', error);
+        },
+      })
+    );
   }
 
   public setStatus(): SafeHtml {
@@ -230,6 +233,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._subs.unsubscribe();
+    this.renderedBuilderFields = [];
   }
 
   public trackItem(index: number, item: any) {

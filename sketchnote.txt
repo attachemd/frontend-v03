@@ -1,0 +1,2 @@
+- on saving free up deletedFields why - for not sending it back to the server when saving again
+- on saving update the [form element field] state with 'old' why - the server will create it again when saving again

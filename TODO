@@ -64,7 +64,7 @@ General:
             ✔ finish single selection field @done(22-04-21 05:09)
     ✔ fix: when a user drags and drops a (dnd field if there is only one) onto the builder canvas, the (dnd field edit) does not appear. @started(22-04-21 10:03) @done(22-04-21 12:30) @lasted(2h47m36s)
     ✔ fix: disabled state of save button when only (options) is available in (confirm field edit) @done(22-04-21 21:55)
-    ☐ move (custom field) methods to a sevice and update (product edit) view
+    ☐ move (custom field) methods to a sevice and update [product edit] view
     save [custom field] form to the database:
         ✔ updated @done(22-04-28 13:03)
         ✔ add & remove form_element_options @done(22-05-03 23:22)
@@ -74,6 +74,9 @@ General:
         ✔ feat: add entity edit and display @done(22-05-10 14:48) 
         ✔ update sort_id for all form_element_field #backend @done(22-05-16 11:18)
         ✔ update the form element option @done(22-05-16)
-        ☐ update field state with 'old'
+        ✔ fix: deleted field sent back to the server when saving again @done(22-05-17 10:54)
+        ☐ update field state with 'old' on saving
         ☐ when deleting a field delete the value associated with it
-        ☐ delete only single option from form element field
+        ☐ when deleting one option delete that option only from [form element field]
+        ☐ if an option deleted and has a value associated with it delete that value
+        ☐ edit option name

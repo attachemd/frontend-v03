@@ -721,6 +721,9 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
             'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
           );
           console.log(form);
+          // on saving free up deletedFields
+          // why - for not sending it back to the server when saving again
+          this.deletedFields = [];
         }
       },
     });
