@@ -76,3 +76,4 @@ General:
         ✔ update the form element option @done(22-05-16)
         ☐ update field state with 'old'
         ☐ when deleting a field delete the value associated with it
+        ☐ delete only single option from form element field
