@@ -51,7 +51,11 @@ export class CheckboxComponent implements OnInit, OnDestroy {
       '%c CheckboxComponent ',
       'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
     );
-
+    console.log(
+      '%c this.group ',
+      'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+    );
+    console.log(this.group);
     this._subs.add(
       this.options?.valueChanges.subscribe((value: any) => {
         console.log(value);
@@ -85,6 +89,12 @@ export class CheckboxComponent implements OnInit, OnDestroy {
     let formElement = (this.group.get('form_element_fields') as FormArray)
       .controls[this.index] as FormGroup;
     let options = formElement?.get('form_element_options') as FormArray;
+
+    // console.log(
+    //   '%c this.group ',
+    //   'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+    // );
+    // console.log(this.group);
 
     // let optionName = (this.getOptions() as any).controls[0]?.controls['name']
     //   .value;
@@ -148,6 +158,7 @@ export class CheckboxComponent implements OnInit, OnDestroy {
     );
 
     optionFormGroup.addControl('name', control);
+    optionFormGroup.addControl('state', this._fb.control('new', []));
     this.options.push(optionFormGroup);
     // this.field.form_element_options = this.options.value;
     // return;

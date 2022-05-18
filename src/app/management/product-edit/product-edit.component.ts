@@ -54,7 +54,10 @@ class FormElement3 {
     this.id = field.id;
     this.form_element_template = field.form_element_template;
     this.selected_value = field.selected_value;
-    this.selected_list_values = field.selected_list_values;
+    this.selected_list_values =
+      field.selected_list_values?.length > 0
+        ? field.selected_list_values
+        : null;
     // this.form_element_options = _.cloneDeep(field.form_element_options);
     this.form_element_options = field.form_element_options;
     // this.name = fieldItem.name;
@@ -194,13 +197,20 @@ export class ProductEditComponent implements OnInit, OnDestroy {
                       'background: #CDDC2B; color: #000; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
                     );
                     console.log(form);
-
+                    form.form_element_fields.sort((a: any, b: any) =>
+                      a.sort_id > b.sort_id ? 1 : b.sort_id > a.sort_id ? -1 : 0
+                    );
                     form.form_element_fields.forEach((field: any) => {
                       this.renderedBuilderFields.push(new FormElement3(field));
                     });
-                    console.log('this.essentialBuilderFields');
+                    console.log('this.renderedBuilderFields');
                     console.log(this.renderedBuilderFields);
                     this._addControls();
+                    console.log(
+                      '%c this.myForm ',
+                      'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+                    );
+                    console.log(this.myForm);
                   }
                   console.log(
                     '%c form ',

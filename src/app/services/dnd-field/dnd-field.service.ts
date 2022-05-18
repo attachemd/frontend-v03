@@ -347,6 +347,16 @@ export class DndFieldService {
           formElementField.form_element_options;
         // formElementField.form_element_options.forEach(
 
+        console.log(
+          '%c optionList ',
+          'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+        );
+        console.log(optionList);
+        console.log('formElementField.selected_list_values');
+        console.log(formElementField.selected_list_values);
+        console.log('formElementField.form_element_options');
+        console.log(formElementField.form_element_options);
+
         optionList.forEach((option: any) => {
           let optionName = option.form_element_option?.name ?? option.name;
           let optionValue = option.value ?? '';

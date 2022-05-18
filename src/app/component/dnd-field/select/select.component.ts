@@ -50,6 +50,7 @@ export class SelectComponent implements OnInit {
     );
 
     optionFormGroup.addControl('name', control);
+    optionFormGroup.addControl('state', this._fb.control('new', []));
     this.options.push(optionFormGroup);
   }
 
