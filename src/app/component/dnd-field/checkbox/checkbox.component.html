@@ -32,7 +32,7 @@
               option?.controls.name.touched) && -->
                 <div
                   class="single-selection-error"
-                  *ngIf="option?.controls.name.hasError(validation.name)"
+                  *ngIf="option?.get('name')?.hasError(validation.name)"
                 >
                   {{ validation.message }}
                 </div>
@@ -91,10 +91,6 @@
               *ngFor="let option of getOptions()?.value; index as i"
             >
               <div class="checkbox-label">
-                <!-- {{log('index')}}
-                {{log(option.name)}}
-                {{log(index)}}
-                {{log(formElement.controls['selected_list_value'].value[option.name])}} -->
                 <mat-checkbox [formControlName]="option.name">{{
                   option.name
                 }}</mat-checkbox>

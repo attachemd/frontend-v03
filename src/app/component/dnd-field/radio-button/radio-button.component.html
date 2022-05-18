@@ -31,7 +31,7 @@
               option?.controls.name.touched) && -->
                 <div
                   class="single-selection-error"
-                  *ngIf="option?.controls.name.hasError(validation.name)"
+                  *ngIf="option?.get('name')?.hasError(validation.name)"
                 >
                   {{ validation.message }}
                 </div>
@@ -59,7 +59,7 @@
     (mouseleave)="visibility = 'none'"
   >
     <div>
-      <mat-label class="ft-lm-label">{{ formElement.value.name }}</mat-label>
+      <mat-label class="ft-lm-label">{{ formElement?.value.name }}</mat-label>
     </div>
     <ng-container formArrayName="form_element_fields">
       <ng-container [formGroupName]="index">

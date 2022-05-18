@@ -48,8 +48,8 @@ export class RadioButtonComponent implements OnInit {
     // },
   ];
 
-  public options: any;
-  public formElement: any;
+  // public options: any;
+  // public formElement: any;
 
   constructor(
     private _dndFieldService: DndFieldService,
@@ -60,58 +60,26 @@ export class RadioButtonComponent implements OnInit {
     return this.field.isOngoing;
   }
 
+  public get formElement() {
+    return this.group.get('form_element_fields')?.get(this.index.toString());
+    // return this.formElement;
+  }
+
+  public get options() {
+    return this.formElement?.get('form_element_options') as FormArray;
+    // return this.options;
+  }
+
   ngOnInit(): void {
     console.log('RadioButtonComponent');
-    // const valueArr = this.group.get(
-    //   this.generatedFieldName(this.field, '_editor')
-    // );
-
-    // this.group.valueChanges.subscribe({
-    //   next: (form) => {
-    //     // keep data model updated
-    //     let generatedFieldName = this.generatedFieldName(this.field, '_editor');
-
-    //     console.log('generatedFieldName');
-    //     console.log(generatedFieldName);
-
-    //     // if (this.data[generatedFieldName])
-    //     //   this.data[generatedFieldName]['options'].forEach((item: any) => {
-    //     //     console.log('item');
-    //     //     console.log(item);
-    //     //   });
-
-    //     // if (form[generatedFieldName]?.options)
-    //     //   // this.data.options = [...form[generatedFieldName]?.options];
-
-    //     //   this.data[this.generatedFieldName(this.field, '_editor')].options = [
-    //     //     ...form[generatedFieldName]?.options,
-    //     //   ];
-
-    //     // this.data.options = form[generatedFieldName]?.options;
-    //   },
-    // });
-    // this.isOngoing = this.field.isOngoing;
-    // console.log('this.field');
-    // console.log(this.field);
-    // this.options = (
-    //   this.group.get(
-    //     this.generatedFieldName(this.field, '_editor')
-    //   ) as FormGroup
-    // )?.controls['options'] as FormArray;
-    let formElementFieldsControlValue = (
-      this.group.controls['form_element_fields'] as FormArray
-    ).value;
+    let formElementFieldsControlValue = this.group.get(
+      'form_element_fields'
+    )?.value;
 
     let currentFormElementField = formElementFieldsControlValue.find(
       (item: any) => item.id === this.field.id
     );
     let index = formElementFieldsControlValue.indexOf(currentFormElementField);
-
-    this.formElement = (this.group.controls['form_element_fields'] as FormArray)
-      .controls[this.index] as FormGroup;
-    this.options = this.formElement.controls[
-      'form_element_options'
-    ] as FormArray;
   }
 
   public deleteFieldControl() {
@@ -123,7 +91,7 @@ export class RadioButtonComponent implements OnInit {
     return this._dndFieldService.generatedFieldName(field, prefix);
   }
 
-  // BOOKMARK add option
+  // BKMRK add option
   public addOption() {
     console.log(
       '%c field ',
@@ -144,8 +112,15 @@ export class RadioButtonComponent implements OnInit {
     );
 
     optionFormGroup.addControl('name', control);
+    // BKMRK option state new
     optionFormGroup.addControl('state', this._fb.control('new', []));
     this.options.push(optionFormGroup);
+    console.log('optionFormGroup');
+    console.log(optionFormGroup);
+
+    console.log('this.group');
+    console.log(this.group);
+
     // this.field.form_element_options = this.options.value;
     // return;
     // console.log('----------------');
@@ -180,11 +155,9 @@ export class RadioButtonComponent implements OnInit {
     // this._dndFieldService.setUpdateControls$();
   }
 
-  // BOOKMARK delete option
+  // BKMRK delete option
   public deleteOption(index: number) {
-    console.log('this.options');
-    console.log(this.options.controls[index]);
-    let option = this.options.controls[index].value;
+    let option = this.options.get(index.toString())?.value;
 
     if (option.state === 'old')
       this._dndFieldService.setDeletedOptionId$(option.id);

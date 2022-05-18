@@ -185,232 +185,7 @@ export class DndFieldService {
     return null;
   }
 
-  public addControls2(formGroup: FormGroup, renderedBuilderFields: any) {
-    // let optionsControl = <FormArray>formGroup.controls['options'];
-    // (
-    //   (formGroup.get('single_selection_editor') as FormGroup)?.controls[
-    //     'options'
-    //   ] as FormArray
-    // )?.clear();
-    // formGroup = this._fb.group({});
-    // console.log(
-    //   '%c formGroup.removeControl ',
-    //   'background-color: #CDDC2B; color: #000; padding: 5px 20px; border: 0px solid #47C0BE'
-    // );
-
-    // Object.keys(formGroup.controls).forEach((key) => {
-    //   console.log('key');
-    //   console.log(key);
-
-    //   // console.log('formGroup.controls[key]');
-    //   // console.log(formGroup.controls[key]);
-    //   formGroup.removeControl(key);
-    // });
-    // console.log("formGroup.value['single_selection_editor17']?.options");
-    // console.log(formGroup.controls);
-
-    // if (formGroup.value['single_selection_editor17']?.options)
-    //   formGroup.value['single_selection_editor17'].options.forEach(
-    //     (item: any) => {
-    //       console.log('item');
-    //       console.log(item);
-    //     }
-    //   );
-    // console.log('formGroup');
-    // console.log(formGroup);
-
-    // formGroup.removeControl('single_selection_editor');
-    // formGroup.removeControl(this.generatedFieldName(field, '_editor'));
-    // formGroup = this._fb.group({});
-    // optionsControl.clear();
-
-    // optionsControl = this._setOptions(this._data.options);
-    // this._data.cities.forEach((x) => {
-    //   optionsControl.push(
-    //     this._fb.group({
-    //       city: x.city,
-    //       options: this._setOptions(x),
-    //     })
-    //   );
-    // });
-
-    // this._data.options.forEach((x) => {
-    //   let optionFormGroup = this._fb.group(
-    //     {},
-    //     {
-    //       validators: Validators.compose([this._isDuplicate]),
-    //     }
-    //   );
-    //   const control = this._fb.control(
-    //     x.name,
-    //     this._bindValidations(this._data.validations || [])
-    //   );
-
-    //   optionFormGroup.addControl('name', control);
-    //   optionsControl.push(optionFormGroup);
-    // });
-
-    // this._controlLicenseNumber(formGroup);
-
-    // console.log('_controlLicenseNumber');
-    // console.log(this._controlLicenseNumber(formGroup));
-
-    // this._data.options.forEach((x) => {
-    //   let optionFormGroup = this._fb.group({});
-    //   let control = new FormControl();
-
-    //   control.setValue(x.name);
-    //   control.setValidators(
-    //     this._bindValidations(this._data.validations || [])
-    //   );
-
-    //   optionFormGroup.addControl('name', control);
-    //   optionsControl.push(optionFormGroup);
-    // });
-
-    // formGroup = this._fb.group(
-    //   {
-    //     name: ['', [Validators.required]],
-    //     surname: ['', [Validators.required]],
-    //     phone: ['', [Validators.required]],
-    //     nationality: ['', [Validators.required]],
-    //     email: ['', Validators.email],
-    //     license_number: ['', [Validators.required]],
-    //   },
-    //   {
-    //     validator: this._controlLicenseNumber,
-    //   }
-    // );
-
-    renderedBuilderFields.forEach((field: any) => {
-      if (field.type === 'button') return;
-      if (field.type === 'date') field.value = new Date(field.value);
-      // if (field.type === 'radiobutton') {
-      //   console.log('field label');
-      //   console.log(field.label.split(' ').join('_').toLowerCase().trim());
-
-      //   let optionsFormGroup = this._fb.group({});
-      //   let optionsControl = this._fb.array([]);
-
-      //   this.data.options.forEach((x) => {
-      //     let optionFormGroup = this._fb.group(
-      //       {},
-      //       {
-      //         validators: Validators.compose([this._isDuplicate]),
-      //       }
-      //     );
-      //     const control = this._fb.control(
-      //       x.name,
-      //       this._bindValidations(this.data.validations || [])
-      //     );
-
-      //     optionFormGroup.addControl('name', control);
-      //     optionsControl.push(optionFormGroup);
-      //   });
-      //   optionsFormGroup.addControl('options', optionsControl);
-      //   formGroup.addControl(
-      //     // field.label.split(' ').join('_').toLowerCase().trim(),
-      //     field.name + '_editor',
-      //     optionsFormGroup
-      //   );
-      //   // return;
-      // }
-
-      if (field.type === 'radiobutton') {
-        console.log(
-          '%c radiobutton ',
-          'background-color: #F7C73B; color: #000; padding: 5px 20px; border: 0px solid #47C0BE'
-        );
-
-        // let control = <FormArray>this.myForm.controls['single_selections'];
-
-        // control.push(
-        //   this._fb.group({
-        //     single_selection: field.name,
-        //     options: this._setOtions(this._data),
-        //   })
-        // );
-
-        // return;
-
-        let optionsFormGroup = this._fb.group({});
-        let optionsControl = this._fb.array([]);
-
-        // console.log(
-        //   '%c RADIOBUTTON ',
-        //   'background: #555a60; color: #f2c080; padding: 10px 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
-        // );
-
-        // if (this.data[this.generatedFieldName(field, '_editor')])
-        //   this.data[this.generatedFieldName(field, '_editor')][
-        //     'options'
-        //   ].forEach((item: any) => {
-        //     console.log('item');
-        //     console.log(item);
-        //   });
-        // let fieldOptions =
-        //   this.data[this.generatedFieldName(field, '_editor')]?.options;
-
-        // console.log("this.generatedFieldName(field, '_editor')");
-        // console.log(this.generatedFieldName(field, '_editor'));
-        // console.log('fieldOptions');
-        // console.log(fieldOptions);
-        // console.log("this.data['options']");
-        // console.log(this.data['options']);
-
-        // let newData: any = (this.data[
-        //   this.generatedFieldName(field, '_editor') as keyof typeof this.data
-        // ] = {});
-
-        // newData['options'] = fieldOptions ?? [...this.data['options']];
-
-        let options = formGroup.get(this.generatedFieldName(field, '_editor'))
-          ?.value.options ?? [...this.data['options']];
-
-        options.forEach((x: any) => {
-          let optionFormGroup = this._fb.group(
-            {}
-            // {
-            //   validators: Validators.compose([this._isDuplicate]),
-            //   // validators: Validators.compose([]),
-            // }
-          );
-
-          const control = this._fb.control(
-            x.name,
-            this.bindValidations(this.data['validations'] || [])
-          );
-
-          optionFormGroup.addControl('name', control);
-          optionsControl.push(optionFormGroup);
-        });
-        optionsFormGroup.addControl('options', optionsControl);
-
-        formGroup.addControl(
-          this.generatedFieldName(field, '_editor'),
-          optionsFormGroup
-        );
-        // return;
-      }
-
-      const control = this._fb.control(
-        field.value,
-        this.bindValidations(field.validations || [])
-      );
-
-      formGroup.addControl(this.generatedFieldName(field), control);
-    });
-    // this.singles = (
-    //   (formGroup.get('single_selection_editor') as FormGroup)?.controls[
-    //     'options'
-    //   ] as FormArray
-    // )?.controls;
-
-    // console.log('singles');
-    // console.log(this.singles);
-  }
-
-  // BOOKMARK add control
+  // BKMRK add control
   public addControls(
     formGroup: FormGroup,
     formElementFields: any,
@@ -438,7 +213,7 @@ export class DndFieldService {
     // create form_element_fields (form array)
     formGroup.addControl('form_element_fields', this._fb.array([]));
     let formElementFieldsControl = <FormArray>(
-      formGroup.controls['form_element_fields']
+      formGroup.get('form_element_fields')
     );
 
     formElementFields.forEach((formElementField: any) => {
@@ -473,7 +248,7 @@ export class DndFieldService {
         })
       );
 
-      // BOOKMARK radiobutton & select
+      // BKMRK radiobutton & select
       if (
         elementTemplate.form_element_type.name === 'radiobutton' ||
         elementTemplate.form_element_type.name === 'select'
@@ -540,7 +315,7 @@ export class DndFieldService {
         // formGroup.addControl('form_element_fields', formElementOptionsGroup);
         // formElementFieldsControl.push(formElementOptionsControl);
 
-        // BOOKMARK checkbox
+        // BKMRK checkbox
       } else if (elementTemplate.form_element_type.name === 'checkbox') {
         let formElementOptionsControl = this._fb.array([]);
         // let formElementFieldGroup = this._fb.group({
@@ -619,7 +394,7 @@ export class DndFieldService {
         // formGroup.addControl('form_element_fields', formElementOptionsGroup);
         // formElementFieldsControl.push(formElementOptionsControl);
 
-        // BOOKMARK date
+        // BKMRK date
       } else if (elementTemplate.form_element_type.name === 'date')
         formElementFieldGroup.addControl(
           // 'date',
@@ -629,7 +404,7 @@ export class DndFieldService {
             this.bindValidations([])
           )
         );
-      // BOOKMARK input
+      // BKMRK input
       else if (elementTemplate.form_element_type.name === 'input')
         // create field selected_value (form control)
 

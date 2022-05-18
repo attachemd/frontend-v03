@@ -101,7 +101,7 @@ class FormElement2 {
   }
 }
 
-// BOOKMARK FormElement3
+// BKMRK FormElement3
 // in builder we don't need validation for the form element field
 // we need it in the creation of the form element template
 class FormElement3 {
@@ -127,6 +127,7 @@ class FormElement3 {
 
     this.name = field.name;
     this.tracked_id = ft_lm.formElementId++;
+    // BKMRK field state
     this.state = field.state ?? 'old';
     this.sort_id = field.sort_id ?? 0;
     this.id = field.id ?? this.tracked_id;
@@ -137,6 +138,7 @@ class FormElement3 {
     this.selected_list_values = null;
     // this.form_element_options = _.cloneDeep(field.form_element_options);
     field.form_element_options.forEach((option: any) => {
+      // BKMRK option state
       if (option.state ?? option.state !== 'new') option.state = 'old';
     });
     this.form_element_options = field.form_element_options;
@@ -190,7 +192,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   // stop the form builder drag & drop
   public stopDrag = false;
   public singles: any;
-  // BOOKMARK data
+  // BKMRK data
   public data: { [k: string]: any } = {
     // validations: [
     //   {
@@ -295,7 +297,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     //   this.renderedBuilderFields.push(new FormElement(field));
     // });
 
-    // BOOKMARK this.myForm = this._fb.group({
+    // BKMRK this.myForm = this._fb.group({
     this.myForm = this._fb.group({
       // name: ['the form'],
       // form_element_fields: this._fb.array([]),
@@ -415,7 +417,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       })
     );
 
-    // BOOKMARK _dragulaService.createGroup
+    // BKMRK _dragulaService.createGroup
     this._dragulaService.createGroup(this.builderContainer, {
       moves: (el: any, container: any, handle: any): any => {
         if (this.stopDrag) return false;
@@ -438,6 +440,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         return source?.classList.contains('builder-source');
       },
       copyItem: (formElement: FormElement3) => {
+        // BKMRK field state new
         formElement.state = 'new';
         let newId = this._generateUniqueIdFromCurrentFields();
 
@@ -468,7 +471,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         console.log(forms);
       },
     });
-    // BOOKMARK fetch essential fields
+    // BKMRK fetch essential fields
     // get essential fields form
     this._form.fetch({ id: '1' }).subscribe({
       next: (form) => {
@@ -579,11 +582,12 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       })
     );
 
-    // BOOKMARK delete field
+    // BKMRK delete field
     this._subs.add(
       this._dndFieldService.getDeleteField$().subscribe({
         next: (field: any) => {
           if (field.state === 'old') {
+            // BKMRK field state deleted
             field.state = 'deleted';
             this.deletedFields.push(field);
           }
@@ -600,7 +604,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
       })
     );
 
-    // BOOKMARK save cancel
+    // BKMRK save cancel
     this._subs.add(
       this._dndFieldService.getActionAndField$().subscribe({
         next: (actionAndField: ActionAndField) => {
@@ -635,15 +639,15 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
             // replaySubject old value (fieldObj.fieldElement) not destroyed
             // and ft_lm.formElementId give new ids for new created
             // fields then currentField may be undefined
-            // BOOKMARK options to renderedBuilderFields
-            let formElementFieldsControlValue = (
-              this.myForm.controls['form_element_fields'] as FormArray
-            ).value;
+            // BKMRK save form options controls value to renderedBuilderFields
+            let formElementFieldsControlValue = this.myForm.get(
+              'form_element_fields'
+            )?.value;
 
             console.log('formElementFieldsControl');
             console.log(formElementFieldsControlValue);
 
-            let currentFormElementField = formElementFieldsControlValue.find(
+            let fieldControlValue = formElementFieldsControlValue.find(
               (item: any) => item.id === actionAndField.fieldElement.id
             );
 
@@ -653,10 +657,30 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
 
             if (currentField) {
               currentField.isOngoing = false;
-              if (currentFormElementField)
+              if (fieldControlValue) {
+                let editedFields =
+                  fieldControlValue.form_element_options.filter(function (
+                    option: any
+                  ) {
+                    return !currentField.form_element_options.some(function (
+                      currentOption: any
+                    ) {
+                      return (
+                        option.name === currentOption.name ||
+                        option.state !== 'old'
+                      );
+                    });
+                  });
+
+                editedFields.forEach((option: any) => {
+                  option.state = 'edited';
+                });
                 currentField.form_element_options =
-                  currentFormElementField.form_element_options;
-              currentField.name = currentFormElementField.name;
+                  fieldControlValue.form_element_options;
+              }
+              currentField.name = fieldControlValue.name;
+              console.log('currentField.form_element_options');
+              console.log(currentField.form_element_options);
             }
             // console.log(
             //   '%c currentField.name ',
@@ -698,7 +722,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     this._subs.unsubscribe();
   }
 
-  // BOOKMARK onSubmit
+  // BKMRK onSubmit
   public onSubmit(form: FormGroup) {
     console.log(
       '%c save ',
@@ -744,29 +768,30 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     this.renderedBuilderFields.forEach((field, index, array) => {
       field.state = 'old';
       field.form_element_options.forEach((option: any) => {
+        // BKMRK option state old
         if (option.state) option.state = 'old';
       });
     });
-    let obj = _.cloneDeep(form.value);
+    let alteredFormValue = _.cloneDeep(form.value);
 
-    obj.deleted_option_ids = this.deletedOptions;
+    alteredFormValue.deleted_option_ids = this.deletedOptions;
     console.log('obj.deleted_option_ids');
-    console.log(obj.deleted_option_ids);
+    console.log(alteredFormValue.deleted_option_ids);
 
-    // this._form.updateOrCreate(obj).subscribe({
-    //   next: (form) => {
-    //     if (form) {
-    //       console.log(
-    //         '%c this._form.update ',
-    //         'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
-    //       );
-    //       console.log(form);
-    //       // on saving free up deletedFields
-    //       // why - for not sending it back to the server when saving again
-    //       this.deletedFields = [];
-    //     }
-    //   },
-    // });
+    this._form.updateOrCreate(alteredFormValue).subscribe({
+      next: (form) => {
+        if (form) {
+          console.log(
+            '%c this._form.update ',
+            'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
+          );
+          console.log(form);
+          // on saving free up deletedFields
+          // why - for not sending it back to the server when saving again
+          this.deletedFields = [];
+        }
+      },
+    });
 
     // this._router.navigate(['/products/', this.productId]);
     // this._router.navigGate(['/products/', '(edit:products/2)']);

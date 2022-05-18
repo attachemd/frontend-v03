@@ -31,7 +31,7 @@
               option?.controls.name.touched) && -->
                 <div
                   class="single-selection-error"
-                  *ngIf="option?.controls.name.hasError(validation.name)"
+                  *ngIf="option?.get('name')?.hasError(validation.name)"
                 >
                   {{ validation.message }}
                 </div>
@@ -80,7 +80,7 @@
             class="demo-full-width margin-top"
           >
             <mat-label class="ft-lm-label">{{
-              formElement.value.name
+              formElement?.value.name
             }}</mat-label>
             <mat-select formControlName="selected_value">
               <mat-option

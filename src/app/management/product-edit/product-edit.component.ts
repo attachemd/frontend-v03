@@ -180,11 +180,11 @@ export class ProductEditComponent implements OnInit, OnDestroy {
           this._http.get<Product>('/api/products/' + params['id']).subscribe({
             next: (product: Product): void => {
               this.product = product;
-              this.myForm.controls['product_name'].setValue(this.product.name);
-              this.myForm.controls['description'].setValue(
-                this.product.description
-              );
-              // BOOKMARK fetch
+              this.myForm.get('product_name')?.setValue(this.product.name);
+              this.myForm
+                .get('description')
+                ?.setValue(this.product.description);
+              // BKMRK fetch
 
               this._form.fetch({ id: '2' }).subscribe({
                 next: (form) => {
@@ -240,7 +240,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     return item.tracked_id;
   }
 
-  // BOOKMARK onSubmit
+  // BKMRK onSubmit
   public onSubmit(form: FormGroup) {
     console.log(
       '%c save ',

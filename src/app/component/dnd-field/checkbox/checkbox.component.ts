@@ -14,8 +14,6 @@ export class CheckboxComponent implements OnInit, OnDestroy {
   public index!: number;
   public data!: any;
   public visibility = 'none';
-  public options: any;
-  public formElement: any;
   public isControlsAdded = false;
 
   private _subs = new Subscription();
@@ -36,26 +34,33 @@ export class CheckboxComponent implements OnInit, OnDestroy {
     return this.field.isOngoing;
   }
 
+  public get formElement() {
+    return this.group
+      .get('form_element_fields')
+      ?.get(this.index.toString()) as FormGroup;
+    // return this.formElement;
+  }
+
+  public get options() {
+    return this.formElement?.get('form_element_options') as FormArray;
+    // return this.options;
+  }
+
   ngOnInit() {
     console.log(
       '%c CheckboxComponent ',
       'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
     );
-    this.formElement = (this.group.controls['form_element_fields'] as FormArray)
-      .controls[this.index] as FormGroup;
-    this.options = this.formElement?.controls[
-      'form_element_options'
-    ] as FormArray;
 
     this._subs.add(
       this.options?.valueChanges.subscribe((value: any) => {
         console.log(value);
-        let selectedOptions = this.formElement.get(
+        let selectedOptions = this.formElement?.get(
           'selected_list_value'
         ) as FormGroup;
 
         selectedOptions ??
-          this.formElement.addControl(
+          this.formElement?.addControl(
             'selected_list_value',
             this._fb.group({})
           );
@@ -77,11 +82,13 @@ export class CheckboxComponent implements OnInit, OnDestroy {
   }
 
   public test() {
-    let formElement = (this.group.controls['form_element_fields'] as FormArray)
+    let formElement = (this.group.get('form_element_fields') as FormArray)
       .controls[this.index] as FormGroup;
+    let options = formElement?.get('form_element_options') as FormArray;
 
-    let optionName = (this.getOptions() as any).controls[0]?.controls['name']
-      .value;
+    // let optionName = (this.getOptions() as any).controls[0]?.controls['name']
+    //   .value;
+    let optionName = (options as any).controls[0]?.controls['name'].value;
 
     // console.log('(this.getOptions() as any)[0]');
     // console.log((this.getOptions() as any).controls[0]?.controls['name'].value);
@@ -93,13 +100,14 @@ export class CheckboxComponent implements OnInit, OnDestroy {
     // );
 
     // return formElement.contains('selected_list_value');
-    return (formElement.controls['selected_list_value'] as FormGroup)?.contains(
+
+    return (formElement.get('selected_list_value') as FormGroup)?.contains(
       optionName
     );
   }
 
   public getFormElement(): FormGroup {
-    return (this.group.controls['form_element_fields'] as FormArray).controls[
+    return (this.group.get('form_element_fields') as FormArray).controls[
       this.index
     ] as FormGroup;
   }
@@ -111,7 +119,7 @@ export class CheckboxComponent implements OnInit, OnDestroy {
     // );
     // console.log(this.formElement);
 
-    return this.formElement?.controls['form_element_options'] as FormArray;
+    return this.formElement?.get('form_element_options') as FormArray;
   }
 
   public log(val: any) {
@@ -176,6 +184,10 @@ export class CheckboxComponent implements OnInit, OnDestroy {
   }
 
   public deleteOption(index: number) {
+    let option = this.options.get(index.toString())?.value;
+
+    if (option.state === 'old')
+      this._dndFieldService.setDeletedOptionId$(option.id);
     this.options.removeAt(index);
     // return;
     // console.log('index');

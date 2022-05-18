@@ -13,8 +13,6 @@ export class SelectComponent implements OnInit {
   public index!: number;
   public data!: any;
   public visibility = 'none';
-  public options: any;
-  public formElement: any;
   constructor(
     private _dndFieldService: DndFieldService,
     private _fb: FormBuilder
@@ -24,13 +22,18 @@ export class SelectComponent implements OnInit {
     return this.field.isOngoing;
   }
 
+  public get formElement() {
+    return this.group.get('form_element_fields')?.get(this.index.toString());
+    // return this.formElement;
+  }
+
+  public get options() {
+    return this.formElement?.get('form_element_options') as FormArray;
+    // return this.options;
+  }
+
   ngOnInit(): void {
     console.log('SelectComponent');
-    this.formElement = (this.group.controls['form_element_fields'] as FormArray)
-      .controls[this.index] as FormGroup;
-    this.options = this.formElement.controls[
-      'form_element_options'
-    ] as FormArray;
   }
 
   public addOption() {
@@ -51,6 +54,10 @@ export class SelectComponent implements OnInit {
   }
 
   public deleteOption(index: number) {
+    let option = this.options.get(index.toString())?.value;
+
+    if (option.state === 'old')
+      this._dndFieldService.setDeletedOptionId$(option.id);
     this.options.removeAt(index);
     // return;
     // console.log('index');

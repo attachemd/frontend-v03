@@ -28,8 +28,9 @@ export class InputComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.formElement = (this.group.controls['form_element_fields'] as FormArray)
-      .controls[this.index] as FormGroup;
+    this.formElement = this.group
+      .get('form_element_fields')
+      ?.get(this.index.toString()) as FormGroup;
   }
 
   public log(val: any) {
