@@ -66,7 +66,8 @@
       [formGroup]="group"
       *ngIf="isControlsAdded"
     > -->
-    <div class="ft-lm-field checkbox" [formGroup]="group" *ngIf="test()">
+    <!-- <div class="ft-lm-field checkbox" [formGroup]="group" *ngIf="test()"> -->
+    <div class="ft-lm-field checkbox" [formGroup]="group">
       <!-- <ng-container formArrayName="form_element_fields" *ngIf="false"> -->
       <ng-container formArrayName="form_element_fields">
         <!-- {{log('index')}}
@@ -86,12 +87,13 @@
           {{
             log(test())
           }} -->
+          <!-- <ng-container formGroupName="selected_list_value" *ngIf="getOptions()?.value"> -->
           <ng-container formGroupName="selected_list_value">
             <ng-container
               *ngFor="let option of getOptions()?.value; index as i"
             >
               <div class="checkbox-label">
-                <mat-checkbox [formControlName]="option.name">{{
+                <mat-checkbox *ngIf="option.name" [formControlName]="option.name">{{
                   option.name
                 }}</mat-checkbox>
               </div>

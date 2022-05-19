@@ -51,13 +51,23 @@ export class CheckboxComponent implements OnInit, OnDestroy {
       '%c CheckboxComponent ',
       'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
     );
-    console.log(
-      '%c this.group ',
-      'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
-    );
-    console.log(this.group);
+    // console.log(
+    //   '%c this.group ',
+    //   'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+    // );
+    // console.log(this.group);
+    // console.log('this.options');
+    // console.log(this.options);
+    // let formElement = (this.group.get('form_element_fields') as FormArray)
+    //   .controls[this.index] as FormGroup;
+    // let options = formElement?.get('form_element_options') as FormArray;
+
+    // console.log("formElement?.get('form_element_options')");
+    // console.log(options);
+
     this._subs.add(
-      this.options?.valueChanges.subscribe((value: any) => {
+      this.options.valueChanges.subscribe((value: any) => {
+        console.log('valueChanges');
         console.log(value);
         let selectedOptions = this.formElement?.get(
           'selected_list_value'
@@ -85,36 +95,36 @@ export class CheckboxComponent implements OnInit, OnDestroy {
     );
   }
 
-  public test() {
-    let formElement = (this.group.get('form_element_fields') as FormArray)
-      .controls[this.index] as FormGroup;
-    let options = formElement?.get('form_element_options') as FormArray;
+  // public test() {
+  //   let formElement = (this.group.get('form_element_fields') as FormArray)
+  //     .controls[this.index] as FormGroup;
+  //   let options = formElement?.get('form_element_options') as FormArray;
 
-    // console.log(
-    //   '%c this.group ',
-    //   'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
-    // );
-    // console.log(this.group);
+  //   // console.log(
+  //   //   '%c this.group ',
+  //   //   'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+  //   // );
+  //   // console.log(this.group);
 
-    // let optionName = (this.getOptions() as any).controls[0]?.controls['name']
-    //   .value;
-    let optionName = (options as any).controls[0]?.controls['name'].value;
+  //   // let optionName = (this.getOptions() as any).controls[0]?.controls['name']
+  //   //   .value;
+  //   let optionName = (options as any)?.controls[0]?.get('name')?.value;
 
-    // console.log('(this.getOptions() as any)[0]');
-    // console.log((this.getOptions() as any).controls[0]?.controls['name'].value);
-    // console.log("formElement.controls['selected_list_value']");
-    // console.log(
-    //   (formElement.controls['selected_list_value'] as FormGroup)?.contains(
-    //     optionName
-    //   )
-    // );
+  //   // console.log('(this.getOptions() as any)[0]');
+  //   // console.log((this.getOptions() as any).controls[0]?.controls['name'].value);
+  //   // console.log("formElement.controls['selected_list_value']");
+  //   // console.log(
+  //   //   (formElement.controls['selected_list_value'] as FormGroup)?.contains(
+  //   //     optionName
+  //   //   )
+  //   // );
 
-    // return formElement.contains('selected_list_value');
+  //   // return formElement.contains('selected_list_value');
 
-    return (formElement.get('selected_list_value') as FormGroup)?.contains(
-      optionName
-    );
-  }
+  //   return (formElement?.get('selected_list_value') as FormGroup)?.contains(
+  //     optionName
+  //   );
+  // }
 
   public getFormElement(): FormGroup {
     return (this.group.get('form_element_fields') as FormArray).controls[
@@ -139,11 +149,14 @@ export class CheckboxComponent implements OnInit, OnDestroy {
   }
 
   public addOption() {
-    console.log(
-      '%c field ',
-      'background: #f2c080; color: #555a60; padding: 10px 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
-    );
-    console.log(this.field);
+    // console.log(
+    //   '%c field ',
+    //   'background: #f2c080; color: #555a60; padding: 10px 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+    // );
+    // console.log('this.field');
+    // console.log(this.field);
+    // console.log('this.group');
+    // console.log(this.group);
     let optionFormGroup = this._fb.group(
       {}
       // {
@@ -160,6 +173,11 @@ export class CheckboxComponent implements OnInit, OnDestroy {
     optionFormGroup.addControl('name', control);
     optionFormGroup.addControl('state', this._fb.control('new', []));
     this.options.push(optionFormGroup);
+    // console.log('this.options');
+    // console.log(this.options);
+    // console.log('this.group');
+    // console.log(this.group);
+
     // this.field.form_element_options = this.options.value;
     // return;
     // console.log('----------------');

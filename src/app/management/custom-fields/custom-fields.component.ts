@@ -647,11 +647,11 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
             console.log('formElementFieldsControl');
             console.log(formElementFieldsControlValue);
 
-            let fieldControlValue = formElementFieldsControlValue.find(
+            let fieldControlValue = formElementFieldsControlValue?.find(
               (item: any) => item.id === actionAndField.fieldElement.id
             );
 
-            let currentField = this.renderedBuilderFields.find(
+            let currentField = this.renderedBuilderFields?.find(
               (item) => item.id === actionAndField.fieldElement.id
             );
 
@@ -659,7 +659,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
               currentField.isOngoing = false;
               if (fieldControlValue) {
                 let editedFields =
-                  fieldControlValue.form_element_options.filter(function (
+                  fieldControlValue.form_element_options?.filter(function (
                     option: any
                   ) {
                     return !currentField.form_element_options.some(function (

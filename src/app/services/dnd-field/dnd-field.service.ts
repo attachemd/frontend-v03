@@ -253,6 +253,7 @@ export class DndFieldService {
         elementTemplate.form_element_type.name === 'radiobutton' ||
         elementTemplate.form_element_type.name === 'select'
       ) {
+        // console.log('radiobutton from addControls');
         let formElementOptionsControl = this._fb.array([]);
         // let formElementFieldGroup = this._fb.group({
         //   form_element_options: formElementOptionsControl,
@@ -317,6 +318,8 @@ export class DndFieldService {
 
         // BKMRK checkbox
       } else if (elementTemplate.form_element_type.name === 'checkbox') {
+        // console.log('checkbox from addControls');
+
         let formElementOptionsControl = this._fb.array([]);
         // let formElementFieldGroup = this._fb.group({
         //   form_element_options: formElementOptionsControl,
@@ -343,9 +346,24 @@ export class DndFieldService {
         // create form_element_options (form array)
 
         let optionList =
-          formElementField.selected_list_values ??
+          // formElementField.selected_list_values ??
           formElementField.form_element_options;
         // formElementField.form_element_options.forEach(
+
+        formElementField.form_element_options.forEach((option: any) => {
+          let selectedListValue = formElementField.selected_list_values?.find(
+            (selected_list_value: any) => {
+              return (
+                option.name === selected_list_value.form_element_option.name
+              );
+            }
+          );
+
+          option.value = selectedListValue?.value ?? 'false';
+        });
+
+        // console.log('optionWithValues');
+        // console.log(optionWithValues);
 
         console.log(
           '%c optionList ',
@@ -360,7 +378,13 @@ export class DndFieldService {
         optionList.forEach((option: any) => {
           let optionName = option.form_element_option?.name ?? option.name;
           let optionValue = option.value ?? '';
+          // let optionValue = option.selected_option_value[0]?.value ?? '';
           let optionId = option.form_element_option?.id ?? option.id;
+
+          // console.log('option');
+          // console.log(option);
+          // console.log('option.selected_option_value[0].value');
+          // console.log(option.selected_option_value[0]?.value);
 
           let formElementOptionGroup = this._fb.group({});
 
