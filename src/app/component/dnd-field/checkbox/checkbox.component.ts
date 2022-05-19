@@ -26,8 +26,8 @@ export class CheckboxComponent implements OnInit, OnDestroy {
       '%c CheckboxComponent constructor',
       'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
     );
-    console.log('this.isControlsAdded');
-    console.log(this.isControlsAdded);
+    // console.log('this.isControlsAdded');
+    // console.log(this.isControlsAdded);
   }
 
   @HostBinding('class.ongoing') public get isOngoing() {
@@ -36,7 +36,7 @@ export class CheckboxComponent implements OnInit, OnDestroy {
 
   public get formElement() {
     return this.group
-      .get('form_element_fields')
+      ?.get('form_element_fields')
       ?.get(this.index.toString()) as FormGroup;
     // return this.formElement;
   }
@@ -172,7 +172,12 @@ export class CheckboxComponent implements OnInit, OnDestroy {
 
     optionFormGroup.addControl('name', control);
     optionFormGroup.addControl('state', this._fb.control('new', []));
+
     this.options.push(optionFormGroup);
+    // for valuechanges
+    this.options.controls[0]
+      ?.get('state')
+      ?.setValue(this.options.controls[0]?.get('state')?.value);
     // console.log('this.options');
     // console.log(this.options);
     // console.log('this.group');
@@ -229,6 +234,11 @@ export class CheckboxComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    console.log(
+      '%c ngOnDestroy ',
+      'background: #2187BF; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+    );
+
     this._subs.unsubscribe();
   }
 }
