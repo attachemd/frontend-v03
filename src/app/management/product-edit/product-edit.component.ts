@@ -30,6 +30,7 @@ class FormElement {
   }
 }
 
+// BKMRK FormElement3
 class FormElement3 {
   public name?: string;
   public id: number;
@@ -259,15 +260,25 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     console.log('form.value', form.value);
     console.log('Valid?', form.valid); // true or false
     console.log('this.renderedBuilderFields', this.renderedBuilderFields);
-    this._form.create(form.value, 'fill_form').subscribe({
-      next: (form) => {
-        if (form)
-          console.log(
-            '%c this._form.create: fill_form ',
-            'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
-          );
-      },
+    let selectedListValueWithId = [];
+
+    this.renderedBuilderFields.forEach((selected_list_value: any) => {
+      selectedListValueWithId.push({
+        name: '',
+      });
     });
+
+    let sentForm = {};
+    // this._form.create(form.value, 'fill_form').subscribe({
+    //   next: (form) => {
+    //     if (form)
+    //       console.log(
+    //         '%c this._form.create: fill_form ',
+    //         'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
+    //       );
+    //   },
+    // });
+
     this._router.navigate([
       '',
       {

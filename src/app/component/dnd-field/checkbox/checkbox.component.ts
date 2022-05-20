@@ -17,6 +17,7 @@ export class CheckboxComponent implements OnInit, OnDestroy {
   public isControlsAdded = false;
 
   private _subs = new Subscription();
+  private _subsForOtionsValueChanges = new Subscription();
 
   constructor(
     private _dndFieldService: DndFieldService,
@@ -65,34 +66,34 @@ export class CheckboxComponent implements OnInit, OnDestroy {
     // console.log("formElement?.get('form_element_options')");
     // console.log(options);
 
-    this._subs.add(
-      this.options.valueChanges.subscribe((value: any) => {
-        console.log('valueChanges');
-        console.log(value);
-        let selectedOptions = this.formElement?.get(
-          'selected_list_value'
-        ) as FormGroup;
+    // this._subs.add(
+    //   this.options.valueChanges.subscribe((value: any) => {
+    //     console.log('valueChanges');
+    //     console.log(value);
+    //     let selectedOptions = this.formElement?.get(
+    //       'selected_list_value'
+    //     ) as FormGroup;
 
-        selectedOptions ??
-          this.formElement?.addControl(
-            'selected_list_value',
-            this._fb.group({})
-          );
+    //     selectedOptions ??
+    //       this.formElement?.addControl(
+    //         'selected_list_value',
+    //         this._fb.group({})
+    //       );
 
-        this.options.value.forEach((formElementOption: any) => {
-          console.log('formElementOption');
-          console.log(formElementOption);
+    //     this.options.value.forEach((formElementOption: any) => {
+    //       console.log('formElementOption');
+    //       console.log(formElementOption);
 
-          selectedOptions.addControl(
-            formElementOption.name,
-            this._fb.control(false, this._dndFieldService.bindValidations([]))
-          );
-        });
-        this.isControlsAdded = true;
-        console.log('this.isControlsAdded');
-        console.log(this.isControlsAdded);
-      })
-    );
+    //       selectedOptions.addControl(
+    //         formElementOption.name,
+    //         this._fb.control(false, this._dndFieldService.bindValidations([]))
+    //       );
+    //     });
+    //     this.isControlsAdded = true;
+    //     console.log('this.isControlsAdded');
+    //     console.log(this.isControlsAdded);
+    //   })
+    // );
   }
 
   // public test() {
@@ -142,6 +143,15 @@ export class CheckboxComponent implements OnInit, OnDestroy {
     return this.formElement?.get('form_element_options') as FormArray;
   }
 
+  public getSelectedListValues(): FormArray {
+    // console.log(
+    //   '%c getOptions ',
+    //   'background: gray; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+    // );
+    // console.log(this.formElement);
+    return this.formElement?.get('selected_list_values') as FormArray;
+  }
+
   public log(val: any) {
     // console.log('from RadioButtonComponent');
 
@@ -149,6 +159,44 @@ export class CheckboxComponent implements OnInit, OnDestroy {
   }
 
   public addOption() {
+    // this._subsForOtionsValueChanges.unsubscribe();
+    // this._subsForOtionsValueChanges.add(
+    //   this.options.valueChanges.subscribe((value: any) => {
+    //     console.log('valueChanges from addOption');
+    //   })
+    // );
+
+    this._subsForOtionsValueChanges.unsubscribe();
+    this._subsForOtionsValueChanges = this.options.valueChanges.subscribe(
+      (value: any) => {
+        console.log('valueChanges from addOption');
+        console.log('valueChanges');
+        console.log(value);
+        let selectedOptions = this.formElement?.get(
+          'selected_list_values'
+        ) as FormGroup;
+
+        selectedOptions ??
+          this.formElement?.addControl(
+            'selected_list_values',
+            this._fb.group({})
+          );
+
+        this.options.value.forEach((formElementOption: any) => {
+          console.log('formElementOption');
+          console.log(formElementOption);
+
+          selectedOptions.addControl(
+            formElementOption.name,
+            this._fb.control(false, this._dndFieldService.bindValidations([]))
+          );
+        });
+        this.isControlsAdded = true;
+        console.log('this.isControlsAdded');
+        console.log(this.isControlsAdded);
+      }
+    );
+
     // console.log(
     //   '%c field ',
     //   'background: #f2c080; color: #555a60; padding: 10px 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
@@ -240,5 +288,6 @@ export class CheckboxComponent implements OnInit, OnDestroy {
     );
 
     this._subs.unsubscribe();
+    this._subsForOtionsValueChanges.unsubscribe();
   }
 }

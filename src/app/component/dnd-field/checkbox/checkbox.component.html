@@ -92,21 +92,37 @@
             formGroupName="selected_list_value"
             *ngIf="getOptions()?.value"
           > -->
-            <ng-container formGroupName="selected_list_value">
+
+          <ng-container formGroupName="selected_list_values">
             <ng-container
               *ngFor="let option of getOptions()?.value; index as i"
             >
               <div class="checkbox-label">
-                <!-- {{getOptions()?.value[i]['name']}}
-                *ngIf="getOptions()?.value[i]" -->
                 <mat-checkbox
-                *ngIf="isControlsAdded"
+                *ngIf="option.name.length > 0"
                   [formControlName]="option.name"
                   >{{ option.name }}</mat-checkbox
                 >
               </div>
             </ng-container>
           </ng-container>
+
+          <!-- <ng-container formArrayName="selected_list_values">
+            
+            <ng-container
+              *ngFor="let option of getSelectedListValues()?.value; index as i"
+            >
+              <ng-container [formGroupName]="i">
+                <div class="checkbox-label">
+              <mat-checkbox
+                    [formControlName]="option.name"
+                    >{{ option.name }}</mat-checkbox
+                  >
+                </div>
+              </ng-container>
+            </ng-container>
+          </ng-container> -->
+          
         </ng-container>
       </ng-container>
     </div>

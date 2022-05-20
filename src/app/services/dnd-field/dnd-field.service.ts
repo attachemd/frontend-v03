@@ -193,14 +193,14 @@ export class DndFieldService {
   ) {
     exclude.push('id');
 
-    // delete all form controls
+    /** delete all form controls */
     Object.keys(formGroup.controls).forEach((key) => {
       let x = exclude.find((item: any) => item === key);
 
       x ?? formGroup.removeControl(key);
     });
 
-    // create form name (form control)
+    /** create form name (form control) */
     // formGroup.addControl(
     //   'id',
     //   this._fb.control('the form2', this.bindValidations([]))
@@ -210,7 +210,7 @@ export class DndFieldService {
       this._fb.control('the form2', this.bindValidations([]))
     );
 
-    // create form_element_fields (form array)
+    /** create form_element_fields (form array) */
     formGroup.addControl('form_element_fields', this._fb.array([]));
     let formElementFieldsControl = <FormArray>(
       formGroup.get('form_element_fields')
@@ -220,7 +220,7 @@ export class DndFieldService {
       let elementTemplate = formElementField.form_element_template;
       let formElementFieldGroup = this._fb.group({});
 
-      // create field name (form control)
+      /** create field name (form control) */
       formElementFieldGroup.addControl(
         'id',
         this._fb.control(formElementField.id, this.bindValidations([]))
@@ -234,13 +234,13 @@ export class DndFieldService {
         this._fb.control(formElementField.state, this.bindValidations([]))
       );
 
-      // create field name (form control)
+      /** create field name (form control) */
       formElementFieldGroup.addControl(
         'name',
         this._fb.control(formElementField.name, this.bindValidations([]))
       );
 
-      // create form_element_template (form group)
+      /** create form_element_template (form group) */
       formElementFieldGroup.addControl(
         'form_element_template',
         this._fb.group({
@@ -259,13 +259,13 @@ export class DndFieldService {
         //   form_element_options: formElementOptionsControl,
         // });
 
-        // create field form_element_options (form array)
+        /** create field form_element_options (form array) */
         formElementFieldGroup.addControl(
           'form_element_options',
           formElementOptionsControl
         );
 
-        // create field selected_value (form control)
+        /** create field selected_value (form control) */
         formElementFieldGroup.addControl(
           'selected_value',
           this._fb.control(
@@ -274,7 +274,7 @@ export class DndFieldService {
           )
         );
 
-        // create form_element_options (form array)
+        /** create form_element_options (form array) */
         formElementField.form_element_options.forEach(
           (formElementOption: any) => {
             let formElementOptionGroup = this._fb.group({});
@@ -285,7 +285,7 @@ export class DndFieldService {
             );
 
             formElementOptionGroup.addControl('name', control);
-            // create field id (form control)
+            /** create field id (form control) */
             formElementOptionGroup.addControl(
               'id',
               this._fb.control(formElementOption.id, this.bindValidations([]))
@@ -319,23 +319,21 @@ export class DndFieldService {
         // BKMRK checkbox
       } else if (elementTemplate.form_element_type.name === 'checkbox') {
         // console.log('checkbox from addControls');
+        console.log(
+          '%c checkbox from addControls ',
+          'background: black; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+        );
 
-        let formElementOptionsControl = this._fb.array([]);
         // let formElementFieldGroup = this._fb.group({
         //   form_element_options: formElementOptionsControl,
         // });
 
-        // create field form_element_options (form array)
-        formElementFieldGroup.addControl(
-          'form_element_options',
-          formElementOptionsControl
-        );
-
-        // create field selected_value (form control)
+        /** create selected_list_values (form array) */
+        // let selectedOptions = this._fb.array([]);
         let selectedOptions = this._fb.group({});
 
         formElementFieldGroup.addControl(
-          'selected_list_value',
+          'selected_list_values',
           selectedOptions
         );
         // FIXME refactor selectedOptions
@@ -343,13 +341,52 @@ export class DndFieldService {
         //   'selected_list_value'
         // ) as FormGroup;
 
-        // create form_element_options (form array)
+        // formElementField.selected_list_values?.forEach(
+        //   (selected_list_value: any) => {
+        //     let selectedListValueGroup = this._fb.group({});
 
+        //     selectedListValueGroup.addControl(
+        //       'id',
+        //       this._fb.control(
+        //         selected_list_value.id,
+        //         this.bindValidations(this.data['validations'] || [])
+        //       )
+        //     );
+        //     selectedListValueGroup.addControl(
+        //       'name',
+        //       this._fb.control(
+        //         selected_list_value.form_element_option.name,
+        //         this.bindValidations(this.data['validations'] || [])
+        //       )
+        //     );
+        //     selectedListValueGroup.addControl(
+        //       'value',
+        //       this._fb.control(
+        //         /** extract true or false */
+        //         selected_list_value.value.toLowerCase() === 'true',
+        //         this.bindValidations(this.data['validations'] || [])
+        //       )
+        //     );
+        //     selectedOptions.push(selectedListValueGroup);
+        //   }
+        // );
+
+        /** create form_element_options (form array) */
+        let formElementOptionsControl = this._fb.array([]);
+
+        formElementFieldGroup.addControl(
+          'form_element_options',
+          formElementOptionsControl
+        );
         let optionList =
           // formElementField.selected_list_values ??
           formElementField.form_element_options;
         // formElementField.form_element_options.forEach(
 
+        /**
+         * add new property [value] to [form element option] to use item
+         * for the creation of default [selected list value]
+         */
         formElementField.form_element_options.forEach((option: any) => {
           let selectedListValue = formElementField.selected_list_values?.find(
             (selected_list_value: any) => {
@@ -376,6 +413,8 @@ export class DndFieldService {
         console.log(formElementField.form_element_options);
 
         optionList.forEach((option: any) => {
+          // first side come from [form builder]
+          // second side from [product edit]
           let optionName = option.form_element_option?.name ?? option.name;
           let optionValue = option.value ?? '';
           // let optionValue = option.selected_option_value[0]?.value ?? '';
