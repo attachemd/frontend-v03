@@ -20,6 +20,8 @@
             matInput
             [type]="field.form_element_template.form_element_type.input_type"
             [placeholder]="formElement.value.name"
+            readonly
+            onfocus="this.removeAttribute('readonly');"
           />
           <!-- [(ngModel)]="field.value" -->
           <ng-container

@@ -143,6 +143,18 @@ export class CheckboxComponent implements OnInit, OnDestroy {
     return this.formElement?.get('form_element_options') as FormArray;
   }
 
+  public checkFormElementOptions() {
+    return (
+      (this.formElement?.get('form_element_options') as FormArray) ?? false
+    );
+  }
+
+  public checkSelectedListValues() {
+    return (
+      (this.formElement?.get('selected_list_values') as FormArray) ?? false
+    );
+  }
+
   public getSelectedListValues(): FormArray {
     // console.log(
     //   '%c getOptions ',

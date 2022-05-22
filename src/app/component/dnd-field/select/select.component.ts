@@ -36,6 +36,12 @@ export class SelectComponent implements OnInit {
     console.log('SelectComponent');
   }
 
+  public checkFormElementOptions() {
+    return (
+      (this.formElement?.get('form_element_options') as FormArray) ?? false
+    );
+  }
+
   public addOption() {
     console.log(
       '%c field ',

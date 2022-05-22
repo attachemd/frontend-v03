@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -189,8 +190,17 @@ export class ProductEditComponent implements OnInit, OnDestroy {
                 .get('description')
                 ?.setValue(this.product.description);
               // BKMRK fetch
+              if (!this.product.form_id) {
+                console.log('no product form id');
 
-              this._form.fetch({ id: '2' }).subscribe({
+                return;
+              } else
+                console.log(
+                  '%c all fine ',
+                  'background: #00CD78; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+                );
+
+              this._form.fetch({ id: this.product.form_id }).subscribe({
                 next: (form) => {
                   if (form) {
                     console.log(
@@ -201,6 +211,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
                     form.form_element_fields.sort((a: any, b: any) =>
                       a.sort_id > b.sort_id ? 1 : b.sort_id > a.sort_id ? -1 : 0
                     );
+                    this.renderedBuilderFields = [];
                     form.form_element_fields.forEach((field: any) => {
                       this.renderedBuilderFields.push(new FormElement3(field));
                     });
@@ -260,24 +271,51 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     console.log('form.value', form.value);
     console.log('Valid?', form.valid); // true or false
     console.log('this.renderedBuilderFields', this.renderedBuilderFields);
-    let selectedListValueWithId = [];
 
-    this.renderedBuilderFields.forEach((selected_list_value: any) => {
-      selectedListValueWithId.push({
-        name: '',
-      });
+    // this.renderedBuilderFields.forEach((field: any) => {
+    //   field.selected_list_values.forEach((selected_list_value: any) => {
+    //     selectedListValueWithId.push({
+    //       id: selected_list_value.id,
+    //       name: selected_list_value.form_element_option.name,
+    //       value: '',
+    //     });
+    //   });
+    // });
+    let sentForm = _.cloneDeep(form.value);
+
+    sentForm.form_element_fields.forEach((reactiveField: any) => {
+      let selectedListValueWithId: any[] = [];
+
+      if (reactiveField.selected_list_values)
+        for (let [key, value] of Object.entries(
+          reactiveField.selected_list_values
+        ))
+          this.renderedBuilderFields.forEach((field: any) => {
+            field.selected_list_values?.forEach((selected_list_value: any) => {
+              if (selected_list_value.form_element_option.name === key)
+                selectedListValueWithId.push({
+                  id: selected_list_value.id,
+                  name: key,
+                  value: value,
+                });
+            });
+          });
+      reactiveField.selected_list_value_with_id =
+        selectedListValueWithId.length > 0 ? selectedListValueWithId : null;
     });
 
-    let sentForm = {};
-    // this._form.create(form.value, 'fill_form').subscribe({
-    //   next: (form) => {
-    //     if (form)
-    //       console.log(
-    //         '%c this._form.create: fill_form ',
-    //         'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
-    //       );
-    //   },
-    // });
+    console.log('sentForm');
+    console.log(sentForm);
+
+    this._form.create(sentForm, 'fill_form').subscribe({
+      next: (form) => {
+        if (form)
+          console.log(
+            '%c this._form.create: fill_form ',
+            'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
+          );
+      },
+    });
 
     this._router.navigate([
       '',

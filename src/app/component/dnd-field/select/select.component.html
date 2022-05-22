@@ -7,7 +7,7 @@
   ></app-confirm-field-edit>
 
   <div [formGroup]="group" *ngIf="field.isOngoing">
-    <div formArrayName="form_element_fields">
+    <div formArrayName="form_element_fields" *ngIf="checkFormElementOptions()">
       <ng-container [formGroupName]="index">
         <div
           class="field-element-body"

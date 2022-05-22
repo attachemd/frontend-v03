@@ -11,7 +11,7 @@
   {{log(index)}} -->
   <div [formGroup]="group" *ngIf="field.isOngoing">
     <!-- <div [formGroup]="group" *ngIf="false"> -->
-    <div formArrayName="form_element_fields">
+    <div formArrayName="form_element_fields" *ngIf="checkFormElementOptions()">
       <ng-container [formGroupName]="index">
         <div class="field-element-body" formArrayName="form_element_options">
           <div
@@ -69,7 +69,12 @@
     <!-- <div class="ft-lm-field checkbox" [formGroup]="group" *ngIf="test()"> -->
     <div class="ft-lm-field checkbox" [formGroup]="group">
       <!-- <ng-container formArrayName="form_element_fields" *ngIf="false"> -->
-      <ng-container formArrayName="form_element_fields">
+      <!-- {{ log('checkFormElementOptions()') }}
+      {{ log(checkFormElementOptions()) }} -->
+      <ng-container
+        formArrayName="form_element_fields"
+        *ngIf="checkSelectedListValues()"
+      >
         <!-- {{log('index')}}
         {{log(index)}} -->
         <ng-container [formGroupName]="index">
@@ -99,7 +104,7 @@
             >
               <div class="checkbox-label">
                 <mat-checkbox
-                *ngIf="option.name.length > 0"
+                  *ngIf="option.name.length > 0"
                   [formControlName]="option.name"
                   >{{ option.name }}</mat-checkbox
                 >
@@ -122,7 +127,6 @@
               </ng-container>
             </ng-container>
           </ng-container> -->
-          
         </ng-container>
       </ng-container>
     </div>

@@ -26,6 +26,7 @@ import { DuplicateValidator } from 'src/app/common/errors/duplicate.validator';
 import { DuplicateService } from 'src/app/common/errors/duplicate.service';
 import { FormService } from 'src/app/services/forms/form.service';
 import { Form } from 'src/app/services/forms/form.model';
+import { ProductService } from 'src/app/services/products/product.service';
 
 let isduplicate = (control: AbstractControl) => {
   console.log(
@@ -284,7 +285,8 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     private _route: ActivatedRoute,
     private _router: Router,
     private _duplicateService: DuplicateService,
-    private _form: FormService
+    private _form: FormService,
+    private _product: ProductService
   ) {
     // this._essentialFields.forEach((field) => {
     //   this.essentialBuilderFields.push(new FormElement(field));
@@ -489,6 +491,24 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
         this._addControls();
       },
     });
+    this._route.params.subscribe({
+      next: (params: any) => {
+        this._product.fetch({ id: params['id'] }).subscribe({
+          next: (product) => {
+            console.log(
+              '%c product',
+              'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+            );
+            console.log(product);
+            console.log('product.form_id');
+            console.log(product.form_id);
+          },
+        });
+      },
+      error: (error) => {
+        console.log('error :', error);
+      },
+    });
 
     this._form.fetch({ id: '2' }).subscribe({
       next: (form) => {
@@ -659,20 +679,20 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
               currentField.isOngoing = false;
               if (fieldControlValue) {
                 let editedFields =
-                  fieldControlValue.form_element_options?.filter(function (
-                    option: any
-                  ) {
-                    return !currentField.form_element_options.some(function (
-                      currentOption: any
-                    ) {
-                      return (
-                        option.name === currentOption.name ||
-                        option.state !== 'old'
+                  fieldControlValue.form_element_options?.filter(
+                    (option: any) => {
+                      return !currentField.form_element_options.some(
+                        (currentOption: any) => {
+                          return (
+                            option.name === currentOption.name ||
+                            option.state !== 'old'
+                          );
+                        }
                       );
-                    });
-                  });
+                    }
+                  );
 
-                editedFields.forEach((option: any) => {
+                editedFields?.forEach((option: any) => {
                   option.state = 'edited';
                 });
                 currentField.form_element_options =
@@ -856,6 +876,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     // this._dndFieldService.addControls(this.myForm, this.renderedBuilderFields);
     // if (!this._isControlsAdded) this._addControls();
     this._addControls();
+
     // debugger;
     // https://www.smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/
     // https://medium.com/@Rahulx1/understanding-event-loop-call-stack-event-job-queue-in-javascript-63dcd2c71ecd
@@ -873,6 +894,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
           builder_element_model.tracked_id! + 1000;
 
       // if (this._isControlsAdded) this._addControls();
+      // debugger;
       this._cdRef.detectChanges();
     }, 0);
   }

@@ -330,11 +330,15 @@ export class DndFieldService {
 
         /** create selected_list_values (form array) */
         // let selectedOptions = this._fb.array([]);
-        let selectedOptions = this._fb.group({});
+        let selectedListValue = this._fb.group({});
 
+        // formElementFieldGroup.addControl(
+        //   'selected_list_values',
+        //   selectedOptions
+        // );
         formElementFieldGroup.addControl(
           'selected_list_values',
-          selectedOptions
+          selectedListValue
         );
         // FIXME refactor selectedOptions
         // let selectedOptions = formElementFieldGroup.get(
@@ -442,7 +446,7 @@ export class DndFieldService {
             'state',
             this._fb.control(option.state, this.bindValidations([]))
           );
-          selectedOptions.addControl(
+          selectedListValue.addControl(
             optionName,
             this._fb.control(
               optionValue.toLowerCase() === 'true',
@@ -492,6 +496,11 @@ export class DndFieldService {
 
       formElementFieldsControl.push(formElementFieldGroup);
     });
+
+    console.log(
+      '%c end of addControls ',
+      'background: black; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+    );
   }
 
   public deleteFieldControl(group: FormGroup, field: any) {
