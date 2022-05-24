@@ -10,6 +10,7 @@ import { Validation } from 'src/app/services/dnd-field/field.model';
 import { fieldConfig } from 'src/app/services/dnd-field/field.sample';
 import { FormService } from 'src/app/services/forms/form.service';
 import { Product } from 'src/app/services/products/product.model';
+import { AppService } from 'src/app/services/app.service';
 
 let ft_lm = { formElementId: 0 };
 
@@ -154,7 +155,8 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     private _fb: FormBuilder,
     private _cdRef: ChangeDetectorRef,
     private _router: Router,
-    private _form: FormService
+    private _form: FormService,
+    private _appService: AppService
   ) {
     // this._regConfig.forEach((field) => {
     //   this.renderedBuilderFields.push(
@@ -178,6 +180,25 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // this._dndFieldService.setDndMode$(false);
+    this._appService.getOpenEditSideNav$().subscribe({
+      next: (isMainNavOpened) => {
+        if (isMainNavOpened) {
+          console.log(
+            '%c isMainNavOpened true ',
+            'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+          );
+          this.renderedBuilderFields = [];
+        } else
+          console.log(
+            '%c isMainNavOpened false ',
+            'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+          );
+      },
+      error: (err: any) => {
+        console.log('error');
+        console.log(err);
+      },
+    });
     this._dndFieldService.setDndFieldEditVisibility$(false);
     this._subs.add(
       this._route.params.subscribe({
@@ -211,11 +232,17 @@ export class ProductEditComponent implements OnInit, OnDestroy {
                     form.form_element_fields.sort((a: any, b: any) =>
                       a.sort_id > b.sort_id ? 1 : b.sort_id > a.sort_id ? -1 : 0
                     );
+                    console.log('this.renderedBuilderFields fetch 01');
+                    console.log(this.renderedBuilderFields);
+                    this.renderedBuilderFields.forEach((field: any) => {
+                      console.log('field.selected_list_values');
+                      console.log(field.selected_list_values);
+                    });
                     this.renderedBuilderFields = [];
                     form.form_element_fields.forEach((field: any) => {
                       this.renderedBuilderFields.push(new FormElement3(field));
                     });
-                    console.log('this.renderedBuilderFields');
+                    console.log('this.renderedBuilderFields fetch 02');
                     console.log(this.renderedBuilderFields);
                     this._addControls();
                     console.log(
@@ -223,7 +250,15 @@ export class ProductEditComponent implements OnInit, OnDestroy {
                       'background: red; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
                     );
                     console.log(this.myForm);
+                  } else {
+                    console.log(
+                      '%c this.renderedBuilderFields = [] ',
+                      'background: orange; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+                    );
+
+                    this.renderedBuilderFields = [];
                   }
+
                   console.log(
                     '%c form ',
                     'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'

@@ -502,39 +502,49 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
             console.log(product);
             console.log('product.form_id');
             console.log(product.form_id);
+            if (product.form_id)
+              this._form.fetch({ id: product.form_id }).subscribe({
+                next: (form) => {
+                  if (form) {
+                    console.log(
+                      '%c product fetched form ',
+                      'background: #CDDC2B; color: #000; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+                    );
+                    console.log(form);
+                    form.form_element_fields.sort((a: any, b: any) =>
+                      a.sort_id > b.sort_id ? 1 : b.sort_id > a.sort_id ? -1 : 0
+                    );
+
+                    form.form_element_fields.forEach((field: any) => {
+                      this.renderedBuilderFields.push(new FormElement3(field));
+                    });
+                    console.log('this.renderedBuilderFields');
+                    console.log(this.renderedBuilderFields);
+                    this.myForm.addControl(
+                      'id',
+                      this._fb.control(form.id ?? '', [])
+                    );
+                    this._addControls();
+                  }
+                  console.log(
+                    '%c form ',
+                    'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
+                  );
+                  console.log(form);
+                },
+              });
+            else {
+              this.myForm.addControl(
+                'product_id',
+                this._fb.control(product.id, [])
+              );
+              this._addControls();
+            }
           },
         });
       },
       error: (error) => {
         console.log('error :', error);
-      },
-    });
-
-    this._form.fetch({ id: '2' }).subscribe({
-      next: (form) => {
-        if (form) {
-          console.log(
-            '%c product fetched form ',
-            'background: #CDDC2B; color: #000; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
-          );
-          console.log(form);
-          form.form_element_fields.sort((a: any, b: any) =>
-            a.sort_id > b.sort_id ? 1 : b.sort_id > a.sort_id ? -1 : 0
-          );
-
-          form.form_element_fields.forEach((field: any) => {
-            this.renderedBuilderFields.push(new FormElement3(field));
-          });
-          console.log('this.renderedBuilderFields');
-          console.log(this.renderedBuilderFields);
-          this.myForm.addControl('id', this._fb.control(form.id ?? '', []));
-          this._addControls();
-        }
-        console.log(
-          '%c form ',
-          'background-color: yellow; color: #000; padding: 0 20px; border: 0px solid #47C0BE'
-        );
-        console.log(form);
       },
     });
 
@@ -787,7 +797,7 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
     // why - the server will create it again when saving again
     this.renderedBuilderFields.forEach((field, index, array) => {
       field.state = 'old';
-      field.form_element_options.forEach((option: any) => {
+      field.form_element_options?.forEach((option: any) => {
         // BKMRK option state old
         if (option.state) option.state = 'old';
       });

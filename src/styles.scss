@@ -232,13 +232,46 @@ $green: (
     )
 );
 
+$green02: (
+    50 : #e2f7e0,
+    100 : #b7ebb3,
+    200 : #87dd80,
+    300 : #57cf4d,
+    400 : #33c526,
+    500 : #0fbb00,
+    600 : #0db500,
+    700 : #0bac00,
+    800 : #08a400,
+    900 : #049600,
+    A100 : #c1ffc1,
+    A200 : #8eff8e,
+    A400 : #5bff5b,
+    A700 : #41ff41,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
 // below defines your custom color to build a theme palette from
 // $workshop-primary: material.mat-palette(material.$mat-brown);
 // $workshop-primary: material.mat-palette(material.$mat-grey);
 $workshop-primary: material.mat-palette($mat-purpule);
 // $workshop-primary: material.mat-palette($light-green);
 // $workshop-accent: material.mat-palette(material.$mat-green);
-$workshop-accent: material.mat-palette($cyan);
+$workshop-accent: material.mat-palette($green02);
 
 $workshop-theme: material.mat-light-theme(
   (

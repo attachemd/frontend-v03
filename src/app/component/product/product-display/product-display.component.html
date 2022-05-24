@@ -1,4 +1,5 @@
 <div class="entity-container">
+  <h2>Product fields</h2>
   <div class="entity-item">
     <span class="entity-title">Name: </span>
     <span class="entity-content">{{ product.name }}</span>
@@ -7,4 +8,26 @@
     <span class="entity-title">Description: </span>
     <span class="entity-content">{{ product.description }}</span>
   </div>
+  <br>
+  <h2>Custom fields</h2>
+  <ng-container *ngFor="let formItem of form.form_element_fields">
+    <div class="entity-item">
+      <span class="entity-title">{{formItem.name}}: </span>
+      <ng-container *ngIf="getValue(formItem).length===1">
+        <span class="entity-content" >{{ getValue(formItem)[0] }}</span>
+      </ng-container>
+      <ng-container *ngIf="getValue(formItem).length>1">
+        <span class="entity-content" >
+          <ng-container *ngFor="let selected_list_value of getValue(formItem)">
+            <ng-container *ngIf="selected_list_value.value==='True'">
+              {{ selected_list_value.form_element_option.name }},
+            </ng-container>
+          </ng-container>
+        </span>
+      </ng-container>
+      <ng-container *ngIf="getValue(formItem).length===0">
+        <span class="entity-content" >n/a</span>
+      </ng-container>
+    </div>
+  </ng-container>
 </div>

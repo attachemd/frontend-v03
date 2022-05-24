@@ -25,6 +25,11 @@
   // background-color: #2dca72;
   background-color: #43a547;
 }
+:host ::ng-deep app-dnd-field {
+  // background-color: #2dca72;
+  // background-color: #43a547;
+  min-height: auto !important;
+}
 
 .ft-lm-label {
   color: rgba(0, 0, 0, 0.54);
@@ -40,7 +45,7 @@
 .ft-lm-custom-fields {
   // background-color: #f0fff6;
   padding: 10px 0;
-  min-height: 400px;
+  min-height: auto;
 }
 
 .builder-container {

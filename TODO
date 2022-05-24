@@ -87,3 +87,6 @@ General:
         ☐ fix when deleting added option and save confirm and save form builder then the option not deleted
         ☐ when adding option in [form element field] to form builder add default [selected list value] #backend
         ☐ test by adding new option for [multiple selection]
+        ☐ implement view product
+        ☐ make the rendered option visible till it exists when creating new options.
+        ☐ show validation for field in product edit

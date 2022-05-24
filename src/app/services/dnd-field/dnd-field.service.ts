@@ -192,6 +192,7 @@ export class DndFieldService {
     exclude: string[] = []
   ) {
     exclude.push('id');
+    exclude.push('product_id');
 
     /** delete all form controls */
     Object.keys(formGroup.controls).forEach((key) => {
