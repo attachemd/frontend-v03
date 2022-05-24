@@ -28,8 +28,12 @@
             *ngFor="let validation of field.validations"
             ngProjectAs="mat-error"
           >
-            <mat-error
+            <!-- <mat-error
               *ngIf="group.get(field.name)?.hasError(validation.name)"
+              >{{ validation.message }}</mat-error
+            > -->
+            <mat-error
+              *ngIf="formElement?.get('selected_value')?.hasError(validation.name)"
               >{{ validation.message }}</mat-error
             >
           </ng-container>

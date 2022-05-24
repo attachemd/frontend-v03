@@ -32,9 +32,6 @@ export class DynamicFieldDirective implements OnInit {
   @Input()
   public index!: number;
 
-  @Input()
-  public data!: any;
-
   public componentRef: any;
   constructor(private _viewContainerRef: ViewContainerRef) {}
 
@@ -49,6 +46,5 @@ export class DynamicFieldDirective implements OnInit {
     this.componentRef.instance.field = this.field;
     this.componentRef.instance.group = this.group;
     this.componentRef.instance.index = this.index;
-    this.componentRef.instance.data = this.data;
   }
 }

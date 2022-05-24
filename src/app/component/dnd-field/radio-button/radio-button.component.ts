@@ -23,30 +23,29 @@ export class RadioButtonComponent implements OnInit {
   public field!: any;
   public group!: FormGroup;
   public index!: number;
-  public data!: any;
   public visibility = 'none';
 
-  public validations = [
-    {
-      name: 'required',
-      message: 'Option name required',
-    },
-    {
-      name: 'pattern',
-      pattern: '^[a-zA-Z]+$',
-      message: 'Accept only text',
-    },
-    {
-      name: 'duplicated',
-      // validator: this._isduplicate,
-      message: 'The option name must be unique',
-    },
-    // {
-    //   name: 'custom',
-    //   validator: this._isduplicate,
-    //   message: 'Invalid option name',
-    // },
-  ];
+  // public validations = [
+  //   {
+  //     name: 'required',
+  //     message: 'Option name required m',
+  //   },
+  //   {
+  //     name: 'pattern',
+  //     pattern: '^[a-zA-Z]+$',
+  //     message: 'Accept only text',
+  //   },
+  //   {
+  //     name: 'duplicated',
+  //     // validator: this._isduplicate,
+  //     message: 'The option name must be unique',
+  //   },
+  //   // {
+  //   //   name: 'custom',
+  //   //   validator: this._isduplicate,
+  //   //   message: 'Invalid option name',
+  //   // },
+  // ];
 
   // public options: any;
   // public formElement: any;
@@ -97,6 +96,9 @@ export class RadioButtonComponent implements OnInit {
       '%c field ',
       'background: #f2c080; color: #555a60; padding: 10px 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
     );
+    console.log('this.field.validations');
+    console.log(this.field.validations);
+
     console.log(this.field);
     let optionFormGroup = this._fb.group(
       {}
@@ -108,7 +110,8 @@ export class RadioButtonComponent implements OnInit {
 
     const control = this._fb.control(
       '',
-      this._dndFieldService.bindValidations(this.data['validations'] || [])
+      // this._dndFieldService.bindValidations(this.data['validations'] || [])
+      this._dndFieldService.bindValidations(this.field.option_validations || [])
     );
 
     optionFormGroup.addControl('name', control);

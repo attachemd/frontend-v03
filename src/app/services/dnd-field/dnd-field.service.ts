@@ -36,7 +36,7 @@ export class DndFieldService {
     validations: [
       {
         name: 'required',
-        message: 'Option name required',
+        message: 'Option name required y',
       },
       {
         name: 'pattern',
@@ -191,6 +191,11 @@ export class DndFieldService {
     formElementFields: any,
     exclude: string[] = []
   ) {
+    console.log(
+      '%c addControls ',
+      'background: #E1342A; color: #fff; padding: 0 20px; border: 0px solid #47C0BE; width: 100%; font-weight: bold; font-size: 13px;'
+    );
+
     exclude.push('id');
     exclude.push('product_id');
 
@@ -282,7 +287,8 @@ export class DndFieldService {
 
             const control = this._fb.control(
               formElementOption.name,
-              this.bindValidations(this.data['validations'] || [])
+              // this.bindValidations(this.data['validations'] || [])
+              this.bindValidations(formElementField.option_validations || [])
             );
 
             formElementOptionGroup.addControl('name', control);
@@ -436,7 +442,8 @@ export class DndFieldService {
             'name',
             this._fb.control(
               optionName,
-              this.bindValidations(this.data['validations'] || [])
+              // this.bindValidations(this.data['validations'] || [])
+              this.bindValidations(formElementField.option_validations || [])
             )
           );
           formElementOptionGroup.addControl(
@@ -491,7 +498,7 @@ export class DndFieldService {
           this._fb.control(
             formElementField.selected_value?.value ?? '',
             // '',
-            this.bindValidations([])
+            this.bindValidations(formElementField.validations)
           )
         );
 

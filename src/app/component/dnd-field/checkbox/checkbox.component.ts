@@ -227,7 +227,7 @@ export class CheckboxComponent implements OnInit, OnDestroy {
 
     const control = this._fb.control(
       '',
-      this._dndFieldService.bindValidations(this.data['validations'] || [])
+      this._dndFieldService.bindValidations(this.field.option_validations || [])
     );
 
     optionFormGroup.addControl('name', control);

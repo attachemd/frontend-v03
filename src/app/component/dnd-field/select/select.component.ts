@@ -11,7 +11,6 @@ export class SelectComponent implements OnInit {
   public field!: any;
   public group!: FormGroup;
   public index!: number;
-  public data!: any;
   public visibility = 'none';
   constructor(
     private _dndFieldService: DndFieldService,
@@ -52,7 +51,7 @@ export class SelectComponent implements OnInit {
 
     const control = this._fb.control(
       '',
-      this._dndFieldService.bindValidations(this.data['validations'] || [])
+      this._dndFieldService.bindValidations(this.field.optionValidations || [])
     );
 
     optionFormGroup.addControl('name', control);

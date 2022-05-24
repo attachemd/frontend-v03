@@ -122,7 +122,8 @@ class FormElement3 {
   // public value: string;
   // public description?: string;
   // public options?: string[];
-  public validations: Validation[];
+  public validations: Validation[] = [];
+  public option_validations: Validation[];
   constructor(field: any) {
     let fieldItem = field.form_element_template;
 
@@ -150,7 +151,14 @@ class FormElement3 {
     // this.value = '';
     // this.description = fieldItem.description;
     // this.options = [];
-    this.validations = [
+    field.form_element_template.validations.forEach((validation: any) => {
+      this.validations.push({
+        name: validation.validator.name,
+        message: validation.message,
+        pattern: validation.pattern,
+      });
+    });
+    this.option_validations = [
       {
         name: 'required',
         message: 'Option name required',
@@ -194,63 +202,63 @@ export class CustomFieldsComponent implements OnInit, OnDestroy {
   public stopDrag = false;
   public singles: any;
   // BKMRK data
-  public data: { [k: string]: any } = {
-    // validations: [
-    //   {
-    //     name: 'required',
-    //     validator: Validators.required,
-    //     message: 'Option name Required',
-    //   },
-    //   {
-    //     name: 'pattern',
-    //     validator: Validators.pattern(
-    //       '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'
-    //     ),
-    //     message: 'Invalid option name',
-    //   },
-    //   {
-    //     name: 'custom',
-    //     validator: _isduplicate,
-    //     message: 'Invalid option name',
-    //   },
-    // ],
-    validations: [
-      {
-        name: 'required',
-        message: 'Option name required',
-      },
-      {
-        name: 'pattern',
-        pattern: '^[a-zA-Z]+$',
-        message: 'Accept only text',
-      },
-      {
-        name: 'duplicated',
-        // validator: this._isduplicate,
-        message: 'The option name must be unique',
-      },
-      // {
-      //   name: 'duplicate',
-      //   // validator: this._isduplicate,
-      //   message: 'duplicate option name',
-      // },
-    ],
-    // options: [
-    //   {
-    //     name: 'option 04',
-    //   },
-    //   { name: 'option 04' },
-    //   { name: 'option 05' },
-    // ],
-    options: [
-      {
-        name: 'johnx',
-      },
-      { name: 'johny' },
-      { name: 'johnyz' },
-      { name: 'johnm' },
-    ],
-  };
+  // public data: { [k: string]: any } = {
+  //   // validations: [
+  //   //   {
+  //   //     name: 'required',
+  //   //     validator: Validators.required,
+  //   //     message: 'Option name Required',
+  //   //   },
+  //   //   {
+  //   //     name: 'pattern',
+  //   //     validator: Validators.pattern(
+  //   //       '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'
+  //   //     ),
+  //   //     message: 'Invalid option name',
+  //   //   },
+  //   //   {
+  //   //     name: 'custom',
+  //   //     validator: _isduplicate,
+  //   //     message: 'Invalid option name',
+  //   //   },
+  //   // ],
+  //   validations: [
+  //     {
+  //       name: 'required',
+  //       message: 'Option name required data',
+  //     },
+  //     {
+  //       name: 'pattern',
+  //       pattern: '^[a-zA-Z]+$',
+  //       message: 'Accept only text',
+  //     },
+  //     {
+  //       name: 'duplicated',
+  //       // validator: this._isduplicate,
+  //       message: 'The option name must be unique',
+  //     },
+  //     // {
+  //     //   name: 'duplicate',
+  //     //   // validator: this._isduplicate,
+  //     //   message: 'duplicate option name',
+  //     // },
+  //   ],
+  //   // options: [
+  //   //   {
+  //   //     name: 'option 04',
+  //   //   },
+  //   //   { name: 'option 04' },
+  //   //   { name: 'option 05' },
+  //   // ],
+  //   options: [
+  //     {
+  //       name: 'johnx',
+  //     },
+  //     { name: 'johny' },
+  //     { name: 'johnyz' },
+  //     { name: 'johnm' },
+  //   ],
+  // };
 
   private _subs = new Subscription();
   private _regConfig = fieldConfig;
