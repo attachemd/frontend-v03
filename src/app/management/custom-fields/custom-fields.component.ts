@@ -166,7 +166,7 @@ class FormElement3 {
       {
         name: 'pattern',
         pattern: '^[a-zA-Z]+$',
-        message: 'Accept only text',
+        message: 'Accept only text h',
       },
       {
         name: 'duplicated',

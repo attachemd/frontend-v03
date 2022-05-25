@@ -48,7 +48,8 @@ class FormElement3 {
   // public value: string;
   // public description?: string;
   // public options?: string[];
-  public validations: Validation[];
+  // public validations: Validation[];
+  public validations: Validation[] = [];
   constructor(field: any) {
     let fieldItem = field.form_element_template;
 
@@ -70,27 +71,36 @@ class FormElement3 {
     // this.value = '';
     // this.description = fieldItem.description;
     // this.options = [];
-    this.validations = [
-      {
-        name: 'required',
-        message: 'Option name required',
-      },
-      {
-        name: 'pattern',
-        pattern: '^[a-zA-Z]+$',
-        message: 'Accept only text',
-      },
-      {
-        name: 'duplicated',
-        // validator: this._isduplicate,
-        message: 'The option name must be unique',
-      },
-      // {
-      //   name: 'duplicate',
-      //   // validator: this._isduplicate,
-      //   message: 'duplicate option name',
-      // },
-    ];
+
+    field.form_element_template.validations.forEach((validation: any) => {
+      this.validations.push({
+        name: validation.validator.name,
+        message: validation.message,
+        pattern: validation.pattern,
+      });
+    });
+
+    // this.validations = [
+    //   {
+    //     name: 'required',
+    //     message: 'Option name required',
+    //   },
+    //   {
+    //     name: 'pattern',
+    //     pattern: '^[a-zA-Z]+$',
+    //     message: 'Accept only text',
+    //   },
+    //   {
+    //     name: 'duplicated',
+    //     // validator: this._isduplicate,
+    //     message: 'The option name must be unique',
+    //   },
+    //   // {
+    //   //   name: 'duplicate',
+    //   //   // validator: this._isduplicate,
+    //   //   message: 'duplicate option name',
+    //   // },
+    // ];
   }
 }
 

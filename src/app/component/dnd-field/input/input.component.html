@@ -24,20 +24,21 @@
             onfocus="this.removeAttribute('readonly');"
           />
           <!-- [(ngModel)]="field.value" -->
-          <ng-container
-            *ngFor="let validation of field.validations"
-            ngProjectAs="mat-error"
-          >
-            <!-- <mat-error
-              *ngIf="group.get(field.name)?.hasError(validation.name)"
-              >{{ validation.message }}</mat-error
-            > -->
-            <mat-error
-              *ngIf="formElement?.get('selected_value')?.hasError(validation.name)"
-              >{{ validation.message }}</mat-error
-            >
-          </ng-container>
         </ng-container>
+      </ng-container>
+      <ng-container
+        *ngFor="let validation of field.validations"
+        ngProjectAs="mat-error"
+      >
+        <!-- <mat-error
+          *ngIf="group.get(field.name)?.hasError(validation.name)"
+          >{{ validation.message }}</mat-error
+        > -->
+        <!-- {{log(formElement?.get('selected_value'))}} -->
+        <mat-error
+          *ngIf="formElement?.get('selected_value')?.hasError(validation.name)"
+          >{{ validation.message }}</mat-error
+        >
       </ng-container>
     </mat-form-field>
     <!-- <app-dnd-field-edit [visibility]="visibility" [field]="field"></app-dnd-field-edit> -->
